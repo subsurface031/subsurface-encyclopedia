@@ -256,7 +256,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact Us</h3>
-                <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                <p>Email: <a href="/cdn-cgi/l/email-protection#087b7d6a7b7d7a6e696b6d383b39486f65696164266b6765"><span class="__cf_email__" data-cfemail="bac9cfd8c9cfc8dcdbd9df8a898bfaddd7dbd3d694d9d5d7">[email&#160;protected]</span></a></p>
                 <p>Phone: +27 66 346 8954</p>
                 <p>Social Media: @Subsurface031</p>
                 <div class="social-icons">
@@ -287,7 +287,7 @@
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const API_URL = 'https://icy-sea-3661.nixstigr031-b3c.workers.dev';
 
     const SYSTEM_PROMPT = `You are an expert marine biologist specialising in KwaZulu-Natal aquatic species. Identify the species in the image and respond ONLY with valid JSON (no markdown, no extra text):
@@ -363,7 +363,7 @@ Status codes: LC NT VU EN CR DD. SASSi: Green Orange Red Unrated. If cannot iden
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'qwen/qwen2.5-vl-72b-instruct:free',
+                    model: 'openrouter/free',
                     max_tokens: 1200,
                     messages: [
                         { role: 'system', content: SYSTEM_PROMPT },
@@ -432,9 +432,4 @@ Status codes: LC NT VU EN CR DD. SASSi: Green Orange Red Unrated. If cannot iden
         showPanel('result');
     }
 
-    function showError(msg) { document.getElementById('errorMsg').textContent = msg; showPanel('error'); }
-    function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-</script>
-
-</body>
-</html>
+    function sho
