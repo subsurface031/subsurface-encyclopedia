@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Crab – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Ghost Crab
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="ghost-crab.png" alt="Ghost Crab">
+                    <p class="image-caption">Ocypode ceratophthalmus — Ghost Crab, KZN sandy beach habitats</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Ghost Crab</h2>
+                    <span class="scientific-name">Ocypode ceratophthalmus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The ghost crab is the spirit of KwaZulu-Natal's sandy beaches made flesh — a pale, fleet-footed scavenger that materialises from burrows at dusk, sprints across the sand faster than a human can run, and vanishes so suddenly that it can seem to have simply ceased to exist. The common name is entirely apt: ghost crabs are the colour of pale sand, semi-transparent in certain light, and move with such speed and unpredictability that they seem to appear and disappear at will. Watching a ghost crab in action on a moonlit KZN beach — darting sideways at remarkable speed, freezing motionless when uncertain, then exploding into movement again — is one of the coast's most entertaining wildlife encounters.</p>
+                    <p>Ghost crabs occupy a unique ecological niche as semi-terrestrial crustaceans: they are true crabs that have partially conquered the land, able to breathe air through moist gills and spending the majority of their lives above the high-tide line on sandy beaches, dunes, and adjacent vegetation. They return to the sea to wet their gills, release larvae, and escape extreme temperatures — but they can survive for hours out of water and are genuinely uncomfortable when submerged. This dual existence between land and sea has made them one of the most successful and widespread crabs in the world, found on sandy beaches throughout the tropics and subtropics.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Carapace Width</span>
+                            <span class="stat-value">up to 7 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">~4 m/s</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Burrow Depth</span>
+                            <span class="stat-value">up to 1.5 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Nocturnal</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~3 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Sandy beaches</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Ghost crabs are medium-sized crabs with a squarish, slightly convex carapace — the main body shield — that is widest at the front and narrows slightly toward the rear. The body colour is their most remarkable adaptation: a pale cream, straw, or light sandy-grey that can shift in tone and intensity to match the colour of the local sand with remarkable precision. This cryptic colouration is achieved through a combination of fixed pigmentation and the ability to redistribute pigments within skin cells — allowing ghost crabs on beaches with darker or lighter sand to adjust their shade accordingly over periods of days. The result is an animal that is extraordinarily difficult to spot when motionless against its preferred substrate.</p>
+                    <p>The eyes are stalked and distinctively horn-like in adults of the horned ghost crab (Ocypode ceratophthalmus) — the most common KZN species — with the eye stalk extending into a pointed horn at its tip that gives the species its scientific name. The eyes are positioned at the extreme ends of the carapace, giving a very wide field of view for detecting approaching threats. Ghost crab eyes are adapted for exceptional low-light performance, allowing them to navigate and hunt effectively on dark beaches by moonlight or even starlight — a critical advantage for an animal that is most active during the darkest hours.</p>
+                    <p>The ten legs are long and slender, and the crab characteristically runs sideways — the direction of motion is perpendicular to the direction the body faces, allowing it to watch for threats with both eyes while moving at full speed. The front pair of legs bears well-developed claws used for food manipulation, burrowing, and occasionally combat with rivals. Ghost crabs can run at speeds approaching 4 metres per second — among the fastest of any crustacean relative to body size — and can change direction almost instantaneously, making them virtually impossible to catch by hand on open sand.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Ghost crabs are primarily nocturnal, emerging from their burrows after sunset to scavenge the beach and intertidal zone during the cooler, darker hours when predation risk is lower and desiccation is not a concern. During the heat of the day, they remain deep within their burrows where temperatures are stable and humidity is maintained — the burrow functions as both a refuge from predators and a microclimate buffer against the extreme surface temperatures of a sun-baked beach. On overcast or cool days, ghost crabs may be active in the early morning or late afternoon, and juveniles are sometimes seen in daylight on beaches with good cover.</p>
+                    <p>The burrow is the centre of ghost crab social life. Each crab excavates and maintains its own burrow — a spiral or J-shaped tunnel angled into the sand at 30 to 45 degrees, extending down to moist sand where humidity remains adequate for gill function. Burrows are defended against rivals of similar size, and territorial disputes are common between neighbouring individuals during the active season. Combat involves raising the claws in threat display, sidling toward the opponent, and occasionally physical wrestling — but serious injury is uncommon, as the smaller of two combatants usually retreats before contact escalates.</p>
+                    <p>Ghost crabs are remarkable navigators. Individuals displaced from their burrows can relocate them from distances of 100 metres or more using a combination of visual landmarks, polarised light cues from the sky, and possibly magnetic field detection. They maintain a detailed spatial map of their home beach territory and can run to their burrow entrance at full speed in the dark with a precision that suggests near-perfect memory of the terrain. This navigational ability is critical for an animal that must reach the safety of its burrow within seconds of detecting a threat.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Ghost crabs are highly opportunistic omnivores and scavengers — among the least fussy feeders on KZN's beaches. They patrol the strand line — the zone of debris and organic matter deposited by waves at the high-tide mark — for anything edible: dead fish, stranded jellyfish and bluebottles, washed-up invertebrates, carrion of any kind, and organic detritus. This scavenging role makes them genuinely important beach ecosystem engineers, recycling organic matter that would otherwise accumulate and decompose slowly, and returning nutrients to the system in a form accessible to other organisms.</p>
+                    <p>Beyond scavenging, ghost crabs are active predators of small prey encountered during their nocturnal foraging. They consume sand hoppers and beach hoppers — the small crustaceans that live in the strand line wrack — in large numbers, and will pursue and capture small crabs, isopods, and other invertebrates encountered on the beach surface. Ghost crabs are also well-documented predators of sea turtle eggs and hatchlings: they excavate into sea turtle nests to consume eggs, and intercept hatchlings making their way to the sea — making them a significant natural predation threat on beaches where sea turtles nest, including important nesting beaches on the northern KZN coast.</p>
+                    <ul>
+                        <li>Carrion — dead fish, birds, marine mammals</li>
+                        <li>Stranded jellyfish, bluebottles, and sea creatures</li>
+                        <li>Sand hoppers, beach hoppers, and isopods</li>
+                        <li>Small crabs and intertidal invertebrates</li>
+                        <li>Sea turtle eggs and hatchlings</li>
+                        <li>Organic detritus and strand line material</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Ghost crabs reproduce seasonally in KZN, with mating activity peaking during the warmer summer months. Females carry fertilised eggs attached to the pleopods beneath their abdomen for several weeks — the eggs developing and darkening in colour as they mature. When the eggs are ready to hatch, females make nocturnal trips to the surf zone at low tide, submerging briefly to release the larvae into the breaking waves. This behaviour is timed to coincide with high tides and favourable current conditions that disperse the larvae offshore into deeper water where plankton concentrations are highest.</p>
+                    <p>The larvae — zoea — pass through several planktonic stages lasting 4 to 6 weeks before metamorphosing into megalopa — the transitional stage between larva and juvenile crab. Megalopa are carried back to shore by onshore currents and settle onto sandy beaches, where they moult into juvenile crabs and immediately begin digging burrows in the lower beach above the high-tide line. Juvenile ghost crabs are miniature, pale versions of the adults, already fully capable of running, burrowing, and feeding independently from the moment of settlement.</p>
+                    <p>Ghost crabs are relatively short-lived, with a lifespan of approximately 3 years in the wild — though some individuals may reach 4 or 5 years. They grow through a series of moults, and younger crabs are found in greatest density close to the waterline while larger, older adults occupy burrows further up the beach. Population densities on suitable KZN beaches can be high — dozens of individuals per hundred metres of beach — and the combined effect of their burrowing, scavenging, and nutrient cycling activities makes them one of the most ecologically significant animals on the beach despite their small size.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Ghost Crabs in KZN: Beach Ecology & Conservation</h3>
+                <p>Ghost crabs are among the most visible and recognisable inhabitants of KwaZulu-Natal's sandy beaches, encountered by every beachgoer who walks the coast at dusk or dawn. From the long, vehicle-accessible beaches of the South Coast to the remote wilderness shores of iSimangaliso in the far north, ghost crabs are a constant and characterful presence — their burrow openings peppering the sand above the high-tide line, their scuttling forms illuminated by torch beams and headlights on evening walks. For many KZN residents, the ghost crab is the quintessential beach animal, its darting silhouette as much a part of the coastal experience as the sound of the surf and the smell of salt air.</p>
+                <p>Ecologically, ghost crabs perform services on sandy beaches that are difficult to overstate. Their burrowing activities aerate compacted sand and accelerate the breakdown of organic matter buried in the beach substrate. Their scavenging removes and recycles stranded organic material — dead animals, kelp wrack, and organic detritus — that would otherwise create anaerobic decomposition zones with negative effects on beach invertebrate communities. As prey, they are important food sources for nocturnal predators including fishing owls, water mongooses, shore birds, and large fish that venture into the surf zone at night. The density of ghost crab burrows on a beach has even been proposed as a simple ecological indicator of beach health — beaches with abundant ghost crab populations tend to be relatively undisturbed, while heavily used or degraded beaches show markedly reduced densities.</p>
+                <p>On northern KZN's loggerhead and leatherback sea turtle nesting beaches — one of the most important sea turtle nesting concentrations in the southern hemisphere — ghost crabs represent a significant natural predation pressure on turtle eggs and hatchlings. Ghost crabs excavate into nests to consume eggs and intercept emerging hatchlings, and on beaches with very high ghost crab densities, predation rates can be substantial. KZN Ezemvelo Wildlife monitors ghost crab populations alongside turtle nesting success and manages beach-driving access partly to protect both turtle nests and the natural beach ecosystem that ghost crabs inhabit.</p>
+                <p>Ghost crabs are highly sensitive to human disturbance and beach modification. Night-time beach driving crushes burrows and disrupts foraging behaviour; artificial lighting disrupts their nocturnal activity patterns and attracts sea turtle hatchlings away from the sea; beach cleaning operations that remove strand line material eliminate their primary food source; and beach armoring and development destroy the natural profile and sediment dynamics on which they depend. Monitoring ghost crab burrow density is increasingly used by coastal ecologists as a rapid, cost-effective assessment of human impact on beach ecosystems — a testament to how these small, pale scavengers serve as sensitive sentinels of beach health throughout KZN's coastline.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The World's Fastest Crustacean</h4>
+                    <p>Ghost crabs hold the unofficial title of the world's fastest crustacean. The horned ghost crab can reach speeds of up to 4 metres per second — equivalent to about 14 km/h — which translates to roughly 100 body lengths per second. Scaled to human size, that is equivalent to running at nearly 600 km/h. They achieve this by essentially tip-toeing on the ends of their legs at full speed, reducing ground contact to an absolute minimum and switching between 4-legged, 6-legged, and 8-legged gaits depending on speed.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Colour-Changing Camouflage</h4>
+                    <p>Ghost crabs are genuinely capable of adjusting their body colour to better match the sand they live on — a process that takes several days rather than the instantaneous colour changes of cephalopods, but that is nonetheless remarkable for a crustacean. Individuals transplanted from light-coloured beaches to beaches with darker sand gradually darken their colouration over the following days, while those moved to lighter sand pale accordingly. This cryptic adaptation makes ghost crabs on undisturbed natural beaches extraordinarily difficult to spot when motionless.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sound of the Night Beach</h4>
+                    <p>Ghost crabs produce a range of sounds including a low, bubbling stridulation made by rubbing the claws together and a rasping sound produced by rubbing leg structures against the carapace. On very quiet nights on undisturbed beaches, the combined chorus of dozens of ghost crabs producing these sounds can be faintly audible to attentive human listeners — a subtle soundscape of clicking, rasping, and bubbling that underlies the rhythm of the surf on KZN's wilder beaches.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Living Tide Gauges</h4>
+                    <p>The vertical distribution of ghost crab burrows on a beach reflects the tidal dynamics with remarkable precision. Young crabs occupy burrows close to the waterline, while large adults dig their burrows 100 metres or more up the beach above the highest storm-surge line. The overall pattern of burrow distribution changes seasonally as tidal ranges shift and storm activity alters beach profiles — meaning that mapping ghost crab burrow distribution provides a detailed record of recent tidal and storm history encoded in the social structure of the crab population.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sea Turtle Nemesis</h4>
+                    <p>On KZN's world-famous loggerhead turtle nesting beaches in iSimangaliso, ghost crabs are one of the most significant natural predators of sea turtle eggs and newly emerged hatchlings. Ghost crabs detect nesting activity through vibration and chemical cues, excavate into nests over successive nights to consume eggs, and position themselves near nest openings to intercept hatchlings as they emerge. Ezemvelo turtle monitors routinely encounter ghost crabs at nest sites and factor natural predation into their assessments of nest success each season.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Beach Health Indicators</h4>
+                    <p>Coastal ecologists have developed simple ghost crab density surveys — counting burrow openings along measured transects above the high-tide line — as a rapid, inexpensive indicator of human disturbance on sandy beaches. The method works because ghost crab populations are highly sensitive to vehicle traffic, light pollution, and strand-line removal, and respond quickly to both degradation and recovery. In KZN, ghost crab surveys are increasingly used alongside traditional biological monitoring to assess the ecological condition of beaches from the busy South Coast resort areas to the remote iSimangaliso wilderness shores.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

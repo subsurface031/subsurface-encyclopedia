@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Evolution – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9; min-height: 100vh; line-height: 1.7;
+        }
+
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none; z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .intro { margin-bottom: 4rem; padding: 2.5rem 3rem; background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); border-radius: 2px; }
+        .intro h2 { color: #e3f2fd; font-size: 1.8rem; margin-bottom: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+        .intro p { font-size: 1.05rem; line-height: 1.9; color: #b0bec5; text-align: justify; margin-bottom: 1.5rem; }
+        .intro p:last-child { margin-bottom: 0; }
+
+        .context-banner { background: rgba(38, 166, 154, 0.07); border: 1px solid rgba(38, 166, 154, 0.3); border-radius: 2px; padding: 1.5rem 2rem; margin-bottom: 4rem; display: flex; align-items: flex-start; gap: 1.5rem; }
+        .context-banner-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+        .context-banner h3 { color: #4db6ac; font-family: 'Courier New', monospace; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; font-weight: 400; }
+        .context-banner p { color: #b0bec5; font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+        .context-banner p:last-child { margin-bottom: 0; }
+        .context-banner strong { color: #4db6ac; }
+
+        .section-title { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .section-label { font-family: 'Courier New', monospace; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #78909c; margin-bottom: 0.5rem; display: block; }
+
+        /* Human image: 11.77h × 33.62w — wide landscape (ratio ~1:2.86)
+           Full container width, height auto — displays short and wide like a banner strip */
+        .hero-image-wrap { width: 100%; margin-bottom: 4rem; }
+        .hero-image-wrap img { width: 100%; height: auto; display: block; border: 1px solid rgba(38, 166, 154, 0.2); border-radius: 2px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+
+        .timeline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 4rem; }
+
+        .timeline-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(38, 166, 154, 0.18); border-radius: 2px; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .timeline-card:hover { border-color: rgba(38, 166, 154, 0.4); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); }
+
+        .timeline-card-header { background: rgba(38, 166, 154, 0.07); border-bottom: 1px solid rgba(38, 166, 154, 0.15); padding: 1.2rem 1.8rem; display: flex; align-items: center; gap: 1rem; }
+
+        .era-badge { font-family: 'Courier New', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.2rem 0.7rem; border-radius: 2px; background: rgba(38, 166, 154, 0.1); border: 1px solid rgba(38, 166, 154, 0.35); color: #4db6ac; white-space: nowrap; flex-shrink: 0; }
+        .timeline-card-header h3 { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.05rem; font-weight: 400; letter-spacing: 1px; }
+        .timeline-card-body { padding: 1.5rem 1.8rem; }
+        .timeline-card-body p { color: #b0bec5; font-size: 0.94rem; line-height: 1.85; text-align: justify; }
+
+        .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .tag { padding: 0.2rem 0.7rem; font-family: 'Courier New', monospace; font-size: 0.72rem; letter-spacing: 0.5px; border-radius: 2px; background: rgba(38, 166, 154, 0.07); border: 1px solid rgba(38, 166, 154, 0.22); color: #80cbc4; }
+
+        .facts-table { width: 100%; border-collapse: collapse; margin-bottom: 4rem; font-size: 0.92rem; }
+        .facts-table thead tr { background: rgba(38, 166, 154, 0.08); border-bottom: 1px solid rgba(38, 166, 154, 0.3); }
+        .facts-table th { color: #e3f2fd; font-family: 'Courier New', monospace; font-weight: 400; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; padding: 1rem 1.2rem; text-align: left; }
+        .facts-table td { padding: 0.9rem 1.2rem; color: #b0bec5; border-bottom: 1px solid rgba(38, 166, 154, 0.07); vertical-align: top; line-height: 1.6; }
+        .facts-table tr:last-child td { border-bottom: none; }
+        .facts-table tr:hover td { background: rgba(38, 166, 154, 0.03); }
+        .facts-table td:first-child { color: #4db6ac; font-family: 'Courier New', monospace; font-size: 0.88rem; white-space: nowrap; }
+
+        .closing-block { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2.5rem 3rem; margin-bottom: 4rem; border-radius: 2px; }
+        .closing-block h3 { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .closing-block p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .closing-block p:last-child { margin-bottom: 0; }
+        .closing-block a { color: #4db6ac; text-decoration: none; border-bottom: 1px solid rgba(77, 182, 172, 0.3); transition: border-color 0.2s ease; }
+        .closing-block a:hover { border-color: rgba(77, 182, 172, 0.7); }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .intro, .closing-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .context-banner { flex-direction: column; gap: 0.8rem; }
+            .timeline-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .facts-table { font-size: 0.83rem; }
+            .facts-table th, .facts-table td { padding: 0.7rem 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .header-logo { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Human Evolution</h2>
+                <p>The story of human evolution is, at its deepest level, a story intimately connected to water. Africa — and KwaZulu-Natal in particular — sits at the geographic heart of the human evolutionary narrative. The earliest members of the genus Homo emerged on the African continent approximately 2.8 million years ago, and the anatomically modern humans who would eventually populate every corner of the globe first appeared in Africa around 300,000 years ago. But the connection between human evolution and the aquatic environment runs deeper than geography. A growing body of palaeoanthropological evidence suggests that coastal and lakeside environments played a significant role in shaping key human traits — from our upright posture and reduced body hair to our relationship with seafood as a high-quality dietary resource rich in the omega-3 fatty acids and iodine critical for brain development.</p>
+                <p>KwaZulu-Natal's coastline sits within the broader southern African coastal zone where Middle Stone Age humans lived, fished, harvested shellfish, and left behind some of the oldest evidence of complex symbolic behaviour and systematic marine resource exploitation ever discovered. Sites like Blombos Cave on the Western Cape coast and Pinnacle Point near Mossel Bay demonstrate that anatomically modern humans were using the ocean as a food source and a cultural space well over 160,000 years ago — long before the behavioural revolution that enabled our species to disperse globally.</p>
+                <p>This page traces the major stages of human evolution, with particular attention to the African origins of our lineage and the role of coastal and aquatic environments in shaping who we are as a species whose relationship with the ocean is both ancient and ongoing.</p>
+            </section>
+
+            <div class="context-banner">
+                <div class="context-banner-icon">🧬</div>
+                <div>
+                    <h3>Human Evolution — Key Facts</h3>
+                    <p><strong>Family:</strong> Hominidae — the Great Apes. Humans share ~98.7% of DNA with chimpanzees and ~98.3% with gorillas</p>
+                    <p><strong>Earliest Homo:</strong> Homo habilis — approximately 2.8 million years ago, East Africa</p>
+                    <p><strong>Anatomically modern humans:</strong> Homo sapiens — approximately 300,000 years ago, Africa</p>
+                    <p><strong>Out of Africa dispersal:</strong> ~70,000 years ago — ancestors of all non-African humans left the continent, likely via coastal routes</p>
+                    <p><strong>African coastal sites:</strong> Pinnacle Point (162,000 ya) and Blombos Cave (100,000+ ya) document the earliest systematic use of marine resources by modern humans</p>
+                </div>
+            </div>
+
+            <!-- Hero image — wide landscape (11.77h × 33.62w, ratio ~1:2.86)
+                 Full width, height auto — renders as a short, wide banner naturally -->
+            <span class="section-label">Evolutionary Diagram</span>
+            <h2 class="section-title">The Human Family Tree</h2>
+            <div class="hero-image-wrap">
+                <img src="Human-Evolution.png" alt="Human Evolution Diagram">
+            </div>
+
+            <span class="section-label">Section 01 — Evolutionary Stages</span>
+            <h2 class="section-title">From Ape to Homo Sapiens — Key Stages in Human Evolution</h2>
+
+            <div class="timeline-grid">
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~7 Mya</span>
+                        <h3>The Human-Chimp Split</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Molecular and fossil evidence converges on approximately 7 million years ago as the date at which the human lineage (hominins) diverged from the lineage leading to modern chimpanzees and bonobos. The earliest potential hominin fossil is Sahelanthropus tchadensis, recovered from Chad and dating to approximately 6–7 million years ago. This individual — nicknamed "Toumaï" — showed a combination of ape-like and human-like traits, including a relatively flat face and possible evidence of upright posture, placing it near the base of the hominin tree. The precise details of the earliest stages of hominin evolution remain actively debated as new fossils emerge.</p>
+                        <div class="card-tags">
+                            <span class="tag">Sahelanthropus tchadensis</span>
+                            <span class="tag">Chad, Central Africa</span>
+                            <span class="tag">Possible bipedalism</span>
+                            <span class="tag">Human-chimp divergence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">4–2 Mya</span>
+                        <h3>Australopithecus — The Southern Apes</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>The genus Australopithecus flourished across Africa between approximately 4 and 2 million years ago. Several species have been recovered from South African cave sites — most famously the Taung Child (Australopithecus africanus) discovered in 1924, and the "Mrs Ples" and "Little Foot" specimens from the Sterkfontein Caves in Gauteng. Australopithecines were bipedal — they walked upright — but retained ape-like brain sizes and spent significant time in trees. Their upright posture freed the hands for tool use and carrying, and may have been an adaptation for thermoregulation in open savanna environments. The Australopithecines are the direct predecessors of the genus Homo.</p>
+                        <div class="card-tags">
+                            <span class="tag">South African fossils</span>
+                            <span class="tag">Bipedal but ape-brained</span>
+                            <span class="tag">Sterkfontein Caves</span>
+                            <span class="tag">Direct Homo ancestors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~2.8 Mya</span>
+                        <h3>Homo habilis — The Tool Maker</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Homo habilis ("handy man") is considered the earliest member of the genus Homo, first recovered from Olduvai Gorge in Tanzania. Associated with the Oldowan stone tool industry — the earliest confirmed stone tool technology — Homo habilis had a significantly larger brain than Australopithecus and made deliberate shaped stone tools for processing animal carcasses. Whether H. habilis hunted actively or was primarily a scavenger remains debated, but its ability to process high-protein animal food with tools marks a significant dietary and cognitive shift in the hominin lineage — one that likely contributed to subsequent brain expansion in the genus Homo.</p>
+                        <div class="card-tags">
+                            <span class="tag">Olduvai Gorge, Tanzania</span>
+                            <span class="tag">First stone tools (Oldowan)</span>
+                            <span class="tag">Enlarged brain</span>
+                            <span class="tag">~2.8 million years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">1.9 Mya – 200 Kya</span>
+                        <h3>Homo erectus — Out of Africa First</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Homo erectus was the first hominin to leave Africa, dispersing across Asia and into Europe by approximately 1.8 million years ago — reaching as far as Java and China. With a body plan very similar to modern humans and a significantly larger brain than earlier hominins, H. erectus was a skilled toolmaker (Acheulean hand axes), controlled fire, and likely hunted large game cooperatively. In Africa, Homo erectus (sometimes called H. ergaster) persisted for nearly 2 million years — an extraordinary evolutionary success. The African populations of H. erectus are the most likely ancestors of later Homo species, including ultimately Homo sapiens.</p>
+                        <div class="card-tags">
+                            <span class="tag">First hominin out of Africa</span>
+                            <span class="tag">Acheulean tools & fire use</span>
+                            <span class="tag">Java, China, Georgia</span>
+                            <span class="tag">~1.9 million years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~300 Kya</span>
+                        <h3>Homo sapiens — Our Species Emerges</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Anatomically modern Homo sapiens first appear in the fossil record approximately 300,000 years ago in Africa, with the Jebel Irhoud specimens from Morocco currently representing the oldest known fossils assigned to our species. The emergence of H. sapiens was not a single event in a single location but a complex, continent-wide process involving gene flow between geographically separated African populations. The transition to behaviourally modern humans — characterised by symbolic art, complex language, long-distance trade, and systematic marine resource exploitation — appears to have been a gradual process rather than a sudden revolution.</p>
+                        <div class="card-tags">
+                            <span class="tag">~300,000 years ago</span>
+                            <span class="tag">Jebel Irhoud, Morocco</span>
+                            <span class="tag">Pan-African emergence</span>
+                            <span class="tag">Gradual behavioural modernity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">164 Kya+</span>
+                        <h3>Coastal Living & the African Shore</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Some of the most significant evidence for early modern human behaviour comes from coastal cave sites in southern Africa. Pinnacle Point near Mossel Bay preserves evidence of shellfish harvesting and the use of red ochre dating to approximately 162,000 years ago. Blombos Cave on the Western Cape coast has yielded engraved ochre pieces, shell beads used as personal ornaments, and a sophisticated tool kit dating to over 100,000 years ago. The KZN coast sits within the same southern African coastal zone where this early complex behaviour flourished — and where human populations may have survived climate fluctuations by relying on the predictable productivity of coastal and marine food resources.</p>
+                        <div class="card-tags">
+                            <span class="tag">Pinnacle Point — 162,000 ya</span>
+                            <span class="tag">Blombos Cave — 100,000+ ya</span>
+                            <span class="tag">Shell middens</span>
+                            <span class="tag">Southern African coast</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~70 Kya</span>
+                        <h3>Out of Africa — The Global Dispersal</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Approximately 70,000 years ago, a small founding population of anatomically and behaviourally modern humans left Africa — most likely via the southern coastal route across the mouth of the Red Sea into the Arabian Peninsula. This single dispersal event is the origin of all non-African human populations today. Genetic evidence suggests this founding group was remarkably small — perhaps only a few hundred individuals — making the subsequent global dispersal of our species to every habitable landmass one of the most extraordinary demographic expansions in natural history. The coastal route hypothesis proposes these dispersing humans followed coastlines, relying heavily on marine resources as they moved eastward into Asia and Australia.</p>
+                        <div class="card-tags">
+                            <span class="tag">~70,000 years ago</span>
+                            <span class="tag">Southern coastal route</span>
+                            <span class="tag">Small founding population</span>
+                            <span class="tag">Ancestor of all non-Africans</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~10 Kya – Present</span>
+                        <h3>Agriculture, Settlement & the Modern World</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>The development of agriculture beginning approximately 10,000 years ago fundamentally transformed human society across multiple independent centres — the Fertile Crescent, China, and Mesoamerica among them. In southern Africa, the Bantu-speaking agricultural expansion from West Africa reached KZN approximately 1,500–2,000 years ago, introducing iron working, cattle keeping, and settled cultivation to a region previously inhabited by hunter-gatherer peoples. The San people — direct descendants of the oldest lineage of anatomically modern humans — carry genetic signatures traceable to populations present in southern Africa for over 100,000 years, making them living links to the deepest roots of human prehistory.</p>
+                        <div class="card-tags">
+                            <span class="tag">Agricultural revolution ~10,000 ya</span>
+                            <span class="tag">Bantu expansion to KZN ~2,000 ya</span>
+                            <span class="tag">San peoples — oldest lineage</span>
+                            <span class="tag">Modern human diversity</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="section-title">Human Evolution — Key Species at a Glance</h2>
+            <table class="facts-table">
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Age</th>
+                        <th>Brain Size</th>
+                        <th>Key Characteristic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sahelanthropus tchadensis</td>
+                        <td>~7 Mya</td>
+                        <td>~360 cc</td>
+                        <td>Oldest possible hominin; possible upright posture</td>
+                    </tr>
+                    <tr>
+                        <td>Australopithecus afarensis</td>
+                        <td>3.9–2.9 Mya</td>
+                        <td>~430 cc</td>
+                        <td>Confirmed bipedalism (Laetoli footprints); "Lucy" specimen</td>
+                    </tr>
+                    <tr>
+                        <td>Australopithecus africanus</td>
+                        <td>3.3–2.1 Mya</td>
+                        <td>~450 cc</td>
+                        <td>South African fossils; Taung Child, Mrs Ples</td>
+                    </tr>
+                    <tr>
+                        <td>Homo habilis</td>
+                        <td>2.8–1.5 Mya</td>
+                        <td>~600 cc</td>
+                        <td>First stone tools (Oldowan industry)</td>
+                    </tr>
+                    <tr>
+                        <td>Homo erectus</td>
+                        <td>1.9 Mya–200 Kya</td>
+                        <td>~900 cc</td>
+                        <td>First out of Africa; fire use; Acheulean tools</td>
+                    </tr>
+                    <tr>
+                        <td>Homo heidelbergensis</td>
+                        <td>700–200 Kya</td>
+                        <td>~1,200 cc</td>
+                        <td>Common ancestor of Neanderthals and modern humans</td>
+                    </tr>
+                    <tr>
+                        <td>Homo neanderthalensis</td>
+                        <td>400–40 Kya</td>
+                        <td>~1,400 cc</td>
+                        <td>Cold-adapted European/Asian hominin; interbred with H. sapiens</td>
+                    </tr>
+                    <tr>
+                        <td>Homo sapiens</td>
+                        <td>~300 Kya – present</td>
+                        <td>~1,350 cc</td>
+                        <td>Anatomically and behaviourally modern; global dispersal ~70 Kya</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="closing-block">
+                <h3>Human Evolution & KZN's Ocean — A Deep Connection</h3>
+                <p>The relationship between human evolution and the ocean is not a footnote to our story — it may be central to it. The coastal populations of southern Africa who exploited shellfish, fish, and marine mammals during the Middle Stone Age were not simply surviving; they were building the cognitive and social infrastructure — planning, cooperation, trade, symbolic communication — that ultimately enabled our species to leave Africa and populate the world. The marine food resources of the southern African coastline, rich in brain-building omega-3 fatty acids and iodine, may have provided the nutritional foundation for the cognitive expansion that distinguishes modern Homo sapiens.</p>
+                <p>When you stand on a KZN beach today watching the sea, you are standing in one of the landscapes where this story unfolded. The ocean that provides food, recreation, and ecological richness to KZN's communities today was doing the same for our ancestors 160,000 years ago. For more on KZN's marine environment and its conservation, visit the <a href="ocean.html">Ocean Awareness &amp; Conservation</a> page. For the species that share these waters with us today, explore the <a href="cetaceans.html">Cetaceans</a>, <a href="sharks.html">Sharks</a>, and <a href="turtles.html">Turtles</a> sections of this encyclopedia.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                   <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html" style="color: #4db6ac;">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

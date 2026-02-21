@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluebottle (Portuguese Man O' War) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Bluebottle (Portuguese Man O' War)</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="bluebottle.png" alt="Bluebottle jellyfish"><p class="image-caption">Physalia utriculus — Bluebottle stranded on KZN beach</p></div>
+<div class="species-intro">
+<h2>Bluebottle (Portuguese Man O' War)</h2>
+<span class="scientific-name">Physalia utriculus</span>
+<span class="conservation-badge">⚠ MODERATE HAZARD — Painful & Dangerous</span>
+<p>The bluebottle — often mistakenly called a jellyfish — is among the most common and painful marine hazards encountered on KwaZulu-Natal's beaches. These colonial organisms drift at the ocean surface, propelled by wind acting on their distinctive blue gas-filled float, trailing venomous tentacles up to 10 metres long beneath the water. When onshore winds blow bluebottles onto beaches, mass strandings can deposit thousands of individuals along kilometers of coastline within hours. Contact with bluebottle tentacles causes immediate, intense burning pain and raised linear welts that can persist for hours or days. While most stings are excruciatingly painful but not life-threatening to healthy adults, severe systemic reactions requiring emergency medical treatment can occur, particularly in children, elderly individuals, or those with allergies.</p>
+<p>Bluebottle strandings in KZN are most common during summer months (October to March) when onshore winds push surface waters — and the bluebottles drifting within them — toward the coastline. A single strong onshore wind event can transform a pristine beach into a bluebottle minefield within hours, with individual organisms stranded on wet sand retaining their sting potency for days. Even detached tentacles separated from the float remain venomous and can cause stings. The best prevention is vigilance — scan the water for the characteristic blue floats before entering, watch for stranded bluebottles on the beach, and exit the water immediately if bluebottles are observed.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Float Size</span><span class="stat-value">3 – 15 cm</span></div>
+<div class="stat-box"><span class="stat-label">Tentacle Length</span><span class="stat-value">Up to 10 m</span></div>
+<div class="stat-box"><span class="stat-label">Peak Season</span><span class="stat-value">Oct – Mar (summer)</span></div>
+<div class="stat-box"><span class="stat-label">Sting Trigger</span><span class="stat-value">Onshore winds</span></div>
+<div class="stat-box"><span class="stat-label">Pain Duration</span><span class="stat-value">30 min – several days</span></div>
+<div class="stat-box"><span class="stat-label">First Aid</span><span class="stat-value">Hot water 45°C</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Is a Bluebottle?</h3>
+<p>The bluebottle is not a single organism but a colonial hydrozoan — a siphonophore composed of multiple specialized polyps that function as a single entity. The most visible component is the pneumatophore — a translucent blue gas-filled float 3 to 15 centimeters long that sits at the water surface and acts as a sail, allowing the colony to drift with wind and currents. Beneath the float hang multiple types of polyps: feeding polyps (gastrozooids) that capture and digest prey, reproductive polyps (gonozooids) that produce larvae, and most importantly for human encounters, the long fishing tentacles (dactylozooids) armed with millions of microscopic stinging cells called nematocysts.</p>
+<p>When a tentacle contacts prey — or a swimmer — the nematocysts fire harpoon-like structures that penetrate the skin and inject venom. The venom contains a cocktail of proteins and peptides that cause intense pain, inflammation, and in some cases cardiovascular and neurological effects. The bluebottle's blue coloration comes from a pigment that protects the organism from UV radiation at the ocean surface. Two species exist globally: Physalia physalis (the larger Atlantic Portuguese Man O' War) and Physalia utriculus (the smaller Indo-Pacific bluebottle found in KZN). The Indo-Pacific species rarely exceeds 15 cm in float length and typically has shorter tentacles than its Atlantic relative, but its sting is still extremely painful.</p>
+</div>
+<div class="info-section"><h3>Symptoms & Medical Risks</h3>
+<p>Bluebottle stings cause immediate, intense burning pain at the contact site — often described as feeling like a hot wire pressed against the skin or being branded with a hot iron. Within seconds to minutes, raised red linear welts appear along the skin where tentacles made contact, sometimes forming a "string of beads" pattern corresponding to nematocyst discharge points. The affected area becomes intensely itchy and may blister. Pain typically peaks within 30 minutes and gradually subsides over 1 to 3 hours in mild cases, though some victims experience pain lasting several days. The welts may persist for weeks and can leave temporary pigmentation changes or scarring.</p>
+<p>Systemic reactions occur in a small percentage of cases and are the primary medical concern. Symptoms include headache, nausea, vomiting, muscle pain, fever, chills, sweating, and in severe cases, difficulty breathing, chest pain, rapid heart rate, and altered consciousness. Children and elderly individuals are at higher risk of severe reactions due to higher venom dose relative to body weight and reduced physiological resilience. Individuals with a history of severe allergic reactions to bluebottle stings should carry an epinephrine auto-injector and seek immediate medical care after any subsequent sting. Multiple stings or stings covering a large body surface area amplify risk of serious complications. Any sting causing chest tightness, difficulty breathing, facial swelling, spreading hives, or altered consciousness requires immediate emergency medical attention.</p>
+<ul>
+<li>Immediate intense burning pain at contact site</li>
+<li>Raised red linear welts forming "string of beads" pattern</li>
+<li>Pain lasting 30 minutes to several days</li>
+<li>Intense itching, blistering, and pigmentation changes</li>
+<li>Systemic reactions: nausea, vomiting, headache, muscle pain</li>
+<li>Severe reactions: difficulty breathing, chest pain, altered consciousness</li>
+</ul>
+</div>
+<div class="info-section"><h3>First Aid & Treatment</h3>
+<p>The most effective first aid for bluebottle stings is hot water immersion. Research has demonstrated that immersing the affected area in water as hot as the victim can tolerate (typically 45°C) for 20 minutes significantly reduces pain by denaturing the heat-labile venom proteins. Hot water should be tested carefully to avoid scalding — it should feel uncomfortably hot but not cause burns. If hot water is unavailable, a hot shower or application of hot packs provides relief. This treatment should be initiated as soon as possible after the sting for maximum effectiveness.</p>
+<p>Tentacle removal must be done carefully to avoid further nematocyst discharge. Do NOT rub the sting area, as this causes additional nematocysts to fire and worsens the injury. Rinse the area gently with seawater (not freshwater, which can trigger nematocyst discharge) while carefully removing any visible tentacle fragments using tweezers, a stick, or the edge of a credit card. Do not use bare fingers. After tentacle removal, rinse with seawater again and then apply hot water treatment. Vinegar — often recommended for box jellyfish stings — is NOT recommended for bluebottle stings as it may cause additional nematocyst discharge and worsen pain.</p>
+<ul>
+<li>Immerse affected area in hot water (45°C) for 20 minutes</li>
+<li>Remove tentacles carefully without rubbing — use tweezers or card edge</li>
+<li>Rinse with seawater, NOT freshwater</li>
+<li>Do NOT use vinegar — it worsens bluebottle stings</li>
+<li>Do NOT rub, scratch, or apply pressure to sting site</li>
+<li>Seek medical care if breathing difficulty, chest pain, or severe systemic symptoms develop</li>
+</ul>
+</div>
+<div class="info-section"><h3>Prevention & Risk Reduction</h3>
+<p>The best prevention is situational awareness and avoidance. Before entering the water, scan the surface for the characteristic translucent blue floats bobbing at the waterline. Bluebottles are most visible on calm days with good visibility, but can be nearly impossible to spot in choppy conditions or murky water. Check the beach for stranded bluebottles on wet sand — a clear indicator that more are present in the water offshore. Lifeguards post bluebottle warnings when strandings occur, and beaches may be temporarily closed during severe bluebottle events. Heed these warnings and stay out of the water when bluebottles are present.</p>
+<p>Onshore winds are the primary driver of bluebottle strandings in KZN. Strong northeasterly or easterly winds push surface waters — and the bluebottles drifting within them — toward shore, creating high-risk conditions that can develop rapidly. Check wind forecasts before beach trips during summer months and avoid swimming during periods of persistent onshore wind. If you observe even a single bluebottle in the water or on the beach, assume more are present and exit the water. Full-body wetsuits and rash guards provide physical barrier protection but are not foolproof — bluebottles can still sting through thin fabric or at exposed areas. The safest approach is complete avoidance when bluebottles are present.</p>
+<ul>
+<li>Scan water surface for blue floats before entering</li>
+<li>Check beach for stranded bluebottles on wet sand</li>
+<li>Avoid swimming during onshore wind conditions</li>
+<li>Exit water immediately if any bluebottles observed</li>
+<li>Heed lifeguard warnings and beach closures</li>
+<li>Wear protective clothing (wetsuits, rash guards) for partial protection</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>Mass Strandings & KZN Peak Season</h3>
+<p>Bluebottle strandings in KwaZulu-Natal follow a predictable seasonal pattern tied to summer wind conditions. Peak strandings occur between October and March when southeasterly trade winds and onshore weather systems push warm surface waters — and the bluebottles living within them — toward the coastline. A single strong onshore wind event lasting 6 to 12 hours can deposit thousands of bluebottles along kilometers of beach, transforming swimming conditions from safe to hazardous within hours. These mass strandings create widespread public health impacts, with hundreds of beachgoers stung during peak summer holiday periods when beaches are crowded and bluebottle awareness is low.</p>
+<p>The unpredictability of bluebottle events complicates risk management for beachgoers and lifeguards. Unlike seasonal hazards that follow consistent yearly patterns, bluebottle strandings are highly dependent on day-to-day wind conditions and can occur with little warning. A beach safe for swimming in the morning can become a bluebottle minefield by afternoon if wind direction shifts onshore. Stranded bluebottles on wet sand remain venomous for days and continue to sting bare feet, making beach walking hazardous even after the organisms have died. Lifeguards conduct regular beach patrols to assess bluebottle presence and post warning signs when strandings occur, but visitors should conduct their own visual assessment before entering the water.</p>
+<p>Climate change may be influencing bluebottle distribution and stranding frequency along the South African coastline. Ocean warming and shifts in wind patterns driven by climate variability can alter the geographic range and seasonal timing of bluebottle populations. Some researchers have noted an apparent increase in bluebottle strandings along the South African coast in recent decades, though comprehensive long-term data are lacking. Regardless of trends, the fundamental prevention strategy remains unchanged: vigilance, situational awareness, and immediate exit from the water when bluebottles are present. No sting — no matter how minor — is worth the excruciating pain and potential complications of a bluebottle encounter.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Bluebottle Stings</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Not a Jellyfish — A Colonial Organism</h4><p>Despite common misconception, bluebottles are not jellyfish but siphonophores — colonial hydrozoans composed of multiple specialized polyps functioning as a single organism. The blue float is a gas-filled structure called a pneumatophore, beneath which hang feeding polyps, reproductive polyps, and long venomous tentacles armed with millions of stinging cells. This colonial structure allows bluebottles to drift at the ocean surface and capture prey far more efficiently than solitary jellyfish.</p></div>
+<div class="fact-card"><h4>Hot Water, NOT Vinegar</h4><p>The most effective first aid for bluebottle stings is hot water immersion at 45°C for 20 minutes — NOT vinegar. Unlike box jellyfish stings (which respond to vinegar), bluebottle stings may worsen with vinegar application as it can trigger additional nematocyst discharge. Hot water denatures the heat-labile venom proteins and provides dramatic pain relief. This treatment should be initiated immediately for best results.</p></div>
+<div class="fact-card"><h4>Tentacles Up to 10 Metres Long</h4><p>Bluebottle tentacles can extend up to 10 metres below the visible float, meaning swimmers can be stung without seeing the organism at the surface. This creates a dangerous invisible hazard zone around each bluebottle. Even detached tentacle fragments separated from the float remain venomous and can cause full-strength stings. Never touch stranded bluebottles or tentacle fragments on the beach — they retain sting potency for days.</p></div>
+<div class="fact-card"><h4>Peak Season: October – March</h4><p>Bluebottle strandings in KZN are most common during summer months (October to March) when onshore winds push surface waters toward the coastline. Strong northeasterly or easterly winds create high-risk conditions that can develop within hours. A beach safe for swimming in the morning can become a bluebottle minefield by afternoon if wind shifts onshore. Always check wind conditions before swimming during summer months.</p></div>
+<div class="fact-card"><h4>Systemic Reactions in Children & Elderly</h4><p>Children and elderly individuals are at higher risk of severe systemic reactions from bluebottle stings due to higher venom dose relative to body weight and reduced physiological resilience. Systemic symptoms include nausea, vomiting, headache, muscle pain, fever, and in severe cases, difficulty breathing, chest pain, and altered consciousness. Multiple stings or stings covering large body surface areas amplify risk. Any severe systemic symptoms require immediate emergency medical care.</p></div>
+<div class="fact-card"><h4>Thousands Stung During Mass Strandings</h4><p>Mass bluebottle strandings driven by strong onshore winds can deposit thousands of organisms along kilometers of coastline within hours. During peak summer holiday periods, hundreds of beachgoers may be stung in a single day during major stranding events. Lifeguards post warnings and close beaches when strandings occur, but many visitors enter the water unaware of the hazard. Heed all bluebottle warnings — no swim is worth the pain.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

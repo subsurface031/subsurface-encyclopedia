@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crocodiles – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .croc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .croc-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .croc-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .croc-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .croc-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .croc-content {
+            padding: 2rem;
+        }
+
+        .croc-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .croc-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmin(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .croc-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .croc-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>KwaZulu-Natal's Ancient Predator</h2>
+                <p>The Nile crocodile is one of Africa's most formidable apex predators and the largest reptile on the continent. In KwaZulu-Natal, these magnificent prehistoric creatures inhabit rivers, lakes, estuaries, and wetlands—from the world-renowned iSimangaliso Wetland Park to the remote river systems of the northern interior. As living relics of the age of dinosaurs, Nile crocodiles have survived virtually unchanged for millions of years, perfectly adapted to their role as ambush predators in freshwater and estuarine ecosystems.</p>
+                
+                <p>KwaZulu-Natal is home to some of South Africa's most important crocodile populations. The St. Lucia estuarine system within iSimangaliso Wetland Park supports the second-largest breeding population of Nile crocodiles in the country, with an estimated 1,200 individuals. The third-largest population thrives in Ndumo Game Reserve along the Mozambique border. These populations represent critical conservation strongholds for a species that has faced centuries of persecution, habitat loss, and commercial exploitation across its African range.</p>
+                
+                <p>Despite their fearsome reputation, Nile crocodiles play an essential ecological role in maintaining the health of aquatic ecosystems. As apex predators, they regulate fish populations, remove sick and weak animals, and their presence indicates healthy, functioning wetland systems. However, their proximity to human settlements and their potential danger to people create ongoing management challenges. Understanding crocodile behaviour, ecology, and conservation needs is vital for ensuring the coexistence of humans and these ancient reptiles in KwaZulu-Natal's waterways.</p>
+                
+                <p>This section of the encyclopedia documents the Nile crocodile—the only crocodilian species native to KwaZulu-Natal and South Africa. While facilities such as the Crocodile Centre at St. Lucia may house exotic crocodilian species for educational purposes, only the Nile crocodile inhabits KZN's wild waters naturally. Every encounter with these powerful predators reminds us of our connection to the ancient natural world and our responsibility to protect it for future generations.</p>
+            </section>
+
+            <section id="crocs" class="croc-grid">
+                <article class="croc-card">
+                    <div class="croc-image">
+                        <img src="croc.png" alt="Nile Crocodile">
+                    </div>
+                    <div class="croc-content">
+                        <h3>Nile Crocodile</h3>
+                        <p>Africa's largest and most widespread crocodilian, the Nile crocodile is found throughout KZN's rivers, lakes, and estuaries. These powerful apex predators can exceed 5 meters in length and are critical to ecosystem health. The iSimangaliso Wetland Park and Ndumo Game Reserve support South Africa's most significant breeding populations.</p>
+                        <a href="nile-crocodile.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

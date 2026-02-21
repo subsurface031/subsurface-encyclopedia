@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coelacanth – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Coelacanth</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="coelacanth.png" alt="Coelacanth"><p class="image-caption">Latimeria chalumnae — West Indian Ocean Coelacanth, KZN</p></div>
+<div class="species-intro">
+<h2>Coelacanth</h2>
+<span class="scientific-name">Latimeria chalumnae</span>
+<span class="sassi-badge">✗ Critically Endangered | Fully Protected</span>
+<p>The coelacanth is a living fossil—a prehistoric fish thought extinct for 65 million years until its dramatic rediscovery off South Africa's coast in 1938. This discovery, made when fisherman Hendrick Goosen caught a strange blue fish off East London and showed it to museum curator Marjorie Courtenay-Latimer, is considered one of the greatest zoological discoveries of the 20th century. The coelacanth belongs to an ancient lineage of lobe-finned fishes that flourished 400 million years ago and were thought to have vanished with the dinosaurs, their only trace preserved as fossils in ancient rocks.</p>
+<p>KwaZulu-Natal's deep submarine canyons off Sodwana Bay harbour a small but significant population of these extraordinary fish. Coelacanths inhabit steep rocky walls and volcanic caves at depths of 100 to 400 meters, emerging at night to hunt for fish and squid in the darkness. They can live for over 60 years, grow to 90 kg, and possess unique biological features including lobed fins with bone and muscle structures resembling limbs, a special organ filled with fat for buoyancy, and extremely slow life history with female sexual maturity not reached until 55 years of age. Coelacanths are critically endangered and fully protected—every individual represents irreplaceable genetic diversity in a species clinging to survival in a handful of locations worldwide.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~90 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">60+ years</span></div>
+<div class="stat-box"><span class="stat-label">Female Maturity</span><span class="stat-value">55 years</span></div>
+<div class="stat-box"><span class="stat-label">Depth Range</span><span class="stat-value">100–400 m</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Critically Endangered</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Coelacanths are large, heavily-built fish with distinctive prehistoric appearance. The body is robust and covered with thick, overlapping cosmoid scales—armor-like scales found in ancient fish groups but extremely rare in modern fish. Body colouration is dark blue-grey to brown with irregular white or pale blotches and spots creating cryptic camouflage against volcanic rock backgrounds. A striking feature is the white, irregular spotting pattern on flanks and fins that is unique to each individual, allowing researchers to identify specific fish through photo-identification.</p>
+<p>The most remarkable features are the lobed fins—fleshy, limb-like appendages containing bones and muscles that move in coordinated alternating patterns resembling tetrapod limb movement. Coelacanths possess two dorsal fins, paired pectoral and pelvic fins, an anal fin, and a unique three-lobed tail with a small middle lobe extending beyond the main tail—all fins are lobed except the first dorsal. These specialized fins allow precise maneuvering in caves and along steep rocky walls, and their similarity to tetrapod limbs provides crucial evidence for understanding the evolutionary transition from fish to land vertebrates.</p>
+<p>The head is large with small eyes adapted for dim light conditions at depth. The mouth is equipped with numerous small, sharp teeth suitable for grasping slippery prey. Internally, coelacanths possess several unique features including a rostral organ—an electroreceptive organ in the snout used to detect prey, a notochord—a primitive skeletal structure rather than a fully ossified backbone, and a fat-filled organ called the fatty lung that provides buoyancy control. These internal structures are shared with ancient fossil coelacanths, demonstrating remarkable morphological conservatism across hundreds of millions of years.</p>
+<p>Adults typically measure 1.5 to 1.8 meters and weigh 60 to 80 kg, with maximum recorded size approximately 2 meters and 90 kg. Sexual dimorphism is minimal, making visual sex determination difficult without internal examination. Growth is extremely slow, and most large adults observed are likely several decades old.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Coelacanths are deep-dwelling, nocturnal fish that spend daylight hours resting in caves and crevices along steep volcanic walls and submarine canyons at depths of 100 to 400 meters. They often rest in small groups of 2 to 10 individuals in the same cave—sometimes positioned upside-down or at unusual angles that take advantage of cave topography. These daytime aggregations may serve thermoregulatory functions—deeper caves maintain stable, cooler temperatures—and provide protection from potential predators including large sharks.</p>
+<p>At night, coelacanths emerge from caves to hunt, typically moving upward in the water column to depths of 100 to 200 meters where prey fish are more abundant. Their lobed fins provide exceptional maneuverability, allowing them to move slowly and precisely through complex three-dimensional cave systems and along vertical rock faces. Swimming motion is distinctive—the paired fins move in coordinated alternating patterns resembling tetrapod walking gaits, a locomotor pattern that provides insights into how early tetrapods may have moved.</p>
+<p>Coelacanths are slow, deliberate predators that rely on stealth and ambush rather than active pursuit. Their dark colouration provides effective camouflage against volcanic rock backgrounds, and their ability to remain nearly motionless allows them to blend with their surroundings while waiting for prey. The electroreceptive rostral organ detects electrical fields produced by nearby prey even in complete darkness, allowing effective hunting in lightless cave environments. When suitable prey approaches, the coelacanth lunges forward with a sudden acceleration, opening its large mouth to engulf the target.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Coelacanths are carnivorous deep-water predators that feed primarily on fish and cephalopods encountered during nocturnal hunting. Their feeding strategy is opportunistic ambush predation—remaining motionless or moving slowly along walls and in caves, then lunging forward to capture prey that approaches within striking distance. The large mouth and numerous small, sharp teeth are adapted for grasping and holding slippery prey rather than cutting or crushing.</p>
+<p>Stomach content analysis from coelacanths caught by fishermen or found dead reveals a diverse diet dominated by deep-water fish species. Lanternfish, soldierfish, cardinalfish, and other small to medium fish inhabiting rocky reefs and caves comprise the majority of prey. Cephalopods including squid and cuttlefish are also consumed regularly, particularly at night when these animals are active. Occasional crustaceans have been found in stomachs, though these appear to be supplemental prey rather than dietary staples.</p>
+<ul>
+<li>Deep-water fish — lanternfish, soldierfish, cardinalfish</li>
+<li>Reef-associated fish — snappers, groupers (juveniles)</li>
+<li>Cephalopods — squid and cuttlefish</li>
+<li>Crustaceans — crabs and shrimp (supplemental)</li>
+<li>Opportunistic scavenging (occasionally)</li>
+</ul>
+<p>Feeding rates appear to be very low compared to most other fish—consistent with the coelacanth's extremely slow metabolism, growth, and life history. Coelacanths may feed only every few days or even less frequently, subsisting on infrequent large meals rather than frequent small ones. This low metabolic rate is an adaptation to the deep, cold, low-productivity environments they inhabit, allowing survival in habitats where food availability is limited and unpredictable.</p>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Coelacanths exhibit one of the slowest life histories known among fish—a suite of characteristics including extremely late sexual maturity, very long gestation, small litters, and exceptional longevity. Female coelacanths do not reach sexual maturity until approximately 55 years of age—among the latest maturity recorded for any fish species. Males mature somewhat earlier, though still extremely late by fish standards. This extraordinarily late maturity means individual coelacanths live for over half a century before contributing to reproduction.</p>
+<p>Coelacanths are ovoviviparous—embryos develop inside eggs retained within the mother's oviduct where they eventually hatch and continue developing, nourished by yolk reserves and possibly also maternal secretions. Gestation is estimated to last approximately 3 to 5 years—among the longest gestation periods known for any vertebrate and longer than elephants. This extreme gestation duration means females can only reproduce once every several years, severely limiting reproductive output across their lifetime.</p>
+<p>Litter size is very small—typically 5 to 25 pups based on examination of pregnant females. Pups are born at approximately 30 to 35 cm length, already quite large and well-developed. They receive no parental care after birth and must immediately begin independent life in deep-water habitats. The combination of late maturity, long gestation, small litters, and infrequent reproduction means coelacanth populations have extremely low reproductive rates—they cannot quickly recover from mortality events or population declines.</p>
+<p>Maximum lifespan is estimated at 60 to over 100 years based on radiometric aging techniques. This exceptional longevity, while impressive, becomes a conservation liability when combined with late maturity and low fecundity. Long-lived species with slow reproduction cannot sustain significant mortality—even removal of a small number of individuals annually can drive populations toward extinction.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Discovery, Research & Conservation</h3>
+<p>The coelacanth's rediscovery in 1938 is one of the most remarkable stories in zoology. On December 22, 1938, fisherman Hendrick Goosen caught a strange 1.5-meter blue fish in his trawl net off East London, South Africa. He showed the unusual specimen to Marjorie Courtenay-Latimer, curator of the East London Museum, who immediately recognized it as something extraordinary. She sketched and photographed the fish, then sent drawings to ichthyologist J.L.B. Smith in Grahamstown. Smith's response was immediate and emphatic—this was a coelacanth, a fish thought extinct for 65 million years. The discovery made international headlines and transformed scientific understanding of vertebrate evolution and extinction.</p>
+<p>For 14 years after the initial discovery, intensive searches failed to locate a second specimen. Then in 1952, a second coelacanth was caught off the Comoros Islands between Madagascar and Africa, revealing the location of a stable population. Over subsequent decades, research revealed that coelacanths inhabit steep volcanic slopes and submarine canyons in several western Indian Ocean locations including the Comoros, Madagascar, Tanzania, Mozambique, and South Africa. In the 1980s and 1990s, deep-diving submersibles allowed scientists to observe living coelacanths in their natural habitat for the first time, revolutionizing understanding of their behavior, ecology, and habitat requirements.</p>
+<p>South Africa's coelacanth population was discovered in 2000 in the submarine canyons off Sodwana Bay, KwaZulu-Natal. This population represents the southernmost extent of the species' range and occurs at the interface between subtropical and temperate waters. The South African population is small—estimated at fewer than 30 individuals based on photo-identification of the unique white spot patterns that mark each fish. Every individual is catalogued, photographed, and monitored through occasional submersible surveys that document population size, distribution, and habitat use.</p>
+<p>Coelacanths are classified as Critically Endangered globally and are fully protected throughout their range. Primary threats include bycatch in deep-water fisheries—coelacanths occasionally become entangled in gillnets and other fishing gear set at depths they inhabit. Although bycatch is rare, even a single coelacanth death annually represents unsustainable mortality given their extremely slow reproduction. Habitat degradation including destructive fishing practices, pollution, and climate change impacts pose additional threats. Rising ocean temperatures may compress suitable habitat as coelacanths require specific temperature ranges, potentially pushing populations toward deeper, less productive waters. Oil and gas exploration, mining, and other deep-water industrial activities also threaten critical habitats.</p>
+<p>Conservation requires absolute protection from fishing mortality through enforcement of bans on retention of coelacanths caught as bycatch, protection of critical habitat including submarine canyons and volcanic slopes, research to understand population dynamics and habitat requirements, and international cooperation to manage populations across multiple countries. Coelacanths are flagship species for deep-water conservation—protecting these ancient fish requires protecting the complex deep-reef ecosystems they inhabit, benefiting countless other species. Every coelacanth encounter is a privilege and a reminder that our oceans still hold mysteries, survivors from ancient worlds that persist in the deep darkness beyond our everyday awareness.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Living Fossil Discovery</h4><p>Coelacanths were thought extinct for 65 million years—known only from fossils—until their rediscovery off South Africa in 1938. This discovery is considered one of the greatest zoological finds of the 20th century and transformed scientific understanding of vertebrate evolution. The coelacanth's persistence demonstrates that species with deep-water, specialized lifestyles may escape extinction events that devastate shallow-water ecosystems, and that our oceans may harbor other "extinct" species waiting to be rediscovered.</p></div>
+<div class="fact-card"><h4>Lobed Fins — Evolutionary Link</h4><p>Coelacanths possess fleshy, lobed fins containing bones and muscles that move in alternating patterns resembling tetrapod limb movement. These specialized fins provide crucial evidence for understanding the evolutionary transition from fish to land vertebrates—early tetrapods evolved from lobe-finned fish ancestors related to coelacanths. The coelacanth's fins demonstrate how limbs capable of supporting weight and enabling walking on land could have evolved from fish fins adapted for precise maneuvering in complex aquatic environments.</p></div>
+<div class="fact-card"><h4>Extraordinarily Slow Life History</h4><p>Coelacanths exhibit one of the slowest life histories among fish—females do not reach sexual maturity until approximately 55 years of age, gestation lasts 3 to 5 years, and lifespan exceeds 60 years. This extremely slow reproduction means populations cannot recover quickly from mortality. Even removal of a single coelacanth annually represents unsustainable fishing pressure. This life history makes coelacanths exceptionally vulnerable to human impacts and explains their critically endangered status.</p></div>
+<div class="fact-card"><h4>Unique Spot Patterns</h4><p>Each coelacanth possesses a unique pattern of white spots and blotches on its body that remains consistent throughout life—functioning like a fingerprint. Scientists use photo-identification of these patterns to track individual coelacanths over time, revealing information about movements, site fidelity, longevity, and population size. South Africa's population is estimated at fewer than 30 individuals based on cataloguing of unique individuals photographed during submersible surveys.</p></div>
+<div class="fact-card"><h4>Ancient Lineage — 400 Million Years</h4><p>Coelacanths belong to an ancient lineage that flourished 400 million years ago during the Devonian period when fish first began colonizing land. Fossil coelacanths are abundant in rocks spanning the Devonian through Cretaceous periods, then disappear from the fossil record 65 million years ago—leading scientists to conclude they went extinct with the dinosaurs. The living coelacanth demonstrates remarkable morphological conservatism—modern coelacanths closely resemble their fossil ancestors from hundreds of millions of years ago.</p></div>
+<div class="fact-card"><h4>Deep Cave Dwellers</h4><p>Coelacanths spend daylight hours in deep caves and crevices along steep volcanic walls at depths of 100 to 400 meters, often resting in small groups and sometimes positioning themselves upside-down or at unusual angles. At night they emerge to hunt in surrounding waters. This cave-dwelling lifestyle provides stable cool temperatures and protection from predators, but also makes coelacanths vulnerable to disturbances of these specific deep-reef habitats. Protection of submarine canyons and volcanic slopes is critical for coelacanth conservation.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

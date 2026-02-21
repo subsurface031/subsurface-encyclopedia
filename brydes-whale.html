@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryde's Whale – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+  <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="cetaceans.html">Cetaceans</a>
+                <span>›</span>
+                Bryde's Whale
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="brydes-whale.png" alt="Bryde's Whale">
+                    <p class="image-caption">Balaenoptera edeni — Bryde's Whale, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Bryde's Whale</h2>
+                    <span class="scientific-name">Balaenoptera edeni</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>Bryde's whale, named after Norwegian whaling entrepreneur Johan Bryde who established South Africa's first modern whaling stations, is the only year-round resident baleen whale in KwaZulu-Natal's coastal waters. Unlike the migratory humpback and southern right whales that visit KZN seasonally, Bryde's whales are present throughout the year, drawn by the region's warm subtropical waters and abundant prey. They are often referred to as the "tropical whales" because they prefer water temperatures above 16°C and rarely venture into the colder polar waters that attract most other baleen whale species.</p>
+                    <p>Distinguished by three distinctive parallel ridges running from the tip of the snout to the blowholes, Bryde's whales are medium-sized rorquals that feed opportunistically on schooling fish, krill, and squid. They are remarkably adaptable feeders, employing diverse hunting strategies including lunge feeding, surface skimming, and even cooperative feeding with dolphins, seabirds, and game fish during the annual sardine run. Their unpredictable surfacing patterns, erratic swimming behaviour, and tendency to change direction suddenly make them challenging to study — yet these same qualities add to the excitement of encountering these magnificent predators close to shore in KZN's coastal waters.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">15.5 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~25 tonnes</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~50 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Daily Food Intake</span>
+                            <span class="stat-value">600–660 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Dive Duration</span>
+                            <span class="stat-value">5 – 15 min</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">11 – 12 months</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Bryde's whales are medium-sized baleen whales belonging to the rorqual family — a group that includes blue, fin, humpback, and sei whales. They possess the characteristic streamlined body and expandable throat pleats typical of rorquals, but can be distinguished from other species by their three prominent longitudinal head ridges. These ridges — one central ridge running along the midline of the rostrum and two lateral ridges on either side — extend from the tip of the snout to the paired blowholes. This unique feature sets Bryde's whales apart from the closely related sei whale, which has only a single central ridge.</p>
+                    <p>Colouration is dark blue-grey to charcoal on the dorsal surface, transitioning to lighter grey or white on the underside. The body is marked by extensive scarring — often white or pale grey — caused by parasites, barnacles, and cookie-cutter shark bites. Between 40 and 70 ventral throat grooves extend from the chin to the navel, allowing the throat to expand dramatically during feeding. Inside the mouth, 250 to 410 baleen plates hang from each side of the upper jaw. These slate-grey plates are relatively short and coarse, measuring up to 40 centimetres in length with bristle-like fibres along the inner edge that act as filters to trap prey while water is expelled.</p>
+                    <p>Adults typically measure 12 to 15 metres in length and weigh 13 to 25 tonnes, with females slightly larger than males. The dorsal fin is relatively small, sickle-shaped, and positioned far back on the body. The flippers are slender and pointed. The blow is columnar or bushy, reaching 3 to 4 metres in height when visible. Bryde's whales do not display their flukes when diving, making them difficult to photo-identify using tail flukes alone — instead, researchers rely on distinctive dorsal fin shapes and scarring patterns.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Bryde's whales are notably unpredictable in their movements and surfacing behaviour. Unlike many baleen whales that surface at regular intervals and swim in predictable patterns, Bryde's whales surface erratically, change direction suddenly, and dive at inconsistent intervals. This seemingly random behaviour has earned them a reputation as one of the more enigmatic whale species, making them challenging to track and study. Scientists believe this unpredictability may be linked to their opportunistic feeding strategy — constantly adjusting their movements to pursue scattered prey patches rather than following predictable migration routes.</p>
+                    <p>They are generally seen alone or in pairs, though loose aggregations of up to 20 individuals may gather in productive feeding areas, including during KZN's sardine run when abundant prey draws multiple predators to the same location. Bryde's whales spend most of their time within 15 metres of the surface, diving for 5 to 15 minutes with occasional deeper dives reaching depths of 300 metres or more. They typically swim at 2 to 6 kilometres per hour but can accelerate to speeds exceeding 25 kilometres per hour during feeding lunges or when evading threats.</p>
+                    <p>Bryde's whales are surprisingly vocal despite being baleen whales. They produce short, powerful, low-frequency moans lasting about 0.4 seconds that resemble human vocalizations. These calls are often produced in pairs, with two types of sounds emitted simultaneously. Whales call back and forth, and call types differ with group size and activity. The purpose of these sounds remains unclear, though they are believed to be used for communication, maintaining contact between individuals, and possibly coordinating feeding activity.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Bryde's whales are opportunistic generalist feeders with a remarkably diverse diet that enables them to remain year-round in warm subtropical and tropical waters where other baleen whales would struggle to find sufficient food. Unlike migratory species that travel to polar regions to exploit seasonal blooms of krill, Bryde's whales feed continuously throughout the year on whatever prey is locally abundant, adapting their feeding strategies to match prey type and distribution. This flexibility is key to their ecological success in KZN waters.</p>
+                    <p>They consume an estimated 600 to 660 kilograms of food per day — approximately 4% of their body weight. Inshore populations in KZN prefer schooling fish, particularly sardines, anchovies, mackerel, and herring, while offshore populations feed more heavily on euphausiid krill and copepods. They also consume cephalopods including squid, cuttlefish, and octopus, and occasionally scavenge discarded bycatch from fishing trawlers. During the sardine run, Bryde's whales join common dolphins, sharks, and seabirds in spectacular multi-species feeding frenzies, lunging through massive sardine bait balls with mouths agape.</p>
+                    <p>Bryde's whales employ multiple feeding strategies depending on prey type and behaviour. Lunge feeding involves accelerating toward a school of fish or krill and engulfing an enormous volume of water and prey, then forcing the water out through the baleen while trapping food inside. Surface skimming involves swimming slowly with the mouth open just below the surface, scooping up concentrated prey patches. Trap feeding or tread-water feeding — a behaviour also seen in humpback whales — involves rising vertically through a prey aggregation with the mouth open, allowing prey to swim directly into the mouth. Bryde's whales have even been observed feeding cooperatively with dolphins and seabirds, using coordinated movements to herd fish into tight schools.</p>
+                    <ul>
+                        <li>Sardines, anchovies, pilchards and herring</li>
+                        <li>Mackerel, bonito, and lanternfish</li>
+                        <li>Euphausiid krill and copepods</li>
+                        <li>Squid, cuttlefish, and octopus</li>
+                        <li>Red crabs and shrimp</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Social Structure</h3>
+                    <p>Bryde's whales exhibit a flexible reproductive strategy that differs from the rigidly seasonal breeding patterns observed in migratory baleen whale species. In warm tropical and subtropical waters like KZN, breeding can occur year-round, though some populations show peaks in mating and calving during certain months. This flexibility reflects their income breeding strategy — rather than migrating to specific breeding grounds, they reproduce opportunistically when body condition and food availability are favourable.</p>
+                    <p>After mating, females undergo a gestation period of approximately 11 to 12 months. Calves measure 3.4 to 4 metres at birth and weigh around 1,000 kilograms. The mother-calf bond is strong, with nursing lasting 6 to 12 months. During this period, calves remain in close association with their mothers, learning essential survival skills including feeding techniques and social behaviours. Female Bryde's whales reproduce biennially — giving birth once every two years — which is typical for medium-sized baleen whales.</p>
+                    <p>Sexual maturity is reached relatively early compared to larger whales. Males mature at approximately 8 to 11 years of age when they reach 12 to 13 metres in length, while females mature slightly later at 10 to 13 years and 12 metres. Maximum lifespan is estimated at approximately 50 years, though few individuals likely reach this age due to natural mortality and human impacts. Social structure is fluid and non-hierarchical, with individuals forming temporary associations based on proximity and shared feeding opportunities rather than stable, long-term bonds.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Year-Round Residents of KZN Waters</h3>
+                <p>Unlike the seasonal visitors — humpback and southern right whales — that pass through KwaZulu-Natal on their annual migrations, Bryde's whales are year-round residents of the region's warm subtropical coastal waters. This residency pattern is highly unusual among baleen whales, most of which undertake extensive migrations between polar feeding grounds and tropical breeding areas. Bryde's whales have evolved a different strategy: remaining in warm, less productive waters year-round and adapting their feeding behaviour to exploit locally available prey rather than travelling thousands of kilometres to access seasonally abundant food sources.</p>
+                <p>In KZN, Bryde's whales are most commonly observed in inshore waters within a few kilometres of the coastline, often feeding in the surf zone or within sight of beaches. They favour areas with strong upwelling, oceanographic fronts, and submarine canyons where nutrient-rich water supports concentrations of fish and zooplankton. During the sardine run between May and July, Bryde's whales become particularly conspicuous as they join the feeding frenzy alongside dolphins, sharks, and seabirds — creating opportunities for spectacular close encounters with these magnificent predators.</p>
+                <p>Research suggests there may be distinct inshore and offshore populations of Bryde's whales in South African waters. Inshore populations remain within shallow coastal habitats year-round, feeding primarily on schooling fish, while offshore populations range more widely over deeper continental shelf waters and consume more krill and copepods. The genetic relationships and movement patterns between these populations remain poorly understood, highlighting the need for continued research to inform conservation strategies.</p>
+                <p>Bryde's whales face numerous threats in KZN waters, including ship strikes, entanglement in fishing gear, pollution, and underwater noise. Their preference for shallow coastal waters places them at high risk of collision with large vessels operating in busy shipping lanes. They are also vulnerable to gillnets, longlines, and shark nets installed along beaches. Despite these threats, Bryde's whales remain relatively abundant in KZN waters compared to many other baleen whale populations, and the species is currently classified as Least Concern globally. However, ongoing monitoring and protective measures are essential to ensuring their continued presence as permanent residents of KwaZulu-Natal's marine ecosystem.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Three Head Ridges</h4>
+                    <p>Bryde's whales are the only baleen whales with three prominent longitudinal ridges on the head — one central ridge along the rostrum and two lateral ridges. This unique feature distinguishes them from the closely related sei whale, which has only a single central ridge, and makes them relatively easy to identify at close range.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tropical Whales</h4>
+                    <p>Bryde's whales are often called "tropical whales" because they prefer water temperatures above 16°C and are the only baleen whale species that does not migrate to polar waters to feed. This warm-water preference allows them to remain year-round residents of subtropical regions like KZN, unlike migratory humpback and southern right whales.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Unpredictable Swimmers</h4>
+                    <p>Bryde's whales exhibit seemingly erratic behaviour compared to other baleen whales, surfacing at irregular intervals and changing direction suddenly for no apparent reason. This unpredictability makes them challenging to study and track, though it may reflect their opportunistic feeding strategy of constantly pursuing scattered prey patches.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sardine Run Participants</h4>
+                    <p>During KZN's annual sardine run, Bryde's whales join common dolphins, sharks, and seabirds in spectacular multi-species feeding frenzies. Their lunge-feeding displays — accelerating through massive sardine bait balls with mouths wide open — create unforgettable encounters for divers and boat-based whale watchers fortunate enough to witness the spectacle.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Massive Daily Appetite</h4>
+                    <p>Bryde's whales consume an estimated 600 to 660 kilograms of food per day — approximately 4% of their body weight. This enormous daily intake is necessary to fuel their active lifestyle and maintain body condition in warm waters where metabolic demands are higher than in the colder polar regions favoured by most baleen whales.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Biotwang Mystery Solved</h4>
+                    <p>In 2014, researchers discovered a mysterious underwater sound dubbed the "Biotwang" in recordings from the Mariana Archipelago. For a decade, the source remained unknown. In 2024, scientists confirmed that Bryde's whales produce these distinctive calls — solving a long-standing acoustic mystery and expanding our understanding of baleen whale communication.</p>
+                </div>
+            </div>
+
+            <a href="cetaceans.html" class="back-link">← Back to Cetaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotted Eagle Ray – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ef5350;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Spotted Eagle Ray
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Spotted-eagle.png" alt="Spotted Eagle Ray">
+                    <p class="image-caption">Aetobatus narinari — Spotted Eagle Ray, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Spotted Eagle Ray</h2>
+                    <span class="scientific-name">Aetobatus narinari</span>
+                    <span class="conservation-badge">⚠ Endangered</span>
+                    <p>The spotted eagle ray is one of the ocean's most striking and beautiful rays—a graceful swimmer distinguished by its distinctive pattern of white spots and rings on a dark blue, black, or grey background. With their elongated, pointed pectoral fins resembling wings and long, whip-like tails, spotted eagle rays are among the most elegant marine creatures gliding through KwaZulu-Natal's coastal waters and reefs.</p>
+                    <p>These powerful, athletic rays are commonly encountered along the KZN coast, particularly over sandy bottoms near coral reefs and in shallow bays. Spotted eagle rays are benthic feeders that use their duck-like snout to excavate mollusks and crustaceans from sandy substrates, leaving characteristic feeding pits on the seafloor. They play important ecological roles as predators of hard-shelled invertebrates and as prey for larger sharks, particularly hammerheads.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Wingspan</span>
+                            <span class="stat-value">3 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">230 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">15 – 20 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">4 – 6 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">12 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pups per Litter</span>
+                            <span class="stat-value">1 – 4</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The spotted eagle ray has a distinctive rhomboidal disc that is much wider than it is long, with pointed, wing-like pectoral fins that taper to elegant points. The dorsal coloration ranges from dark blue to black or grey, adorned with numerous white spots, rings, and sometimes linear markings that create a beautiful pattern unique to each individual. The ventral surface is white or pale.</p>
+                    <p>The head is distinct from the body, elevated and flattened, with a broad, duck-bill-shaped snout that protrudes beyond the pectoral fins. This specialized rostrum is packed with electroreceptors used to detect prey buried in sediment. The eyes are positioned on the sides of the head, and immediately behind them are large spiracles used for breathing while resting on the bottom.</p>
+                    <p>The tail is extremely long—often 2 to 3 times the disc width—and whip-like, armed with one to six venomous barbed spines positioned near the base. These spines are used purely for defense and can inflict painful wounds, though spotted eagle rays are generally non-aggressive toward humans unless stepped on or threatened. Adults typically reach disc widths of 1.8 to 2.3 meters, though exceptional individuals can exceed 3 meters wingspan and weigh over 230 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Spotted eagle rays are highly active, strong swimmers that spend much of their time cruising through the water column in mid-water or near the surface, propelling themselves with graceful, bird-like flapping motions of their pectoral fins. Unlike many rays that are primarily bottom-dwellers, spotted eagle rays are semi-pelagic, moving between benthic feeding grounds and open water with remarkable agility.</p>
+                    <p>These rays are often observed alone but frequently aggregate in large schools, particularly during migration or at productive feeding areas. Groups of 10 to 100 individuals may gather, swimming in coordinated formations. They are known for spectacular breaching behavior, launching themselves completely out of the water and performing multiple somersaults before crashing back—behavior that may serve purposes including parasite removal, communication, or play.</p>
+                    <p>Spotted eagle rays are generally wary of divers and boats, maintaining a cautious distance. However, in areas where they are regularly fed or protected, some individuals become habituated to human presence. They exhibit strong site fidelity to productive feeding areas, and tagged individuals have been recorded returning to the same locations repeatedly over multiple years. They are capable of long-distance movements of hundreds of kilometers along coastlines, following seasonal prey abundance and water temperature preferences.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Spotted eagle rays are specialized benthic predators that feed primarily on hard-shelled mollusks and crustaceans buried in sandy or muddy substrates. They possess powerful crushing plates rather than typical teeth—flattened dental plates designed to crack open shells and exoskeletons. These plates are continuously replaced throughout their lifetime as they wear down from crushing hard prey.</p>
+                    <p>Feeding behavior is distinctive and leaves characteristic evidence on the seafloor. Eagle rays use their protruding snout to probe and excavate substrate, creating conical feeding pits up to 30 cm deep. Once prey is located—often through electroreception detecting buried animals—the ray uses jets of water expelled from its mouth to blast away sediment, then crushes and consumes the exposed prey.</p>
+                    <ul>
+                        <li>Bivalve mollusks (clams, oysters, mussels)</li>
+                        <li>Gastropods (snails, whelks)</li>
+                        <li>Crustaceans (crabs, shrimp, mantis shrimp)</li>
+                        <li>Octopus and squid (occasionally)</li>
+                        <li>Polychaete worms</li>
+                    </ul>
+                    <p>Spotted eagle rays can consume remarkably large prey—individual clams weighing over 1 kg have been found in their stomachs. In some regions, they are considered pests by commercial shellfish operations due to their appetite for commercially valuable clams and oysters. An adult spotted eagle ray may consume 5 to 10% of its body weight in food daily when actively feeding.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Spotted eagle rays reach sexual maturity relatively early compared to many other large rays—females at 4 to 6 years of age when they reach approximately 1.8 meters disc width, and males at 4 to 5 years at about 1.3 to 1.5 meters. Mating typically occurs in spring and summer months in KwaZulu-Natal waters, often involving multiple males pursuing a single female.</p>
+                    <p>Mating behavior includes the male biting and holding one of the female's pectoral fins while maneuvering into copulation position. Copulation is brief, lasting only a few minutes. Spotted eagle rays are ovoviviparous—embryos develop inside eggs retained within the mother's uterus, where they eventually hatch and continue developing, nourished by yolk sacs and uterine secretions.</p>
+                    <p>After a gestation period of approximately 12 months, females give birth to 1 to 4 fully developed pups, typically 2 to 3 in most litters. Pups are born at 17 to 35 cm disc width and weigh 180 to 225 grams. They are immediately independent, receiving no parental care. Females likely reproduce every 1 to 2 years depending on environmental conditions and food availability. This relatively slow reproductive rate makes spotted eagle ray populations vulnerable to overexploitation—they cannot quickly recover from population declines caused by fishing pressure.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Spotted eagle rays are circumtropical, found in warm coastal waters throughout the world's tropical and warm temperate oceans. They inhabit a variety of marine habitats from the surface to depths exceeding 80 meters, though they are most commonly encountered in shallow waters between 1 and 30 meters deep. Preferred habitats include coral reefs, rocky reefs, sandy flats adjacent to reefs, seagrass beds, muddy bays, and estuaries—anywhere that supports populations of their molluscan and crustacean prey.</p>
+                <p>In KwaZulu-Natal, spotted eagle rays are year-round residents along the entire coastline, though they are most abundant during warmer months from October through April. They are commonly sighted at popular dive sites including Aliwal Shoal, Protea Banks, and along the reefs of the KZN South Coast. Individuals are frequently observed gliding over sandy channels between reef structures, cruising through the water column, or feeding in shallow bays and estuaries including Richards Bay, St. Lucia, and various smaller estuarine systems.</p>
+                <p>Spotted eagle rays undertake seasonal migrations along coastlines, following water temperature preferences—they generally avoid waters below 16°C—and tracking prey abundance. Tagged individuals have demonstrated movement patterns of hundreds of kilometers along the South African coast, with some showing strong site fidelity to specific locations while others are highly nomadic. Population genetic studies suggest some degree of connectivity between regional populations across the Indian Ocean, though localized populations also exist.</p>
+                <p>The spotted eagle ray is classified as Endangered globally on the IUCN Red List, with populations declining significantly throughout much of their range. Primary threats include targeted fishing for meat and display in aquariums, extensive bycatch in commercial fisheries (particularly gillnets, trawls, and longlines), habitat degradation including destruction of coastal nursery areas and feeding grounds, and declining prey populations due to overfishing of shellfish. In South Africa, spotted eagle rays receive some protection in marine protected areas, but significant mortality from fishing activities continues outside protected zones.</p>
+                <p>Climate change poses additional threats through ocean warming—which may alter prey distributions and breeding cycles—ocean acidification that affects the calcium carbonate shells of their mollusk prey, and sea level rise impacting coastal habitats. Their spectacular appearance makes them popular in marine tourism, providing economic incentive for conservation, but also makes them targets for aquarium collection. Long-term conservation requires expanded marine protected areas, reduction of fishing bycatch through modified gear and practices, protection of critical feeding and nursery habitats, and international cooperation to manage populations across their wide-ranging distribution.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Spectacular Breaching Behavior</h4>
+                    <p>Spotted eagle rays are famous for their acrobatic displays, launching themselves completely out of the water and sometimes performing multiple consecutive leaps. They can jump up to 2 meters above the surface and have been observed executing complete somersaults. Some individuals perform synchronized breaching in groups. The loud splash when they crash back into the water can be heard from considerable distances. While the exact purpose is debated, theories include parasite removal, communication, escaping predators, or simply playful behavior.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Unique Spot Patterns</h4>
+                    <p>Each spotted eagle ray has a unique pattern of spots, rings, and markings on its dorsal surface that remains consistent throughout its life—functioning like a fingerprint. Scientists use photo-identification of these patterns to track individual rays over time, revealing information about movements, site fidelity, and longevity. The spotted pattern provides effective camouflage when viewed from above against the dappled light patterns on sandy bottoms.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Powerful Shellfish Crushers</h4>
+                    <p>Spotted eagle rays possess remarkably powerful jaws equipped with flattened crushing plates specifically adapted for breaking open hard-shelled prey. These dental plates are among the strongest biological materials, capable of crushing clam shells, thick-shelled gastropods, and crab carapaces that would resist most other predators. The plates are continuously replaced as they wear down—a necessity given the abrasive nature of their diet. They can consume clams larger than a human fist.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Favorite Prey of Hammerhead Sharks</h4>
+                    <p>Spotted eagle rays are a preferred prey species for large hammerhead sharks, whose unique head shape may have evolved in part to better pin rays to the seafloor. Hammerheads use their heads as weapons, stunning rays with powerful strikes before biting them. Many spotted eagle rays bear scars from hammerhead encounters, and rays have been observed fleeing frantically when hammerheads appear. Despite their defensive tail spines—which can inflict serious injury—eagle rays are vulnerable to these specialized predators.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient Lineage</h4>
+                    <p>Eagle rays belong to the family Myliobatidae, a lineage that extends back approximately 60 million years to the Paleocene epoch. Fossil eagle ray dental plates—their most commonly preserved remains—provide evidence of their long evolutionary history. The distinctive spotted pattern of Aetobatus narinari appears to have remained remarkably consistent over millions of years, suggesting it provides significant survival advantages through camouflage or perhaps species recognition.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Threatened by Overfishing</h4>
+                    <p>Spotted eagle ray populations have declined dramatically worldwide—by an estimated 50 to 79% over the past three generations—primarily due to overfishing. They are targeted for their meat in some regions and are highly valued in the aquarium trade due to their striking appearance. However, bycatch in commercial fisheries is the greatest threat. Their slow reproductive rate—producing only 2 to 3 pups annually—means populations cannot sustain significant fishing pressure. They are now classified as Endangered globally, with local extinctions occurring in heavily fished areas.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

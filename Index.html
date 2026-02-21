@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub-Surface Encyclopedia – KwaZulu-Natal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        /* ── HEADER ── */
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; text-align: center; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        /* ── NAV ── */
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); padding: 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 0; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        /* ── HERO ── */
+        .hero-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; padding: 3rem 2rem; }
+        .hero-video { position: relative; width: 100%; aspect-ratio: 9 / 16; max-height: 480px; border: 1px solid rgba(100, 149, 237, 0.3); overflow: hidden; background: #0a1929; }
+        .hero-video iframe { width: 100%; height: 100%; display: block; border: none; }
+        .hero-text h2 { color: #e3f2fd; font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+        .hero-text p { font-size: 1.15rem; line-height: 2; color: #b0bec5; }
+
+        /* ── FISH IDENTIFIER FEATURE BANNER ── */
+        .identifier-feature {
+            margin-bottom: 2rem;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 149, 237, 0.35);
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.18) 0%, rgba(15, 24, 32, 0.85) 55%, rgba(1, 87, 155, 0.15) 100%);
+            position: relative;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .identifier-feature:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            box-shadow: 0 4px 28px rgba(13, 71, 161, 0.35);
+        }
+
+        .identifier-feature::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(100,149,237,0.06) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .identifier-feature:hover::after { opacity: 1; }
+
+        .identifier-feature a {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 2.5rem;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .identifier-icon-wrap {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .identifier-icon-circle {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(100, 149, 237, 0.45);
+            background: rgba(13, 71, 161, 0.22);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .identifier-feature:hover .identifier-icon-circle {
+            background: rgba(13, 71, 161, 0.35);
+            border-color: rgba(100, 149, 237, 0.7);
+        }
+
+        .identifier-badge {
+            font-family: 'Courier New', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4a6fa5;
+            background: rgba(100, 149, 237, 0.08);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 0.15rem 0.6rem;
+            border-radius: 2px;
+        }
+
+        .identifier-info { flex: 1; min-width: 0; }
+
+        .identifier-eyebrow {
+            display: block;
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4a6fa5;
+            margin-bottom: 0.4rem;
+        }
+
+        .identifier-info h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .identifier-info p { color: #78909c; font-size: 0.95rem; line-height: 1.7; }
+
+        .identifier-cta-wrap {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .identifier-btn {
+            display: inline-block;
+            padding: 0.75rem 1.8rem;
+            border: 1px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.08);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #90caf9;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .identifier-feature:hover .identifier-btn {
+            background: rgba(100, 149, 237, 0.18);
+            border-color: rgba(100, 149, 237, 0.75);
+            color: #e3f2fd;
+        }
+
+        /* ══════════════════════════════════════════════════════
+           TIDE, WEATHER & EXPERIENCES SECTION
+        ══════════════════════════════════════════════════════ */
+        .tide-weather-links {
+            margin-bottom: 3rem;
+            padding: 2rem 2.5rem;
+            background: rgba(15, 24, 32, 0.6);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+        }
+
+        .tide-weather-title {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        /* Top row — tides & weather */
+        .tide-links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tide-link-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1.2rem 1rem;
+            background: rgba(15, 24, 32, 0.85);
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.32);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .tide-link-btn:hover {
+            background: rgba(100, 149, 237, 0.12);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+            transform: translateY(-2px);
+        }
+
+        .tide-link-btn .btn-icon { font-size: 1.8rem; line-height: 1; }
+        .tide-link-btn .btn-text { font-size: 0.75rem; }
+
+        /* Weather button — slightly highlighted */
+        .tide-link-btn.weather-btn {
+            border-color: rgba(255, 183, 77, 0.3);
+            color: #ffb74d;
+        }
+
+        .tide-link-btn.weather-btn:hover {
+            background: rgba(255, 183, 77, 0.08);
+            border-color: rgba(255, 183, 77, 0.6);
+            color: #ffe082;
+        }
+
+        .tide-links-note {
+            font-size: 0.72rem;
+            color: #546e7a;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+
+        /* Divider + experiences row */
+        .section-divider {
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4a6fa5;
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.12);
+        }
+
+        .experiences-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .exp-link-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.3rem 1rem;
+            background: rgba(13, 71, 161, 0.07);
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.28);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            text-align: center;
+            line-height: 1.45;
+        }
+
+        .exp-link-btn:hover {
+            background: rgba(100, 149, 237, 0.13);
+            border-color: rgba(100, 149, 237, 0.55);
+            color: #e3f2fd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(13, 71, 161, 0.2);
+        }
+
+        .exp-link-btn .btn-icon { font-size: 1.9rem; line-height: 1; }
+        .exp-link-btn .btn-sublabel {
+            font-size: 0.66rem;
+            color: #455a64;
+            letter-spacing: 0.5px;
+            text-transform: none;
+            font-style: italic;
+            margin-top: 0.1rem;
+        }
+
+        /* Shark cage button — accent in red/orange */
+        .exp-link-btn.shark-btn {
+            border-color: rgba(239, 83, 80, 0.28);
+            color: #ef9a9a;
+        }
+        .exp-link-btn.shark-btn:hover {
+            background: rgba(239, 83, 80, 0.08);
+            border-color: rgba(239, 83, 80, 0.55);
+            color: #ffcdd2;
+        }
+
+        /* ══════════════════════════════════════════════════════
+           THE SUB-SURFACE POD — sister site banner
+        ══════════════════════════════════════════════════════ */
+        .ssp-banner {
+            margin-bottom: 3rem;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 149, 237, 0.28);
+            background: linear-gradient(
+                135deg,
+                rgba(13, 71, 161, 0.22) 0%,
+                rgba(15, 24, 32, 0.88) 55%,
+                rgba(1, 87, 155, 0.18) 100%
+            );
+            position: relative;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .ssp-banner:hover {
+            border-color: rgba(100, 149, 237, 0.55);
+            box-shadow: 0 4px 28px rgba(13, 71, 161, 0.28);
+        }
+
+        .ssp-banner::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(100,149,237,0.05) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .ssp-banner:hover::after { opacity: 1; }
+
+        .ssp-banner a {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.8rem 2.5rem;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ssp-icon-wrap {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .ssp-icon-circle {
+            width: 62px; height: 62px;
+            border-radius: 50%;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            background: rgba(13, 71, 161, 0.18);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.75rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .ssp-banner:hover .ssp-icon-circle {
+            background: rgba(13, 71, 161, 0.3);
+            border-color: rgba(100, 149, 237, 0.65);
+        }
+
+        .ssp-abbr-tag {
+            font-family: 'Courier New', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #455a64;
+        }
+
+        .ssp-info { flex: 1; min-width: 0; }
+
+        .ssp-eyebrow {
+            display: block;
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4a6fa5;
+            margin-bottom: 0.3rem;
+        }
+
+        .ssp-info h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.45rem;
+        }
+
+        .ssp-info p { color: #6e8fa8; font-size: 0.92rem; line-height: 1.65; }
+
+        .ssp-cta-wrap {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .ssp-btn {
+            display: inline-block;
+            padding: 0.6rem 1.6rem;
+            border: 1px solid rgba(100, 149, 237, 0.45);
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #90caf9;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .ssp-banner:hover .ssp-btn {
+            background: rgba(100, 149, 237, 0.16);
+            border-color: rgba(100, 149, 237, 0.7);
+            color: #e3f2fd;
+        }
+
+        .ssp-coming-soon {
+            font-family: 'Courier New', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #2e4057;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(100, 149, 237, 0.12);
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.04);
+        }
+
+        /* ── CONTENT SECTIONS ── */
+        .content-section { margin-bottom: 4rem; padding: 2.5rem 3rem; background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); border-radius: 2px; }
+        .content-section h2 { color: #e3f2fd; font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+        .content-section p { font-size: 1.05rem; line-height: 1.9; color: #b0bec5; text-align: justify; margin-bottom: 1.5rem; }
+        .content-section p:last-child { margin-bottom: 0; }
+
+        /* ── CATEGORY CARDS ── */
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .category-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); border-radius: 2px; padding: 2rem; text-align: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .category-card:hover { border-color: rgba(100, 149, 237, 0.4); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); transform: translateY(-5px); }
+        .category-card h3 { color: #e3f2fd; font-size: 1.4rem; margin-bottom: 1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+        .category-card p { color: #b0bec5; line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .category-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-align: center; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-weight: 400; transition: all 0.2s ease; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+        .category-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        /* ── FOOTER ── */
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .tide-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .experiences-row { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            .hero-section { grid-template-columns: 1fr; text-align: center; padding: 2rem 0; }
+            .hero-video { max-height: 380px; margin: 0 auto; max-width: 220px; }
+            .hero-text h2 { font-size: 1.8rem; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .content-section { padding: 2rem; }
+            .category-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .identifier-feature a, .ssp-banner a { flex-direction: column; text-align: center; gap: 1.2rem; padding: 1.8rem 1.5rem; }
+            .ssp-cta-wrap { align-items: center; }
+            .tide-weather-links { padding: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .experiences-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .content-section { padding: 1.5rem; }
+            .header-logo { display: none; }
+            .identifier-info h3, .ssp-info h3 { font-size: 1.2rem; }
+            .tide-links-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sharks.html">Sharks</a></li>
+                <li><a href="crocs.html">Crocs</a></li>
+                <li><a href="hippos.html">Hippos</a></li>
+                <li><a href="rays.html">Rays</a></li>
+                <li><a href="turtles.html">Turtles</a></li>
+                <li><a href="cetaceans.html">Cetaceans</a></li>
+                <li><a href="fish.html">Fish</a></li>
+                <li><a href="crustaceans.html">Crustaceans</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <!-- HERO -->
+            <section class="hero-section">
+                <div class="hero-video">
+                    <a href="https://youtube.com/shorts/Lg8G0eO8-s8" target="_blank" style="display:block; position:relative; width:100%; height:100%;">
+                        <img src="hero-thumbnail.png" alt="Watch on YouTube" style="width:100%; height:100%; object-fit:cover; display:block;">
+                        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:64px; height:64px; background:rgba(255,0,0,0.85); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                            <div style="width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent; border-left:22px solid white; margin-left:5px;"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="hero-text">
+                    <h2>Welcome to the Sub-Surface Encyclopedia</h2>
+                    <p>Your comprehensive guide to the remarkable aquatic life of KwaZulu-Natal's marine and freshwater ecosystems. From the depths of the Indian Ocean to the estuaries and rivers that wind through our landscape, discover the incredible diversity of species that call these waters home.</p>
+                </div>
+            </section>
+
+            <!-- FISH & SPECIES IDENTIFIER -->
+            <div class="identifier-feature">
+                <a href="fish-identifier.html">
+                    <div class="identifier-icon-wrap">
+                        <div class="identifier-icon-circle">🔬</div>
+                        <span class="identifier-badge">AI-Powered</span>
+                    </div>
+                    <div class="identifier-info">
+                        <span class="identifier-eyebrow">New Tool Available</span>
+                        <h3>Fish & Species Identifier</h3>
+                        <p>Upload a photo of your catch or sighting and get instant AI-powered species identification — including scientific name, conservation status, SASSi rating, habitat, and key identifying features. Works for fish, sharks, rays, turtles, and all KZN aquatic species.</p>
+                    </div>
+                    <div class="identifier-cta-wrap">
+                        <span class="identifier-btn">Try Identifier →</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ════════════════════════════════════════════════
+                 TIDES, WEATHER & KZN EXPERIENCES
+            ═════════════════════════════════════════════════ -->
+            <div class="tide-weather-links">
+                <h3 class="tide-weather-title">🌊 Tides, Weather & KZN Experiences</h3>
+
+                <!-- Row 1: Tides & Weather -->
+                <div class="tide-links-grid">
+                    <a href="https://www.tide-forecast.com/" target="_blank" rel="noopener" class="tide-link-btn">
+                        <span class="btn-icon">🌊</span>
+                        <span class="btn-text">KZN Tide Times</span>
+                    </a>
+                    <a href="https://www.windy.com/-Waves-waves?waves,-29.858,31.029,10" target="_blank" rel="noopener" class="tide-link-btn">
+                        <span class="btn-icon">🌬️</span>
+                        <span class="btn-text">Wind & Swell Map</span>
+                    </a>
+                    <a href="https://tideschart.com/SouthAfrica/KwaZuluNatal/eThekwiniMetropoleMunicipality/Durban/" target="_blank" rel="noopener" class="tide-link-btn">
+                        <span class="btn-icon">📅</span>
+                        <span class="btn-text">Tide Calendar</span>
+                    </a>
+                    <!-- NEW: Weather & UV -->
+                    <a href="https://weathertoday.co.za/" target="_blank" rel="noopener" class="tide-link-btn weather-btn">
+                        <span class="btn-icon">🌤️</span>
+                        <span class="btn-text">Weather & UV Index</span>
+                    </a>
+                </div>
+
+                <p class="tide-links-note">Live data from external sources — all links open in new tab</p>
+
+                <!-- Row 2: KZN Ocean Experiences -->
+                <p class="section-divider">🐬 KZN Ocean Experiences</p>
+                <div class="experiences-row">
+
+                    <a href="https://www.bing.com/maps?q=whale+watching+tours+KZN" target="_blank" rel="noopener" class="exp-link-btn">
+                        <span class="btn-icon">🐋</span>
+                        <span style="font-size:0.75rem;">Whale & Dolphin Tours</span>
+                        <span class="btn-sublabel">Find KZN operators</span>
+                    </a>
+
+                    <a href="https://www.bing.com/maps/search?style=r&q=shark+cage+diving+KZN" target="_blank" rel="noopener" class="exp-link-btn shark-btn">
+                        <span class="btn-icon">🦈</span>
+                        <span style="font-size:0.75rem;">Shark Cage Diving</span>
+                        <span class="btn-sublabel">Find KZN operators</span>
+                    </a>
+
+                    <a href="https://www.surf-forecast.com/
+" target="_blank" rel="noopener" class="exp-link-btn">
+                        <span class="btn-icon">🏄</span>
+                        <span style="font-size:0.75rem;">surf forcast</span>
+                        <span class="btn-sublabel">6-day surf forecast</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- THE SUB-SURFACE POD -->
+            <div class="ssp-banner">
+                <a href="#" target="_blank">
+                    <div class="ssp-icon-wrap">
+                        <div class="ssp-icon-circle">🐚</div>
+                        <span class="ssp-abbr-tag">SSp</span>
+                    </div>
+                    <div class="ssp-info">
+                        <span class="ssp-eyebrow">Also from Sub-Surface</span>
+                        <h3>The Sub-Surface Pod</h3>
+                        <p>Our sister community platform — where ocean enthusiasts, divers, and coastal explorers across KZN connect, share encounters, and stay in the loop. The encyclopedia tells you what's out there. The Pod is where you talk about it.</p>
+                    </div>
+                    <div class="ssp-cta-wrap">
+                        <span class="ssp-btn">Visit the Pod →</span>
+                        <span class="ssp-coming-soon">Coming Soon</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- CONTENT SECTIONS -->
+            <section class="content-section">
+                <h2>KwaZulu-Natal's Aquatic Biodiversity</h2>
+                <p>The waters of KwaZulu-Natal represent one of the most biodiverse marine environments on Earth. Where the warm Agulhas Current meets our coastline, it creates a unique convergence zone that supports an extraordinary array of life—from microscopic plankton to the ocean's largest predators.</p>
+                <p>Our coastal waters harbor over 1,200 species of fish, dozens of shark species, graceful rays, ancient sea turtles, and migrating whales. The rocky reefs of Aliwal Shoal and Protea Banks serve as vital nurseries and feeding grounds, while our estuaries—including the world-renowned St. Lucia system—provide critical transitional habitats where freshwater and marine ecosystems meet.</p>
+                <p>Beyond the coast, KwaZulu-Natal's rivers, lakes, and wetlands support a rich diversity of freshwater species, including the formidable Nile crocodile and the hippopotamus, both integral to the health of these inland aquatic systems. This encyclopedia documents these species, their behaviors, ecological roles, and the conservation challenges they face in an era of rapid environmental change.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Conservation and Our Future</h2>
+                <p>The aquatic biodiversity of KwaZulu-Natal faces unprecedented challenges. Climate change, overfishing, habitat destruction, pollution, and coastal development threaten the delicate balance of these ecosystems. Many species documented in this encyclopedia are now classified as vulnerable, endangered, or critically endangered.</p>
+                <p>However, there is hope. KwaZulu-Natal has become a leader in marine conservation and research, with numerous marine protected areas, active research programs, and community-based conservation initiatives. Understanding these species—their biology, ecology, and the threats they face—is the foundation for effective conservation action.</p>
+                <p>This encyclopedia serves not only as an educational resource but as a call to action. Every species profiled here plays an irreplaceable role in maintaining the health and resilience of our aquatic ecosystems. By learning about and protecting these remarkable creatures, we ensure that future generations will continue to experience the wonder of KwaZulu-Natal's aquatic life.</p>
+            </section>
+
+            <!-- CATEGORY CARDS -->
+            <section class="category-grid">
+                <article class="category-card">
+                    <h3>Sharks</h3>
+                    <p>Explore the apex predators of KZN's waters, from gentle ragged-tooth sharks to powerful tiger sharks and the unique Zambezi bull shark.</p>
+                    <a href="sharks.html" class="category-link">Explore Sharks</a>
+                </article>
+                <article class="category-card">
+                    <h3>Crocodiles</h3>
+                    <p>Learn about the formidable Nile crocodile, one of Africa's most powerful predators inhabiting KZN's rivers and estuaries.</p>
+                    <a href="crocs.html" class="category-link">Explore Crocs</a>
+                </article>
+                <article class="category-card">
+                    <h3>Hippos</h3>
+                    <p>Discover the hippopotamus, massive herbivores that play a crucial role in KZN's freshwater ecosystems and wetlands.</p>
+                    <a href="hippos.html" class="category-link">Explore Hippos</a>
+                </article>
+                <article class="category-card">
+                    <h3>Rays</h3>
+                    <p>Learn about the graceful rays gliding through our waters, from manta rays to spotted eagle rays and stingrays.</p>
+                    <a href="rays.html" class="category-link">Explore Rays</a>
+                </article>
+                <article class="category-card">
+                    <h3>Turtles</h3>
+                    <p>Explore the ancient sea turtles that nest on KZN's beaches, including leatherbacks and loggerheads on their migration routes.</p>
+                    <a href="turtles.html" class="category-link">Explore Turtles</a>
+                </article>
+                <article class="category-card">
+                    <h3>Cetaceans</h3>
+                    <p>Discover the dolphins and whales of KZN's waters — from playful bottlenose dolphins to majestic humpback and southern right whales.</p>
+                    <a href="cetaceans.html" class="category-link">Explore Cetaceans</a>
+                </article>
+                <article class="category-card">
+                    <h3>Fish</h3>
+                    <p>Dive into the incredible diversity of over 1,200 fish species found throughout KZN's marine and freshwater habitats.</p>
+                    <a href="fish.html" class="category-link">Explore Fish</a>
+                </article>
+                <article class="category-card">
+                    <h3>Crustaceans</h3>
+                    <p>Explore the crabs, lobsters, prawns, and other crustaceans inhabiting KZN's coastal and freshwater environments.</p>
+                    <a href="crustaceans.html" class="category-link">Explore Crustaceans</a>
+                </article>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html">Coming Soon</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                    <a href="fish-identifier.html" style="color: #90caf9;">🔬 Fish & Species Identifier</a>
+                </div>
+
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cetaceans – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .cetacean-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .cetacean-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cetacean-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .cetacean-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cetacean-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .cetacean-content {
+            padding: 2rem;
+        }
+
+        .cetacean-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .cetacean-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .cetacean-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .cetacean-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+   <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>Giants and Acrobats of KwaZulu-Natal's Waters</h2>
+                <p>Cetaceans—the collective name for whales, dolphins, and porpoises—represent some of the most intelligent, socially complex, and ecologically significant marine mammals on Earth. In KwaZulu-Natal, the warm waters of the Agulhas Current create a vital corridor for both resident dolphin populations and the annual migrations of some of the ocean's most majestic creatures. From the playful bottlenose dolphins that ride the surf along Durban's coastline to the awe-inspiring humpback whales that journey thousands of kilometres from Antarctic feeding grounds, KZN's coastal waters host an extraordinary diversity of cetacean life.</p>
+
+                <p>Every year between May and December, KwaZulu-Natal's coastline becomes a front-row seat to one of nature's greatest spectacles—the northward and southward migration of humpback whales and southern right whales. These gentle giants travel along the KZN coast en route to breeding and calving grounds off Mozambique and Madagascar, often passing within mere metres of the shore. The predictability and proximity of these migrations have established locations like St. Lucia, Sodwana Bay, and Durban's Bluff as world-renowned whale-watching destinations. The Bluff in Durban holds the distinction of being one of the world's first certified Whale Heritage Areas, a testament to the region's commitment to cetacean conservation and responsible eco-tourism.</p>
+
+                <p>Beyond the migratory whales, KwaZulu-Natal supports year-round populations of several dolphin species. Indo-Pacific bottlenose dolphins are a daily sight along the coast, frequently bow-riding boats, surfing waves, and delighting beach-goers with their acrobatic displays. Long-beaked common dolphins arrive in massive super-pods during the annual sardine run, creating feeding frenzies alongside sharks, seabirds, and other marine predators. The critically endangered Indo-Pacific humpback dolphin—one of South Africa's rarest marine mammals—clings to survival in small, isolated populations along the northern KZN coast, making every sighting of these shy, coastal specialists a conservation priority.</p>
+
+                <p>Cetaceans are not merely charismatic megafauna—they are keystone species whose presence indicates healthy, productive ocean ecosystems. Whales fertilize surface waters through their nutrient-rich waste, supporting phytoplankton blooms that form the base of marine food webs. Dolphins regulate fish populations and serve as sentinels for ocean health, their presence or absence signaling changes in water quality, prey availability, and ecosystem integrity. Despite legal protection, KZN's cetaceans face mounting threats from entanglement in fishing gear and shark nets, ship strikes, pollution, ocean noise, and climate-driven changes to prey distribution. Understanding and protecting these remarkable marine mammals is essential not only for their survival but for the health of the ocean ecosystems on which all life—including our own—ultimately depends.</p>
+            </section>
+
+            <section id="cetaceans" class="cetacean-grid">
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="humpback-whale.png" alt="Humpback Whale">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Humpback Whale</h3>
+                        <p>Famous for their haunting songs and spectacular breaching displays, humpback whales migrate past KZN's coast between May and December. These gentle giants travel from Antarctic feeding grounds to tropical breeding areas off Mozambique, often passing close to shore. Their long pectoral fins, distinctive humped backs, and acrobatic behaviour make them favourites among whale watchers along the KZN coastline.</p>
+                        <a href="humpback-whale.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="southern-right-whale.png" alt="Southern Right Whale">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Southern Right Whale</h3>
+                        <p>Named by whalers as the "right" whale to hunt due to their slow swimming and tendency to float when killed, southern right whales are now a conservation success story. These massive baleen whales migrate along the KZN coast between June and November, recognized by their enormous heads, V-shaped blows, and distinctive white callosities. Mothers and calves are frequently spotted in sheltered bays.</p>
+                        <a href="southern-right-whale.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="bottlenose-dolphin.png" alt="Indo-Pacific Bottlenose Dolphin">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Indo-Pacific Bottlenose Dolphin</h3>
+                        <p>KZN's most commonly encountered dolphin, Indo-Pacific bottlenose dolphins are year-round residents along the entire coastline. Masters of the surf zone, they frequently bow-ride boats, perform acrobatic leaps, and interact playfully with swimmers. These highly intelligent, social animals live in groups averaging 20 individuals in KZN waters, though larger gatherings occur when food is plentiful.</p>
+                        <a href="bottlenose-dolphin.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="common-dolphin.png" alt="Long-beaked Common Dolphin">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Long-beaked Common Dolphin</h3>
+                        <p>Epitomizing grace and speed, long-beaked common dolphins are frequently encountered in massive super-pods of hundreds or even thousands during KZN's famous sardine run. These sleek, fast swimmers are known for their enthusiastic bow-riding and spectacular aerial displays. They are occasionally seen from shore during summer months when following schools of fish up the coast.</p>
+                        <a href="common-dolphin.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="humpback-dolphin.png" alt="Indo-Pacific Humpback Dolphin">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Indo-Pacific Humpback Dolphin</h3>
+                        <p>One of South Africa's rarest marine mammals, the Indo-Pacific humpback dolphin is listed as Endangered with only 500 individuals remaining in South African waters. The northern KZN population is critically small and isolated. Distinguished by a distinctive hump below their dorsal fin, these shy, coastal specialists prefer shallow estuarine waters and are rarely seen by the casual observer.</p>
+                        <a href="humpback-dolphin.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="cetacean-card">
+                    <div class="cetacean-image">
+                        <img src="brydes-whale.png" alt="Bryde's Whale">
+                    </div>
+                    <div class="cetacean-content">
+                        <h3>Bryde's Whale</h3>
+                        <p>Unlike the migratory humpback and southern right whales, Bryde's whales are year-round residents of KZN's warmer coastal waters. These medium-sized baleen whales are often seen feeding close to shore, sometimes within the surf zone, pursuing schools of sardines and anchovies. They can be identified by their sleek appearance, three parallel ridges on the head, and preference for tropical and subtropical waters.</p>
+                        <a href="brydes-whale.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

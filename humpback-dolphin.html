@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indo-Pacific Humpback Dolphin – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="cetaceans.html">Cetaceans</a>
+                <span>›</span>
+                Indo-Pacific Humpback Dolphin
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="humpback-dolphin.png" alt="Indo-Pacific Humpback Dolphin">
+                    <p class="image-caption">Sousa plumbea — Indo-Pacific Humpback Dolphin, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Indo-Pacific Humpback Dolphin</h2>
+                    <span class="scientific-name">Sousa plumbea</span>
+                    <span class="conservation-badge">⚠ Endangered</span>
+                    <p>The Indo-Pacific humpback dolphin, also known as the Indian Ocean humpback dolphin, is one of South Africa's rarest and most critically threatened marine mammals. Distinguished by a distinctive fatty hump on the back below the dorsal fin, these shy, coastal specialists have among the most restricted habitat preferences of any cetacean—inhabiting only shallow inshore waters less than 20 metres deep, typically within 500 metres of the coastline. This extreme coastal dependence places them at the intersection of nearly every anthropogenic threat facing the ocean: pollution, habitat degradation, boat strikes, fishing gear entanglement, and shark net mortality.</p>
+                    <p>In KwaZulu-Natal, humpback dolphin populations are critically small and isolated, with fewer than 100 individuals remaining along the northern KZN coast near Richards Bay and the iSimangaliso Wetland Park. Between 1980 and 2009, over 200 humpback dolphins died in KZN's shark nets—a level of mortality that is entirely unsustainable for such a small, slow-breeding population. Every sighting of these elusive dolphins represents a conservation priority, a reminder of what we stand to lose if urgent action is not taken to protect South Africa's coastal habitats and reduce human-dolphin conflict.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.8 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~200 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~40 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KZN Population</span>
+                            <span class="stat-value">&lt;100</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 20 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">10 – 12 months</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Indo-Pacific humpback dolphins are medium-sized dolphins with a stocky, robust build and a distinctive fatty hump on the back located just below the dorsal fin—the feature for which the species is named. This hump becomes more pronounced with age and is most prominent in large adult individuals. The dorsal fin itself is relatively small, broad-based, and triangular, positioned centrally on the back above the hump. Unlike their bottlenose dolphin cousins with whom they sometimes share habitat, humpback dolphins have a more angular body profile and slower, deliberate swimming motion.</p>
+                    <p>Colouration in South African waters is predominantly dark grey, with slightly paler undersides. Juveniles are lighter in colouration than adults—pale grey on the flanks with a white ventral surface—and gradually darken as they mature. Some of the largest, oldest adults develop white or pale grey patches on the dorsal fin and hump. Many individuals bear prominent scars on the dorsal fin and back, believed to result from unsuccessful shark attacks, testament to the dangers these coastal dolphins face in KZN's predator-rich waters.</p>
+                    <p>Adults measure 2 to 2.8 metres in length and weigh 150 to 200 kg. The head is relatively small with a moderately long, well-defined beak. Each jaw contains 30 to 34 small, conical teeth adapted for grasping slippery fish. A distinctive characteristic of humpback dolphins is their unique surfacing motion—they surface at a steep 30 to 45-degree angle, often showing the rostrum and sometimes the full head before arching the back and occasionally displaying the flukes. This behaviour, combined with the hump, makes them relatively easy to identify when encountered.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Indo-Pacific humpback dolphins are notably shy and reclusive compared to the more gregarious and playful bottlenose dolphins that often share their habitat. They are typically encountered in small groups averaging 4 to 6 individuals in KZN waters, though larger temporary aggregations of up to 20 dolphins have been observed. These groups are fluid and dynamic, constantly splitting and reforming as individuals move between pods. Social structure appears to be based on loose, fluid associations rather than stable, long-term bonds.</p>
+                    <p>The species exhibits strong site fidelity and restricted home ranges. Radio-tracking and photo-identification studies in Richards Bay and the iSimangaliso Wetland Park have revealed that individual humpback dolphins remain in relatively small coastal areas, rarely moving more than a few kilometres from core habitat. This philopatry increases their vulnerability to localised threats such as pollution, coastal development, and shark nets, as they cannot simply relocate to safer waters when conditions deteriorate.</p>
+                    <p>Humpback dolphins are shallow, relatively slow divers compared to bottlenose dolphins and pelagic species. They rarely dive for more than a few minutes and prefer to remain in water less than 20 metres deep where their primary prey—reef-associated and estuarine fish—are most abundant. They avoid boats and are generally wary of human activity, making close encounters rare outside of structured research programs. This shyness may be an adaptive response to their vulnerable coastal existence, where predation risk from sharks is high.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Indo-Pacific humpback dolphins feed almost exclusively on fish, with cephalopods comprising only a small fraction of their diet. They are specialised coastal feeders, targeting reef-associated, estuarine, and nearshore bottom-dwelling fish species that are abundant in the shallow, turbid waters they inhabit. Studies of stomach contents from dolphins caught in KZN shark nets have identified 59 different prey species, reflecting an opportunistic but specialised feeding strategy adapted to the highly productive coastal and estuarine ecosystems of the region.</p>
+                    <p>The most commonly consumed prey species include glassnosed anchovy, ribbonfish, olive grunter, bearded croaker, and various species of mullet—all of which are abundant in the shallow bays, estuaries, and nearshore reefs of northern KZN. Humpback dolphins employ diverse feeding strategies including beaching themselves partially onto mudflats and sandbanks to chase fish stranded by the receding tide—a risky but effective technique that demonstrates their remarkable adaptability.</p>
+                    <p>In some areas, humpback dolphins have been observed following fishing trawlers to exploit discarded bycatch and fish escaping from nets. While this behaviour may provide an easy meal, it also exposes them to the significant risk of entanglement in fishing gear—a leading cause of mortality for the species throughout their range. The dependence on fish species that are also targeted by commercial and subsistence fisheries places humpback dolphins in direct competition with humans, further exacerbating conservation challenges.</p>
+                    <ul>
+                        <li>Glassnosed anchovy and ribbonfish</li>
+                        <li>Olive grunter and bearded croaker</li>
+                        <li>Mullet (multiple species)</li>
+                        <li>Threadfins and sea catfish</li>
+                        <li>Squid and cuttlefish (occasional)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Social Structure</h3>
+                    <p>Very little is known about the reproductive biology of Indo-Pacific humpback dolphins in South African waters due to their rarity, elusive nature, and protected status. What information exists comes primarily from analysis of dolphins caught incidentally in shark nets and observations of mother-calf pairs in protected bays. Gestation is estimated at 10 to 12 months, with calving occurring year-round in KZN's warm coastal waters, though there may be a peak in late summer and autumn.</p>
+                    <p>Females give birth to a single calf measuring approximately 1 metre in length. The mother-calf bond is strong and persistent, with calves remaining closely associated with their mothers for at least one to two years. During this period, calves learn essential survival skills including hunting techniques, predator avoidance, and navigation of the complex coastal and estuarine environments they inhabit. Nursing lasts approximately 6 to 9 months, after which calves begin supplementing milk with fish but continue to receive maternal care and protection.</p>
+                    <p>Humpback dolphins are slow breeders with long intervals between births—females likely reproduce only once every three years or longer. This extremely low reproductive rate, combined with small population sizes and high mortality from human activities, means that humpback dolphin populations cannot sustain even modest levels of additional mortality. The loss of a single breeding female represents an irreplaceable setback for the population, underscoring the critical importance of every individual to the species' survival.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Conservation Crisis: On the Brink in KZN</h3>
+                <p>The Indo-Pacific humpback dolphin population in KwaZulu-Natal is in crisis. Genetic studies have revealed that the northern KZN population—centred around Richards Bay and the iSimangaliso Wetland Park—is small, isolated, and genetically distinct from populations elsewhere along the South African coast. With fewer than 100 individuals remaining, this population faces an extremely high risk of local extinction within decades if current threats are not urgently addressed.</p>
+                <p>The primary threat is mortality in shark nets installed along KZN beaches to protect bathers. Between 1980 and 2009, 203 humpback dolphins died in these nets—an average of more than six dolphins per year. For a population that may number fewer than 100 individuals and reproduces only once every three years, this level of mortality is entirely unsustainable. Since 1999, efforts have been made to reduce bycatch through the use of acoustic pingers and making nets more conspicuous, but dolphin deaths continue to occur.</p>
+                <p>Habitat degradation poses an equally severe threat. The shallow coastal and estuarine waters that humpback dolphins depend on are among the most heavily impacted by human activity. The expansion of Richards Bay Harbour, one of Africa's largest ports, has resulted in dredging, pollution, increased boat traffic, and noise that disrupts dolphin communication and navigation. Coastal development, pollution from agricultural and urban runoff, and the loss of mangrove and seagrass habitats have all contributed to the degradation of critical dolphin habitat.</p>
+                <p>Climate change and overfishing compound these threats by altering prey availability and distribution. Humpback dolphins are dietary specialists that rely on specific fish species inhabiting shallow coastal waters. Overfishing of these prey species reduces food availability, while warming waters and changing oceanographic conditions may shift prey distributions beyond the dolphins' restricted home ranges. Pollution—particularly organochlorine contaminants and heavy metals—accumulates in dolphin tissues and has been linked to immune suppression and reproductive failure in other cetacean populations.</p>
+                <p>Despite their Endangered status, humpback dolphins in KZN receive limited direct protection. Marine protected areas offer some refuge, but enforcement is inadequate, and the areas themselves are too small to encompass the full home ranges of resident dolphins. The SouSA Project, a collaborative effort between Sea Search and the University of Pretoria, aims to improve understanding of humpback dolphin population size, distribution, and ecological needs in South Africa. However, knowledge alone is insufficient—urgent conservation action is needed including expanded marine protected areas, alternative bather protection methods to replace shark nets, stricter enforcement of coastal development regulations, and public education to build support for dolphin conservation. Without immediate, concerted action, KwaZulu-Natal's humpback dolphins face a very real risk of disappearing entirely within our lifetimes.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Critically Small Population</h4>
+                    <p>The northern KZN population of Indo-Pacific humpback dolphins numbers fewer than 100 individuals and is genetically isolated from other populations. This makes it one of the most endangered marine mammal populations in southern Africa, with every individual critical to the population's survival.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shark Net Victims</h4>
+                    <p>Between 1980 and 2009, over 200 humpback dolphins died in KZN's shark nets—an average of more than six per year. This level of mortality is entirely unsustainable for a population that may number fewer than 100 individuals and has one of the slowest reproductive rates of any dolphin species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Coastal Specialists</h4>
+                    <p>Humpback dolphins have one of the most restricted habitat preferences of any marine mammal, inhabiting only shallow coastal waters less than 20 metres deep and typically within 500 metres of shore. This extreme coastal dependence places them at the intersection of nearly every human activity impacting the ocean.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Distinctive Surfacing</h4>
+                    <p>Unlike other dolphins that surface horizontally, humpback dolphins breach at a steep 30 to 45-degree angle, often showing the rostrum and full head before arching the back. This unique surfacing behaviour, combined with the distinctive hump, makes them relatively easy to identify despite their rarity.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Four Species, Not One</h4>
+                    <p>Until recently, all humpback dolphins were considered a single species. Genetic studies have now revealed four distinct species: Atlantic humpback dolphin (Critically Endangered), Indian Ocean humpback dolphin (Endangered), Indo-Pacific humpback dolphin (Vulnerable), and Australian humpback dolphin (Vulnerable). This reclassification highlights just how small and isolated individual populations truly are.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shark Attack Survivors</h4>
+                    <p>Many humpback dolphins in KZN bear prominent scars on their dorsal fins and backs, believed to result from unsuccessful shark attacks. These scars are a testament to the dangers these coastal dolphins face living in waters patrolled by bull sharks, tiger sharks, and other large predators.</p>
+                </div>
+            </div>
+
+            <a href="cetaceans.html" class="back-link">← Back to Cetaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

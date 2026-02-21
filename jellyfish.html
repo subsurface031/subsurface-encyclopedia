@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Box Jellyfish & Other Jellyfish – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #e57373; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Box Jellyfish & Other Jellyfish</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="boxjelly.png" alt="Box Jellyfish"><p class="image-caption">Carybdea & Chiropsella spp. — Box jellyfish, KZN waters</p></div>
+<div class="species-intro">
+<h2>Box Jellyfish & Other Jellyfish</h2>
+<span class="scientific-name">Carybdea & Chiropsella spp.</span>
+<span class="conservation-badge">⚠ HIGH HAZARD — Medical Attention Advised</span>
+<p>Several species of jellyfish inhabit KwaZulu-Natal's coastal waters, with occurrence peaking during summer months when warm water currents bring gelatinous plankton close to shore. Small box jellyfish — cubomedusae from the genera Carybdea and Chiropsella — are occasionally encountered in warm, sheltered bays and estuaries along the KZN coast. While far less lethal than their notorious Indo-Pacific relatives like the Australian box jellyfish (Chironex fleckeri), South African box jellies are still capable of causing severe pain, systemic reactions, and in rare cases, life-threatening complications requiring emergency medical intervention.</p>
+<p>Box jellyfish differ from other jellyfish in their anatomy and behaviour. Rather than drifting passively with currents, box jellies actively swim using jet propulsion, allowing them to pursue prey and avoid obstacles. They possess well-developed eyes that provide genuine vision — an unusual trait among jellyfish. Their tentacles trail beneath a transparent, cube-shaped bell and are armed with millions of nematocysts containing potent venom. Any jellyfish sting causing chest tightness, difficulty breathing, spreading pain beyond the sting site, or altered consciousness requires immediate emergency medical attention. Moon jellies, compass jellies, and other species also occur in KZN waters and cause mild to moderate stings, though they are far less dangerous than box jellyfish.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Bell Size</span><span class="stat-value">2 – 10 cm</span></div>
+<div class="stat-box"><span class="stat-label">Tentacle Length</span><span class="stat-value">Up to 1 m</span></div>
+<div class="stat-box"><span class="stat-label">Peak Season</span><span class="stat-value">Oct – Mar (summer)</span></div>
+<div class="stat-box"><span class="stat-label">Habitat</span><span class="stat-value">Sheltered bays / estuaries</span></div>
+<div class="stat-box"><span class="stat-label">Pain Duration</span><span class="stat-value">Hours to days</span></div>
+<div class="stat-box"><span class="stat-label">First Aid</span><span class="stat-value">Vinegar + hot water</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Are Box Jellyfish?</h3>
+<p>Box jellyfish are members of the class Cubozoa — jellyfish characterized by a cube-shaped bell (medusa) with four sides and clusters of tentacles hanging from each of the four corners. Unlike true jellyfish (Scyphozoa) that drift passively with ocean currents, box jellyfish are active swimmers that use jet propulsion to move through water at speeds up to 4 knots. They possess remarkably advanced eyes — 24 eyes arranged in four clusters called rhopalia — that provide genuine visual capabilities including obstacle avoidance and prey detection. This combination of mobility and vision makes box jellyfish effective predators of small fish and crustaceans.</p>
+<p>South African box jellyfish species are far smaller and less venomous than the deadly Australian box jellyfish (Chironex fleckeri), which causes dozens of deaths annually in northern Australian waters. KZN species typically have bells 2 to 10 centimeters across and tentacles up to 1 metre long. The two primary genera encountered in South African waters are Carybdea and Chiropsella. Carybdea species have one tentacle per corner (four total), while Chiropsella have multiple tentacles per corner. Both possess nematocysts — microscopic capsules containing coiled, barbed threads that fire when triggered by contact, injecting venom that causes pain, tissue damage, and in severe cases, cardiovascular and neurological effects.</p>
+</div>
+<div class="info-section"><h3>Symptoms & Medical Risks</h3>
+<p>Box jellyfish stings cause immediate, intense burning pain at the contact site — often described as feeling like being branded with a hot iron or struck by an electric shock. Within seconds, raised red welts appear where tentacles contacted skin, often forming characteristic ladder-like patterns. The affected area becomes swollen, tender, and may blister. Pain typically intensifies over 20 to 30 minutes before gradually subsiding over several hours, though some victims experience pain lasting days. The welts may persist for weeks and can leave permanent scarring or pigmentation changes.</p>
+<p>Systemic reactions are the primary medical concern with box jellyfish stings. Severe envenomations can cause nausea, vomiting, headache, muscle spasms, abdominal pain, sweating, difficulty breathing, chest tightness, rapid or irregular heart rate, elevated blood pressure, and in extreme cases, cardiovascular collapse and death. Children, elderly individuals, and those with pre-existing cardiovascular conditions are at highest risk of life-threatening complications. Irukandji syndrome — a delayed systemic reaction named after a small Australian box jellyfish — can develop 20 to 40 minutes after sting, causing severe back pain, muscle cramps, profuse sweating, agitation, sense of impending doom, and cardiovascular instability requiring intensive care. Any box jellyfish sting causing systemic symptoms requires immediate emergency medical treatment.</p>
+<ul>
+<li>Immediate intense burning pain at contact site</li>
+<li>Raised red welts forming ladder-like patterns</li>
+<li>Pain lasting hours to days depending on severity</li>
+<li>Swelling, blistering, and potential scarring</li>
+<li>Systemic reactions: nausea, vomiting, muscle spasms, sweating</li>
+<li>Severe reactions: difficulty breathing, chest pain, irregular heartbeat</li>
+<li>Irukandji syndrome (rare): delayed severe systemic symptoms</li>
+</ul>
+</div>
+<div class="info-section"><h3>First Aid & Treatment</h3>
+<p>The first priority after a box jellyfish sting is preventing further nematocyst discharge. Rinse the affected area immediately with vinegar — acetic acid inactivates unfired nematocysts and prevents them from discharging additional venom. Pour vinegar directly onto the sting site for at least 30 seconds, ensuring thorough coverage of all affected areas. If vinegar is unavailable, rinse gently with seawater — NOT freshwater, which can trigger massive nematocyst discharge and dramatically worsen the injury. Do not rub the sting site, as this causes additional nematocysts to fire.</p>
+<p>After vinegar treatment, carefully remove any visible tentacle fragments using tweezers, a stick, or the edge of a credit card — never use bare fingers. Once tentacles are removed and nematocysts are inactivated, immerse the affected area in hot water (as hot as can be tolerated without scalding, typically 45°C) for 20 minutes to denature venom proteins and provide pain relief. If hot water is unavailable, apply a hot pack. Monitor the victim closely for signs of systemic reaction: difficulty breathing, chest tightness, spreading pain beyond the sting site, altered consciousness, or cardiovascular symptoms. Any of these signs requires immediate emergency medical care. Severe box jellyfish envenomations may require antivenom, intravenous pain medication, cardiovascular support, and intensive care monitoring.</p>
+<ul>
+<li>Immediately rinse with vinegar for 30+ seconds to inactivate nematocysts</li>
+<li>If no vinegar, rinse with seawater — NOT freshwater</li>
+<li>Remove tentacles carefully without rubbing — use tweezers or card edge</li>
+<li>Immerse in hot water (45°C) for 20 minutes after tentacle removal</li>
+<li>Do NOT rub, scratch, or apply pressure to sting site</li>
+<li>Monitor for systemic symptoms: breathing difficulty, chest pain, altered consciousness</li>
+<li>Seek immediate emergency care if any systemic symptoms develop</li>
+</ul>
+</div>
+<div class="info-section"><h3>Prevention & Risk Reduction</h3>
+<p>The most effective prevention is avoiding water when jellyfish are present. Box jellyfish are most commonly encountered in warm, sheltered bays and estuaries during summer months (October to March) when water temperatures rise and plankton blooms occur. They are often invisible in the water due to their transparent bells, making visual detection nearly impossible. Check with lifeguards or local authorities about jellyfish activity before entering the water, and heed all jellyfish warnings and beach closures. If you see any jellyfish in the water or stranded on the beach, exit immediately — where there's one, there are likely more.</p>
+<p>Protective clothing provides physical barrier protection against jellyfish stings. Full-body wetsuits, rash guards, and dive skins dramatically reduce sting risk by preventing tentacle contact with skin. Lycra stinger suits designed specifically for jellyfish protection are widely available in tropical regions with endemic box jellyfish populations. For children swimming in areas with known box jellyfish presence, full-body protective clothing is strongly recommended. However, no clothing provides complete protection — tentacles can still contact exposed skin at ankles, wrists, neck, and face. The safest approach is avoiding the water entirely when box jellyfish are present or swimming only at beaches with established lifeguard presence and vinegar supplies for emergency treatment.</p>
+<ul>
+<li>Avoid swimming in warm, sheltered bays during summer months</li>
+<li>Check with lifeguards about jellyfish activity before entering water</li>
+<li>Exit water immediately if any jellyfish are observed</li>
+<li>Wear full-body protective clothing (wetsuits, stinger suits, rash guards)</li>
+<li>Heed all jellyfish warnings and beach closures</li>
+<li>Children should wear protective clothing in jellyfish-prone areas</li>
+<li>Know location of nearest vinegar supply (often stocked at patrolled beaches)</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>Box Jellies vs Other Jellyfish — Understanding the Risk Spectrum</h3>
+<p>Not all jellyfish pose equal risk. Box jellyfish represent the most dangerous end of the spectrum due to their potent venom, active hunting behaviour, and capacity to cause life-threatening systemic reactions. However, KZN waters also host numerous other jellyfish species that cause milder stings. Moon jellies (Aurelia aurita) are common transparent jellyfish with four horseshoe-shaped gonads visible inside the bell. Their stings cause only mild irritation and itching in most people. Compass jellies and other scyphozoans produce more painful stings but rarely cause serious systemic effects. These species are often encountered in large aggregations during plankton blooms.</p>
+<p>The key distinction is severity and treatment. Moon jellies and mild stingers require only basic first aid: rinse with seawater, remove tentacles, apply ice or hot packs for pain relief, and monitor for infection. Box jellyfish stings require immediate vinegar treatment to inactivate nematocysts, followed by hot water immersion and close monitoring for systemic reactions. If there's any uncertainty about which species caused the sting, or if any systemic symptoms develop, treat as a box jellyfish sting and seek medical evaluation. The cost of over-reacting to a moon jelly sting is minimal; the cost of under-reacting to a box jelly sting can be fatal.</p>
+<p>Global context helps understand KZN's jellyfish risk. The most dangerous box jellyfish species — Chironex fleckeri from northern Australian waters — causes dozens of deaths annually and possesses venom potent enough to kill an adult human within minutes. By comparison, South African box jellyfish species have caused no confirmed fatalities but have sent numerous victims to hospital with severe pain and systemic symptoms requiring medical intervention. This lower lethality does not mean South African box jellies are harmless — they remain dangerous marine animals capable of causing serious medical emergencies. The absence of deaths likely reflects lower envenomation doses, prompt medical treatment, and the fact that severe stings are relatively rare compared to Australia's endemic box jellyfish zones. Regardless, any box jellyfish sting should be treated with urgency and respect for the potential complications.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Box Jellyfish & Jellyfish Stings</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Active Swimmers with Genuine Vision</h4><p>Unlike true jellyfish that drift passively with currents, box jellyfish actively swim using jet propulsion and possess 24 eyes that provide genuine visual capabilities including obstacle avoidance and prey detection. This makes them effective predators capable of pursuing prey and avoiding threats — and makes them nearly impossible to avoid once encountered since they can change direction and pursue swimmers.</p></div>
+<div class="fact-card"><h4>Vinegar THEN Hot Water</h4><p>Box jellyfish stings require vinegar first to inactivate unfired nematocysts, preventing additional venom discharge. Pour vinegar onto the sting site for 30+ seconds, remove tentacles carefully, then immerse in hot water (45°C) for 20 minutes. This two-step treatment is critical — hot water alone does not inactivate nematocysts and may worsen injury if applied before vinegar.</p></div>
+<div class="fact-card"><h4>Less Lethal Than Australian Relatives</h4><p>South African box jellyfish species are far smaller and less venomous than the deadly Australian box jellyfish (Chironex fleckeri), which causes dozens of deaths annually. KZN species have caused no confirmed fatalities but still send victims to hospital with severe pain and systemic reactions. This lower lethality does not mean they're harmless — they remain dangerous and require urgent treatment.</p></div>
+<div class="fact-card"><h4>Systemic Reactions Can Be Life-Threatening</h4><p>Severe box jellyfish envenomations can cause difficulty breathing, chest tightness, rapid or irregular heart rate, cardiovascular collapse, and in rare cases, death. Irukandji syndrome — a delayed systemic reaction — can develop 20 to 40 minutes after sting, causing severe symptoms requiring intensive care. Any systemic symptoms require immediate emergency medical treatment.</p></div>
+<div class="fact-card"><h4>Peak Season: Summer in Sheltered Bays</h4><p>Box jellyfish are most commonly encountered in warm, sheltered bays and estuaries during summer months (October to March) when water temperatures rise and plankton blooms occur. They are often invisible due to transparent bells. Check with lifeguards about jellyfish activity before swimming, and avoid water in known box jellyfish areas during peak season.</p></div>
+<div class="fact-card"><h4>Protective Clothing Reduces Risk</h4><p>Full-body wetsuits, rash guards, and lycra stinger suits dramatically reduce sting risk by preventing tentacle contact with skin. However, no clothing provides complete protection — tentacles can still contact exposed areas at ankles, wrists, neck, and face. For children swimming in jellyfish-prone areas, protective clothing is strongly recommended, but avoidance remains the safest strategy.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .fish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .fish-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .fish-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .fish-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .fish-content {
+            padding: 2rem;
+        }
+
+        .fish-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .fish-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .fish-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .fish-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>The Incredible Diversity of KwaZulu-Natal's Fish</h2>
+                <p>KwaZulu-Natal's coastal waters harbour over 1,200 species of fish, making the region one of the most biodiverse marine environments on Earth. Where the warm Agulhas Current sweeps along the coastline, it creates a unique convergence zone supporting an extraordinary array of life—from tiny reef-dwelling blennies to massive ocean-going marlin. The rocky reefs of Aliwal Shoal and Protea Banks serve as vital nurseries and feeding grounds for countless species, while the estuaries and river mouths provide critical transitional habitats where freshwater and marine ecosystems meet.</p>
+
+                <p>The fish species of KZN represent every ecological niche imaginable. Game fish like marlin, sailfish, and yellowfin tuna patrol the open ocean, drawing anglers from around the world to test their skills against these powerful predators. Reef fish such as potato bass, kingfish, and red steenbras inhabit the rocky outcrops and coral communities that fringe the coastline. Coastal species including kob, elf, and garrick frequent the surf zones and estuaries, while pelagic schooling fish like sardines and mackerel form the foundation of the marine food web, supporting everything from seabirds to whales.</p>
+
+                <p>Beyond their ecological importance, KZN's fish species hold immense cultural and economic significance. Recreational and subsistence fishing support thousands of families and contribute millions to the regional economy. Traditional fishing practices passed down through generations connect communities to the ocean and its rhythms. Yet many species face unprecedented pressures from overfishing, habitat degradation, pollution, and climate change. Species once abundant—such as seventy-four and red steenbras—have been driven to critically low numbers, serving as stark reminders of what we stand to lose without sustainable management and conservation action.</p>
+
+                <p>This section profiles 20 of the most common, ecologically significant, and culturally important fish species found in KwaZulu-Natal waters. From the lightning-fast wahoo to the prehistoric coelacanth, each species has a unique story to tell about life in the Indian Ocean. Understanding these fish—their biology, behaviour, and the threats they face—is the first step toward ensuring that future generations will continue to experience the incredible diversity of life that makes KZN's coastal waters so extraordinary.</p>
+            </section>
+
+            <section id="fish" class="fish-grid">
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="sailfish.png" alt="Sailfish">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Sailfish</h3>
+                        <p>The sailfish is one of KZN's most spectacular billfish, famous for its enormous dorsal fin that can be raised like a sail. These lightning-fast predators can reach speeds exceeding 100 km/h, making them the fastest fish in the ocean. Sailfish are common in KZN's offshore waters between November and April, providing thrilling sport for game fishers with their acrobatic leaps and powerful runs.</p>
+                        <a href="sailfish.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="yellowfin-tuna.png" alt="Yellowfin Tuna">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Yellowfin Tuna</h3>
+                        <p>Sleek, powerful, and beautifully coloured with bright yellow fins and finlets, yellowfin tuna are among the most sought-after game fish in KZN waters. These warm-water pelagic predators can exceed 150 kg and are known for their incredible speed and stamina. They form schools offshore, feeding on squid and small fish, and are targeted by both commercial and recreational fishers.</p>
+                        <a href="yellowfin.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="wahoo.png" alt="Wahoo">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Wahoo</h3>
+                        <p>The wahoo is one of the fastest fish in the ocean, reaching speeds up to 80 km/h with explosive bursts of acceleration. Recognizable by their elongated body, brilliant blue-green stripes, and razor-sharp teeth, wahoo are solitary pelagic predators found in KZN's offshore waters year-round. They're highly prized for their fighting ability and excellent table fare.</p>
+                        <a href="wahoo.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="dorado.png" alt="Dorado (Mahi-Mahi)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Dorado (Mahi-Mahi)</h3>
+                        <p>Also known as dolphinfish or mahi-mahi, dorado are among the most beautiful and acrobatic fish in KZN waters. Males develop distinctive blunt foreheads and brilliant gold, green, and blue colouration. These fast-growing pelagic predators frequent the Agulhas Current, often found beneath floating debris or seaweed where they ambush baitfish and squid.</p>
+                        <a href="dorado.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="kingfish.png" alt="Yellowtail Kingfish">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Yellowtail Kingfish</h3>
+                        <p>The yellowtail kingfish, known locally simply as "kingfish," is one of KZN's most popular sport and table fish. These powerful predators frequent rocky reefs, drop-offs, and offshore wrecks, hunting in schools for sardines, anchovies, and squid. Kingfish can exceed 30 kg and are renowned for their strength and aggressive strikes, making them favourites among anglers.</p>
+                        <a href="kingfish.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="giant-kingfish.png" alt="Giant Kingfish (GT)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Giant Kingfish (GT)</h3>
+                        <p>The giant trevally, known in KZN as the giant kingfish or GT, is one of the most formidable reef predators in the Indian Ocean. These massive ambush hunters can exceed 50 kg and are known for their brutal strikes and unstoppable power. GTs patrol reef edges, channels, and drop-offs, exploding from the depths to ambush unsuspecting prey.</p>
+                        <a href="giant-kingfish.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="garrick.png" alt="Garrick (Leervis)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Garrick (Leervis)</h3>
+                        <p>The garrick, or leervis, is a powerful coastal predator that prowls KZN's surf zones, estuaries, and rocky shorelines. These silver-bodied hunters can exceed 30 kg and are famous for their aggressive strikes and acrobatic fights. Garrick are ambush predators that lie in wait in channels and behind waves before exploding into schools of mullet and sardines.</p>
+                        <a href="garrick.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="kob.png" alt="Dusky Kob">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Dusky Kob (Kabeljou)</h3>
+                        <p>The dusky kob, known as kabeljou in Afrikaans, is one of South Africa's most iconic shore fish and a favourite target for anglers. These large croakers frequent surf zones, estuaries, and rocky shorelines, particularly at night and during rough seas. Dusky kob can exceed 40 kg and are prized both as sport fish and for their excellent eating quality.</p>
+                        <a href="dusky-kob.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="elf.png" alt="Shad (Elf)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Shad (Elf)</h3>
+                        <p>Elf, also called shad, are fast-swimming pelagic predators that form large schools along KZN's coastline. These silver-bodied fish are particularly abundant during the annual sardine run when they feed voraciously alongside dolphins and game fish. Elf typically weigh 2 to 6 kg and are highly regarded as both sport and table fish, with delicate white flesh.</p>
+                        <a href="elf.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="potato-bass.png" alt="Potato Bass">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Potato Bass (Potato Cod)</h3>
+                        <p>The potato bass is a massive grouper species that can exceed 100 kg and live for over 40 years. These gentle giants are a highlight of diving at Aliwal Shoal and Protea Banks, where they've become habituated to divers and will approach closely. Potato bass are critically endangered due to overfishing and slow reproductive rates, making every encounter a conservation priority.</p>
+                        <a href="potatocod.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="red-steenbras.png" alt="Red Steenbras">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Red Steenbras</h3>
+                        <p>The red steenbras is a large, slow-growing sparid that was once abundant in KZN waters but has been severely depleted by overfishing. These magnificent fish can live for over 50 years and reach weights exceeding 40 kg. Red steenbras inhabit rocky reefs and deep ledges, feeding on crustaceans and molluscs. They are now critically endangered and fully protected.</p>
+                        <a href="steenbras.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="bronze-bream.png" alt="Bronze Bream (Seventy-Four)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Bronze Bream (Seventy-Four)</h3>
+                        <p>The bronze bream, known locally as "seventy-four" after the number of scales along its lateral line, is one of KZN's most important reef fish. These golden-bronze fish frequent rocky reefs and sandy bottoms, feeding on invertebrates and small fish. Once extremely abundant, seventy-four populations have declined dramatically due to overfishing, and they are now classified as Critically Endangered.</p>
+                        <a href="bronze-bream.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="spotted-grunter.png" alt="Spotted Grunter">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Spotted Grunter</h3>
+                        <p>The spotted grunter is a highly prized estuarine species found in KZN's river mouths, estuaries, and tidal creeks. Named for the grunting sound they produce by grinding their pharyngeal teeth, these silver fish with distinctive black spots can exceed 5 kg. Spotted grunter are popular with anglers and are considered excellent eating, but populations have declined due to estuarine degradation and overfishing.</p>
+                        <a href="grunter.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="springer.png" alt="Springer (Poenskop)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Springer (Poenskop)</h3>
+                        <p>The springer, known in Afrikaans as poenskop, is a common coastal species found in KZN's surf zones, rocky shores, and estuaries. These small silver fish typically weigh 1 to 3 kg and travel in large schools. Springer are important forage fish for larger predators and are popular with shore anglers, particularly during summer months when they move inshore to spawn.</p>
+                        <a href="springer.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="natal-stumpnose.png" alt="Natal Stumpnose">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Natal Stumpnose</h3>
+                        <p>The Natal stumpnose is a deep-bodied sparid common along KZN's rocky coastlines and reefs. These robust fish typically weigh 2 to 4 kg and are named for their blunt, rounded snout. Natal stumpnose feed on mussels, barnacles, and other invertebrates, using their powerful jaws to crush shells. They're popular with rock and surf anglers and provide good eating.</p>
+                        <a href="natal-stumpnose.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="barracuda.png" alt="Great Barracuda">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Great Barracuda</h3>
+                        <p>The great barracuda is a fearsome predator recognizable by its elongated body, large mouth full of razor-sharp teeth, and silvery colouration with dark bars. These ambush hunters can exceed 1.5 metres and 20 kg, patrolling reefs and open water for prey. Barracuda are aggressive strikers and provide exciting sport, though larger individuals may contain ciguatera toxin and should not be consumed.</p>
+                        <a href="barracuda.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="coelacanth.png" alt="Coelacanth">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Coelacanth</h3>
+                        <p>The coelacanth is a living fossil, a prehistoric fish thought extinct for 65 million years until its rediscovery off South Africa's coast in 1938. KZN's deep submarine canyons harbour a small population of these ancient fish, which can live for over 60 years and grow to 90 kg. Coelacanths are critically endangered and fully protected, representing one of the most significant zoological discoveries of the 20th century.</p>
+                        <a href="coelacanth.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="sardine.png" alt="Sardine (Pilchard)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Sardine (Pilchard)</h3>
+                        <p>The sardine, or South African pilchard, is a small schooling fish that forms the foundation of KZN's marine food web. These silvery fish migrate northward along the coast between May and July in one of the greatest wildlife spectacles on Earth — the sardine run. Massive shoals numbering billions attract predators including dolphins, sharks, whales, and seabirds in spectacular feeding frenzies.</p>
+                        <a href="sardine.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="skipjack-tuna.png" alt="Skipjack Tuna">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Skipjack Tuna</h3>
+                        <p>The skipjack tuna is the smallest and most abundant tuna species in KZN waters. Recognizable by distinctive dark horizontal stripes on the belly, skipjack form large schools in offshore waters, feeding voraciously on small fish and squid. These fast-swimming predators typically weigh 3 to 10 kg and are important commercially, forming the basis of the global canned tuna industry.</p>
+                        <a href="skipjack.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="fish-card">
+                    <div class="fish-image">
+                        <img src="queen-mackerel.png" alt="Queen Mackerel (Natal Snoek)">
+                    </div>
+                    <div class="fish-content">
+                        <h3>Queen Mackerel (Natal Snoek)</h3>
+                        <p>The queen mackerel, known locally as Natal snoek or couta, is a fast-swimming pelagic predator common in KZN's coastal waters. These sleek, torpedo-shaped fish can exceed 15 kg and are renowned for their blistering runs and acrobatic jumps when hooked. Queen mackerel hunt in schools along the coastline, feeding on sardines, anchovies, and squid, and are highly prized as both sport and table fish.</p>
+                        <a href="queen-mackerel.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

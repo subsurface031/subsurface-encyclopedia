@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shad (Elf) – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Shad (Elf)</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="elf.png" alt="Shad (Elf)"><p class="image-caption">Pomatomus saltatrix — Shad (Elf), KZN</p></div>
+<div class="species-intro">
+<h2>Shad (Elf)</h2>
+<span class="scientific-name">Pomatomus saltatrix</span>
+<span class="sassi-badge">⚠ SASSI Orange</span>
+<p>The shad — universally known as elf along the South African coast — is one of the most exciting and accessible game fish in KwaZulu-Natal waters. Fast, aggressive, and powerful for their size, elf arrive along the KZN coastline in large silver schools that create feeding frenzies visible from shore. They are particularly abundant during the annual sardine run between May and July when massive shoals push northward along the coast, drawing elf by the thousands into shallow waters where they slash through baitfish with remarkable ferocity.</p>
+<p>Elf are found worldwide in temperate and subtropical waters, making them one of the most widely distributed marine fish species on Earth. In KZN, they are most commonly encountered in surf zones, around rocky headlands, and at river mouths where schools patrol for prey. Their arrival in an area is often announced by diving seabirds and surface splashes as elf drive baitfish to the surface — a sight that sends shore anglers racing to the water's edge with spinning rods ready.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">~1.3 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~14 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">9 years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">2 years</span></div>
+<div class="stat-box"><span class="stat-label">Typical Weight</span><span class="stat-value">2–6 kg</span></div>
+<div class="stat-box"><span class="stat-label">Common Length</span><span class="stat-value">40–70 cm</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Elf are sleek, streamlined fish built for speed and aggression. The body is elongated and laterally compressed with a powerful forked tail that propels them through water at remarkable velocity. Colouration is metallic blue-green to grey-green on the back and upper flanks, fading to brilliant silver on the sides and white on the belly. This counter-shading provides camouflage from both above and below — making elf difficult for prey to detect until the final explosive strike.</p>
+<p>The most distinctive feature of elf is their formidable dentition. The mouth is large and equipped with a single row of sharp, triangular teeth in both upper and lower jaws — teeth capable of inflicting serious injury to careless anglers. These razor-sharp teeth are perfectly adapted for slashing through schools of small fish, and elf are known to bite through fishing line with ease. The lower jaw projects slightly beyond the upper, giving the fish an aggressive, predatory appearance that matches their hunting behaviour.</p>
+<p>Adults in KZN typically measure 40 to 70 cm and weigh 2 to 6 kg, with fish over 8 kg considered exceptional. Maximum recorded size is approximately 1.3 metres and 14 kg, though fish exceeding 10 kg are rare in South African waters. The South African shore angling record stands at 10.4 kg. Sexual dimorphism is minimal, with males and females similar in size and appearance.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Elf are highly migratory pelagic predators that travel along coastlines in large schools, following concentrations of prey fish. In KZN, their movements are closely tied to the annual sardine run — when billions of sardines migrate northward along the coast, elf schools follow in massive feeding aggregations. These feeding frenzies are spectacular events where elf slash through baitfish from below while seabirds dive from above, creating chaotic surface activity visible for kilometres.</p>
+<p>Elf are voracious feeders that hunt cooperatively, using coordinated attacks to herd baitfish into tight balls before slashing through them with open mouths. Their feeding strategy is violent and efficient — elf often bite fish in half rather than swallowing them whole, leaving a trail of injured and dying baitfish in their wake. This aggressive feeding behaviour makes them highly susceptible to angling, and schools can be targeted effectively with lures and bait when feeding activity is visible.</p>
+<p>Elf exhibit strong diel vertical migration, moving deeper during daylight hours and ascending toward the surface at dawn and dusk to feed. The most productive fishing occurs during these crepuscular periods when elf push baitfish against the surface in shallow water. They are also highly opportunistic and will feed throughout the day when prey concentrations are high, particularly during the sardine run.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Elf are obligate piscivores — fish specialists that feed almost exclusively on smaller fish species. Diet composition varies with location and season but consistently consists of schooling pelagic fish that form dense aggregations. In KZN waters, sardines are the primary prey during the sardine run, but elf also consume anchovies, juvenile mackerel, small carangids, and mullet. They are highly opportunistic and will target any appropriately sized fish species that forms schools in accessible waters.</p>
+<p>Their hunting strategy involves high-speed pursuits and slashing attacks using their sharp teeth to wound and kill prey. Elf often bite fish in half and return to consume the pieces, rather than swallowing prey whole like many piscivorous species. This feeding behaviour results in high metabolic rates and rapid growth — elf must consume substantial quantities of prey daily to meet their energetic demands.</p>
+<ul>
+<li>Sardines and pilchards (primary prey)</li>
+<li>Anchovies and small herrings</li>
+<li>Juvenile mackerel and snoek</li>
+<li>Small carangids and scad</li>
+<li>Mullet and other coastal schooling fish</li>
+<li>Occasionally squid and crustaceans</li>
+</ul>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Elf are broadcast spawners that release eggs and sperm into the water column where fertilization occurs externally. Spawning occurs in offshore waters during spring and summer months, with peak spawning activity in KZN between October and January. Females produce between 400,000 and 2 million eggs depending on size — a high fecundity typical of pelagic fish with high larval mortality rates.</p>
+<p>Sexual maturity is reached at approximately 2 years of age and 40 cm length — relatively early compared to many other coastal game fish. This early maturity, combined with high fecundity and rapid growth, allows elf populations to recover relatively quickly from fishing pressure compared to slow-growing, late-maturing species. However, populations can still be depleted by intensive fishing, particularly when targeting spawning aggregations.</p>
+<p>Maximum lifespan is approximately 9 years, though most fish in exploited populations live only 4 to 6 years. Growth is rapid during the first 2 to 3 years, with fish adding 15 to 20 cm per year before growth slows after reaching sexual maturity. The combination of early maturity, rapid growth, and relatively short lifespan means elf populations are resilient to moderate fishing pressure but can decline rapidly under intensive exploitation.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Sardine Run Spectacle & Recreational Importance</h3>
+<p>Elf are synonymous with KwaZulu-Natal's world-famous sardine run — the annual northward migration of billions of sardines along the coast between May and July. During this spectacular natural event, elf schools numbering in the thousands converge on sardine shoals, creating feeding frenzies that attract dolphins, sharks, whales, seabirds, and human observers. The sight of elf slashing through sardine bait balls at the surface while seabirds dive from above represents one of the greatest wildlife spectacles on Earth.</p>
+<p>For shore anglers in KZN, the arrival of elf schools signals the start of one of the most exciting fishing periods of the year. Elf are accessible from beaches, rocky shores, and piers, requiring relatively simple tackle and techniques. Their aggressive strikes, powerful runs, and acrobatic jumps make them outstanding sport fish, and their delicate white flesh is highly regarded for eating. This combination of accessibility, fighting ability, and table quality has made elf one of the most popular recreational fish species along South Africa's coastline.</p>
+<p>Despite their popularity, elf face conservation concerns in some regions due to overfishing and population declines. In South African waters, elf are rated Orange by SASSI — indicating that populations are not yet in danger but require careful management to prevent overfishing. Responsible anglers practice selective harvest, releasing larger breeding-size fish and keeping only smaller fish for the table. Daily bag limits and minimum size restrictions help ensure sustainable fishing pressure, but continued monitoring and adaptive management are essential to maintaining healthy elf populations along the KZN coast.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Global Nomads</h4><p>Elf are found worldwide in temperate and subtropical waters, making them one of the most widely distributed marine fish species on Earth. They occur on every continent except Antarctica, occupying coastal waters from South Africa to Australia, the Mediterranean to the Americas. This global distribution reflects their adaptability to diverse environmental conditions and their effectiveness as pelagic predators.</p></div>
+<div class="fact-card"><h4>Razor-Sharp Teeth</h4><p>Elf possess a single row of extremely sharp, triangular teeth in both jaws — teeth capable of slashing through fish, biting through fishing line, and inflicting serious injury to careless anglers. These teeth are continually replaced throughout the fish's life, ensuring that hunting efficiency is maintained even as teeth are lost or damaged during feeding frenzies.</p></div>
+<div class="fact-card"><h4>Feeding Frenzy Indicators</h4><p>The arrival of elf schools in an area is often announced by diving seabirds and surface splashes as elf drive baitfish to the surface. Experienced shore anglers scan the ocean for these telltale signs, and when elf are spotted feeding, anglers race to the water's edge to cast into the melee. The sight of terns, gulls, and cormorants diving frantically over churning water is the universal signal that elf are feeding below.</p></div>
+<div class="fact-card"><h4>Sardine Run Stars</h4><p>During KZN's annual sardine run, elf schools numbering in the thousands converge on sardine shoals, creating feeding frenzies that attract dolphins, sharks, whales, and seabirds. The spectacle of elf slashing through sardine bait balls at the surface represents one of the greatest wildlife events on Earth and draws marine enthusiasts from around the world to witness the chaos.</p></div>
+<div class="fact-card"><h4>Rapid Growth & Early Maturity</h4><p>Elf grow rapidly during their first 2 to 3 years, adding 15 to 20 cm per year before reaching sexual maturity at approximately 2 years and 40 cm length. This early maturity and rapid growth allows elf populations to recover relatively quickly from fishing pressure compared to slow-growing, late-maturing species like kob and steenbras.</p></div>
+<div class="fact-card"><h4>SASSI Orange Rating</h4><p>Elf are rated Orange by SASSI — indicating that populations are not yet in danger but require careful management to prevent overfishing. Responsible anglers practice selective harvest, releasing larger breeding-size fish and keeping only smaller fish for the table. Daily bag limits and size restrictions help ensure sustainable fishing pressure along the KZN coast.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

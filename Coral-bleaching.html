@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coral Bleaching & Reef Degradation – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(183, 28, 28, 0.6); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #4db6ac; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #4db6ac; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="ocean.html">Ocean Awareness</a><span>›</span>Coral Bleaching & Reef Degradation</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="coral.png" alt="Coral Bleaching KZN Sodwana Bay">
+    <p class="image-caption">Bleached coral at Sodwana Bay — when sea temperatures rise above tolerance thresholds, corals expel their symbiotic algae and turn white. Without intervention, bleached coral dies.</p>
+</div>
+<div class="species-intro">
+    <h2>Coral Bleaching & Reef Degradation</h2>
+    <span class="scientific-name">Sodwana Bay & northern KZN reef systems — at the edge of survival</span>
+    <span class="conservation-badge">⚠ CRITICAL — Climate-Driven Threat</span>
+    <p>The coral reef systems of KwaZulu-Natal's northern coastline occupy an extraordinary and precarious position in the global map of reef distribution. Sodwana Bay, roughly 350 kilometres north of Durban, hosts the southernmost significant coral reef system on the African continent — a mosaic of hard and soft corals, sponges, and associated reef communities that has developed at the absolute thermal and latitudinal margin of where reef-building corals can survive. This marginal position, shaped over thousands of years by the warm southward-flowing Agulhas Current that keeps KZN's northern waters warmer than equivalent latitudes elsewhere, is now the source of the reefs' greatest vulnerability. The same oceanographic feature that makes these reefs possible is carrying progressively warmer water from a rapidly warming Indian Ocean — and the corals that live here are already at or near the upper limits of their thermal tolerance.</p>
+    <p>Coral bleaching occurs when water temperatures rise above a coral's thermal threshold — typically just 1°C above the local summer maximum sustained for several weeks — triggering the breakdown of the symbiotic relationship between coral polyps and the microscopic algae (zooxanthellae) that live within their tissues. The zooxanthellae provide up to 90% of a coral's energy through photosynthesis and give reefs their colour; when they are expelled, the coral turns ghostly white, is deprived of its primary energy source, becomes highly susceptible to disease, and will die if thermal stress is not relieved within weeks. KZN's Sodwana reefs have experienced multiple bleaching events in recent decades, and the frequency and severity of these events is increasing as baseline ocean temperatures rise. Each event from which the reef does not fully recover leaves it more fragmented, less resilient, and less capable of withstanding the next.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Threat Status</span><span class="stat-value">Critical — Climate-Driven</span></div>
+        <div class="stat-box"><span class="stat-label">Primary Cause</span><span class="stat-value">Sea surface temp. rise</span></div>
+        <div class="stat-box"><span class="stat-label">Bleaching Trigger</span><span class="stat-value">+1°C above summer max</span></div>
+        <div class="stat-box"><span class="stat-label">KZN Reef Location</span><span class="stat-value">Sodwana — Africa's southernmost</span></div>
+        <div class="stat-box"><span class="stat-label">Recovery Time</span><span class="stat-value">10–15 years (if undisturbed)</span></div>
+        <div class="stat-box"><span class="stat-label">Secondary Threat</span><span class="stat-value">Ocean acidification</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>How Coral Bleaching Works</h3>
+    <p>Reef-building corals are colonial animals — each coral head is made up of thousands of individual polyps, small soft-bodied creatures related to sea anemones, that secrete the calcium carbonate skeletons that form the physical reef structure. Within the tissues of each polyp live millions of single-celled dinoflagellate algae called zooxanthellae. This relationship is one of the most productive symbioses in nature: the zooxanthellae photosynthesise using sunlight that penetrates the clear, shallow reef water, producing sugars and oxygen that fuel the coral polyp; in return, the polyp provides the algae with shelter and the nitrogen-rich waste products they need to grow. The vivid colours of healthy coral — the golds, browns, greens, and reds — are produced by these algae and by coral-specific pigments.</p>
+    <p>When water temperatures rise above the coral's thermal tolerance threshold, the zooxanthellae begin producing reactive oxygen species that damage coral tissues. The coral's defensive response is to expel the algae, turning white — bleached — as the algae that provided its colour are lost. A bleached coral is not immediately dead: it retains its living tissue and can re-acquire zooxanthellae if temperatures return to normal within a few weeks. But a bleached coral is severely energy-deprived, highly stressed, and extremely vulnerable to secondary infection by bacteria and fungi. If elevated temperatures persist beyond four to six weeks, coral mortality is likely. The rate of mortality after bleaching depends on the severity and duration of the thermal anomaly, the species involved (some are more thermally tolerant than others), and the overall health of the reef system before bleaching began.</p>
+    <ul>
+        <li>Zooxanthellae provide up to 90% of coral's energy via photosynthesis</li>
+        <li>Thermal stress causes corals to expel zooxanthellae — turning white</li>
+        <li>Bleached corals: alive but severely energy-deprived and disease-prone</li>
+        <li>Recovery possible if temperatures normalise within ~4–6 weeks</li>
+        <li>Prolonged bleaching leads to coral mortality and reef framework collapse</li>
+        <li>Some species more thermally tolerant — reef community composition shifts post-bleaching</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Sodwana Bay — KZN's Reef in Detail</h3>
+    <p>Sodwana Bay's reef system is composed of a series of parallel shoal reefs running roughly north–south approximately 2 to 9 kilometres offshore, at depths of between 7 and 40 metres. These reefs — Two Mile Reef, Five Mile Reef, Nine Mile Reef, and Quarter Mile Reef among the most frequently dived — support diverse communities of hard and soft corals, sea fans, sponges, and an exceptionally rich fish fauna: over 1,200 fish species have been recorded from the Sodwana system, a diversity that reflects the reef's position at the confluence of tropical and subtropical biogeographic provinces. The reef fish assemblage includes species from the Red Sea and Mozambique that reach their southern range limit at Sodwana, alongside endemic and near-endemic southern African species found nowhere else on the continent.</p>
+    <p>The reefs are maintained as part of the iSimangaliso Wetland Park — a UNESCO World Heritage Site — and all forms of coral collection, spearfishing, and destructive activities are prohibited. Recreational diving is the primary human use of the reefs and is managed through a permit system administered by the iSimangaliso Wetland Park Authority. Despite this protection, the reefs face compounding pressures: coral bleaching events driven by Indian Ocean warming, physical damage from diver contact at heavily visited sites, sedimentation from nearshore riverine discharge, and the increasing threat of ocean acidification reducing the efficiency of coral calcification. Each of these pressures individually would be manageable; in combination, and against the backdrop of a warming ocean, they present a genuinely serious challenge to the long-term integrity of a reef system that took thousands of years to develop.</p>
+    <ul>
+        <li>Two Mile, Five Mile, Nine Mile Reef: most dived sections of Sodwana system</li>
+        <li>Depths 7–40 m; hard and soft corals, sea fans, rich sponge communities</li>
+        <li>Over 1,200 fish species recorded — tropical and subtropical confluence</li>
+        <li>Protected within iSimangaliso Wetland Park — UNESCO World Heritage Site</li>
+        <li>Dive permit system managed through iSimangaliso Wetland Park Authority</li>
+        <li>Multiple compounding stressors: bleaching, diver impact, sedimentation, acidification</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Ocean Acidification — The Slower Threat</h3>
+    <p>Alongside rising sea temperatures, ocean acidification represents a second major climate-driven threat to KZN's reef systems — one that operates more slowly than bleaching events but with equally serious long-term consequences. The ocean absorbs approximately 25–30% of the carbon dioxide released by human activities each year. When CO₂ dissolves in seawater it forms carbonic acid, which dissociates to release hydrogen ions that lower the pH of seawater — a process of acidification that has already reduced the average pH of the world's surface ocean by approximately 0.1 pH units since the industrial revolution. On the logarithmic pH scale, this represents roughly a 26% increase in ocean acidity.</p>
+    <p>For corals, the consequences of acidification are direct and structural. Reef-building corals construct their calcium carbonate skeletons by extracting carbonate ions from seawater; as ocean acidity increases, carbonate ion concentrations fall, making it progressively more energetically costly for corals to calcify. At sufficiently high acidity levels, existing calcium carbonate structures begin to dissolve faster than corals can replace them. Research indicates that even if global warming were halted today, continued ocean acidification from existing atmospheric CO₂ concentrations would reduce the calcification rates of many coral species, slowing reef growth and recovery from bleaching events. The combined effect of thermal bleaching and acidification creates a particularly challenging future for marginal reefs like those at Sodwana, which are already near the limits of their viability.</p>
+    <ul>
+        <li>Ocean absorbs ~25–30% of human CO₂ emissions annually</li>
+        <li>CO₂ + seawater = carbonic acid — ocean pH has dropped ~0.1 units since industrialisation</li>
+        <li>26% increase in ocean acidity on the logarithmic scale</li>
+        <li>Corals rely on carbonate ions to build calcium carbonate skeletons</li>
+        <li>Higher acidity = fewer carbonate ions = slower calcification, weaker reef structure</li>
+        <li>Acidification compounds bleaching damage — reduces recovery capacity</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>What You Can Do — Reef Protection Actions</h3>
+    <p>The primary driver of coral bleaching is climate change — specifically, the rise in ocean temperatures caused by the accumulation of greenhouse gases in the atmosphere. This means that the most fundamental action anyone can take to protect KZN's reefs is to reduce their personal carbon footprint and to support the political, economic, and technological transitions that reduce collective emissions. This is not a task for individuals alone, and it is not a comfortable message — but it is the honest one. No amount of reef monitoring, diver behaviour modification, or local pollution reduction will save a reef system that is being thermally destroyed by a warming ocean. Action on the root cause is inseparable from action on the symptom.</p>
+    <p>At the local level, divers and snorkellers visiting Sodwana Bay can meaningfully reduce their direct impact on the reef through rigorous buoyancy control, zero-contact diving technique, and selection of dive operators who take environmental briefings and diver supervision seriously. Physical contact with coral — a single kick of a fin, a hand placed on a coral head for stability — causes damage to living tissue that can take years to recover. At heavily visited sites, cumulative diver contact is a measurable contributor to reef degradation. Reporting sightings of bleaching, disease, or unusual reef mortality through the SANLAM iSimangaliso Marine Monitoring Programme and the Reef Check South Africa citizen science network provides the scientific data that informs management decisions about reef protection. Minimising single-use plastic — which contributes to the ocean warming that drives bleaching when its production emits greenhouse gases, and to the water quality degradation that compounds thermal stress — is a further contribution that links individual behaviour to reef health outcomes.</p>
+    <ul>
+        <li>Reduce personal carbon footprint — climate action is reef action</li>
+        <li>Zero-contact diving: perfect buoyancy, horizontal fins, no touching</li>
+        <li>Choose dive operators who conduct environmental briefings and supervise divers</li>
+        <li>Report bleaching and unusual mortality through Reef Check South Africa</li>
+        <li>Book dive permits through iSimangaliso Wetland Park Authority only</li>
+        <li>Refuse single-use plastic — links consumer behaviour to reef health</li>
+        <li>Support South African ocean temperature and reef monitoring programmes</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>KZN's Reefs in the Broader Context of Global Coral Decline</h3>
+    <p>KZN's coral bleaching problem cannot be fully understood in isolation from the global crisis of coral reef decline of which it is a part. The world's coral reefs — which cover less than 1% of the ocean floor but support approximately 25% of all marine species — are under severe and escalating threat from climate change. The Great Barrier Reef in Australia has experienced four mass bleaching events since 2016. Reefs across the Caribbean, the Maldives, Hawaii, and the central Indo-Pacific have all recorded significant bleaching and mortality from thermal anomalies driven by progressively warmer ocean temperatures. The IPCC has estimated that at 1.5°C of global warming above pre-industrial levels, 70–90% of the world's coral reefs will be severely degraded or lost; at 2°C, more than 99% will be severely affected. Current global emissions trajectories point toward warming well in excess of 2°C this century.</p>
+    <p>Within this global context, KZN's Sodwana reefs occupy a position of both exceptional vulnerability and potential resilience. The marginal location that makes these reefs sensitive to warming also means they have historically experienced greater thermal variability than central Indo-Pacific reefs — and some evidence suggests that corals living in more thermally variable environments may carry greater inherent thermal tolerance as a result of periodic natural exposure to thermal stress. Some coral geneticists and reef ecologists have proposed that coral populations from marginal environments like Sodwana may carry genetic variations conferring higher thermal tolerance that could become valuable as global temperatures rise — a form of biological insurance for reef restoration efforts elsewhere. This potential does not diminish the urgency of protecting these reefs from additional stressors; if anything, it amplifies it. A reef that may hold the genetic keys to reef resilience in a warming world is a reef worth every available protection measure.</p>
+    <p>KZN's reef monitoring capacity has improved significantly over the past decade, with the iSimangaliso Wetland Park Authority, the South African Environmental Observation Network (SAEON), and citizen science networks including Reef Check South Africa all contributing to a more detailed picture of reef condition over time. Long-term coral cover data, bleaching event documentation, and fish assemblage monitoring now provide a baseline against which future changes can be measured. This data infrastructure is essential not only for scientific understanding but for the adaptive management decisions — seasonal dive closures, visitor number caps, diver supervision requirements — that the park authorities may need to implement as reef condition changes. Supporting these monitoring programmes, either through direct participation as a citizen scientist or through choosing dive operators who contribute to monitoring data collection, is a meaningful and direct contribution to the evidence base on which reef management decisions rest.</p>
+</div>
+
+<h3 class="section-heading">Key Facts — Coral Bleaching & KZN's Reef Systems</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>Sodwana Is Africa's Southernmost Coral Reef</h4>
+    <p>The reefs at Sodwana Bay represent the southernmost significant coral reef system on the African continent, maintained at this latitude by the warm southward-flowing Agulhas Current. This geographic position makes them scientifically unique — a living record of coral adaptation at the edge of viable habitat. It also makes them acutely sensitive to temperature change: the same marginal warmth that allows them to exist is approaching the thermal ceiling that will make it impossible for them to persist without intervention. Once a marginal reef system crosses this threshold, recovery to its original state becomes increasingly unlikely.</p>
+</div>
+<div class="fact-card">
+    <h4>Bleaching Events Are Becoming More Frequent</h4>
+    <p>Coral bleaching events on KZN's northern reefs that were historically rare, decade-scale occurrences are now happening with increasing regularity as baseline Indian Ocean sea surface temperatures rise. The recovery time required for a coral reef to regain its pre-bleaching coral cover — assuming no further bleaching events — is estimated at 10 to 15 years for hard corals and longer for some slow-growing species. When bleaching events occur more frequently than the reef's recovery interval, net coral cover declines progressively with each cycle, restructuring the reef community toward a less diverse, more algae-dominated state from which recovery becomes increasingly difficult.</p>
+</div>
+<div class="fact-card">
+    <h4>Reefs Support 25% of All Marine Species</h4>
+    <p>Coral reefs occupy less than 1% of the ocean floor but provide habitat, feeding grounds, and nursery space for approximately 25% of all known marine species. On KZN's northern coast, the reef system at Sodwana supports over 1,200 fish species — a number that rivals many Indo-Pacific reef systems far closer to the centre of global marine biodiversity. The fish populations that KZN's recreational and commercial fishers target are partly dependent on reef habitat for juvenile stages, shelter, and feeding. The degradation of reef systems has consequences that extend far beyond the reef itself, reducing fish populations, tourism values, and coastal protection that the reef structure provides against wave energy.</p>
+</div>
+<div class="fact-card">
+    <h4>Diver Contact Is a Measurable Threat</h4>
+    <p>Sodwana Bay receives tens of thousands of dive entries per year, making it one of the most intensively dived reef systems in South Africa. Research at heavily dived reef sites globally has consistently demonstrated measurable increases in coral damage — broken branches, abraded tissue, toppled coral heads — in proportion to diver numbers and skill levels. A single poorly controlled diver can break coral that took decades to grow in a single fin-strike. At the aggregate level of thousands of dives per year, this physical damage represents a significant additional stressor on a reef already under thermal pressure. Choosing to dive with excellent buoyancy control is not a trivial matter of technique — it is an ethical choice about your impact on a stressed ecosystem.</p>
+</div>
+<div class="fact-card">
+    <h4>Some Corals Are More Resilient Than Others</h4>
+    <p>Not all coral species respond equally to thermal stress, and not all bleaching events result in the same community outcomes. Massive brain corals and robust encrusting species are generally more thermally tolerant and are slower to bleach than branching Acropora and Pocillopora species, which bleach rapidly but can also recover more quickly after thermal stress is relieved. Post-bleaching reef communities at Sodwana and other KZN sites often show a shift in composition toward more thermally tolerant species and away from the structurally complex branching corals that provide the richest habitat for reef fish. This compositional shift can persist for decades even after gross coral cover recovers, with lasting consequences for the fish and invertebrate communities the reef supports.</p>
+</div>
+<div class="fact-card">
+    <h4>Citizen Science Monitoring Makes a Difference</h4>
+    <p>Reef Check South Africa coordinates structured citizen science reef monitoring surveys at Sodwana Bay and other KZN and South African dive sites, training recreational divers to conduct standardised fish and invertebrate count surveys and coral health assessments using internationally comparable methodology. This data directly supplements the professional monitoring conducted by SAEON and the iSimangaliso Wetland Park Authority, extending spatial and temporal coverage beyond what professional monitoring alone could achieve. Any recreational diver visiting Sodwana can apply to train as a Reef Check EcoDiver and contribute directly to the scientific record of KZN's reef condition. This is one of the most direct and meaningful contributions an individual diver can make to reef conservation in KZN.</p>
+</div>
+</div>
+
+<a href="ocean.html" class="back-link">← Back to Ocean Awareness</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

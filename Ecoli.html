@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E. Coli & Water Contamination – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #e57373; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>E. Coli & Water Contamination</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="ecoli.png" alt="E. coli Water Contamination"><p class="image-caption">Bacterial contamination — stormwater and sewage pollution in KZN coastal waters</p></div>
+<div class="species-intro">
+<h2>E. Coli & Water Contamination</h2>
+<span class="scientific-name">Bacterial pollution from stormwater runoff & sewage overflows</span>
+<span class="conservation-badge">⚠ HIGH HAZARD — Serious Health Risk</span>
+<p>Following heavy rainfall, KwaZulu-Natal's rivers, estuaries, and inshore coastal waters are flushed with stormwater runoff and sewage overflows carrying dangerous concentrations of coliform bacteria — including E. coli, enterococci, and other fecal indicator organisms that signal the presence of human and animal waste. Swimming in bacterially contaminated water exposes beachgoers to gastrointestinal illness, skin infections, ear infections, eye infections, and respiratory illness. Children, the elderly, and individuals with compromised immune systems face particularly high risk of severe illness from waterborne pathogens. Several KZN beaches regularly exceed safe bacterial limits following rainfall events, with some urban and peri-urban sites remaining problematic even during dry weather due to ongoing sewage infrastructure failures.</p>
+<p>The problem is most acute within 48 to 72 hours of heavy rainfall, when stormwater systems overwhelmed by runoff discharge directly into rivers and estuaries carrying accumulated pollutants from streets, parking lots, and informal settlements. Sewage treatment plants operating at or beyond capacity experience overflow events during storms, releasing partially treated or raw sewage into waterways that flow directly to KZN's beaches. eThekwini Municipality monitors water quality at major beaches and publishes results on their website, but many beaches outside municipal jurisdiction receive no regular testing. The default precaution after heavy rain is simple: stay out of the water for at least 48 hours, and longer at river mouths and estuaries where contamination persists.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Risk Window Post-Rain</span><span class="stat-value">48 – 72 hours</span></div>
+<div class="stat-box"><span class="stat-label">Primary Symptoms</span><span class="stat-value">GI illness, skin/ear infections</span></div>
+<div class="stat-box"><span class="stat-label">Highest Risk Locations</span><span class="stat-value">Estuaries, river mouths</span></div>
+<div class="stat-box"><span class="stat-label">Safe E. coli Limit</span><span class="stat-value">&lt;130 CFU/100mL</span></div>
+<div class="stat-box"><span class="stat-label">Incubation Period</span><span class="stat-value">1 – 10 days</span></div>
+<div class="stat-box"><span class="stat-label">eThekwini Testing</span><span class="stat-value">Weekly monitoring</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Is E. Coli & Why Is It Dangerous?</h3>
+<p>Escherichia coli (E. coli) is a species of bacteria that lives in the intestines of humans and warm-blooded animals. Most strains of E. coli are harmless and form part of the normal gut microbiome. However, certain pathogenic strains — including E. coli O157:H7 and other Shiga toxin-producing variants — cause severe gastrointestinal illness including bloody diarrhea, abdominal cramping, vomiting, and in vulnerable individuals, life-threatening complications including hemolytic uremic syndrome (HUS), which can cause kidney failure. E. coli in recreational water is used as a fecal indicator organism — its presence signals that water has been contaminated with fecal matter, which may also contain other dangerous pathogens including Salmonella, Campylobacter, Shigella, norovirus, hepatitis A, and parasitic protozoa.</p>
+<p>South African water quality guidelines establish a safe limit for E. coli in recreational waters at less than 130 colony-forming units (CFU) per 100 millilitres. Beaches exceeding this threshold are considered unsafe for full-body contact recreation including swimming, surfing, and bodyboarding. Enterococci — another fecal indicator bacteria group — is also monitored, with safe limits set at less than 200 CFU per 100mL. When beaches exceed these thresholds, eThekwini Municipality issues public health warnings and may close beaches until bacterial counts return to safe levels. However, many contamination events go undetected because monitoring is conducted only weekly and samples are collected during weekday mornings — missing the weekend and post-storm contamination spikes when risk is highest.</p>
+</div>
+<div class="info-section"><h3>Sources of Contamination in KZN</h3>
+<p>Bacterial contamination of KZN's coastal waters originates from multiple sources, with stormwater runoff and sewage overflows dominating during rainfall events. Urban stormwater systems collect runoff from streets, parking lots, rooftops, and landscaped areas, carrying accumulated pollutants — including fecal matter from dogs, birds, and informal settlements — directly into rivers and estuaries without treatment. During heavy rainfall, the sheer volume of stormwater overwhelms drainage capacity, causing combined sewer overflow events where stormwater mixes with raw sewage and discharges directly into waterways.</p>
+<p>Sewage treatment infrastructure failures contribute significantly to chronic contamination. Many of KZN's wastewater treatment plants operate at or beyond design capacity, and maintenance backlogs result in pump station failures, pipeline ruptures, and treatment bypasses that release partially treated or raw sewage into rivers. Informal settlements lacking formal sanitation infrastructure discharge untreated human waste into nearby streams and rivers that flow to the coast. Agricultural runoff from livestock farming introduces animal fecal contamination. The cumulative result is that KZN's rivers — particularly the Umgeni, Umhlanga, Mdloti, and uMdloti — routinely carry elevated bacterial loads to the coast, rendering river mouth and estuary beaches persistently contaminated.</p>
+<ul>
+<li>Stormwater runoff carrying accumulated fecal pollution</li>
+<li>Sewage treatment plant overflows during heavy rain</li>
+<li>Aging sewage infrastructure failures and pipeline ruptures</li>
+<li>Informal settlement discharge of untreated human waste</li>
+<li>Agricultural runoff from livestock operations</li>
+<li>Combined sewer overflow events in mixed drainage systems</li>
+</ul>
+</div>
+<div class="info-section"><h3>Health Risks & Symptoms</h3>
+<p>Swimming in bacterially contaminated water exposes individuals to waterborne pathogens through ingestion, inhalation of contaminated spray, and direct contact with mucous membranes and open wounds. The most common health outcome is acute gastroenteritis — presenting 12 to 72 hours after exposure with nausea, vomiting, diarrhea, abdominal cramping, and fever. Symptoms typically resolve within 3 to 7 days in healthy adults but can persist longer and cause severe dehydration in children, elderly individuals, and those with weakened immune systems. Pathogenic E. coli strains causing bloody diarrhea require immediate medical attention due to risk of hemolytic uremic syndrome.</p>
+<p>Skin infections occur when contaminated water contacts cuts, abrasions, or compromised skin — presenting as redness, swelling, warmth, and pus formation at the infection site. Swimmer's ear (otitis externa) results from bacteria entering the ear canal during swimming — causing ear pain, itching, discharge, and temporary hearing loss. Eye infections (conjunctivitis) develop when contaminated water contacts the eyes, causing redness, discharge, and light sensitivity. Respiratory illness can result from inhalation of contaminated spray during surfing or bodyboarding in heavily polluted conditions. Individuals with pre-existing conditions including diabetes, liver disease, cancer, HIV/AIDS, and those on immunosuppressive medications face substantially elevated risk of severe infection.</p>
+<ul>
+<li>Gastroenteritis (nausea, vomiting, diarrhea, fever)</li>
+<li>Skin infections at cuts or abrasions</li>
+<li>Swimmer's ear (ear pain, discharge, hearing loss)</li>
+<li>Eye infections (redness, discharge, sensitivity)</li>
+<li>Respiratory illness from inhaled spray</li>
+<li>Severe complications in immunocompromised individuals</li>
+</ul>
+</div>
+<div class="info-section"><h3>High-Risk Beaches in KZN</h3>
+<p>Several KZN beaches have documented histories of persistent bacterial contamination that place them on eThekwini Municipality's chronic problem beach list. Umgeni River Mouth consistently fails water quality standards due to discharge from the Umgeni catchment carrying sewage and stormwater pollution from greater Durban. Lagoon Beach and Bay of Plenty — both influenced by the Umgeni — regularly post elevated bacterial counts. Mdloti Beach and uMhlanga Lagoon are chronically contaminated by their respective river systems. Isipingo Beach receives pollution from industrial and residential areas south of Durban. On the South Coast, beaches near Umkomaas River and Mpambanyoni River mouths frequently exceed safe limits following rainfall.</p>
+<p>River mouth and estuary beaches represent the highest contamination risk across all of KZN because they receive the concentrated discharge of entire catchment areas. Even beaches with generally good water quality become unsafe within hours of heavy rainfall as river plumes spread contaminated freshwater into the surf zone. The visual appearance of brown, murky water flowing from river mouths is a reliable indicator of high contamination risk — this discoloured water carries elevated bacterial loads and should be avoided for at least 48 to 72 hours following the rain event. Beaches without visible river discharge but located downstream of contaminated river mouths also carry elevated risk as longshore currents transport contaminated water along the coastline.</p>
+<ul>
+<li>Umgeni River Mouth — chronic contamination from Umgeni catchment</li>
+<li>Lagoon Beach & Bay of Plenty — Umgeni River influence</li>
+<li>Mdloti Beach — Mdloti River discharge</li>
+<li>uMhlanga Lagoon — uMhlanga River contamination</li>
+<li>Isipingo Beach — industrial and residential pollution</li>
+<li>All river mouth and estuary beaches following heavy rain</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>eThekwini Water Quality Monitoring & Public Reporting</h3>
+<p>eThekwini Municipality's Beach Water Quality Programme monitors bacterial levels at approximately 17 key beaches along the Durban coastline through weekly sampling conducted by Environmental Health Practitioners. Water samples are collected on weekday mornings, transported to laboratories for bacterial culture, and results are typically available within 24 to 48 hours. Beaches exceeding safe limits for E. coli (>130 CFU/100mL) or enterococci (>200 CFU/100mL) are flagged for public health warnings, and beaches with severe or persistent contamination may be closed to swimming pending remediation or natural bacterial die-off. Results are published on the eThekwini Municipality website and communicated to the public through signage at affected beaches and social media channels.</p>
+<p>However, significant limitations constrain the effectiveness of this monitoring system. Weekly sampling means contamination events occurring mid-week or on weekends may not be detected until days later when risk has already passed or new swimmers have been exposed. The lag between sampling and result availability means that warnings are often posted after peak weekend beach usage. Many beaches outside eThekwini's municipal boundaries — including popular destinations on the South Coast and North Coast — receive no regular monitoring at all, leaving beachgoers uninformed about bacterial risk. During holiday periods when beach usage spikes and sewage infrastructure is most stressed, monitoring frequency does not increase to match the elevated contamination risk.</p>
+<p>The most reliable personal risk mitigation strategy is behavioral: avoid all beach swimming for 48 to 72 hours following heavy rainfall, particularly at river mouths, estuaries, and beaches known to have chronic contamination issues. Discoloured water, strong sewage odors, visible debris or scum on the surface, and dead fish are all visual indicators of high contamination probability and should trigger immediate exit from the water. If illness develops within 10 days of swimming at a potentially contaminated beach — particularly gastrointestinal symptoms — inform your doctor of the possible exposure to assist with diagnosis and treatment. Reporting illness to eThekwini's Environmental Health unit also helps authorities track contamination-related health impacts and prioritize remediation efforts.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Water Contamination in KZN</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>48-Hour Rule Post-Rainfall</h4><p>The safest approach to avoiding bacterial illness is to stay out of the water for at least 48 to 72 hours following any significant rainfall event. This window allows bacterial populations to decline naturally through dilution, UV exposure from sunlight, and saltwater effects. River mouth and estuary beaches require longer clearance times — up to 5 to 7 days after major storms — as these locations receive concentrated catchment discharge and experience prolonged contamination.</p></div>
+<div class="fact-card"><h4>E. coli Safe Limit: <130 CFU/100mL</h4><p>South African recreational water quality guidelines establish safe limits for E. coli at less than 130 colony-forming units (CFU) per 100 milliliters and enterococci at less than 200 CFU/100mL. Beaches exceeding these thresholds are considered unsafe for full-body contact recreation. During post-rain contamination events, bacterial counts at KZN river mouths can reach thousands or tens of thousands of CFU/100mL — orders of magnitude above safe limits.</p></div>
+<div class="fact-card"><h4>Children & Elderly at Highest Risk</h4><p>Young children, elderly individuals, and those with compromised immune systems face substantially elevated risk of severe illness from waterborne pathogens. Children are more likely to ingest contaminated water during play, have less developed immune systems, and experience more severe dehydration from gastroenteritis. Immunocompromised individuals including those with HIV/AIDS, cancer, diabetes, or on immunosuppressive drugs should avoid swimming at any beach with questionable water quality.</p></div>
+<div class="fact-card"><h4>Chronic Problem Beaches</h4><p>Several KZN beaches have documented histories of persistent bacterial contamination and are classified by eThekwini Municipality as chronic problem beaches requiring ongoing remediation efforts. Umgeni River Mouth, Mdloti Beach, Lagoon Beach, Bay of Plenty, and Isipingo Beach consistently post elevated bacterial counts. Swimming at these beaches carries elevated baseline risk even during dry weather, and they should be avoided entirely for at least one week following any significant rainfall.</p></div>
+<div class="fact-card"><h4>Brown Water = Stay Out</h4><p>The visual appearance of brown, murky water flowing from river mouths into the surf zone is a reliable field indicator of high bacterial contamination risk. This discoloured water carries elevated loads of sediment, organic matter, and fecal bacteria from upstream catchments. Any beach exhibiting visible brown water discharge, strong sewage odors, floating debris, or surface scum should be avoided regardless of published water quality reports, as these visual indicators signal active contamination in progress.</p></div>
+<div class="fact-card"><h4>Symptoms Appear 1–10 Days Later</h4><p>Gastrointestinal illness from waterborne pathogens typically manifests 12 hours to 10 days after exposure, with most cases appearing within 1 to 3 days. The delayed onset means that beachgoers may not connect their illness to beach swimming, particularly if they swam days earlier or visited multiple beaches during a holiday period. If illness develops within 10 days of swimming at a potentially contaminated beach, inform your doctor of the possible exposure and report the incident to local health authorities.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/@subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html" target="_blank">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

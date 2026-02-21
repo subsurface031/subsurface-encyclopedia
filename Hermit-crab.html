@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermit Crab – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Hermit Crab
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="hermit-crab.png" alt="Hermit Crab">
+                    <p class="image-caption">Clibanarius virescens & related species — Hermit Crab, KZN tidal pools and shallow reefs</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Hermit Crab</h2>
+                    <span class="scientific-name">Clibanarius virescens & related species</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The hermit crab is perhaps the most immediately charming and recognisable inhabitant of KwaZulu-Natal's tidal pools — a small, industrious creature that has solved the problem of having a soft, unprotected abdomen not by evolving its own armour, but by taking up residence in the abandoned shells of gastropod snails and carrying its borrowed home wherever it goes. This remarkable evolutionary strategy — using the physical investment of another animal as one's own protective shell — has made hermit crabs enormously successful, with dozens of species inhabiting KZN's tidal pools, rocky shores, shallow reefs, and estuaries in numbers that make them among the most commonly encountered crustaceans in the region.</p>
+                    <p>Hermit crabs are not true crabs — they belong to the superfamily Paguroidea, more closely related to squat lobsters and anomurans than to the brachyuran crabs of the intertidal. Unlike true crabs, whose abdomen is reduced and tucked beneath the body, hermit crabs have a long, soft, spiral-curved abdomen specifically shaped to fit snugly inside a gastropod shell. This abdomen is entirely unprotected without a shell — soft, pink, and defenceless — which explains the extraordinary importance that shell selection, shell guarding, and shell exchange play in hermit crab social life. A hermit crab without a well-fitting shell is a crab in serious danger, and few behaviours in their lives consume more time and energy than the eternal quest for the perfect shell.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Body Length</span>
+                            <span class="stat-value">0.5 – 10 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Tidal pools & reefs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 50 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Diet</span>
+                            <span class="stat-value">Omnivore</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Shell Species</span>
+                            <span class="stat-value">Many gastropods</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">2 – 10 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The visible portion of a hermit crab — the part that protrudes from the shell during normal activity — comprises the cephalothorax and the appendages attached to it, while the abdomen remains hidden inside the borrowed shell. The cephalothorax is covered by a calcified carapace that varies in colour by species: the common tidal pool hermit crabs of KZN (Clibanarius virescens and related species) typically display walking legs banded or striped in green, cream, and brown — colouration that provides reasonable camouflage against the algae-covered pool surfaces they inhabit. The larger, deeper-water hermit crabs found on KZN's reefs are often more vividly coloured, with orange, red, or blue markings.</p>
+                    <p>The claws are notably asymmetrical in most hermit crab species — one claw is significantly larger than the other. The larger claw serves primarily as a door: when the hermit crab retreats fully into its shell, this enlarged claw is pulled into the aperture to block the opening, acting as a living shield that prevents predators from reaching the vulnerable soft abdomen inside. The smaller claw is used primarily for food manipulation and delicate tasks. The walking legs are adapted both for locomotion across pool surfaces and for gripping the interior wall of the shell securely — preventing the shell from being pulled off by predators.</p>
+                    <p>The abdomen, when briefly visible during shell changes, is elongated, spirally curved to match the helical interior of a gastropod shell, and almost entirely lacking in calcification. The uropods — appendages at the tail end — are modified into muscular hooks that grip the columella (central pillar) of the shell interior, providing the primary anchorage that keeps the hermit crab in its home. The telson is asymmetrically shaped, twisted to match the curvature of the shell interior — an adaptation so precise that hermit crabs can accurately gauge the fit of a potential new shell by examining the interior with their abdomen before committing to a shell exchange.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>The social life of hermit crabs revolves almost entirely around shells — finding them, evaluating them, defending them, and trading them. Shell availability is the primary limiting resource for hermit crab populations, and the competition for suitable shells drives complex social behaviours that are among the most sophisticated observed in crustaceans. When a hermit crab encounters a vacant shell — either newly emptied or abandoned — it performs a detailed inspection: tapping the exterior, probing the aperture with its claws, and inserting its abdomen to assess the internal fit before deciding whether to move in or continue searching.</p>
+                    <p>One of the most remarkable hermit crab behaviours is the "vacancy chain" — a coordinated shell exchange involving multiple individuals that has been described as a form of collective decision-making unique in the invertebrate world. When a large shell becomes available, a hermit crab that moves into it vacates its previous shell — which may then be taken by a slightly smaller individual, who in turn vacates a shell suitable for an even smaller animal, and so on in a sequential chain that can involve a dozen or more crabs exchanging shells in rapid succession. These exchanges are sometimes facilitated by "shell queues" — lines of waiting crabs that have assessed the vacancy and positioned themselves in order of size to participate in the cascade as it occurs.</p>
+                    <p>Outside of shell-related activities, hermit crabs are active, curious, and relatively social animals — more tolerant of conspecifics than most crustaceans, and often found aggregating around food sources in tidal pools. They forage actively across pool surfaces and rock faces, using their antennae to detect chemical cues from food items and following scent trails to carrion and algal patches from considerable distances. When threatened, hermit crabs withdraw completely into the shell and seal the entrance with the enlarged claw — remaining motionless until the perceived threat passes, sometimes for several minutes.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Hermit crabs are opportunistic omnivores and scavengers with broad and flexible dietary requirements. Their feeding behaviour is heavily influenced by the size of their current shell — a shell that fits well allows confident, active foraging, while an ill-fitting shell makes the hermit crab reluctant to stray far from shelter, restricting its access to food. In tidal pools, hermit crabs forage across all available microhabitats: scraping algal films from rock surfaces, picking at detritus accumulations in pool corners, and converging on any item of carrion or organic matter that appears on the pool floor.</p>
+                    <p>Algal material — both filamentous algae that can be grazed directly from surfaces and coralline algae scraped from rock — forms a significant component of the diet in tidal pool species, supplemented by organic detritus, microbial films, small invertebrates including mites, copepods, and tiny worms, and any available animal matter. The versatility of the hermit crab's diet makes it a genuinely important contributor to tidal pool nutrient cycling — processing organic matter that might otherwise accumulate and creating nutrient-rich faecal material that supports bacterial and algal growth in the pool substrate.</p>
+                    <ul>
+                        <li>Algal films, filamentous algae, and encrusting algae</li>
+                        <li>Organic detritus and microbial biofilms</li>
+                        <li>Carrion and dead invertebrates</li>
+                        <li>Small live invertebrates — worms, mites, copepods</li>
+                        <li>Plant material and strand line debris</li>
+                        <li>Faecal pellets and recycled organic matter</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Hermit crab mating is intimately linked to the shell — specifically to the vulnerability of females during the moulting process that precedes mating. Males identify pre-moult females through chemical cues and perform a behaviour called "mate guarding" — grasping the female's shell and following her closely for days before she moults, ensuring first access when she becomes receptive. Mating occurs immediately after the female moults, when her new exoskeleton is still soft. The male briefly extricates himself from his shell to deposit spermatophores on the female's abdomen before both animals rapidly retreat back into their respective shells.</p>
+                    <p>Fertilised eggs are brooded on the female's abdominal pleopods within the shell — she carries hundreds to thousands of eggs through a 4 to 6 week incubation period, periodically emerging slightly from the shell to aerate and clean the egg mass with her walking legs and abdomen. Larvae — zoea — are released directly into the water column and spend several weeks developing through multiple planktonic stages. The final larval stage, the glaucothoe, is a transitional form that seeks out appropriate substrate and initiates the characteristic hermit crab behaviour of shell searching — it will settle only when a suitable small gastropod shell is available, sometimes delaying settlement for extended periods if suitable shells are scarce.</p>
+                    <p>Juvenile hermit crabs grow rapidly, moulting frequently in their first year of life and requiring progressively larger shells with each growth moult. The need to find a new, larger shell after every moult represents one of the most dangerous recurring events in a hermit crab's life — the period between vacating the old shell and securing the new one, when the abdomen is briefly exposed, is the moment of maximum vulnerability to predation. Most hermit crabs in KZN's tidal pools live for 2 to 5 years, though deeper-water species and larger individuals can live considerably longer — up to a decade in some cases.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Hermit Crabs in KZN: Tidal Pool Characters & Ecological Roles</h3>
+                <p>Hermit crabs are a fixture of KwaZulu-Natal's tidal pool experience — the small, shell-carrying animals that children almost inevitably encounter first and remember longest from rock pool visits along the KZN coast. From the warm, sheltered pools of the iSimangaliso coastline in the north to the wave-battered pools of the Wild Coast in the south, hermit crabs in an assortment of shell types — turritella shells, top shells, cerith shells, nerite shells — trundle across pool floors and rock surfaces, retreating comically into their borrowed homes at the first sign of a shadow falling across the pool. Several species occur in KZN waters, with intertidal forms from the genus Clibanarius most commonly encountered in tidal pools, while larger species from the families Paguridae and Diogenidae occupy reef habitats from the shallows down to moderate depths.</p>
+                <p>In the tidal pool community, hermit crabs play multiple ecological roles simultaneously. As scrapers and grazers, they contribute to the turnover of algal films and organic detritus that accumulates on pool surfaces — maintaining the open, clean rock surfaces that allow algal diversity and prevent the dominance of any single fast-growing algal species. As scavengers, they rapidly process carrion and organic matter that enters the pool, recycling nutrients and preventing anaerobic decomposition. As prey, they are consumed by a range of tidal pool predators including octopuses, moray eels, and larger crabs — with the shell providing only partial protection against predators determined enough to extract the soft body from within.</p>
+                <p>The relationship between hermit crabs and gastropod snails is one of the most ecologically significant secondary relationships in the tidal pool community. Hermit crabs depend entirely on the continued production of gastropod shells by populations of whelks, periwinkles, top shells, and other snails that live alongside them. When gastropod populations decline — through overharvesting, habitat degradation, or pollution — shell availability drops and hermit crab populations experience increased competition, stress, and mortality. Conversely, the recycling role of hermit crabs — ensuring that shells remain in circulation within the community rather than accumulating as dead matter — sustains the supply of usable shells over time. This interdependence makes hermit crabs a sensitive indicator of the overall health and ecological completeness of the rocky shore community.</p>
+                <p>KZN's tidal pools face ongoing pressures from coastal development, pollution, and recreational overuse that affect hermit crab populations alongside all other intertidal residents. Trampling by visitors — particularly on pools close to popular beaches and resort areas — damages the physical structure of pools and crushes animals including hermit crabs that are slow to respond to approaching feet. Collection of hermit crabs as pets, though individually trivial, has cumulative impacts on heavily visited pools where numbers are already reduced by disturbance. Educational programmes that teach visitors to observe tidal pools without touching or collecting, and to replace any rocks turned over during exploration, are among the most effective tools for protecting these fragile communities and the charming hermit crabs that inhabit them.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The Vacancy Chain</h4>
+                    <p>When a larger shell becomes available in a hermit crab population, the resulting cascade of exchanges — where each crab that moves up in shell size vacates a shell for the next-smallest crab — can involve up to 20 individuals exchanging shells in rapid succession over just a few minutes. Researchers studying these events have found that the crabs line up in size order before the first exchange occurs, suggesting a level of collective assessment and social coordination that is extraordinary for an animal with a brain smaller than a pinhead.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shell Inspectors</h4>
+                    <p>Before committing to a new shell, a hermit crab performs a remarkably thorough inspection: it taps the exterior to assess structural integrity, probes the aperture to gauge size, inserts its claws to check internal dimensions, and then briefly inserts its abdomen to test the spiral fit and weight of the shell before deciding. This entire assessment process can take several minutes and is repeated multiple times before a final decision is made — a level of selectivity and decision-making sophistication that surprised researchers when first documented in detail.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Asymmetric Body</h4>
+                    <p>Hermit crabs are among the very few animals with a genuinely asymmetrical body — the abdomen is twisted to the right in the vast majority of species, matching the predominant right-handed (dextral) spiral of most gastropod shells. This asymmetry is so deeply embedded in hermit crab anatomy that their uropod hooks, musculature, and abdominal curvature are all specifically adapted for right-handed shells — a hermit crab placed in a sinistral (left-handed) shell is unable to grip properly and is immediately vulnerable to predation and desiccation.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Decorator Crabs of the Pool</h4>
+                    <p>Some hermit crab species actively place anemones, sponges, and other sessile organisms on the exterior of their shells — a behaviour that provides additional camouflage and, in the case of anemones, active chemical and physical defence against predators. The relationship between hermit crabs and certain anemone species is one of the most studied examples of facultative mutualism in marine ecology: the anemone gains mobility and access to food scraps from the crab's meals, while the crab gains a formidable stinging defence that deters even octopus predation.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Not True Crabs</h4>
+                    <p>Despite their name, hermit crabs are not true crabs at all — they belong to a distinct infraorder, the Anomura, and are more closely related to squat lobsters, porcelain crabs, and even mole crabs than to swimming crabs or rock crabs. The key anatomical difference is visible in their abdomen: true crabs have a reduced, calcified abdomen tucked permanently beneath the body, while hermit crabs have a long, soft, exposed abdomen that must be protected by a borrowed shell. This distinction places them in a fascinating evolutionary middle ground between lobster-like and crab-like body plans.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shell Shortage Crisis</h4>
+                    <p>The global trade in decorative gastropod shells — harvested from beaches and reefs and sold as ornaments, jewellery, and souvenirs — has created localised shell shortages in some heavily visited coastal areas that directly affect hermit crab populations. With fewer empty shells available, hermit crabs resort to occupying plastic bottle caps, broken glass fragments, and even small tin cans — alternatives that provide inadequate protection and are associated with higher predation rates and reduced reproductive success. On KZN's more popular beaches, discouraging shell collection is an important, if modest, conservation measure.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

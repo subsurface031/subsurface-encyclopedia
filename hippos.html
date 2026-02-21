@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hippopotamus – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hippo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .hippo-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hippo-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .hippo-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hippo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .hippo-content {
+            padding: 2rem;
+        }
+
+        .hippo-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .hippo-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .hippo-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .hippo-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+     <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>KwaZulu-Natal's River Giants</h2>
+                <p>The common hippopotamus is one of Africa's most iconic and impressive megaherbivores—massive, semi-aquatic mammals that have shaped freshwater ecosystems for millions of years. In KwaZulu-Natal, these remarkable creatures inhabit rivers, lakes, estuaries, and wetlands, where they serve as essential ecosystem engineers, influencing vegetation patterns, nutrient cycling, and habitat structure for countless other species.</p>
+                
+                <p>Despite their seemingly docile appearance while wallowing in water, hippos are among Africa's most formidable and dangerous animals. Adults can weigh up to 4,000 kilograms, making them the third-largest land mammal after elephants and white rhinos. Their powerful jaws, massive teeth, surprising speed on land—up to 30 km/h in short bursts—and highly territorial nature make them responsible for more human fatalities in Africa than any other large animal except crocodiles.</p>
+                
+                <p>KwaZulu-Natal supports South Africa's largest hippopotamus population, with the St. Lucia estuarine system in iSimangaliso Wetland Park hosting approximately 800 to 1,000 individuals—the single largest concentration in the country. Smaller but significant populations persist in Ndumo Game Reserve, Hluhluwe-iMfolozi Park, and various river systems throughout northern KZN. These populations represent critical conservation strongholds for a species facing increasing pressure from habitat loss and human-wildlife conflict across its African range.</p>
+                
+                <p>Hippos play an extraordinary ecological role far beyond their size. Their grazing creates and maintains grasslands, their dung fertilizes aquatic systems and supports entire food chains, and their movements through water create channels and pools that benefit countless other species. Understanding hippopotamus behavior, ecology, and conservation needs is essential for managing KwaZulu-Natal's freshwater ecosystems and ensuring the long-term coexistence of humans and these magnificent aquatic giants.</p>
+            </section>
+
+            <section id="hippos" class="hippo-grid">
+                <article class="hippo-card">
+                    <div class="hippo-image">
+                        <img src="hippos.png" alt="Common Hippopotamus">
+                    </div>
+                    <div class="hippo-content">
+                        <h3>Common Hippopotamus</h3>
+                        <p>Africa's third-largest land mammal and one of the most dangerous animals on the continent, the common hippopotamus is found throughout KZN's major river systems and wetlands. These semi-aquatic herbivores can weigh up to 4,000 kg and play a vital role as ecosystem engineers. The St. Lucia estuary supports the largest population in South Africa, with approximately 800 to 1,000 individuals.</p>
+                        <a href="hippopotamus.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yellowtail Kingfish – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+    <nav></nav>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="fish.html">Fish</a><span>›</span>
+                Yellowtail Kingfish
+            </div>
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="kingfish.png" alt="Yellowtail Kingfish">
+                    <p class="image-caption">Seriola lalandi — Yellowtail Kingfish, KZN</p>
+                </div>
+                <div class="species-intro">
+                    <h2>Yellowtail Kingfish</h2>
+                    <span class="scientific-name">Seriola lalandi</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The yellowtail kingfish — known simply as "kingfish" or "kingie" throughout KwaZulu-Natal — is the defining reef game fish of the South African coastline and one of the most prized sport and table fish in the Indian Ocean. Powerful, fast, and explosively aggressive when encountered in numbers, the kingfish combines the schooling behaviour of a pelagic predator with the structural affinity of a reef species, making it equally at home tearing apart a sardine school in open water as patrolling the edges of deep drop-offs and rocky pinnacles in search of prey.</p>
+                    <p>In KZN, yellowtail kingfish inhabit the rocky reefs, offshore wrecks, and submarine ridges that punctuate the coastline from the Cape Vidal region southward. They are found year-round but are most abundant and concentrated during winter months when cooler water temperatures push into KZN's northern waters and baitfish schools concentrate around reef structures. The sardine run brings especially dramatic encounters, with schools of kingfish corralling sardine shoals against the surface in a frenzy of activity that electrifies snorkelers and divers alike. Their powerful, unstoppable runs and stubbornness make them one of the hardest-fighting fish of their weight class in South African waters.</p>
+                    <div class="quick-stats">
+                        <div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2.5 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~70 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">8 years (♂) / 9 years (♀)</span></div>
+                        <div class="stat-box"><span class="stat-label">Preferred Temp</span><span class="stat-value">17 – 24°C</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Depth</span><span class="stat-value">~300 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Maturity Age</span><span class="stat-value">2.3 yrs (♂) / 3.6 yrs (♀)</span></div>
+                    </div>
+                </div>
+            </section>
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The yellowtail kingfish is an immediately recognizable species — a large, powerfully built, torpedo-shaped fish whose entire body is built for sustained high-speed pursuit in open and reef-associated waters. The body is fusiform, laterally compressed, and tapers to a narrow caudal peduncle that supports a large, deeply forked tail — the structural signature of a fast, efficient swimmer. The upper body is a deep blue-green to olive-blue, transitioning through silver on the flanks to a white underside. A distinctive bronze-yellow to golden stripe runs continuously from the snout tip, through the eye, and along the midline of the body all the way to the base of the brilliant yellow tail — the feature that gives the species its common name.</p>
+                    <p>The fins are proportionally small relative to the body size, reducing drag at speed. The first dorsal fin is short and low; the second dorsal and anal fins are long-based and falcate. The caudal fin is deeply forked with rigid, efficient lobes that generate powerful propulsion with minimal water turbulence. Juveniles display a very different appearance — bright yellow body with distinctive black vertical bands that fade progressively as the fish grows, transitioning to adult colouration at approximately 30 cm. This juvenile pattern provides camouflage among floating weed and debris where juvenile fish shelter during early life.</p>
+                    <p>Adults in KZN waters typically measure 60 cm to 1.2 metres and weigh 3 to 25 kg. Maximum confirmed size is 2.5 metres and approximately 70 kg, though fish exceeding 30 kg are uncommon inshore. South African research confirms maximum ages of 7 years for males and 8 years for females, with males maturing at 2.3 years and females at 3.6 years — among the fastest maturation rates for a fish of this size.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Yellowtail kingfish are highly mobile pelagic-reef fish that move fluidly between open-water pelagic environments and structured reef habitats depending on season, prey availability, and life stage. Juveniles form dense shoals of several hundred similarly sized fish around coastal rocky reefs, jetties, harbour structures, and offshore floating debris, a schooling strategy that provides protection from predators and improves foraging efficiency. As fish grow larger, they progressively shift to deeper reef structures, offshore pinnacles, and continental shelf drop-offs where prey is most concentrated.</p>
+                    <p>Adult kingfish are typically encountered in small schools of 5 to 30 fish patrolling reef edges, drop-offs, and current-swept pinnacles, though larger aggregations of over 100 fish occur during feeding events and seasonal migrations. They are relentlessly aggressive predators, exploding into schools of sardines, maasbanker, and mackerel with a co-ordinated intensity that devastates baitfish schools. During the sardine run, kingfish work alongside dolphins, sharks, and seabirds, corralling sardine shoals from below while other predators attack from above.</p>
+                    <p>When hooked, yellowtail kingfish fight with exceptional stamina and power — long, unstoppable runs that strip line from reels, combined with the ability to use their deep body as a kite against the current, make them pound-for-pound among the hardest-fighting fish in KZN waters. They are intelligent enough to run directly into reef structure when hooked, making light tackle fishing a test of both skill and luck.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Yellowtail kingfish are versatile, generalist predators whose diet reflects the diversity of prey available in KZN's reef and coastal pelagic environments. South African research on stomach contents confirms a remarkably broad diet encompassing bony fish, crustaceans, cephalopods, polychaetes, and bivalves — 18 species across five prey classes recorded in a single study of Western Cape fish. The dominant prey items vary by location, season, and fish size, with larger adults focusing increasingly on fish prey while smaller individuals consume proportionally more crustaceans and invertebrates.</p>
+                    <p>In KZN waters, sardines, anchovies, maasbanker (horse mackerel), and mackerel constitute the most important fish prey. Squid and cuttlefish are taken opportunistically, particularly at night when cephalopods rise toward the surface. Kingfish are also known to consume reef-associated fish including various carangids, small garfish, and even juvenile fish of their own species. The sardine run transforms kingfish feeding behaviour dramatically — schools shift from their typical structured reef hunting to frenzied, open-water cooperative feeding alongside the sardine shoals.</p>
+                    <ul>
+                        <li>Sardines, anchovies, and maasbanker (primary)</li>
+                        <li>Mackerel and small pelagic fish</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Crustaceans and crabs</li>
+                        <li>Reef fish and invertebrates opportunistically</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Yellowtail kingfish in South African waters spawn during late spring and summer, with peak activity occurring between October and February when water temperatures are warmest. Spawning is a pelagic event occurring in offshore surface waters. A South African University of Cape Town study on the age and growth of yellowtail in local waters — using otolith analysis of 384 readable specimens — confirmed maximum ages of 7 years for males and 8 years for females, with males maturing at a mean age of 2.3 years and females at 3.6 years. This rapid maturity, within 2 to 4 years for a fish capable of exceeding 70 kg, reflects the species' relatively fast growth rate.</p>
+                    <p>South African yellowtail are genetically distinct from other world populations, with recent molecular studies confirming that the southern African population represents a genetically separate lineage from Indo-Pacific, Australian, and South American populations — effectively a distinct cryptic species separated from globally similar-looking fish. This genetic isolation has important conservation implications, as the South African population cannot be replenished by fish from other regions if local populations are depleted.</p>
+                    <p>The species is highly valued in global aquaculture, particularly in Japan where it is cultured as "hiramasa" — one of the most prized sashimi fish in the Japanese market. South African aquaculture trials have been conducted but commercial production remains limited. The wild South African population is rated Least Concern by IUCN and is concentrated primarily in Western Cape shelf waters, with the KZN population representing the northern limit of its South African range.</p>
+                </div>
+            </div>
+            <div class="info-section-full">
+                <h3>Kingfish in KZN — Reef Hunters of the Sardine Run</h3>
+                <p>While the yellowtail kingfish is more strongly associated with the cooler Western Cape waters — where the South African population is most concentrated along the shelf between Namibia and northern KwaZulu-Natal — KZN reef anglers and divers regard kingfish as a significant and exciting presence at offshore structures including Aliwal Shoal, Protea Banks, and the offshore reefs and pinnacles of the northern coast. The species reaches the northern edge of its South African range in KZN, and fish in these warmer waters are often large, mature individuals rather than the schooling juveniles more typical of Western Cape reefs.</p>
+                <p>The sardine run provides KZN's most dramatic kingfish encounters. Schools converge on the sardine shoals from below, working in loose coordination with copper sharks, common dolphins, and Cape gannets — each species exploiting a different dimension of the same prey school. Kingfish attack the flanks and bottom of sardine shoals, using their speed and power to cut off escape routes while other predators attack from above. For divers and snorkelers who enter the water during an active feeding frenzy, the experience of being surrounded by hunting kingfish — alongside sharks and dolphins — is one of the most extraordinary encounters in South African marine life.</p>
+                <p>In KZN, kingfish are targeted by spearfishers, ski-boat anglers, and increasingly by kayak fishers and fly fishers. The species rates Orange on the SASSI (South African Sustainable Seafood Initiative) list, reflecting moderate conservation concern and a recommendation that recreational anglers practice selective catch-and-release of large breeding adults. Their excellent eating quality — firm, white, oily flesh that suits grilling, curing, and sashimi — ensures sustained demand, making responsible fishing practices all the more important for the long-term health of this iconic species.</p>
+            </div>
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card"><h4>Genetically Unique to SA</h4><p>Recent molecular research has confirmed that the South African yellowtail kingfish population is genetically distinct from all other world populations — effectively a separate cryptic species from superficially identical fish in Australia, New Zealand, Japan, and South America. This genetic isolation means that if local populations are depleted, they cannot be naturally replenished from elsewhere in the world.</p></div>
+                <div class="fact-card"><h4>Juvenile Camouflage</h4><p>Juvenile yellowtail kingfish bear almost no resemblance to adults — they display a brilliant yellow body crossed by bold black vertical bands that provide camouflage among floating weed and debris at sea. This striking colouration fades progressively to adult blue-green and silver as the fish reaches approximately 30 cm, reflecting the transition from a debris-associated juvenile lifestyle to the open-reef adult environment.</p></div>
+                <div class="fact-card"><h4>Hiramasa Sashimi</h4><p>In Japan, yellowtail kingfish is cultured as "hiramasa" — one of the most prized and expensive sashimi fish in the Japanese market, valued above the closely related amberjack (hamachi) for its cleaner flavour and firmer texture. Global aquaculture production of yellowtail kingfish is increasing rapidly, with farmed fish exceeding wild catches in some countries by a ratio of 75:1.</p></div>
+                <div class="fact-card"><h4>Structure Obsessed</h4><p>Yellowtail kingfish show a remarkable affinity for any form of vertical structure in the water column — rocky pinnacles, drop-offs, offshore wrecks, jetty pylons, FADs, and even floating debris will concentrate and hold kingfish. This structure-seeking behaviour makes them highly predictable for targeted fishing and diving, and explains why KZN's offshore wrecks and reef pinnacles consistently produce quality kingfish encounters year-round.</p></div>
+                <div class="fact-card"><h4>Fastest Maturing Seriola</h4><p>South African research confirms that yellowtail kingfish mature with extraordinary speed relative to their ultimate size — males reaching sexual maturity at just 2.3 years and females at 3.6 years. For a species capable of exceeding 70 kg and 2.5 metres, this early maturity gives the population good resilience to fishing pressure, provided large breeding adults are protected and habitat quality is maintained.</p></div>
+                <div class="fact-card"><h4>Sardine Run Hunters</h4><p>The annual sardine run transforms yellowtail kingfish feeding behaviour from structured reef hunting to frenzied open-water cooperative attacks. KZN kingfish join dolphins, sharks, and gannets in multi-species feeding frenzies, attacking sardine bait balls from the flanks and below simultaneously. Divers entering the water during active sardine run feeding events regularly find themselves surrounded by packs of hunting kingfish — one of KZN's most exhilarating marine encounters.</p></div>
+            </div>
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

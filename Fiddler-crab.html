@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiddler Crab – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Fiddler Crab
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="fiddler-crab.png" alt="Fiddler Crab">
+                    <p class="image-caption">Uca annulipes & related species — Fiddler Crab, KZN mangrove forests and estuarine mudflats</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Fiddler Crab</h2>
+                    <span class="scientific-name">Uca annulipes & related species</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The fiddler crab is one of the most immediately captivating animals in KwaZulu-Natal's estuarine and mangrove ecosystems — small enough to hold in a palm, yet sufficiently theatrical in its behaviour to command the full attention of any observer who pauses to watch. Named for the oversized claw of adult males that resembles a fiddle or violin held under the arm — one enormous appendage balanced against one tiny one — fiddler crabs are among the most visually distinctive crustaceans in KZN's coastal environment, their constant waving, wrestling, and scurrying transforming the apparently barren surface of an estuarine mudflat into a stage of extraordinary social complexity.</p>
+                    <p>Several species of fiddler crab inhabit KZN's mangrove forests, estuarine mudflats, and salt marshes, with Uca annulipes — the small-dotted fiddler crab — among the most widespread and commonly observed. These small crabs occupy a narrow but ecologically critical zone at the landward edge of the intertidal: the soft, organic-rich sediments of mangrove fringes and tidal mudflats where they excavate burrows, emerge at low tide to feed, and conduct the elaborate social rituals — waving, displaying, chasing, and wrestling — that fill every hour of their active, daylight lives. Their ecological role as sediment processors, nutrient recyclers, and prey for wading birds and larger predators makes them a genuinely important component of the estuarine ecosystem, despite their diminutive size.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Carapace Width</span>
+                            <span class="stat-value">1 – 3 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Major Claw</span>
+                            <span class="stat-value">Up to 50% body wt</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Burrow Depth</span>
+                            <span class="stat-value">up to 30 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Diurnal</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Mangroves & mudflats</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~2 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Fiddler crabs are small, box-shaped brachyuran crabs with a squarish, moderately convex carapace that is typically broader than it is long. Body colouration varies considerably between species and individuals, and many fiddler crabs show a remarkable ability to change colour — darkening rapidly when exposed to direct sunlight and lightening during cooler or shadier conditions. In Uca annulipes, the carapace bears a variable pattern of blue-grey, brown, and cream markings that provide partial camouflage against the mottled surface of mangrove sediment. The walking legs are typically pale and banded, and the eyestalks are long and slender, positioning the eyes high for maximum visibility across the flat mudflat surface.</p>
+                    <p>The defining and most immediately striking feature of adult male fiddler crabs is the extreme asymmetry of their claws. One claw — the major cheliped — is enormously enlarged, often equalling or even exceeding the weight of the rest of the body, brilliantly coloured in many species, and used exclusively for display and combat rather than feeding. The other claw — the minor cheliped — is small and delicate, identical in form to the claws of females, and used for all feeding activities. This extreme sexual dimorphism in claw size has no parallel among KZN's other crustaceans and represents one of the most striking examples of secondary sexual characteristics in any coastal animal. Females possess two small, equal claws and lack the enlarged major cheliped entirely.</p>
+                    <p>The eyes are set at the ends of long, slender stalks that can be held fully erect to survey the surroundings or folded flat into orbital grooves beneath the carapace for protection when the crab retreats into its burrow. This remarkable eye-stalk mobility gives fiddler crabs an almost 360-degree field of view when active on the surface — a critical adaptation for animals that must simultaneously monitor the approach of aerial predators from above, rival crabs approaching from the side, and potential mates from any direction, all while feeding with their heads angled toward the sediment.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Fiddler crabs are among the most behaviourally complex crustaceans in KZN's coastal environment. Their social lives revolve around a trio of interlocked activities — feeding, territory defence, and courtship — all conducted simultaneously on the surface of the mudflat during the brief windows of low-tide exposure. The surface of an active fiddler crab colony during a warm, low-tide morning is one of the most visually animated scenes in KZN's coastal habitats: dozens of small crabs moving in every direction, feeding heads-down, waving frantically, chasing rivals, and courting potential mates in a seemingly chaotic but highly structured social environment.</p>
+                    <p>Male fiddler crabs wave their enormous major chelipeds in species-specific patterns — vertical waves, lateral sweeps, circular motions, rapid flicks — that serve as both territorial signals to rival males and courtship displays to prospective females. This waving behaviour is continuous and energetically costly: a male may wave his major cheliped thousands of times per day, burning energy reserves equivalent to a significant fraction of his daily food intake. The investment is worthwhile because waving rate, amplitude, and coordination are all honest signals of male quality — healthy, well-nourished males wave faster and with greater precision, and females assess these signals carefully when selecting mates.</p>
+                    <p>When rival males meet at territory boundaries, waving escalates into tactile assessment — the two crabs approach and engage in ritualised pushing contests using their major chelipeds, each attempting to lever the other off-balance without risking injury to their own oversized claw. These contests are settled quickly, with the smaller or weaker male retreating to his burrow. When aerial predators — herons, egrets, kingfishers — are detected, every surface-active crab dives simultaneously for the nearest burrow entrance in a wave of collective retreat that can sweep across a colony of hundreds of individuals within a single second.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Fiddler crabs are deposit feeders — they feed by scooping up surface sediment with their minor cheliped and passing it to their mouthparts, where the organic-rich surface layer is sorted, digestible organic particles are retained, and inorganic sediment grains are expelled as small, rounded pellets that accumulate around burrow entrances and active feeding areas. This feeding technique — scooping, sorting, and spitting — is rhythmic and rapid, with a feeding crab processing dozens of mouthfuls per minute during active low-tide foraging. Males feed at roughly half the rate of females because only one small claw is available to them for feeding, while females have two working simultaneously.</p>
+                    <p>The food extracted from sediment is primarily microbial — bacteria, microalgae (particularly benthic diatoms), fungal hyphae, and other microorganisms that colonise the surface layer of organic sediment in dense concentrations. Fiddler crabs cannot digest the mineral sediment grains themselves or the cellulose of mangrove leaf litter; what they extract is the microbial biofilm that coats sediment particles and the fine particulate organic matter mixed in with the mineral substrate. Despite the apparently low nutritional density of this food source, the extraordinary productivity of mangrove and estuarine sediment microbial communities supports dense fiddler crab populations at surprisingly high individual feeding rates.</p>
+                    <ul>
+                        <li>Benthic microalgae — diatoms and cyanobacteria</li>
+                        <li>Bacteria and sediment microbial biofilms</li>
+                        <li>Fungal hyphae and microbial decomposers</li>
+                        <li>Fine particulate organic matter in sediment</li>
+                        <li>Decomposing mangrove leaf litter fragments</li>
+                        <li>Meiofauna — small worms and microcrustaceans</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Fiddler crab reproduction is tightly timed to tidal and lunar cycles — mating and larval release are synchronised with spring tides that provide the maximum tidal range and the highest water levels that carry larvae furthest offshore into suitable planktonic habitats. Courtship involves prolonged male waving displays that attract receptive females to approach — once a female enters a male's territory and shows interest, the male may lead her to his burrow entrance and drum on the substrate with his major cheliped in a further display before the female descends into the burrow for mating. Mating occurs underground in the privacy of the male's burrow.</p>
+                    <p>After mating, the female retires to her own burrow to develop her egg mass, which she carries attached to the pleopods beneath her abdomen for 10 to 14 days. As the eggs approach hatching, she moves to the water's edge during high tides and releases the larvae directly into the sea — a behaviour precisely timed to coincide with the highest spring tides of the lunar cycle, maximising the depth of water available for larval dispersal. The larvae — zoea — spend 2 to 4 weeks developing in the plankton through multiple stages before metamorphosing into megalopa that settle back into estuarine and mangrove habitats.</p>
+                    <p>Juvenile fiddler crabs settle preferentially into soft sediment habitats at the high-tide fringe of estuaries and mangrove systems and begin burrowing and feeding almost immediately after settlement. Sexual differentiation becomes visible as the crabs grow, with males developing the enlarged major cheliped progressively through successive moults. Adults reach sexual maturity within their first year and typically live for approximately 2 years in the wild. Population turnover is rapid, making successful larval recruitment every season a critical population bottleneck — and the protection of both offshore larval habitat and inshore estuarine nursery conditions equally important to population sustainability.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Fiddler Crabs in KZN: Mangrove Ecology & Estuarine Health</h3>
+                <p>Fiddler crabs are inseparable from the mangrove ecosystems that fringe KwaZulu-Natal's estuaries and sheltered bays — from the dense red mangrove forests of the Kosi Bay system and the iSimangaliso Wetland Park in the far north to the smaller mangrove patches of the Bluff and South Coast estuaries. Wherever mangrove trees root in soft intertidal sediment, fiddler crabs are almost invariably present in the spaces between prop roots and on the exposed mudflats that extend seaward from the mangrove fringe. Their presence — signalled by the carpet of small burrow openings that pockmarks every surface of suitable mangrove sediment — is one of the most reliable indicators of healthy, structurally intact mangrove habitat.</p>
+                <p>The ecological services that fiddler crabs provide to mangrove ecosystems are multiple and significant. Their feeding activity — continuously processing the surface layer of sediment through each tidal cycle — turns over and aerates the uppermost centimetres of mangrove mud, exposing fresh sediment surfaces to microbial colonisation and accelerating the decomposition of organic matter. The burrows they excavate penetrate 20 to 30 centimetres into otherwise anaerobic sediment, creating oxygenated channels that radically alter the chemical environment of the substrate and support communities of sediment-dwelling organisms that could not persist in undisturbed, oxygen-depleted mangrove mud. Studies on mangrove systems in southern Africa have found that the combined burrowing and bioturbation activity of fiddler crab populations significantly accelerates nutrient cycling and organic matter decomposition — functions that underpin the extraordinary productivity of mangrove ecosystems as carbon sinks, fish nurseries, and water purification systems.</p>
+                <p>As prey animals, fiddler crabs are an important food source for a suite of estuarine and mangrove-associated predators throughout KZN. Wading birds — particularly the various heron and egret species that stalk the mangrove fringes at low tide, and the mangrove kingfisher that specialises in mangrove-edge habitats — feed heavily on fiddler crabs and time their foraging to coincide with periods of peak crab surface activity. Larger crabs including the blue swimming crab opportunistically take fiddler crabs, monitor lizards found throughout the mangrove systems of northern KZN are significant terrestrial predators, and the mudskippers that co-inhabit mangrove surfaces with fiddler crabs also prey on juveniles. This central prey role connects the productivity of mangrove sediment microbial communities — the fiddler crab's food source — directly to the health of KZN's coastal bird, fish, and reptile populations.</p>
+                <p>The health and abundance of fiddler crab populations is widely used by coastal ecologists as a direct indicator of mangrove and estuarine condition. Dense, active colonies — characterised by burrow-pockmarked sediment, visible waving activity during every suitable low tide, and the presence of multiple size classes including small juveniles — indicate structurally intact, chemically healthy sediment with adequate organic content and appropriate tidal regime. Degraded mangrove habitats affected by sedimentation from catchment erosion, pollution from industrial or urban runoff, altered hydrology from upstream water abstraction, or physical disturbance from coastal development typically support far lower fiddler crab densities. Completely degraded mangrove sediment may support no fiddler crabs at all — making these small, waving crabs among the most sensitive and accessible living gauges of mangrove ecosystem condition available to field ecologists throughout KZN.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The Useless Giant Claw</h4>
+                    <p>The male fiddler crab's enormous major cheliped — sometimes heavier than the rest of his body — is entirely useless for feeding. He can only eat with his small minor claw, meaning that males feed at roughly half the rate of females, who have two small feeding claws working simultaneously. This extraordinary metabolic handicap is the price males pay for a display organ that attracts mates and intimidates rivals. A male that loses his major claw to a predator will regenerate a large claw on the opposite side at his next moult — a remarkable reversal of developmental symmetry.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Species-Specific Wave Codes</h4>
+                    <p>Different fiddler crab species wave their major chelipeds in completely distinct patterns — vertical bobs, lateral sweeps, circular motions, rapid flicks — that are species-specific and function as visual identification signals in habitats where multiple species co-exist on the same mudflat. Females instinctively recognise and respond only to the waving pattern of their own species, ensuring that mating attempts are directed at appropriate partners. Experimental presentation of mechanical wave models in non-native patterns elicits no response from females, confirming the precise signal specificity of the wave code.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sediment Pellet Architects</h4>
+                    <p>The small, rounded pellets of expelled sediment that accumulate around fiddler crab feeding sites and burrow entrances are the processed remains of sediment that has been stripped of its microbial coating and organic content. On an active fiddler crab flat, pellet density can be so high that the entire surface appears textured with a mosaic of tiny balls. These pellets are then rapidly re-colonised by microalgae and bacteria — beginning the microbial succession cycle again and creating a continuous conveyor belt of sediment processing that maintains the extraordinary productivity of the mudflat surface.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Synchronised Retreat</h4>
+                    <p>When a shadow passes over an active fiddler crab colony — the silhouette of a heron, a low-flying bird, or even a passing cloud — every crab on the surface dives simultaneously for the nearest burrow in a wave of collective retreat that propagates across the colony faster than any individual could react independently. This alarm response is triggered not by each crab detecting the threat directly, but by watching neighbours disappear — a chain reaction of social cue-following that provides effective predator protection even to crabs too far from the threat to detect it themselves.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Claw Reversal After Loss</h4>
+                    <p>If a male fiddler crab loses his major cheliped to a predator, a rival, or an accident, he does not regenerate the same claw on the same side. Instead, at his next moult, the originally small minor claw begins developing into the new major claw, while the stump on the original side grows a new small feeding claw. The result is a complete mirror-image reversal of the original asymmetry. This developmental flexibility — the ability to reprogram which side bears the major claw — reflects the extraordinary evolutionary importance of the display appendage to male reproductive success.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Mangrove Health Indicators</h4>
+                    <p>Coastal ecologists conducting rapid assessments of mangrove ecosystem health in KZN routinely use fiddler crab burrow density and surface activity as primary field metrics. A healthy KZN mangrove mudflat supports densities of 20 to 50 or more fiddler crab burrows per square metre, with vigorous waving activity visible during every suitable low tide. Impacted sites show dramatically reduced densities, and completely degraded mangrove sediment may support no fiddler crabs at all. These small, persistently waving crabs are among the most sensitive and cost-effective living indicators of mangrove ecosystem condition available to field researchers throughout KZN's coast.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                   <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

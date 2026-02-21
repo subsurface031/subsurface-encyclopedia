@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Hippopotamus – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="hippos.html">Hippopotamus</a>
+                <span>›</span>
+                Common Hippopotamus
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Hippos.png" alt="Common Hippopotamus Group">
+                    <p class="image-caption">Hippopotamus amphibius — Common Hippopotamus, KZN</p>
+                    <img src="hippo.png" alt="Common Hippopotamus" style="margin-top: 1rem;">
+                    <p class="image-caption">Hippopotamus amphibius — Common Hippopotamus, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Common Hippopotamus</h2>
+                    <span class="scientific-name">Hippopotamus amphibius</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The common hippopotamus is Africa's third-largest land mammal and one of the continent's most iconic megaherbivores. These massive, semi-aquatic mammals spend their days submerged in rivers, lakes, and estuaries to keep cool, emerging at night to graze on surrounding grasslands. Despite their seemingly docile appearance, hippos are among Africa's most dangerous animals, responsible for more human fatalities than any other large mammal except crocodiles.</p>
+                    <p>In KwaZulu-Natal, hippos play a vital role as ecosystem engineers—their grazing patterns shape vegetation communities, their movements through water create channels and pools, and their nutrient-rich dung fertilizes aquatic systems, supporting entire food webs. The St. Lucia estuarine system in iSimangaliso Wetland Park supports South Africa's largest population, with approximately 800 to 1,000 individuals thriving in this UNESCO World Heritage Site.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">4,000 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">5.2 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">40 – 50 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">6 – 14 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">8 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Land Speed</span>
+                            <span class="stat-value">30 km/h</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The common hippopotamus possesses a massive, barrel-shaped body supported by short, stocky legs with four-toed feet. Their skin is remarkably thick—up to 6 cm in places—providing protection from injuries during fights and environmental hazards. The skin appears grey to grey-brown, sometimes with pinkish tones, and lacks hair except for sparse bristles around the mouth and tail tip.</p>
+                    <p>Hippos have an enormous head with a broad muzzle and massive jaws that can open to an angle of 150 degrees, revealing large canine tusks and incisors. The lower canine teeth can grow up to 50 cm long and are continuously growing, sharpened against the upper incisors. Males develop particularly large tusks used in territorial combat and dominance displays.</p>
+                    <p>Their eyes, ears, and nostrils are positioned on top of the head, allowing them to remain almost entirely submerged while still seeing, hearing, and breathing. They can close their nostrils and ears underwater and can hold their breath for up to five minutes. Adult males typically weigh 1,500 to 3,200 kg, while females weigh 1,300 to 1,700 kg, though exceptional males can exceed 4,000 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Hippos are primarily nocturnal, spending daylight hours almost entirely submerged in water to keep cool and protect their sensitive skin from the sun. They lack sweat glands but secrete a reddish, oily substance often called "blood sweat" that acts as a natural sunscreen and antibiotic, protecting their skin from ultraviolet radiation and bacterial infections.</p>
+                    <p>At dusk, hippos emerge from the water to graze, traveling up to 10 kilometers inland to feeding grounds along well-worn hippo paths. They are highly territorial in water but not on land, where multiple individuals may graze peacefully in proximity. Bulls establish and defend aquatic territories that may contain several females and their young.</p>
+                    <p>Despite their massive size, hippos can move surprisingly fast on land—reaching speeds up to 30 km/h in short bursts. They are generally aggressive when threatened or when their escape route to water is blocked. Bulls engage in spectacular territorial fights, clashing with their massive canines and inflicting serious wounds. Hippos communicate through various vocalizations including grunts, roars, and the characteristic honking call that can be heard over long distances and even underwater.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>The common hippopotamus is a herbivore with a diet consisting almost entirely of grass. Despite their massive size, hippos have relatively small stomachs for their body mass and must consume approximately 40 kg of grass nightly—only about 1.5% of their body weight, which is modest compared to other herbivores of similar size.</p>
+                    <p>Hippos are selective grazers, preferring short, tender grasses close to the ground. They crop grass using their wide, muscular lips rather than their teeth, creating characteristic feeding lawns in areas of regular grazing. These grazing patterns significantly influence vegetation structure and composition in their territories.</p>
+                    <ul>
+                        <li>Various grass species (primary diet)</li>
+                        <li>Reeds and aquatic vegetation (occasionally)</li>
+                        <li>Fallen fruit (opportunistically)</li>
+                        <li>Agricultural crops (when available near water)</li>
+                    </ul>
+                    <p>While primarily herbivorous, hippos have occasionally been observed consuming carrion or even engaging in cannibalism, though this is rare and thought to occur during periods of nutritional stress. Their digestive system is uniquely adapted to extract maximum nutrition from tough grasses through bacterial fermentation in their multi-chambered stomach.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Female hippos reach sexual maturity at 5 to 6 years of age, while males mature physically at 6 to 7 years but typically don't establish territories and begin breeding until 10 to 14 years old. Breeding occurs throughout the year in KwaZulu-Natal, though peaks often correspond with the dry season when water levels are lower and social interactions intensify.</p>
+                    <p>Mating takes place in shallow water, with the female's head submerged throughout the process. After a gestation period of approximately 8 months (240 days), the female gives birth to a single calf, rarely twins. Birth typically occurs in water or on land near the water's edge, with the calf weighing 25 to 55 kg at birth.</p>
+                    <p>Calves can swim and dive almost immediately after birth, though they spend considerable time resting on their mother's backs while in deeper water. Mothers are highly protective and may aggressively defend their young from any perceived threats, including other hippos, crocodiles, and humans. The bond between mother and calf is exceptionally strong, with nursing continuing for up to a year, though calves begin grazing at 3 to 4 months of age. Young hippos remain with their mothers until the next calf is born, typically after 2 to 3 years.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The common hippopotamus inhabits rivers, lakes, estuaries, swamps, and wetlands throughout KwaZulu-Natal wherever permanent or semi-permanent water bodies exist alongside suitable grazing areas. They require deep water for daytime refuge—typically at least 1.5 meters deep—with gently sloping banks that allow easy entry and exit, and nearby grasslands within several kilometers for nocturnal feeding.</p>
+                <p>KwaZulu-Natal supports South Africa's largest and most significant hippopotamus populations. The St. Lucia estuarine system in iSimangaliso Wetland Park is the stronghold, with 800 to 1,000 individuals—the single largest concentration in the country. This population fluctuates with drought and flooding cycles but remains stable overall. Additional important populations exist in Ndumo Game Reserve along the Pongola and Usutu river floodplains (approximately 150 to 200 individuals), Hluhluwe-iMfolozi Park's river systems, and various other protected and private reserves throughout northern KZN.</p>
+                <p>Historically, hippos ranged far more widely across southern Africa, inhabiting river systems throughout the subcontinent. Hunting and habitat destruction eliminated populations from most of their former range by the early 20th century. The common hippopotamus is now classified as Vulnerable on the IUCN Red List, with continental populations declining by an estimated 7 to 20% over the past three decades. In South Africa, populations are stable in protected areas but remain vulnerable to drought—which can cause mass mortality events—habitat loss, human-wildlife conflict, and disease.</p>
+                <p>Climate change poses particular threats to hippo populations through altered rainfall patterns affecting water availability, increased drought frequency and severity, and potential disruption of seasonal flooding patterns that maintain critical wetland habitats. The St. Lucia system has experienced significant fluctuations in water levels and salinity in recent decades, occasionally stressing the hippo population. Long-term conservation requires maintaining adequate freshwater flows, protecting grazing lands adjacent to water bodies, and managing the inevitable conflicts that arise when humans and hippos compete for space and resources.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Africa's Deadliest Large Mammal</h4>
+                    <p>Despite their herbivorous diet and seemingly docile appearance, hippos are considered Africa's most dangerous large mammal to humans. They are responsible for an estimated 500 to 3,000 human fatalities annually across the continent—more than lions, elephants, leopards, or buffalo. Their aggression stems from their highly territorial nature and their instinct to charge anything blocking their route back to water.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Closest Living Relatives are Whales</h4>
+                    <p>Molecular evidence reveals that hippos' closest living relatives are cetaceans—whales, dolphins, and porpoises. These two groups share a common ancestor that lived approximately 50 to 60 million years ago. This surprising evolutionary relationship is reflected in shared adaptations for aquatic life, including the ability to communicate underwater, give birth in water, and unique skeletal features.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Natural Sunscreen and Antibiotic</h4>
+                    <p>Hippos lack sweat glands but secrete a remarkable reddish-brown, oily substance often called "blood sweat" that protects their sensitive skin. This secretion acts as both a natural sunscreen—absorbing ultraviolet light—and an antibiotic that prevents bacterial infections in the wounds that hippos frequently sustain during territorial battles. The red coloration comes from pigments that polymerize into a protective film on the skin.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ecosystem Engineers</h4>
+                    <p>Hippos are keystone species that profoundly shape aquatic and terrestrial ecosystems. Their grazing maintains short-grass lawns that support diverse herbivore communities, their movements through water create channels and pools that persist through dry seasons, and their prodigious dung production—up to 40 kg daily per individual—fertilizes aquatic systems, supporting food webs from algae to fish. The removal of hippos from an ecosystem can trigger cascading ecological changes.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>They Can't Actually Swim</h4>
+                    <p>Despite spending most of their lives in water, hippos cannot truly swim or float. They are too dense and sink immediately in deep water. Instead, they move through water by walking, trotting, or galloping along the bottom, occasionally propelling themselves off the substrate in a bounding motion. They can hold their breath for up to five minutes while submerged, with the ability to close their nostrils and ears underwater.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Underwater Communication</h4>
+                    <p>Hippos have evolved a sophisticated system of underwater communication unique among terrestrial mammals. They can vocalize while completely submerged, producing low-frequency sounds that travel both through water and through the substrate as seismic vibrations. These calls can be detected by other hippos several kilometers away, allowing individuals to communicate their location, status, and territorial boundaries across vast wetland systems.</p>
+                </div>
+            </div>
+
+            <a href="hippos.html" class="back-link">← Back to Hippopotamus</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

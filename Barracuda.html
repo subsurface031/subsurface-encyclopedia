@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Great Barracuda – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Great Barracuda</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="barracuda.png" alt="Great Barracuda"><p class="image-caption">Sphyraena barracuda — Great Barracuda, KZN</p></div>
+<div class="species-intro">
+<h2>Great Barracuda</h2>
+<span class="scientific-name">Sphyraena barracuda</span>
+<span class="sassi-badge">✓ SASSI Green | Least Concern</span>
+<p>The great barracuda is one of the ocean's most fearsome-looking predators—a streamlined torpedo of muscle, teeth, and predatory instinct that commands respect from divers and anglers alike. With elongated bodies reaching up to 2 meters, large mouths bristling with razor-sharp, dagger-like teeth, and aggressive hunting behavior, barracuda embody the apex predator archetype. Their silvery bodies marked with dark vertical bars and irregular blotches create effective camouflage in reef and open water environments, allowing these ambush hunters to remain nearly invisible until the moment they strike.</p>
+<p>Great barracuda are found throughout KZN's coastal waters, from shallow reefs and estuaries to offshore waters, where they patrol alone or in small groups hunting for fish. They are powerful swimmers capable of explosive bursts of speed exceeding 40 km/h, allowing them to overtake even fast-swimming prey. While barracuda have an intimidating reputation, attacks on humans are extremely rare and typically result from mistaken identity in murky water or attraction to shiny objects resembling fish scales. For anglers, barracuda provide exciting sport with their aggressive strikes, blistering runs, and aerial displays, though larger individuals may accumulate ciguatera toxin and should not be consumed.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~50 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">14+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">2–4 years</span></div>
+<div class="stat-box"><span class="stat-label">Top Speed</span><span class="stat-value">40+ km/h</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Least Concern</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Great barracuda possess classic predator morphology—elongated, streamlined bodies built for explosive acceleration and sustained pursuit of prey. The body is nearly cylindrical in cross-section with only slight lateral compression, minimizing drag and allowing rapid movement through water. Background colouration is metallic silver-grey with distinctive dark vertical bars and irregular blotches along the upper flanks and back, creating disruptive colouration that breaks up the fish's outline and provides effective camouflage in complex reef and open water environments.</p>
+<p>The head is large and pike-like with a protruding lower jaw that gives barracuda their characteristic underbite appearance. The mouth is enormous relative to body size and contains multiple rows of sharp, dagger-like teeth of varying sizes—large canine-like teeth at the front for grasping and holding prey, and smaller razor-sharp teeth behind for cutting and tearing. These teeth are continuously replaced throughout life, ensuring the predator always maintains formidable weaponry. The eyes are large and positioned laterally, providing excellent binocular vision for detecting and tracking prey.</p>
+<p>The fins are positioned for explosive acceleration. The dorsal fins are widely separated—a small spinous first dorsal positioned far back, and a soft-rayed second dorsal even further back near the tail. The anal fin mirrors the second dorsal in size and position, and the caudal fin is deeply forked—all adaptations for rapid acceleration and high-speed pursuit. The lateral line is prominent and highly developed, detecting vibrations and pressure changes produced by prey movements even in turbid water where vision is limited.</p>
+<p>Adults in KZN waters typically measure 1 to 1.5 meters and weigh 8 to 20 kg, though individuals can exceed 2 meters and 50 kg. Sexual maturity is reached at 2 to 4 years of age when fish measure 60 to 90 cm. Juveniles have similar body form to adults but with brighter, more distinct barring patterns that fade and become less regular with age.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Great barracuda are primarily solitary ambush predators, though juveniles sometimes form small schools and adults may loosely aggregate in productive areas. They typically hunt by remaining motionless in the water column or near structure, using their cryptic colouration and torpedo-shaped profile to blend with their surroundings. From this stationary position, barracuda observe their surroundings with keen eyesight, waiting for prey to approach within striking distance. When suitable prey appears, the barracuda explodes forward in a blur of acceleration, covering distances of 5 to 10 meters in fractions of a second to capture the target.</p>
+<p>Barracuda inhabit a wide variety of coastal and offshore environments including coral reefs, rocky reefs, seagrass beds, mangroves, estuaries, harbours, and open water. They are eurytolerant—able to tolerate wide ranges of salinity, temperature, and water clarity—allowing them to exploit diverse habitats from freshwater-influenced estuaries to clear offshore waters. Individual barracuda often maintain home ranges within specific reef areas, patrolling the same territories repeatedly and becoming familiar with local topography and prey availability.</p>
+<p>Great barracuda are curious fish that will approach divers and snorkelers, often following them at close range. This behavior is likely investigatory rather than predatory—barracuda are trying to determine if the diver is a potential food source or threat, and whether the diver's activities disturb prey that can be exploited. Despite their fearsome appearance and close approaches, barracuda attacks on humans are extremely rare. Most documented "attacks" involve mistaken identity in murky water where reflections from jewelry, watches, or diving equipment resemble the flash of fish scales, triggering a strike response.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Great barracuda are strict carnivores and highly effective fish-eating specialists. Their elongated body, large mouth, and formidable teeth are all adaptations for capturing, holding, and consuming fish prey ranging from small reef fish to large pelagic species nearly half the barracuda's own length. Feeding strategy relies on a combination of ambush tactics and pursuit predation—barracuda use stealth and camouflage to approach prey undetected, then explosive acceleration to close distance and capture the target before it can escape.</p>
+<p>Prey fish are typically struck mid-body with the barracuda's powerful jaws, the long teeth penetrating and holding the struggling prey. Small fish are often swallowed whole immediately, while larger prey may be held and repositioned before swallowing, or even torn into pieces using powerful head-shaking motions. Barracuda can consume surprisingly large prey relative to their body size—fish weighing several kilograms can be consumed by large barracuda through a combination of powerful jaws and expandable stomach.</p>
+<ul>
+<li>Small to medium reef fish — wrasses, parrotfish, snappers</li>
+<li>Schooling fish — mullet, needlefish, flying fish</li>
+<li>Jacks and trevallies</li>
+<li>Grunts, goatfish, and other bottom species</li>
+<li>Squid and cuttlefish (occasionally)</li>
+<li>Juvenile tuna and other pelagic fish</li>
+</ul>
+<p>Feeding activity peaks during dawn and dusk when many prey species are most active and visibility conditions favor the barracuda's ambush strategy. However, barracuda are opportunistic and will feed whenever suitable prey is encountered. Their wide dietary breadth and ability to capture diverse prey types from small reef fish to fast-swimming pelagic species makes them successful top predators across varied habitats.</p>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Great barracuda are gonochoristic with separate sexes throughout life. Sexual maturity is reached relatively early at 2 to 4 years of age when fish measure 60 to 90 cm—earlier maturity than many other large coastal predators and a factor contributing to population resilience. Growth is rapid during the first 3 to 4 years until sexual maturity, then slows considerably as energy is reallocated from somatic growth to reproduction.</p>
+<p>Spawning occurs during spring and summer months in tropical and subtropical waters, with peak activity in KZN typically from October through January. Mature adults migrate to offshore spawning areas where they form temporary aggregations and release eggs and sperm into the water column. Females produce very large numbers of small eggs—estimates suggest individual large females may release over one million eggs per spawning season, though actual fecundity data remains limited. This high fecundity is a life history strategy common to species experiencing high and unpredictable larval mortality.</p>
+<p>The eggs are pelagic and buoyant, drifting in offshore currents while developing. Hatching occurs within 24 to 48 hours depending on water temperature, and larval barracuda remain planktonic for several weeks feeding on microscopic zooplankton. Larval fish are transparent and bear little resemblance to adults, gradually developing adult body form during metamorphosis. After the planktonic phase, juvenile barracuda settle into shallow nursery areas including mangroves, seagrass beds, and sheltered bays where they find protection from large predators and abundant small prey. As juveniles grow, they gradually move to more exposed reef and open water habitats where adults are found.</p>
+<p>Maximum lifespan is approximately 14 years based on otolith analysis, though many individuals likely live 8 to 10 years in wild populations. This moderate longevity combined with relatively early maturity and high fecundity creates population characteristics favoring resilience and recovery from fishing pressure compared to longer-lived, late-maturing species.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Ciguatera Poisoning & Human Interactions</h3>
+<p>Great barracuda are notorious as one of the fish species most likely to cause ciguatera poisoning in humans—a form of seafood poisoning caused by consuming fish containing ciguatoxins produced by dinoflagellate microalgae that accumulate through food webs. Ciguatera is one of the most common forms of seafood poisoning globally, affecting tens of thousands of people annually in tropical and subtropical regions. Barracuda are particularly implicated because they are large, long-lived top predators that bioaccumulate high concentrations of ciguatoxins, and because they are widely consumed in many coastal communities.</p>
+<p>Ciguatoxins are produced by benthic dinoflagellates that colonize coral rubble, macroalgae, and dead coral surfaces on tropical reefs. Herbivorous fish consume these algae along with the toxin-producing dinoflagellates, accumulating low levels of ciguatoxins in their tissues. When carnivorous fish like barracuda consume herbivorous fish, the toxins bioaccumulate and biomagnify—concentrations increase with each trophic level. Large, old barracuda at the top of food webs can accumulate ciguatoxin concentrations hundreds of times higher than those in herbivorous prey fish, creating serious poisoning risk for human consumers.</p>
+<p>Ciguatera poisoning symptoms are diverse and can be severe, including gastrointestinal distress, neurological effects like tingling and temperature reversal, cardiovascular impacts, and in severe cases, long-term chronic effects persisting for months or years. There is no reliable test for ciguatoxins in fish, no treatment to remove toxins from contaminated fish, and cooking does not destroy the toxins. The only prevention is avoiding consumption of high-risk species from affected areas—large barracuda over 5 kg from coral reef environments are particularly high risk, while smaller individuals from non-reef habitats pose lower risk.</p>
+<p>Despite ciguatera concerns, barracuda remain popular sport fish throughout their range. Their aggressive strikes, powerful runs, spectacular aerial displays, and willingness to take artificial lures make them exciting targets for anglers. Most recreational fishing for barracuda is catch-and-release, though smaller individuals from low-risk areas are occasionally retained for consumption. Barracuda populations appear healthy throughout most of their range and are rated Green by SASSI, suggesting sustainable population levels under current fishing pressure. Their wide distribution, early maturity, high fecundity, and occurrence in diverse habitats from inshore estuaries to offshore waters all contribute to population resilience.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Intimidating Dental Arsenal</h4><p>Great barracuda possess one of the most formidable sets of teeth in the ocean—multiple rows of razor-sharp, fang-like teeth including large canines at the front for grasping prey and smaller, blade-like teeth behind for cutting and tearing flesh. These teeth are continuously replaced throughout life, ensuring the predator always maintains effective weaponry. The teeth are sharp enough to easily cut through fishing line, leaders, and even human flesh if a barracuda strikes in error.</p></div>
+<div class="fact-card"><h4>Lightning-Fast Strikes</h4><p>Barracuda are capable of explosive bursts of acceleration exceeding 40 km/h, allowing them to overtake even fast-swimming prey fish. Their streamlined bodies, powerful musculature, and specialized fin arrangement create a living torpedo capable of covering 5 to 10 meters in fractions of a second. This explosive speed makes barracuda strikes difficult for prey to evade and creates spectacular strikes when hooked by anglers—often accompanied by aerial leaps and blistering runs.</p></div>
+<div class="fact-card"><h4>Ciguatera Bioaccumulators</h4><p>Great barracuda are among the fish species most likely to cause ciguatera poisoning—a serious form of seafood poisoning caused by toxins produced by reef-dwelling dinoflagellates that bioaccumulate through food webs. Large barracuda at the top of food chains can accumulate toxin concentrations hundreds of times higher than herbivorous prey, creating serious poisoning risk. There is no reliable field test for ciguatoxins, and cooking does not destroy them—the only prevention is avoiding consumption of large barracuda from reef environments.</p></div>
+<div class="fact-card"><h4>Curious Followers</h4><p>Barracuda are notoriously curious fish that will approach and follow divers and snorkelers at close range, often hovering motionless just meters away. This behavior is likely investigatory rather than predatory—barracuda are trying to determine if the diver represents a food source or threat, and whether the diver's activities disturb prey that can be exploited. Despite their fearsome appearance and close approaches, barracuda attacks on humans are extremely rare and typically involve mistaken identity in murky water.</p></div>
+<div class="fact-card"><h4>Solitary Hunters</h4><p>Unlike many other large predatory fish that hunt cooperatively in schools, adult great barracuda are primarily solitary hunters that maintain individual territories on reefs. They use ambush tactics—remaining motionless in the water column or near structure using cryptic colouration for camouflage, waiting for prey to approach before launching explosive strikes. This solitary lifestyle allows barracuda to exploit prey resources without competition from conspecifics, though it may make finding mates during spawning season more challenging.</p></div>
+<div class="fact-card"><h4>Juveniles in Mangroves</h4><p>Juvenile barracuda utilize mangroves, seagrass beds, and sheltered bays as nursery areas where they find protection from large predators and abundant small prey fish. These shallow, structurally complex habitats provide optimal conditions for growth during vulnerable early life stages. As juveniles grow and develop swimming ability and hunting skills, they gradually move to more exposed reef and open water habitats where adults are found. Protection of mangrove and seagrass nursery habitats is critical for maintaining barracuda populations.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

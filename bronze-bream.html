@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronze Bream (Seventy-Four) – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Bronze Bream (Seventy-Four)</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="bronze-bream.png" alt="Bronze Bream (Seventy-Four)"><p class="image-caption">Polysteganus undulosus — Bronze Bream (Seventy-Four), KZN</p></div>
+<div class="species-intro">
+<h2>Bronze Bream (Seventy-Four)</h2>
+<span class="scientific-name">Polysteganus undulosus</span>
+<span class="sassi-badge">✗ SASSI Red | Critically Endangered</span>
+<p>The bronze bream — universally known along the South African coast as "seventy-four" after the 74 scales along its lateral line — was once one of the most abundant and sought-after reef fish in KwaZulu-Natal waters. These golden-bronze fish frequented rocky reefs and sandy bottoms in large schools, providing consistent catches for shore and boat anglers throughout the 20th century. Their excellent fighting ability, beautiful colouration, and superb table quality made them favourites among recreational fishers, while commercial fishers targeted them intensively for local and export markets. This popularity proved catastrophic for a species whose life history made it exceptionally vulnerable to overfishing.</p>
+<p>Today, seventy-four populations have declined so dramatically that the species is classified as Critically Endangered and rated Red by SASSI — joining dusky kob and red steenbras as stark examples of once-common fish driven to the brink of extinction by unsustainable fishing pressure. Fish that were caught by the dozens on single outings in the 1960s and 1970s are now extraordinarily rare, and encounters with schools of breeding-size adults — once a defining feature of KZN reef fishing — have become virtually unknown. Recovery will require decades of strict protection and near-perfect compliance, yet illegal fishing continues to undermine conservation efforts.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">90 cm</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~12 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">30+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">5–7 years</span></div>
+<div class="stat-box"><span class="stat-label">Lateral Scales</span><span class="stat-value">74</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Critically Endangered</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Bronze bream are medium-sized, deep-bodied sparids with a distinctive golden-bronze colouration that gives the species its common name. The body is laterally compressed with a relatively high profile and rounded contours. Background colouration is bronze to copper-gold on the back and upper flanks, fading through golden-yellow to silver-white on the belly. The scales are large and clearly defined, creating a beautifully patterned appearance that becomes more pronounced in larger individuals. Dark vertical bars or bands are sometimes visible on the flanks, particularly in juveniles and stressed fish.</p>
+<p>The most distinctive feature — and the source of the species' universally recognized common name — is the precisely 74 scales along the lateral line. This consistent scale count allows for easy identification and has made "seventy-four" the preferred common name among South African anglers and fishers across multiple languages and cultural groups. The head is moderately sized with a slightly pointed snout and relatively small mouth equipped with conical teeth suited for grasping rather than crushing prey.</p>
+<p>Adults in KZN typically measure 40 to 60 cm and weigh 2 to 6 kg, with fish over 8 kg considered exceptional in modern waters. Maximum recorded size is approximately 90 cm and 12 kg, though fish exceeding 10 kg are now virtually extinct from South African populations. Historical photographs show catches of multiple fish in the 8 to 10 kg range — sizes that are almost inconceivable to modern anglers familiar only with the depleted remnant population. Sexual maturity is reached at 5 to 7 years of age and 40 to 50 cm length.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Bronze bream are reef-associated fish that inhabit rocky reefs, reef-sand interfaces, and mixed substrate habitats from shallow inshore waters to depths exceeding 100 metres. They are gregarious fish that form schools ranging from small groups of a few individuals to large aggregations of dozens or even hundreds of fish — though such large schools have become virtually unknown in contemporary observations following population collapse. These schools patrol reef edges and sandy channels, searching for prey and shelter opportunities across reef landscapes.</p>
+<p>Seventy-four are primarily diurnal feeders, most active during daylight hours when they forage across reef substrates and adjacent sandy areas for invertebrates and small fish. Their feeding strategy involves methodical searching of benthic habitats, using visual and chemosensory detection to locate prey concealed in reef crevices or buried in sand. They often feed in association with other reef fish species, forming mixed-species aggregations that move across reefs in coordinated foraging groups.</p>
+<p>Seventy-four were historically observed in spawning aggregations at specific reef sites during spring and summer months, with multiple schools gathering to release eggs and sperm into the water column. These predictable spawning aggregations were targeted intensively by fishers who could fill cooler boxes with large breeding-size fish in single outings. The combination of predictable spawning behaviour, schooling habits, and site fidelity made seventy-four extraordinarily vulnerable to fishing pressure — vulnerabilities that contributed directly to population collapse.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Bronze bream are generalist carnivores with a diverse diet that reflects their opportunistic feeding strategy and habitat use across reef and sandy substrates. Invertebrates comprise the majority of their diet, including crustaceans such as crabs, shrimp, and mantis shrimp, as well as molluscs including bivalves, gastropods, and small octopuses. Polychaete worms and other benthic invertebrates are consumed opportunistically, particularly in sandy areas adjacent to reefs.</p>
+<p>Small fish are also taken regularly, particularly by larger individuals. Seventy-four feed on reef-associated species such as juvenile wrasses and blennies, as well as sand-dwelling species including small flatfish and gobies. Their feeding strategy involves active searching of reef substrates during daylight hours, with fish often observed rooting through algae and turning over debris to expose hidden prey. They occasionally feed in association with foraging rays and other bottom-disturbing species, taking advantage of invertebrates exposed by these disturbances.</p>
+<ul>
+<li>Crustaceans — crabs, shrimp, mantis shrimp</li>
+<li>Molluscs — bivalves, gastropods, small octopuses</li>
+<li>Polychaete worms and benthic invertebrates</li>
+<li>Small fish — juvenile wrasses, blennies, gobies</li>
+<li>Sea urchins and brittle stars (occasionally)</li>
+<li>Opportunistic scavenging on carrion</li>
+</ul>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Bronze bream are gonochoristic (separate sexes) with no evidence of hermaphroditism — unlike many other large sparid species that are protogynous hermaphrodites. Males and females reach sexual maturity at similar ages and sizes, typically 5 to 7 years of age and 40 to 50 cm length. This relatively late maturity means fish require half a decade or more to contribute to reproduction — a life history trait that makes populations slow to recover from fishing pressure.</p>
+<p>Spawning occurs during spring and summer months in aggregations at specific reef sites. Multiple schools gather at these locations to release eggs and sperm into the water column where fertilization occurs externally. Females produce large numbers of eggs — several hundred thousand per spawning event depending on body size — though actual fecundity is difficult to estimate given the rarity of breeding-size females in contemporary populations. Larval fish drift in the plankton for several weeks before settling onto shallow reefs where they grow through juvenile stages before transitioning to adult habitats.</p>
+<p>Maximum lifespan exceeds 30 years based on otolith analysis — substantial longevity that contributes to the species' vulnerability to overfishing. Growth is relatively rapid during the first 5 to 7 years until sexual maturity, then slows considerably as fish reach adult sizes. The combination of late maturity, moderately slow growth after maturity, and substantial longevity means bronze bream populations are slow to recover from depletion, requiring decades of strict protection to rebuild to sustainable levels.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>The Fall of Seventy-Four — From Abundance to Rarity</h3>
+<p>The bronze bream's decline represents one of the most dramatic fisheries collapses in South African history. Historical accounts from the mid-20th century describe reefs where seventy-four could be caught consistently in large numbers, with shore anglers regularly landing multiple fish per outing and boat anglers filling cooler boxes with beautiful golden-bronze fish weighing 5 to 10 kg. Seventy-four were so abundant they were considered a "bread and butter" species — reliable catches that formed the backbone of recreational shore fishing along the KZN coast. Today, any seventy-four caught is a noteworthy event, and fish exceeding 5 kg are virtually unknown.</p>
+<p>Multiple factors contributed to this catastrophic decline. Seventy-four were accessible to shore anglers, boat anglers, and commercial fishers alike, subjecting populations to intensive, multi-sector fishing pressure. Their schooling behaviour and predictable spawning aggregations made them especially vulnerable to targeted exploitation — fishers could locate schools and remove large numbers of fish in short periods. Late sexual maturity at 5 to 7 years meant fish required substantial time to reach breeding age, and removal of juveniles prevented recruitment into breeding populations. Finally, their excellent table quality and fighting ability made them highly sought-after, ensuring that fishing pressure remained intense even as populations declined.</p>
+<p>Seventy-four are now fully protected in South African waters with zero bag limits and severe penalties for illegal fishing. Marine protected areas provide safe havens where remnant populations can slowly recover. Yet despite these protections, recovery remains agonizingly slow. Occasional juvenile fish are encountered, suggesting some limited recruitment continues, but schools of large breeding-size adults — once a defining feature of KZN reefs — remain extraordinarily rare. Illegal fishing, habitat degradation, and the species' inherent life history limitations all contribute to slow recovery rates. Bronze bream serve as a stark reminder that some fisheries collapses may be functionally irreversible on human timescales, even with the best conservation intentions and legal frameworks.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>The Name — 74 Scales</h4><p>The common name "seventy-four" refers to the precisely 74 scales along the lateral line — a consistent scale count that allows for easy identification and has made this the universally recognized name among South African anglers across multiple languages and cultural groups. This distinctive feature has made seventy-four one of the most easily identified reef fish in KZN waters.</p></div>
+<div class="fact-card"><h4>30-Year Lifespan</h4><p>Bronze bream can live for over 30 years — substantial longevity confirmed through otolith analysis. Combined with late sexual maturity at 5 to 7 years, this longevity means populations are slow to recover from fishing pressure, requiring decades of strict protection to rebuild. Fish removed from the population represent decades of lost reproductive potential.</p></div>
+<div class="fact-card"><h4>Golden Beauty</h4><p>Bronze bream are among the most beautifully coloured fish in South African waters, with golden-bronze colouration on the back and flanks fading to silver-white on the belly. Large individuals display particularly intense colouration, and the large, clearly defined scales create a distinctive pattern. This beauty contributed to their popularity but also to their demise as display fish were prized by anglers.</p></div>
+<div class="fact-card"><h4>From Abundance to Rarity</h4><p>Historical accounts describe reefs where seventy-four were so abundant they were considered "bread and butter" catches — reliable fish that formed the backbone of recreational shore fishing. Shore anglers regularly landed multiple fish per outing, and boat anglers filled cooler boxes. Today, any seventy-four caught is noteworthy, and fish exceeding 5 kg are virtually unknown — a stark indicator of population collapse.</p></div>
+<div class="fact-card"><h4>Schooling Vulnerability</h4><p>Seventy-four form schools ranging from small groups to large aggregations of dozens or hundreds of fish. This schooling behaviour, combined with predictable spawning aggregations at specific reef sites, made them extraordinarily vulnerable to fishing pressure. Fishers could locate schools and remove large numbers of fish in short periods, collapsing local populations rapidly.</p></div>
+<div class="fact-card"><h4>SASSI Red & Critically Endangered</h4><p>Bronze bream are rated Red by SASSI and classified as Critically Endangered — joining dusky kob and red steenbras as stark examples of once-common fish driven to the brink of extinction by unsustainable fishing. They are fully protected with zero bag limits. Every seventy-four released alive represents hope for a species clinging to survival along South Africa's coastline.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

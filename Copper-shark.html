@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffa726;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Copper Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="copper.png" alt="Copper Shark">
+                    <p class="image-caption">Carcharhinus brachyurus — Copper Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Copper Shark</h2>
+                    <span class="scientific-name">Carcharhinus brachyurus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>Known locally as the bronze whaler, the copper shark is one of the most commonly encountered large shark species along KwaZulu-Natal's coastline. Named for the warm bronzy-copper sheen of their skin, these powerful, streamlined sharks are a defining feature of KZN's marine environment — and one of the most spectacular sights during the annual sardine run, when thousands converge on the baitballs rolling up the coast.</p>
+                    <p>Widely distributed across temperate and subtropical coastal waters, copper sharks occupy a crucial position as apex predators in nearshore ecosystems. Fast, agile, and highly social during feeding events, they are both feared and admired by ocean users — from surfers and swimmers to game fishermen and marine biologists.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">3.3 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">305 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~30 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 100 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">13 – 19 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">7 – 24 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The copper shark is a large, robust requiem shark with a streamlined, fusiform body built for speed and endurance. Its most distinguishing feature is its colouration — a warm bronze to olive-grey on the dorsal surface that gives the species both its common names: copper shark and bronze whaler. The underside is pale white, with a faint white band along the flanks.</p>
+                    <p>The copper shark closely resembles several other requiem shark species, but can be identified by the combination of its narrow, curved upper teeth with smooth to finely serrated edges, the absence of an interdorsal ridge, and its relatively small first dorsal fin positioned well behind the pectoral fins.</p>
+                    <p>Females are generally larger than males, a trait common among requiem sharks. Large females can approach 3.3 metres in length, while males rarely exceed 2.9 metres. Their streamlined build and powerful, lunate tail make them fast and highly manoeuvrable in the water.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Copper sharks are highly active, fast-swimming sharks that exhibit some of the most dramatic feeding behaviour of any coastal species. During the sardine run — one of the greatest wildlife spectacles on Earth — copper sharks aggregate in their thousands along the KZN coastline to exploit the massive shoals of sardines, working in concert with common dolphins, Cape gannets, and Bryde's whales.</p>
+                    <p>Outside of major feeding events, copper sharks are typically found in loose aggregations segregated by sex and size — a common pattern in requiem sharks. Females and juveniles tend to occupy shallower inshore waters, while larger males range further offshore.</p>
+                    <p>They are considered one of the more dangerous shark species to surfers and swimmers in KZN waters, due to their size, speed, and tendency to investigate objects at the surface. The majority of shark incidents involving copper sharks in South Africa occur in association with recreational water users in the surf zone.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Copper sharks are versatile, highly opportunistic predators. Their diet varies significantly with season, location, and prey availability. During the annual sardine run they feed almost exclusively on sardines, but at other times their diet includes a wide range of fish, cephalopods, and elasmobranchs.</p>
+                    <p>They are capable of cooperative hunting — herding and corralling prey into dense baitballs before attacking at high speed. During such events multiple sharks may feed simultaneously in a highly coordinated manner, a behaviour that maximises feeding efficiency in the presence of abundant prey.</p>
+                    <ul>
+                        <li>Sardines and schooling fish</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Rays and small sharks</li>
+                        <li>Reef fish and bony fish</li>
+                        <li>Occasionally marine mammals</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Copper sharks are viviparous, with embryos nourished through a yolk-sac placenta inside the mother's uterus. After a gestation period of approximately 12 months, females give birth to litters of 7 to 24 pups in coastal nursery areas. Newborn pups measure 60 to 70 cm in length.</p>
+                    <p>One of the most notable reproductive characteristics of the copper shark is its exceptionally late maturity — females do not reach sexual maturity until 13 to 19 years of age, and males between 13 and 16 years. This, combined with a gestation period of 12 months and small litter sizes relative to body size, makes the species extremely slow to recover from population decline.</p>
+                    <p>KZN's shallow coastal bays and estuaries serve as important nursery grounds for juvenile copper sharks, which are particularly vulnerable to bycatch in beach seine nets and recreational fishing during their early years.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The copper shark has one of the widest distributions of any large coastal shark, found in temperate and subtropical coastal waters across both hemispheres. In South Africa, they are abundant along the entire KwaZulu-Natal coastline, and are one of the most frequently encountered large sharks by divers, fishermen, and beachgoers.</p>
+                <p>They are typically found in the surf zone and along the continental shelf to depths of around 100 metres, favouring coastal environments with cool to warm temperate water temperatures. In KZN, copper sharks are most abundant during the sardine run season (May to July), when the cold Agulhas countercurrent pushes sardine shoals northward along the coast from the Eastern Cape.</p>
+                <p>The species is listed as Vulnerable on the IUCN Red List. In South Africa, copper sharks face pressure from targeted commercial and recreational fishing, shark nets deployed along KZN's bathing beaches, and accidental bycatch. The KwaZulu-Natal Sharks Board captures significant numbers of copper sharks in its drumlines and gillnets each year, and ongoing research seeks to develop more selective shark management approaches that reduce bycatch while maintaining public safety.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Sardine Run Star</h4>
+                    <p>Copper sharks are one of the primary predators of the annual KZN sardine run — one of the greatest wildlife spectacles on Earth. Thousands of copper sharks converge on the sardine shoals, creating dramatic feeding frenzies visible from the shore and from the air.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Late Developers</h4>
+                    <p>Female copper sharks don't reach sexual maturity until up to 19 years of age — one of the latest of any shark species. This extremely slow reproductive timeline makes their populations exceptionally vulnerable to overfishing and very slow to recover.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Bronze Sheen</h4>
+                    <p>The distinctive warm bronze or copper colouration of their skin — particularly visible in clear water or when seen from above — is caused by light scattering across their small, close-set dermal denticles, and gives the species both of its common names.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Multi-Species Feeding</h4>
+                    <p>During the sardine run, copper sharks feed alongside bottlenose dolphins, common dolphins, Cape gannets, Bryde's whales, and other shark species — one of the rare instances in the ocean where multiple apex predators actively cooperate around the same prey source.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>KZN Shark Nets</h4>
+                    <p>Copper sharks are one of the most frequently caught species in KZN's beach protection shark nets and drumlines. Ongoing research by the KwaZulu-Natal Sharks Board is focused on developing smarter, more selective shark deterrent technologies to reduce copper shark bycatch.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Coastal Nurseries</h4>
+                    <p>The shallow bays and estuaries of KZN serve as critical nursery grounds for juvenile copper sharks. The protection and conservation of these coastal habitats is essential to the long-term survival of copper shark populations in southern African waters.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

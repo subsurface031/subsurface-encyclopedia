@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Rays – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #81c784;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+   <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Electric Rays
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Electricray.png" alt="Electric Ray">
+                    <p class="image-caption">Order Torpediniformes — Electric Rays, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Electric Rays</h2>
+                    <span class="scientific-name">Order Torpediniformes</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>Electric rays are among the most extraordinary rays found in KwaZulu-Natal's waters—thick-bodied, slow-moving bottom-dwellers capable of generating powerful electrical discharges up to 220 volts. These unique cartilaginous fish possess specialized electric organs derived from modified muscle tissue that can produce stunning shocks used both for prey capture and defense. Their ability to generate bioelectricity makes them fascinating subjects of scientific research and important models for understanding bioelectric systems.</p>
+                    <p>Several electric ray species inhabit KZN's coastal waters, ranging from small torpedo rays to larger marbled electric rays. These rays are typically found on sandy and muddy bottoms from shallow coastal waters to depths exceeding 1,000 meters. Unlike their more active ray relatives, electric rays are ambush predators that lie buried in sediment waiting for prey to approach within striking distance, then deliver a paralyzing electrical shock before consuming their stunned victim.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">1.8 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">90 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Voltage Output</span>
+                            <span class="stat-value">8 – 220 V</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">15 – 20 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">4 – 7 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pups per Litter</span>
+                            <span class="stat-value">1 – 32</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Electric rays have distinctive rounded or oval disc-shaped bodies that are noticeably thicker and more robust than most other ray species. The disc is formed by enlarged pectoral fins that extend around the head but do not connect in front of it—creating a distinct separation between the head and fins. This thick, fleshy body houses the massive electric organs that occupy much of the ray's volume on either side of the head.</p>
+                    <p>The tail is relatively short and thick compared to other rays, with two dorsal fins near the tip and a well-developed caudal fin—unusual among rays. Most species lack the venomous tail spine found in stingrays, relying entirely on their electrical capabilities for defense. Coloration varies by species from uniform grey, brown, or black to ornate patterns with spots, blotches, or marbled designs. The skin is smooth and slippery, lacking the dermal denticles found on many sharks and rays.</p>
+                    <p>The most remarkable anatomical feature is the paired electric organs located on either side of the disc between the head and pectoral fins. These organs are visible as pale, kidney-shaped structures and can comprise up to one-sixth of the ray's total body weight. Each organ consists of hundreds to thousands of modified muscle cells called electrocytes stacked in columns like batteries in series, capable of generating substantial voltage. Size varies dramatically among species—small torpedo rays may reach only 30 cm length, while large marbled electric rays can exceed 1.8 meters and weigh 90 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Electric rays are predominantly nocturnal, sedentary predators that spend daylight hours buried in sand or mud with only their eyes and spiracles exposed. They are slow, sluggish swimmers compared to most rays—their thick body plan and reliance on ambush hunting rather than active pursuit means they lack the streamlined agility of species like eagle rays. Movement is accomplished through weak undulations of the disc margins and sculling motions of the tail.</p>
+                    <p>When hunting, electric rays remain motionless on the bottom, often partially buried, using vision and electroreception to detect approaching prey. Once prey is within range—typically when it swims directly over or very near the ray—the electric ray rapidly wraps its pectoral fins around the prey while delivering a powerful electrical discharge that stuns or kills the victim. The immobilized prey is then maneuvered to the mouth and consumed whole.</p>
+                    <p>The electrical discharge serves dual purposes: prey capture and defense. A threatened electric ray can deliver repeated powerful shocks—though voltage decreases with successive discharges as the electric organs temporarily deplete. Recharging requires time and energy. Large electric rays can deliver shocks powerful enough to stun adult humans, making them potentially dangerous if mishandled. However, they are generally docile and only discharge when threatened or hunting. Electric rays are typically solitary though may aggregate in areas with optimal habitat and abundant prey.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Electric rays are carnivorous ambush predators specializing in small to medium-sized fish and invertebrates. Their feeding strategy is unique among rays—rather than actively searching for prey or excavating buried organisms, they remain stationary and wait for mobile prey to approach within striking distance. The electrical discharge is the key hunting adaptation, allowing these sluggish predators to capture fast-swimming prey that would otherwise easily escape.</p>
+                    <p>The hunting sequence is highly specialized. The ray lies motionless, monitoring its surroundings through vision and electroreception. When prey approaches—typically swimming within 10 to 20 cm of the ray—the electric ray explosively wraps its flexible pectoral fins around the prey in a fraction of a second while simultaneously discharging its electric organs. The shock instantly stuns or kills the prey, which is then manipulated to the mouth using the pectoral fins.</p>
+                    <ul>
+                        <li>Small to medium fish (primary prey)</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Crustaceans (shrimp, crabs)</li>
+                        <li>Marine worms</li>
+                        <li>Small sharks and rays (occasionally)</li>
+                    </ul>
+                    <p>Electric rays possess small mouths with numerous small, pointed teeth arranged in bands—suitable for gripping slippery prey. They typically swallow prey whole rather than biting pieces. Larger species can consume surprisingly large prey relative to their mouth size by dislocating their jaws. Feeding frequency and metabolism are relatively low compared to more active predators—electric rays may go extended periods between meals, particularly after consuming large prey.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Electric rays are ovoviviparous—embryos develop inside eggs retained within the mother's uterus, where they hatch and continue developing, nourished by yolk and uterine secretions. This reproductive mode provides developing young with protection and additional nutrition beyond the original egg yolk, increasing survival rates. Sexual maturity varies by species, typically reached at 4 to 7 years of age when individuals achieve 60 to 75% of maximum size.</p>
+                    <p>Mating behavior in electric rays has been rarely observed but appears similar to other rays. Males possess paired claspers—modified pelvic fins—used to transfer sperm. The male grasps one of the female's pectoral fins with his teeth during copulation and inserts a clasper into her cloaca. Interestingly, males appear capable of controlling their electric discharge during mating—presumably to avoid shocking the female—demonstrating sophisticated neural control over the electric organs.</p>
+                    <p>Gestation periods range from 6 to 12 months depending on species and environmental conditions. Litter sizes vary dramatically—from a single pup in some species to over 30 in others, with most species producing 3 to 14 pups per litter. Pups are born fully developed and functional, including operational electric organs capable of delivering shocks, though at reduced voltage compared to adults. They receive no parental care and are immediately independent, though they typically remain in shallow nursery areas during their vulnerable juvenile stage.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Electric rays inhabit benthic environments across a wide depth range from very shallow coastal waters—including surf zones and estuaries—to continental slopes exceeding 1,000 meters depth. They require soft substrates (sand, mud, or fine sediment) suitable for burying, though some species also occur on rocky bottoms with sand patches. Different species show distinct depth preferences and habitat specialization—some are strictly coastal, others prefer moderate depths, and some inhabit deep waters.</p>
+                <p>Several electric ray species occur in KwaZulu-Natal waters. The marbled electric ray (Torpedo sinuspersici) is the largest species commonly encountered along the KZN coast, reaching up to 1.3 meters and capable of delivering powerful shocks up to 200 volts. The spotted torpedo ray (Torpedo fuscomaculata) is smaller, reaching about 60 cm, and inhabits sandy bottoms from shallow coastal waters to 200 meters depth. The blind electric ray (Typhlonarke aysoni) is a deep-water species occasionally encountered on the continental slope, notable for its reduced, non-functional eyes—an adaptation to perpetual darkness.</p>
+                <p>Electric rays exhibit limited movement patterns compared to more mobile ray species. Most are relatively sedentary with small home ranges, moving primarily to follow seasonal changes in prey abundance or water temperature. Some species show diel vertical migration—moving into shallower water at night to feed and retreating to deeper water during day. Juveniles typically inhabit shallower water than adults, gradually moving to deeper habitats as they mature.</p>
+                <p>Electric rays face relatively fewer conservation threats than many other ray species, with most populations considered stable. Their sedentary nature, deep-water habitats (for some species), and ability to deliver painful shocks provide some protection from fishing pressure. However, they are taken as bycatch in bottom trawl and gillnet fisheries, and some species have limited distributions making localized populations vulnerable. Climate change may impact electric rays through effects on prey distribution, ocean chemistry, and benthic habitat conditions. Their remarkable bioelectric capabilities make them valuable for scientific research into bioelectricity, neurobiology, and potential biomimetic applications—providing economic incentive for conservation beyond ecological considerations.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Living Batteries</h4>
+                    <p>Electric rays can generate electrical discharges ranging from 8 to 220 volts depending on species and size—sufficient to stun prey, deter predators, and deliver painful shocks to adult humans. The electric organs consist of thousands of specialized cells called electrocytes derived from modified muscle tissue. Each electrocyte generates a small voltage, but when thousands are stacked in series like batteries, they produce substantial electrical output. Large specimens can deliver 1 kilowatt of power in a single discharge—roughly equivalent to the power consumption of a household microwave.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient Knowledge of Bioelectricity</h4>
+                    <p>Electric rays were known to ancient civilizations and represent humanity's first documented encounter with bioelectricity. Ancient Greek and Roman physicians used live electric rays as a form of electrotherapy—placing the rays on patients to treat headaches, gout, and other ailments through their electrical shocks. The Greek word for electric ray, "narke," meaning "numbness," gave rise to the modern word "narcotic." These ancient observations predated scientific understanding of electricity by over 2,000 years.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Precise Neural Control</h4>
+                    <p>Electric rays exhibit sophisticated neural control over their electric organs, capable of modulating discharge voltage, duration, and frequency based on circumstance. They can deliver weak exploratory pulses to investigate their surroundings without depleting their organs, strong single shocks for prey capture, or rapid series of pulses for defense. Males can apparently suppress discharge during mating to avoid shocking females. This precise control requires complex neural circuits in the brain that coordinate activation of thousands of electrocytes simultaneously.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Scientific Research Models</h4>
+                    <p>Electric rays have been invaluable to scientific research, particularly in neurobiology and the study of bioelectricity. Their large, accessible electric organs and electrocytes provided early researchers with model systems for understanding electrical signal generation in biological tissues. Studies of electric rays contributed to fundamental discoveries about ion channels, membrane potentials, and neural signaling—knowledge that extends far beyond electric fish to all excitable tissues including human nerves and muscles. The first isolation of acetylcholine—a critical neurotransmitter—was achieved using electric ray tissue.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Metabolic Cost of Electricity</h4>
+                    <p>Generating electricity is metabolically expensive. The electric organs of electric rays are metabolically active tissues that consume substantial energy even when not discharging. After delivering a series of strong shocks, the electric organs become temporarily depleted and require time and energy to recharge—the electrocytes must restore ion gradients across their membranes through active transport, which requires ATP. This metabolic cost partially explains why electric rays are sedentary ambush predators rather than active hunters—their lifestyle minimizes overall energy expenditure.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Diverse Electric Ray Species</h4>
+                    <p>The order Torpediniformes includes approximately 70 species across four families, exhibiting remarkable diversity in size, habitat, behavior, and electrical capabilities. Species range from 10 cm to 1.8 meters in length, inhabit depths from intertidal zones to abyssal plains exceeding 3,000 meters, and occupy tropical to polar waters worldwide. Some species are boldly patterned while others are cryptically colored. The blind electric ray has lost functional eyes entirely—an adaptation to perpetual darkness in deep water. This diversity reflects millions of years of evolution refining the electric ray body plan for different ecological niches.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

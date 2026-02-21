@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacktip Reef Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffa726;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Blacktip Reef Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Blacktip.png" alt="Blacktip Reef Shark">
+                    <p class="image-caption">Carcharhinus melanopterus — Blacktip Reef Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Blacktip Reef Shark</h2>
+                    <span class="scientific-name">Carcharhinus melanopterus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>One of the most easily recognised and frequently encountered reef sharks in the Indo-Pacific, the blacktip reef shark is named for the striking black tips and edges on all of its fins. Slender, fast, and agile, these sharks are a common and iconic sight along KwaZulu-Natal's shallow coastal reefs, tidal flats, and lagoons.</p>
+                    <p>Despite their relatively small size compared to other shark species, blacktip reef sharks are highly efficient hunters and play a vital role in maintaining the health and balance of reef ecosystems. Their presence in shallow waters — sometimes in just centimetres of water — makes them one of the most visible and regularly observed shark species along the KZN coastline.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">1.8 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">13.6 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~13 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 75 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">5 – 9 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">2 – 5 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The blacktip reef shark is a slender, streamlined shark with a short, rounded snout and large eyes. Its most defining characteristic is the prominent black tips and margins on all fins — the first dorsal fin, pectoral fins, pelvic fins, second dorsal fin, and the lower lobe of the caudal fin all carry vivid black markings, often bordered by a white stripe.</p>
+                    <p>Their dorsal colouration ranges from grey to brownish-grey, with a pale to white underside. A distinctive white band runs along each flank, separating the darker upper body from the paler belly. These markings are most vivid in juveniles and can fade slightly with age.</p>
+                    <p>They are relatively small and lightweight compared to most other reef sharks, with a maximum length of around 1.8 metres — though most individuals encountered in KZN waters are considerably smaller, typically between 1.2 and 1.6 metres.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Blacktip reef sharks are active, fast-moving sharks that patrol shallow reef environments with rapid, precise movements. They are known for their characteristic leaping behaviour — spinning or breaching out of the water, particularly when pursuing schooling fish — a spectacle that makes them a favourite among snorkellers and divers.</p>
+                    <p>They are generally timid and cautious around humans, typically retreating when approached. However, they can become bolder and more assertive in the presence of food, and nipping incidents have been recorded in shallow water where swimmers are wading through groups of feeding sharks.</p>
+                    <p>Blacktip reef sharks are not strongly territorial but do show site fidelity — individuals often return to the same reef areas repeatedly, and home ranges of neighbouring sharks frequently overlap. They tend to be more active at dawn and dusk when prey is most abundant.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Blacktip reef sharks are highly active predators that feed primarily on small reef fish. They use their speed and agility to herd and chase fish into shallow water or against reef structures, where escape is more difficult. Their slender jaws and small, serrated teeth are perfectly adapted for gripping and consuming small, fast-moving prey.</p>
+                    <p>They are known to feed cooperatively in groups, working together to corral schools of fish before striking. This coordinated feeding behaviour is relatively unusual among sharks and contributes to their effectiveness as hunters on busy coral and rocky reef environments.</p>
+                    <ul>
+                        <li>Small reef fish (wrasse, mullet, grouper)</li>
+                        <li>Squid and octopus</li>
+                        <li>Crustaceans (crabs, shrimp)</li>
+                        <li>Sea snakes</li>
+                        <li>Small rays</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Blacktip reef sharks are viviparous, with pups nourished via a yolk-sac placenta inside the mother's uterus. After a gestation period of 8 to 11 months, females give birth to small litters of 2 to 5 pups in shallow, sheltered nursery areas such as lagoons, tidal flats, and mangrove margins.</p>
+                    <p>Newborn pups measure approximately 33 to 52 cm at birth and remain in shallow nursery habitats for the first months of their lives, where they are relatively safe from larger predators. Females give birth every one to two years.</p>
+                    <p>The use of shallow coastal nursery areas makes this species particularly vulnerable to habitat degradation, coastal development, and pollution — threats that are increasingly significant along KZN's rapidly developing coastline.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Blacktip reef sharks are found throughout the tropical and warm temperate Indo-Pacific, from the Red Sea and East African coast across to Hawaii and the eastern Pacific. In KwaZulu-Natal, they are most commonly encountered in the warmer waters of the northern coast, including the shallow reefs and tidal flats of the iSimangaliso Wetland Park — a UNESCO World Heritage Site — as well as around rocky reef environments further south.</p>
+                <p>They are strongly associated with shallow water environments, frequently found in water less than 30 metres deep and sometimes venturing into water just centimetres deep on tidal flats. They occasionally enter brackish estuaries but are predominantly a marine species.</p>
+                <p>The blacktip reef shark is listed as Vulnerable on the IUCN Red List. Primary threats include overfishing — both targeted and as bycatch — the shark fin trade, habitat loss through coral and reef degradation, and the destruction of coastal nursery habitats. Their shallow-water lifestyle and coastal distribution make them particularly susceptible to human activity along the shoreline.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Acrobatic Leaper</h4>
+                    <p>Blacktip reef sharks are well known for leaping and spinning out of the water — a behaviour most commonly seen when they are herding schooling fish near the surface. These aerial displays make them one of the most exciting sharks to observe in the wild.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shallow Water Specialist</h4>
+                    <p>Blacktip reef sharks are one of the few shark species regularly found in extremely shallow water — sometimes in less than 30 cm of depth on tidal flats, with their dorsal fins visibly cutting through the surface.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fin Identification</h4>
+                    <p>Researchers use the unique shape and markings of the black fin tips to identify individual blacktip reef sharks — a non-invasive technique that has helped scientists map their movements, social behaviour, and site fidelity over time.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Cooperative Hunters</h4>
+                    <p>Unlike most sharks, blacktip reef sharks have been observed hunting cooperatively in groups — coordinating their movements to herd schools of fish into tight baitballs before attacking. This social hunting strategy significantly increases their success rate.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Reef Ecosystem Role</h4>
+                    <p>As one of the most abundant reef sharks, blacktip reef sharks play a critical role in controlling populations of small reef fish and invertebrates. Their removal from reef systems has been linked to significant disruption of local food webs and reef health.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Electroreception</h4>
+                    <p>Like all sharks, blacktip reef sharks possess ampullae of Lorenzini — sensory organs that detect the faint electrical fields produced by prey animals. This sixth sense allows them to detect prey hidden in sand or behind reef structures with remarkable precision.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

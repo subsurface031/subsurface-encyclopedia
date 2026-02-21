@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garrick (Leervis) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+   <nav></nav>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="fish.html">Fish</a><span>›</span>
+                Garrick (Leervis)
+            </div>
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="garrick.png" alt="Garrick (Leervis)">
+                    <p class="image-caption">Lichia amia — Garrick (Leervis), KZN</p>
+                </div>
+                <div class="species-intro">
+                    <h2>Garrick (Leervis)</h2>
+                    <span class="scientific-name">Lichia amia</span>
+                    <span class="sassi-badge">✗ SASSI Red</span>
+                    <p>The garrick — known universally in South Africa as leervis (Afrikaans for "empty fish," referring to its cavernous mouth) — is the premier surf zone game fish of the South African coastline and one of the most sought-after species in KwaZulu-Natal's coastal fishing culture. A powerful, silver-bodied ambush predator that prowls the turbulent interface between breaking waves and shore, the garrick combines explosive speed, aerial acrobatics, and raw power into a package that has captivated generations of South African anglers. Few coastal fish inspire the same reverence and excitement as a large leervis crashing through a baitfish school in the white water.</p>
+                    <p>In KwaZulu-Natal, garrick are encountered year-round along rocky shorelines, in estuaries, and throughout the surf zone — though they undertake remarkable seasonal migrations that bring them into KZN waters in massive concentrations during spawning season. Adults migrate from their Western Cape nursery grounds northward to spawn along the KZN and southern Mozambique coastline between September and November, creating exceptional fishing opportunities during these peak months. They are ambush hunters par excellence — lying in wait behind waves, in channels, and along current lines before exploding into schools of mullet, sardines, and other prey with breathtaking speed and violence.</p>
+                    <div class="quick-stats">
+                        <div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">1.5 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~30 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">11 years</span></div>
+                        <div class="stat-box"><span class="stat-label">KZN Spawn Season</span><span class="stat-value">Sept – Nov</span></div>
+                        <div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">3 – 4 years</span></div>
+                        <div class="stat-box"><span class="stat-label">Top Speed</span><span class="stat-value">~65 km/h</span></div>
+                    </div>
+                </div>
+            </section>
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The garrick is a large, streamlined carangid with a powerful, torpedo-shaped body built for sustained high-speed pursuit in the turbulent surf zone. The body is laterally compressed and deep through the shoulder, tapering to a narrow caudal peduncle that supports a large, deeply forked tail — the structural hallmark of a fast, efficient swimmer. The overall colouration is a brilliant metallic silver on the flanks and belly, with a blue-green to olive back. A distinctive golden-bronze flush spreads across the head and gill covers — particularly pronounced in large adults — giving the fish its characteristic "golden head" appearance that is unmistakable at close range.</p>
+                    <p>Juveniles display a strikingly different colouration from adults — brilliant yellow bodies crossed by 8 to 10 bold vertical black bars that provide camouflage in shallow estuarine and coastal waters where they spend their first years of life. This juvenile pattern fades progressively as fish grow, disappearing entirely by the time they reach 40 to 50 cm in length and transition to the open coastal environment. This ontogenetic colour shift is one of the most dramatic transformations among South African coastal fish.</p>
+                    <p>Adults in KZN waters typically measure 60 cm to 1 metre and weigh 4 to 15 kg. Maximum confirmed size is approximately 1.5 metres and 30 kg, though fish exceeding 20 kg are exceptionally rare today. The mouth is large and cavernous — the feature that gives rise to the Afrikaans name "leervis" (empty fish) — with small teeth on the jaws and tongue. The first dorsal fin is short with 7 to 8 spines; the second dorsal and anal fins are long-based and sickle-shaped.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Garrick are ambush predators that exploit the complex hydrodynamics of the surf zone — using breaking waves, channels, rip currents, and turbulent white water as cover to approach prey undetected before launching explosive, high-speed attacks. They position themselves strategically in areas where current concentrates baitfish — behind breaking waves, in deep channels between sandbanks, along rocky points where current sweeps past, and at river mouths where outflow meets incoming surf. When a school of mullet, sardines, or other prey enters the strike zone, the garrick explodes from concealment with extraordinary acceleration.</p>
+                    <p>They are highly migratory, undertaking annual reproductive migrations from Western Cape nursery grounds northward along the coast to spawn in KwaZulu-Natal and southern Mozambique waters between September and November. During these spawning migrations, garrick concentrate in massive numbers along KZN's coastline, creating peak fishing opportunities. After spawning, adults disperse southward, with juveniles remaining in KZN estuaries before migrating south as they mature. This life history pattern — spawning in the north, nursery habitat in the south — is unusual among South African coastal fish and makes cross-regional conservation cooperation essential.</p>
+                    <p>When hooked, garrick are spectacular fighters — making long, powerful runs, executing dramatic aerial leaps and tail-walks, and using their deep, powerful bodies to generate leverage in the current. They are intelligent fish that quickly learn to associate boats, lines, and shadows with danger, making them progressively more difficult to catch in heavily fished areas. Their combination of power, speed, and acrobatic ability places them among the most exciting surf zone game fish in South Africa.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Garrick are obligate piscivores — fish make up the overwhelming majority of their diet throughout their lives, with crustaceans and squid consumed only opportunistically. South African diet studies confirm that garrick are generalist predators targeting whatever fish prey is locally abundant and vulnerable, adapting their diet seasonally and regionally to exploit available food sources. In KZN waters, mullet are the most important prey species — schools of white and grey mullet concentrating in the surf zone and estuary mouths are primary hunting targets for garrick.</p>
+                    <p>During the annual sardine run, garrick join the multi-species feeding frenzy, attacking sardine bait balls in the surf zone alongside sharks, dolphins, and seabirds. They are also known to target small carangids, halfbeaks, queenfish, and juvenile fish of various species. In estuaries, juvenile garrick consume small fish and crustaceans, gradually transitioning to an almost exclusively piscivorous diet as they grow. The species' reliance on schooling baitfish makes it vulnerable to baitfish population declines driven by overfishing or environmental change.</p>
+                    <ul>
+                        <li>Mullet (white and grey mullet — primary prey)</li>
+                        <li>Sardines and anchovy during sardine run</li>
+                        <li>Small carangids and halfbeaks</li>
+                        <li>Queenfish and juvenile reef fish</li>
+                        <li>Squid and crustaceans (opportunistically)</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Garrick exhibit a remarkable and highly unusual reproductive migration pattern. Adults spawn along the KwaZulu-Natal and southern Mozambique coastline between September and November, with peak spawning activity in October. Spawning occurs in coastal surf zone waters, with females releasing eggs that are fertilized externally and drift in ocean currents. After spawning, adults disperse southward along the coast, returning to Western Cape feeding grounds where they spend the non-reproductive months of the year.</p>
+                    <p>Larvae and juveniles, however, do not remain in KZN — instead, they are carried southward by the Agulhas Current to settle in Western Cape estuaries and coastal environments, which serve as the species' primary nursery habitat. Juveniles spend their first 2 to 3 years in these southern nursery areas before undertaking their first northward spawning migration as they approach sexual maturity at 3 to 4 years of age. This life cycle creates a spatially separated system in which spawning occurs in KZN while nursery habitat is located 1,500 km away in the Western Cape.</p>
+                    <p>Maximum confirmed age is 11 years based on otolith analysis. Garrick grow rapidly during their first years — reaching 30 cm by age 1, 50 cm by age 2, and approaching 70 cm by age 3 when sexual maturity is reached. Growth slows significantly after maturity, with the largest and oldest fish approaching 1.5 metres. This relatively fast growth to maturity gives the species moderate resilience to fishing pressure compared to slow-growing species, though heavy exploitation of spawning aggregations in KZN has contributed to population declines.</p>
+                </div>
+            </div>
+            <div class="info-section-full">
+                <h3>Conservation Crisis & SASSI Red Listing</h3>
+                <p>The garrick is classified as Red by SASSI (South African Sustainable Seafood Initiative) — the most urgent conservation category, indicating that the species is experiencing severe population decline and urging complete avoidance of consumption and retention. This Red listing reflects decades of heavy fishing pressure on spawning aggregations along the KZN coast, combined with habitat degradation in Western Cape nursery estuaries and the species' complex life history that makes it vulnerable to overfishing at multiple life stages across a 1,500 km coastline.</p>
+                <p>Historical accounts from KZN's north coast describe garrick fishing in the 1970s and 1980s that is almost unimaginable today — anglers reporting schools of hundreds of large garrick feeding in the surf zone during peak spawning season, with multiple fish over 15 kg landed in a single outing. Today, any garrick over 10 kg is considered exceptional, and encounters with feeding schools of the size described historically are vanishingly rare. This collapse in catch rates and size structure reflects the cumulative impact of sustained overfishing on a species whose life history makes it particularly vulnerable to exploitation.</p>
+                <p>The garrick's unusual reproductive strategy — spawning in KZN while juveniles settle in Western Cape nurseries 1,500 km away — means that conservation requires coordinated management across provincial boundaries. Degradation of Western Cape estuaries through pollution, development, and freshwater abstraction directly impacts KZN's future garrick populations by reducing juvenile survival in nursery habitat. Similarly, overfishing of spawning aggregations in KZN depletes the adult breeding stock that sustains the entire population. Effective recovery requires habitat protection in both regions, enforcement of size limits and bag limits, and ideally seasonal closures during peak spawning periods to protect breeding adults.</p>
+            </div>
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card"><h4>1,500 km Migration</h4><p>Garrick undertake one of the most remarkable migrations of any South African coastal fish — spawning along the KZN coast between September and November, then dispersing southward while their larvae are carried by the Agulhas Current to Western Cape nursery estuaries 1,500 km away. Juveniles spend 2 to 3 years in the Western Cape before migrating north to KZN to spawn for the first time.</p></div>
+                <div class="fact-card"><h4>Juvenile Black Bars</h4><p>Juvenile garrick look nothing like adults — they display brilliant yellow bodies crossed by 8 to 10 bold vertical black bars that provide camouflage in shallow estuarine and coastal waters. This striking colouration fades progressively as fish grow, disappearing entirely by 40 to 50 cm. The transformation from yellow-and-black juvenile to silver adult is one of the most dramatic colour shifts among South African coastal fish.</p></div>
+                <div class="fact-card"><h4>"Leervis" — Empty Fish</h4><p>The Afrikaans name "leervis" translates literally to "empty fish" — a reference to the species' enormous, cavernous mouth that appears disproportionately large relative to the body. This oversized mouth is perfectly adapted for engulfing large prey whole, including mullet and other fish up to 30% of the garrick's own body length, which are swallowed head-first in a single explosive gulp.</p></div>
+                <div class="fact-card"><h4>Surf Zone Specialist</h4><p>Garrick are supremely adapted to hunting in the turbulent, oxygen-rich surf zone — using breaking waves, channels, and white water as cover to ambush prey. They position themselves strategically behind waves and in rip currents, waiting for schools of mullet or sardines to enter the strike zone before exploding forward with extraordinary acceleration. This surf zone specialization makes them accessible to shore-based anglers throughout KZN.</p></div>
+                <div class="fact-card"><h4>SASSI Red — Protect & Release</h4><p>Garrick are rated Red by SASSI — the most urgent conservation category — reflecting severe population decline from decades of overfishing at KZN spawning aggregations and habitat degradation in Western Cape nurseries. Every garrick released alive is an investment in the species' recovery. Responsible KZN anglers now practice strict catch-and-release, contributing to slow but measurable population recovery in some areas.</p></div>
+                <div class="fact-card"><h4>Iconic Surf Zone Fighter</h4><p>Among South African surf zone anglers, the garrick holds almost mythical status as the ultimate inshore game fish. Its combination of explosive strikes, long powerful runs, spectacular aerial displays, and raw fighting stamina makes it the benchmark against which all other surf zone species are measured. Landing a large leervis from the beach remains one of the defining achievements in South African angling culture.</p></div>
+            </div>
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

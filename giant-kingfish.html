@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giant Kingfish (GT) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; margin-left: 0.8rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+    <nav></nav>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="fish.html">Fish</a><span>›</span>
+                Giant Kingfish (GT)
+            </div>
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="giant-kingfish.png" alt="Giant Kingfish (GT)">
+                    <p class="image-caption">Caranx ignobilis — Giant Kingfish (GT), KZN</p>
+                </div>
+                <div class="species-intro">
+                    <h2>Giant Kingfish (GT)</h2>
+                    <span class="scientific-name">Caranx ignobilis</span>
+                    <span class="conservation-badge">✓ Least Concern</span><span class="sassi-badge">✗ SASSI Red</span>
+                    <p>The giant trevally — known universally in KwaZulu-Natal as the GT, giant kingfish, or simply "geet" — is the apex reef predator of the Indo-Pacific and the most formidable carangid in the ocean. The largest member of the genus Caranx, capable of reaching 80 kg and 1.7 metres, the GT combines a deep, powerful body with extraordinary speed, aggression, and intelligence to dominate reef systems from shallow estuarine flats to offshore drop-offs in depths exceeding 180 metres. Few fish in KZN waters inspire the same raw excitement as a large GT — their explosive strikes, relentless power, and habit of immediately running into reef structure when hooked make them the ultimate test of tackle and angler alike.</p>
+                    <p>In KwaZulu-Natal, giant kingfish are found throughout the warmer coastal and reef environments of the region, from the estuarine systems of Kosi Bay and the surf zones of the northern Maputaland coast to the deep reef structures of Aliwal Shoal and Protea Banks further south. The Maputaland coastline bordering southern Mozambique — which hosts the world's largest known GT aggregation, estimated at 5,000 adult fish — was once legendary for its GT fishing, though populations have declined significantly due to historical overfishing. Today, catch-and-release is widely practised and GTs are rated Red by SASSI, a conservation listing urging anglers to release all fish of this species.</p>
+                    <div class="quick-stats">
+                        <div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">1.7 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~80 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">25+ years</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Depth</span><span class="stat-value">188 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Common Length</span><span class="stat-value">~100 cm</span></div>
+                        <div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">~3.5 years</span></div>
+                    </div>
+                </div>
+            </section>
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The giant trevally is immediately recognizable by its imposing, deep-bodied profile and distinctive steep forehead that creates an almost vertical facial angle — more pronounced in large adults than in juveniles. The body is powerfully built and laterally compressed, with a robust caudal peduncle flanked by two bony scutes (keels) that anchor the large, deeply forked crescent-shaped tail — the primary power source for sustained high-speed swimming and explosive bursts. Two additional smaller scutes precede the caudal peduncle along the lateral line.</p>
+                    <p>Colouration is highly variable with age, sex, and context. Juveniles are silvery with scattered dark spots on the flanks. Adults are typically silver-grey with occasional irregular dark blotches, and the fins are pale to light yellow. Large mature males develop a dramatic alternative colouration — the entire body turns jet black or very dark grey, a colour change associated with reproductive activity and social dominance. This black coloration can be turned on and off, with males darkening during spawning aggregations and reverting to silver at other times. The ability to switch between silver and black is unique among KZN reef fish and makes a large black GT one of the most startling sights in the water.</p>
+                    <p>Growth is well documented via otolith analysis — a fish of 1 metre in length is approximately 8 years old, while a 1.7 metre individual would be around 24 years old. Maximum theoretical length predicted by growth curves is 1.84 metres. Adults consume approximately 150 kg of prey per year to sustain their active, predatory lifestyle. The world record stands at 72.8 kg from Japanese waters.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Giant trevally are among the most intelligent and behaviourally sophisticated reef predators in the ocean. They are highly visual, active hunters that learn and remember the topography of their home reef with remarkable precision — returning to the same ambush positions, current channels, and feeding stations day after day. Large adults in KZN are often described as "semi-resident" in favoured reef areas, with acoustic telemetry studies confirming that individual fish use the same reef zones repeatedly over periods of months to years.</p>
+                    <p>GTs are famous for their extraordinary attacking behaviour — erupting from depth or from beside reef structure in explosive, high-speed charges that leave prey with virtually no time to react. They are known to follow rays and sharks, intercepting prey flushed from the reef substrate by these other species. They will also hunt in the shadow of rays — using the ray's silhouette to approach prey from below without being seen. In Hawaii, GTs have been documented launching themselves almost fully onto beach faces or reef crests to grab seabirds — an audacity of hunting behaviour virtually without parallel among fish.</p>
+                    <p>Juvenile GTs follow a well-documented ontogenetic habitat shift — hatching in offshore pelagic waters, then progressively moving into turbid estuaries and shallow coastal zones as juveniles, before transitioning through lagoonal and bay environments to the outer reef habitats occupied by adults. In KZN, juvenile GTs are commonly encountered in estuaries including Kosi Bay, St. Lucia, and various river mouths along the northern coast, where they are a prized target for light-tackle estuary anglers.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Giant trevally are obligate apex predators that are over 90% piscivorous as adults — consuming primarily fish above all else, with crustaceans, cephalopods, and other invertebrates forming a minor dietary supplement. Adults of 1 metre in length consume an estimated 150 kg of prey annually, reflecting the enormous energetic demands of sustaining a large, highly active predatory lifestyle at reef temperatures. Their diet expands in diversity as juveniles, with smaller fish consuming proportionally more crustaceans and invertebrates before transitioning to fish-dominated diets as they grow.</p>
+                    <p>In KZN reef environments, GTs target mullet, various carangids, reef-associated wrasse and grouper, and any schooling fish species concentrated around reef structure. They are heavily associated with the sardine run, hunting sardine bait balls with characteristic GT aggression — exploding into the school from below or the side with a single explosive burst, taking fish individually before circling back for another pass. They have also been documented hunting seabirds landing on the surface — a hunting behaviour more typically associated with large pelagic predators than reef fish.</p>
+                    <ul>
+                        <li>Reef fish — mullet, wrasse, carangids (primary)</li>
+                        <li>Sardines and pelagic schooling fish</li>
+                        <li>Squid and octopus</li>
+                        <li>Crustaceans and large invertebrates</li>
+                        <li>Occasionally seabirds at the surface</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Giant trevally undertake remarkable spawning migrations along the KZN and Mozambican coastline that have been revealed by acoustic telemetry research. Adults from throughout KZN's reef systems migrate northward to gather at aggregation sites in southern Mozambique — the world's largest known GT aggregation, estimated at approximately 5,000 adult fish totalling some 30 tonnes of biomass, with individual fish reaching 56 kg. After spawning, adults disperse southward along the coast, with tagged fish recorded as far south as Port St Johns in the Eastern Cape before returning to their spawning site the following season.</p>
+                    <p>Spawning occurs in surface waters at aggregation sites, with males darkening to jet black during active spawning events. Females remain lighter in colour but may also darken partially. Larvae are pelagic and avoid large fish, using jellyfish as temporary shelter. Juveniles at one year reach approximately 18 cm; by two years 35 cm; and at three years 50 to 60 cm. Sexual maturity is reached at approximately 3.5 years at around 60 cm — early enough to allow population recovery if adult fish are protected from overfishing.</p>
+                    <p>Studies in Hawaiian waters confirmed GTs can live for at least 25 years, validated using bomb radiocarbon dating of otoliths. This remarkable longevity, combined with the species' site fidelity to spawning aggregations and the ease with which spawning aggregations can be targeted by fishers, means that GT populations are extremely vulnerable to overfishing at aggregation sites. Historical accounts from KZN's Maputaland coast describe vastly more plentiful GT fishing in the 1980s and 1990s than is encountered today — a cautionary tale of what is lost when aggregation fisheries are inadequately managed.</p>
+                </div>
+            </div>
+            <div class="info-section-full">
+                <h3>The GT in KZN — A Species Under Pressure</h3>
+                <p>The giant trevally occupies a unique and somewhat melancholy position in KZN's fishing culture — universally admired and sought after, yet a species whose numbers in local waters have declined dramatically from historical baselines. Andy Coetzee, one of the pioneers of GT fishing along KZN's Maputaland coast in the 1980s, described what are now almost unimaginable fishing conditions: "Eight casts, eight bust-ups — packed up and went home. That's it." Today, a single GT hookup on the same stretch of coast is considered an exceptional day. This collapse in catch rates reflects decades of overfishing at spawning aggregations and along the coastline, without sufficient regulatory protection or enforcement.</p>
+                <p>The discovery of the world's largest GT aggregation in southern Mozambique — just north of the KZN border — has provided critical new scientific understanding of GT population dynamics. The 5,000-fish aggregation is now monitored by researchers using acoustic telemetry and satellite tagging, revealing the extent of individual fish movements between KZN and Mozambique and confirming that KZN fish are part of a broader regional population that depends on cross-border protection. This research underscores the importance of coordinated conservation between South Africa and Mozambique for the long-term recovery of GT populations.</p>
+                <p>In KZN today, the giant trevally is rated Red by SASSI — the most urgent conservation category, urging recreational anglers to avoid consuming or retaining fish of this species. Trophy catch-and-release is increasingly embraced by KZN's reef and estuary fishing community, and modern circle hooks and careful handling protocols allow most GTs to be released in good condition. For the species to recover to historical abundance along KZN's coastline, a combination of reduced fishing pressure, protection of spawning aggregations, and careful management of juvenile habitat in estuaries will all be required.</p>
+            </div>
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card"><h4>World's Largest GT Aggregation</h4><p>The world's largest known giant trevally aggregation — estimated at 5,000 adult fish totalling approximately 30 tonnes of biomass — occurs in southern Mozambique, just north of the KZN border. Acoustic telemetry research has confirmed that adults from KZN's reef systems migrate to this aggregation to spawn, making cross-border conservation cooperation essential for the recovery of KZN's GT populations.</p></div>
+                <div class="fact-card"><h4>Turns Jet Black</h4><p>Large male giant trevally are capable of dramatically changing colour from silver-grey to jet black — a colour change associated with reproductive activity, social dominance, and spawning aggregations. This ability to switch between silver and black colouration is unique among KZN reef fish and makes a large black GT one of the most startling and memorable sights in the Indo-Pacific underwater environment.</p></div>
+                <div class="fact-card"><h4>25-Year Lifespan</h4><p>Giant trevally can live for at least 25 years — confirmed by bomb radiocarbon dating of otoliths in Hawaiian studies. At one metre in length, a GT is approximately 8 years old; at maximum size of 1.7 metres, it is around 24 years old. This exceptional longevity, combined with site fidelity to spawning aggregations, makes large GTs among the most vulnerable fish to targeted fishing pressure.</p></div>
+                <div class="fact-card"><h4>Hunts in Shadow of Rays</h4><p>Giant trevally are documented using spotted eagle rays as hunting shields — swimming in the ray's shadow to approach prey from below without being seen, then exploding into the attack at the last moment. They also follow sharks to intercept prey flushed from the reef substrate. This level of hunting intelligence and ecological awareness is rarely documented in reef fish and speaks to the GT's remarkable cognitive sophistication.</p></div>
+                <div class="fact-card"><h4>Catches Seabirds</h4><p>In Hawaii, giant trevally have been documented launching themselves almost fully onto beach faces and reef crests to snatch seabirds — an audacity of predatory behaviour virtually without parallel among marine fish. GTs will also ambush birds landing on the surface from below. This bird-hunting behaviour is increasingly recorded in Indo-Pacific populations and may occur in KZN's offshore reef systems where seabirds concentrate.</p></div>
+                <div class="fact-card"><h4>SASSI Red — Protect and Release</h4><p>The GT is rated Red by SASSI (South Africa's Sustainable Seafood Initiative) — the most urgent conservation listing, urging anglers to avoid retaining fish of this species. Historical GT fishing in KZN's Maputaland region declined dramatically between the 1980s and today, a stark reminder of what overfishing of spawning aggregations can achieve. Every GT released is an investment in the species' recovery along KZN's coastline.</p></div>
+            </div>
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

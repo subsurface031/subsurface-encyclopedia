@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cone Shells & Other Molluscs – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Cone Shells & Other Molluscs</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="coneshell.png" alt="Cone Shell KZN Reef">
+    <p class="image-caption">Cone shells (Conus spp.) on KZN's northern reefs — beautiful, slow-moving, and capable of delivering potentially lethal venom</p>
+</div>
+<div class="species-intro">
+    <h2>Cone Shells & Other Molluscs</h2>
+    <span class="scientific-name">Conus spp. — venomous gastropods of KZN's northern reefs</span>
+    <span class="conservation-badge">⚠ LOW HAZARD — Awareness Required</span>
+    <p>Cone shells occupy one of the most unexpected positions in KZN's marine hazard landscape: creatures of extraordinary beauty that carry genuine lethal potential. These slow-moving, ornately patterned marine snails are found on the reef flats, sandy reef margins, and rubble zones of KZN's northern coastline — from Sodwana Bay north through the iSimangaliso marine protected area to the Mozambique border. To the uninitiated, a cone shell lying half-buried in the sand or nestled in a reef crevice looks like exactly what it is: a spectacular collectible shell. This visual appeal is precisely what makes cone shells dangerous. People pick them up, often directly over the living animal's narrow end — the siphonal canal — from which the cone can extend its harpoon-like radular tooth in any direction, including backward along the shell's length.</p>
+    <p>All cone shells are venomous. All of them are capable of stinging a person who handles them. The severity of a cone shell sting varies substantially by species — fish-hunting cones are considerably more dangerous than worm-hunting or mollusc-hunting cones, as their venom is more potent and faster-acting — but no cone shell can be identified as "safe to handle" without specialist expertise that most beachgoers do not have. There is no cone shell antivenom. Treatment of serious envenomations is entirely supportive. On KZN's reefs, alongside cone shells, several other molluscs and invertebrates pose hazards to the unaware: bristle worms deliver painful, irritating setae that are difficult to remove; fire urchins sting through clothing; and stinging hydroids cause intense but short-lived skin reactions. Understanding which organisms to avoid, and following the universal rule of non-handling of live marine animals, eliminates virtually all risk from this hazard category.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Venom Type</span><span class="stat-value">Conotoxins (neurotoxic)</span></div>
+        <div class="stat-box"><span class="stat-label">Antivenom</span><span class="stat-value">None available</span></div>
+        <div class="stat-box"><span class="stat-label">Species on KZN Reefs</span><span class="stat-value">30+ Conus spp.</span></div>
+        <div class="stat-box"><span class="stat-label">KZN Distribution</span><span class="stat-value">Northern reefs</span></div>
+        <div class="stat-box"><span class="stat-label">Primary Risk Activity</span><span class="stat-value">Handling live shells</span></div>
+        <div class="stat-box"><span class="stat-label">Rule #1</span><span class="stat-value">Never pick up live shells</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>Cone Shell Identification</h3>
+    <p>The genus Conus comprises over 900 described species worldwide, with diversity peaking in the tropical Indo-Pacific — the biogeographic region that extends to KZN's northern coast. In KZN and the adjacent Mozambican coast, over 30 species have been recorded, ranging from the common and widespread geography cone (Conus geographus) and textile cone (Conus textile) — both responsible for human fatalities globally — to smaller, less dangerous worm-hunting species. Cone shells are immediately recognisable by their characteristic conical shape: a broad apex tapering to a narrow base (the anterior canal end), with a long, narrow aperture running the full length of the shell's underside.</p>
+    <p>Shell patterns vary enormously between species — from the intricate, overlapping triangular patterns of the textile cone to the speckled browns and whites of the geography cone, the vivid orange-banded court cone (Conus aulicus), and the pale yellow-marked striated cone (Conus striatus). Because visual identification of species is unreliable for non-specialists, and because even smaller, "less dangerous" cones can cause severe reactions in sensitive individuals, the only safe approach is to treat all cone shells as potentially dangerous and not to handle any living specimen. A shell that is empty — no visible soft tissue, no operculum, and noticeably lighter than a living shell — can generally be picked up safely, but caution is still warranted as recently vacated shells may retain residual venom in superficial tissue.</p>
+    <ul>
+        <li>Characteristic conical shape — broad apex tapering to narrow anterior canal</li>
+        <li>Long, narrow aperture along shell underside — venom apparatus near anterior end</li>
+        <li>Conus geographus (geography cone): tan/white with brown spots — highly dangerous</li>
+        <li>Conus textile (textile cone): overlapping triangular brown pattern — highly dangerous</li>
+        <li>All species venomous — no reliable "safe" species for non-specialists</li>
+        <li>Found under coral rubble, on sand, in reef crevices — most active at night</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>How Cone Shells Sting</h3>
+    <p>Cone shells are active predators that use a highly specialised venom delivery system to immobilise prey — fish, worms, or other molluscs depending on the species. The venom apparatus consists of a muscular venom bulb, a long, coiled venom duct, and a harpoon-like radular tooth — a hollow, barbed dart that can be extended from the proboscis (a flexible, extendable tube) to stab prey with extreme speed. The critical and counter-intuitive characteristic of cone shell envenomation is directionality: the proboscis can extend in virtually any direction from the shell, including backward toward the hand holding the wide end. There is no "safe" way to hold a cone shell — the conventional wisdom of "hold it from the wide end" is dangerously inadequate and has resulted in documented fatalities.</p>
+    <p>The sting itself is typically described as similar to a wasp sting initially — a sharp, sudden pain at the puncture site that may be preceded by no sensation at all if the sting is through already-numb fingers. In minor envenomations from worm-hunting species, symptoms may be limited to local pain, swelling, and numbness that resolve within hours. In serious envenomations from fish-hunting cones — particularly Conus geographus, which is responsible for the majority of recorded human fatalities from cone shells worldwide — rapid-onset systemic effects include spreading numbness and paralysis from the sting site, difficulty swallowing, blurred or double vision, progressive generalised muscle weakness, respiratory failure, and cardiovascular collapse. The speed of progression varies but can be extremely rapid: deaths have occurred within four hours of envenomation, and serious systemic symptoms can develop within 30 minutes.</p>
+    <ul>
+        <li>Proboscis can extend in any direction — no safe holding orientation</li>
+        <li>Sting may be painless initially — first symptom sometimes numbness at puncture</li>
+        <li>Fish-hunting cones: fastest onset, most dangerous systemic effects</li>
+        <li>Conus geographus: responsible for majority of recorded cone shell fatalities</li>
+        <li>Progressive paralysis and respiratory failure in serious envenomations</li>
+        <li>Symptoms can develop within 30 minutes — emergency response is time-critical</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Other Hazardous Reef Molluscs & Invertebrates</h3>
+    <p>Cone shells are the most dangerous molluscs on KZN's reefs, but several other invertebrate groups encountered during reef walks, snorkelling, and diving warrant awareness. Bristle worms — polychaete worms of the family Amphinomidae — are among the most commonly encountered tidal pool hazards for explorers on northern KZN reefs. These brightly coloured worms (often red, orange, or pink) are covered in fine, glass-like calcified setae (bristles) that break off and embed in skin on contact, causing intense localised itching, burning, and inflammatory reactions that can persist for days. Removal of bristles is best achieved with adhesive tape pressed onto the affected area rather than fingers, which drives the setae deeper.</p>
+    <p>Fire urchins (Asthenosoma varium and related species) — soft, brightly coloured urchins found on deeper KZN reefs — deliver venom through pedicellariae and spines on contact, causing intense burning pain that is disproportionate to the minor nature of the wound. Their vivid colouration is aposematic — a genuine warning that should be heeded. Stinging hydroids are inconspicuous colonial animals that form feathery or branching growths on reef surfaces, rope, moorings, and submerged structures; contact with their microscopic nematocysts causes immediate, intense skin burning that resembles a severe nettle sting. Divers and snorkellers should avoid all contact with reef surfaces not just to protect marine life but to protect themselves from these low-visibility stinging hazards.</p>
+    <ul>
+        <li>Bristle worms: fine setae break off in skin — remove with tape, not fingers</li>
+        <li>Fire urchins: vivid colour = warning — venomous pedicellariae and spines</li>
+        <li>Stinging hydroids: feathery growths on reefs and ropes — nematocyst contact causes burning</li>
+        <li>Octopus: bites are rare but can deliver venom — the blue-ringed octopus, if encountered, is extremely dangerous</li>
+        <li>Murex and other spiny shells: physical spines cause puncture wounds — infection risk</li>
+        <li>General rule: do not touch or handle any living reef organism</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>First Aid & Emergency Response</h3>
+    <p>There is no antivenom for cone shell envenomation anywhere in South Africa. All treatment is supportive — maintaining the victim's airway, breathing, and circulation while the body manages the toxic load. This means that in any case of suspected cone shell envenomation, particularly from a fish-hunting species, the overriding emergency priority is to call 10111 or 112 immediately and get the victim to the nearest hospital emergency department as rapidly as possible. Do not wait for symptoms to worsen before calling emergency services — given the potential speed of progression to respiratory failure, early activation of emergency response is critical. Keep the victim still and calm, immobilise the stung limb below heart level, and if available, apply a pressure immobilisation bandage over the sting site (the same first aid technique used for snake and funnel-web spider bite) to slow venom spread.</p>
+    <p>For minor envenomations from smaller, worm-hunting cone species where systemic symptoms do not develop within 30 minutes, the immediate focus is pain management and monitoring. The sting site should be cleaned, the puncture wound inspected for any embedded radular tooth fragment, and the patient monitored closely for systemic symptom development. Any numbness spreading beyond the immediate sting site, any difficulty swallowing, any visual disturbance, or any muscle weakness should immediately escalate the response to an emergency call. For bristle worm contacts, use adhesive tape (not tweezers) to lift bristles from the skin surface, then wash with soap and water; topical corticosteroid cream can reduce the inflammatory response. For hydroid or fire urchin contacts, rinse affected skin with sea water (not fresh water, which may trigger nematocyst discharge), apply hot water immersion where practical, and seek medical attention if symptoms are severe or spreading.</p>
+    <ul>
+        <li>Cone shell sting: call 10111 or 112 immediately — no antivenom available</li>
+        <li>Immobilise stung limb; apply pressure bandage if available</li>
+        <li>Do NOT: apply tourniquet, cut and suck, apply ice</li>
+        <li>Monitor for: numbness spreading from sting, swallowing difficulty, vision changes</li>
+        <li>Bristle worms: remove setae with tape; topical anti-inflammatory cream</li>
+        <li>Hydroid contact: rinse with sea water; hot water immersion; medical review if severe</li>
+        <li>Poison Helpline: 0861 555 777</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>Cone Shells on KZN's Northern Reefs: Ecology, Distribution & Conservation</h3>
+    <p>Cone shells are fundamentally animals of the tropical Indo-Pacific reef ecosystem, and their presence on KZN's coast reflects the biogeographic transition zone that KZN occupies: a coastline where the warm, species-rich Mozambique Channel water meets the more temperate Agulhas Current, creating a marine environment of exceptional biodiversity that includes both tropical and warm-temperate species. The highest cone shell diversity and abundance on KZN's coast is found on the shoal reefs and sand patches of the Maputaland coast — from Cape Vidal north through Rocktail Bay to Kosi Bay — where clear, warm, nutrient-poor water supports the dense coral and associated invertebrate fauna that cone shells depend on. The Sodwana Bay reef system, one of the southernmost fully developed coral reef systems in the world, harbours a diverse cone shell assemblage that includes several of the more dangerous fish-hunting species.</p>
+    <p>Cone shells are predominantly nocturnal. During daylight hours they typically remain buried in sand, tucked under coral rubble, or concealed in reef crevices, emerging after dark to hunt prey. This behavioural pattern means that snorkellers and divers exploring reef environments during the day are less likely to encounter active, exposed cone shells than they would be on a night dive — but buried cones that are accidentally disturbed or stepped on by reef walkers present a genuine and largely invisible hazard. The combination of nocturnal activity and cryptic daytime concealment also means that cone shells found on the sand surface during the day may have been disturbed from their resting positions, may be stressed, and may be more likely to respond defensively to handling than a normally resting animal.</p>
+    <p>From a conservation perspective, cone shells — like all marine invertebrates in KZN's marine protected areas — are protected from collection. The iSimangaliso Wetland Park's marine protected area, which covers the majority of KZN's northern reef coast, prohibits the removal of any live or dead marine organism from within its boundaries. Violation of these regulations carries substantial penalties. Beyond protected areas, the impulse to collect cone shells as souvenirs or for ornamental purposes represents both a conservation concern and a very real safety risk. The correct approach for any person encountering a cone shell on KZN's northern reefs is to admire it without touching, to photograph it from a safe distance, and to leave it exactly where it was found. The shell will be there on your next dive — and so will you.</p>
+</div>
+
+<h3 class="section-heading">Critical Facts — Cone Shells & Reef Molluscs on KZN Reefs</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>No Antivenom Exists Anywhere</h4>
+    <p>Unlike most other venomous marine animals, there is no antivenom for cone shell envenomation — not in South Africa and not anywhere in the world. Conotoxins are an extraordinarily complex mix of hundreds of different peptide components that vary substantially between species, making the development of a universal antivenom exceptionally difficult. All treatment of serious cone shell envenomation is supportive, focused on maintaining breathing and circulation. This is why preventing envenomation through non-contact is the only rational safety strategy — there is no medical safety net once a serious envenomation has occurred.</p>
+</div>
+<div class="fact-card">
+    <h4>The "Wide End" Rule Is Wrong</h4>
+    <p>The widely repeated advice that cone shells are safe to handle from the wide (apex) end is dangerously incorrect. The cone's proboscis — the flexible tube through which the venomous radular tooth is fired — can extend in virtually any direction from the shell's body, including backward toward the broad apex. People have been fatally stung while holding cone shells correctly by this rule. There is no safe way to hold a live cone shell without specialist training and appropriate equipment. The correct rule is universal and unconditional: do not pick up any cone shell that has a living animal inside it.</p>
+</div>
+<div class="fact-card">
+    <h4>Identifying a Live Shell</h4>
+    <p>A cone shell with a living animal is identifiable by several cues: soft tissue (mantle, siphon, or foot) may be visible at the aperture; the operculum — a hard, plate-like structure that seals the shell opening — is present and often visible or felt at the aperture; the shell has weight consistent with a living animal; and the shell may show slow, directed movement. Empty shells are noticeably lighter and show no tissue or operculum. However, recently vacated or recently dead shells may still have tissue present and retain residual venom — treat any shell with tissue with the same caution as a confirmed live animal.</p>
+</div>
+<div class="fact-card">
+    <h4>Conotoxins Have Medical Value</h4>
+    <p>The same venom compounds that make cone shells dangerous to handle are also one of the most studied sources of novel pharmaceutical compounds in modern medicine. Conotoxins are highly selective — each targets specific ion channels and receptors in the nervous system with extraordinary precision. Ziconotide (Prialt), derived from the venom of the magician cone (Conus magus), is an approved pharmaceutical for severe chronic pain that cannot be managed by other opioids or analgesics. Dozens of other conotoxin-derived compounds are in various stages of clinical research for pain, cardiovascular disease, and neurological conditions. The scientific and medical value of living cone shell populations is a compelling additional reason to leave them undisturbed on the reef.</p>
+</div>
+<div class="fact-card">
+    <h4>Tidal Pool & Reef Safety — Broader Rules</h4>
+    <p>Cone shells are one of several reef and tidal pool hazards that are best managed through the same general principle: do not touch or handle any living organism in or on the reef unless you have the expertise to identify it confidently and the experience to handle it safely. This rule covers not just cone shells but bristle worms, fire urchins, stinging hydroids, octopus, live coral, and sea anemones. Reef shoes or wetsuit booties protect feet from physical puncture by urchin spines and cone shells underfoot. A buoyancy-controlled, hands-off diving and snorkelling technique protects both the diver and the reef community simultaneously.</p>
+</div>
+<div class="fact-card">
+    <h4>Protected Species on Northern KZN Reefs</h4>
+    <p>All marine invertebrates within the iSimangaliso Wetland Park marine protected area — including all cone shells, whether live or recently dead — are legally protected and may not be collected or removed. Outside protected areas, cone shells may legally be collected under certain conditions but removing live animals for shell collecting purposes is both ecologically harmful and, as this page makes clear, personally dangerous. Responsible reef users leave all shell collections exactly where they find them. If you wish to own a cone shell, purchase a legally sourced specimen from a reputable shell dealer rather than collecting from KZN's vulnerable reef systems.</p>
+</div>
+</div>
+
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

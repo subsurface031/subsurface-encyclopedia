@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Turtle – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="turtles.html">Turtles</a>
+                <span>›</span>
+                Green Turtle
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="green-turtle.png" alt="Green Turtle">
+                    <p class="image-caption">Chelonia mydas — Green Turtle, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Green Turtle</h2>
+                    <span class="scientific-name">Chelonia mydas</span>
+                    <span class="conservation-badge">⚠ Endangered</span>
+                    <p>The green turtle is the largest of the hard-shelled sea turtles and one of the most ecologically important marine animals in KwaZulu-Natal's coastal waters. Despite its name, the green turtle's shell is not green — it is typically brown, olive, or black with attractive streaked patterning. The "green" refers instead to the distinctive greenish tint of the fat and cartilage beneath the skin, a result of its herbivorous diet of seagrass and algae.</p>
+                    <p>Green turtles are regular foragers along the KZN coastline, grazing the seagrass beds and algae-covered reefs from iSimangaliso southward to the Durban bight. They are a frequent and beloved sight for divers and snorkellers throughout KZN's northern reefs — calm, unhurried, and often tolerant of careful human observers. While they nest on the iSimangaliso beaches in smaller numbers than loggerheads, their ecological role as marine grazers makes them irreplaceable components of healthy coastal ecosystems.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Shell Length</span>
+                            <span class="stat-value">Up to 1.5 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~230 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">80+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Nesting Season</span>
+                            <span class="stat-value">Nov – Feb</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Eggs per Nest</span>
+                            <span class="stat-value">~115 eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">25 – 35 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The green turtle has a smooth, streamlined carapace that is broader and more rounded than the loggerhead's. The shell is typically brown to olive in colour with a beautiful radiating pattern of lighter streaks and blotches — each individual's pattern is unique, much like a fingerprint. The plastron is pale yellow to white. Adults have a small, rounded head with a single pair of prefrontal scales between the eyes — a key distinguishing feature from other sea turtle species.</p>
+                    <p>Their jaws are finely serrated — an adaptation for cropping seagrass and scraping algae from hard surfaces. Unlike the loggerhead's massive crushing jaws, the green turtle's beak is relatively narrow and more delicate, reflecting its exclusively plant-based adult diet.</p>
+                    <p>Males are distinguished from females by a longer, more prominent tail that extends well beyond the rear of the shell, and by the presence of a single curved claw on each front flipper used during mating. Females are generally slightly larger than males in overall body size.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Green turtles are the only sea turtle species that undergoes a dramatic dietary shift during its life cycle. Juveniles in their early oceanic phase are carnivorous, feeding on jellyfish, crustaceans, and other invertebrates at the surface of the open ocean. As they mature and transition to nearshore habitats, they progressively shift to an almost exclusively herbivorous diet — a transition that is unique among sea turtles and parallels a complete change in habitat, physiology, and behaviour.</p>
+                    <p>Adult green turtles are largely solitary foragers but aggregate in large numbers at productive feeding grounds and at nesting beaches. They are capable of remaining submerged for several hours when resting, lowering their heart rate dramatically to conserve oxygen. They have been observed sleeping on the seafloor or wedged under coral ledges for extended periods.</p>
+                    <p>Green turtles are the most commonly encountered sea turtle species by divers in KZN's northern reef systems. They are generally placid and approachable, though disturbance during feeding or rest should always be avoided. Feeding green turtles at dive sites — a practice that still occurs at some locations — is discouraged as it disrupts natural behaviour and creates dependency.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Adult green turtles are the only exclusively herbivorous sea turtles, and their role as marine grazers gives them an ecological function analogous to terrestrial grazing mammals. By cropping seagrass blades short and regularly, green turtles prevent seagrass beds from becoming overgrown and senescent — stimulating new growth, improving nutrient cycling, and maintaining the productivity of one of the ocean's most important nursery habitats.</p>
+                    <p>In KZN, green turtles graze the seagrass meadows of the iSimangaliso estuary system and the shallow banks along the northern coast, as well as cropping algae from reef surfaces throughout the Sodwana Bay area. A healthy green turtle population is considered an essential indicator of seagrass ecosystem health.</p>
+                    <ul>
+                        <li>Seagrasses (primary adult diet)</li>
+                        <li>Macro-algae and reef algae</li>
+                        <li>Jellyfish and invertebrates (juveniles)</li>
+                        <li>Sponges and tunicates (occasionally)</li>
+                        <li>Carrion (very rarely)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Nesting & Reproduction</h3>
+                    <p>Green turtles nesting in KZN use the same iSimangaliso beaches as loggerheads and leatherbacks, with the nesting season running from November through February. They nest in smaller numbers than loggerheads in KZN — typically a few dozen to a few hundred females per season — but are important contributors to the beach's overall turtle nesting activity. Each female deposits approximately 115 eggs per clutch and may nest two to five times per season.</p>
+                    <p>Green turtles are among the most faithful of all sea turtles to their natal beaches — some females have been recorded nesting on the same KZN beach for over 30 years. They also undertake some of the longest migrations of any sea turtle to reach their nesting grounds, with individuals feeding as far away as the East African coast, Mozambique Channel, and even further afield returning to iSimangaliso to nest.</p>
+                    <p>Sexual maturity is not reached until 25 to 35 years of age — the latest of any of the three KZN nesting species — meaning that the green turtles nesting on iSimangaliso beaches today hatched in the 1990s or earlier, a sobering reminder of how long it takes for conservation efforts to show results in this species.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Green turtles are found throughout KwaZulu-Natal's coastal waters, from the Mozambique border southward. They are most abundant along the northern KZN coast where productive seagrass beds and coral reefs provide year-round foraging habitat, particularly around the iSimangaliso Wetland Park, Sodwana Bay, and the Two-Mile and Five-Mile reef systems. They are regularly encountered by divers at Aliwal Shoal further south, and occasional individuals are sighted as far south as the Durban and south coast waters, particularly during warmer summer months.</p>
+                <p>The iSimangaliso estuarine system — including Lake St. Lucia — provides critical seagrass foraging habitat that supports resident green turtle populations year-round. The turtles that feed here are not necessarily the same individuals that nest on nearby beaches; some may have travelled thousands of kilometres from nesting beaches elsewhere in the Indian Ocean to feed in these productive waters.</p>
+                <p>Green turtles face threats from bycatch in trawl and gillnet fisheries, entanglement in beach seine nets, ingestion of plastic debris, fibropapillomatosis (a debilitating viral disease causing tumour growth), boat strike, and loss of seagrass foraging habitat through coastal pollution and water quality degradation. Historical hunting for their meat and eggs — the original source of the name "green turtle" came from the prized green-coloured fat used to make turtle soup — caused catastrophic population declines from which many populations are still slowly recovering.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Named for Green Fat</h4>
+                    <p>Despite what the name suggests, the green turtle's shell is brown or olive — not green. The name comes from the distinctive greenish colour of the fat layer beneath the skin, caused by their seagrass and algae diet. It was this fat that made green turtles a prized food source for sailors and contributed to their near-extinction in many parts of the world.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Only Herbivorous Sea Turtle</h4>
+                    <p>Adult green turtles are the only sea turtle species that feeds exclusively on plants. This dietary specialisation makes them the ocean's equivalent of grazing mammals — their seagrass grazing activity is essential for maintaining healthy, productive seagrass meadows that serve as nursery habitat for hundreds of fish species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>25 – 35 Year Wait</h4>
+                    <p>Green turtles take longer to reach sexual maturity than any other KZN sea turtle — up to 35 years in some populations. A green turtle nesting on iSimangaliso's beaches today may have hatched before the year 2000. This extraordinary delay means that the benefits of current conservation efforts won't be measurable for decades.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sleeping Underwater</h4>
+                    <p>Green turtles can slow their heart rate to as little as one beat per minute when resting underwater, allowing them to remain submerged for several hours without surfacing to breathe. They are frequently found sleeping wedged under coral ledges on KZN's reefs — a behaviour that leaves them vulnerable to entanglement in fishing gear.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fibropapillomatosis</h4>
+                    <p>Green turtles are particularly susceptible to fibropapillomatosis — a viral disease that causes large, disfiguring tumours on the skin, flippers, and eyes. The disease has reached epidemic proportions in some populations and is associated with degraded coastal water quality. It is one of the most significant health threats facing green turtles in KZN's inshore waters.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Seagrass Farmers</h4>
+                    <p>By regularly cropping seagrass blades to a short, productive length, green turtles effectively "farm" their feeding grounds — stimulating faster regrowth and higher nutritional content in the grass. Seagrass beds in areas with healthy green turtle populations are demonstrably more productive than ungrazed beds, highlighting the turtle's role as an ecosystem engineer.</p>
+                </div>
+            </div>
+
+            <a href="turtles.html" class="back-link">← Back to Turtles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

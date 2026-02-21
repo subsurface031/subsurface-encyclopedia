@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dusky Kob (Kabeljou) – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header><div class="container"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Dusky Kob (Kabeljou)</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="kob.png" alt="Dusky Kob"><p class="image-caption">Argyrosomus japonicus — Dusky Kob (Kabeljou), KZN</p></div>
+<div class="species-intro">
+<h2>Dusky Kob (Kabeljou)</h2>
+<span class="scientific-name">Argyrosomus japonicus</span>
+<span class="sassi-badge">✗ SASSI Red | Endangered</span>
+<p>The dusky kob — known universally in South Africa as kabeljou — is one of the most iconic shore fish in the nation's angling history and a species whose story embodies both the thrill of coastal fishing and the tragedy of unsustainable exploitation. Once so abundant along KwaZulu-Natal's coastline that anglers could expect multiple fish per outing, the dusky kob has been driven to the brink of collapse by decades of overfishing. Today it is classified as Endangered and rated Red by SASSI, with current population levels estimated at a devastating 1.3% of pristine stock — one of the most severe population collapses of any South African fish species.</p>
+<p>In KZN, dusky kob are most commonly encountered in surf zones, estuaries, and rocky shorelines, particularly at night and during rough seas when they move inshore to feed. Large adults exceeding 30 kg — fish that were once relatively common — are now extraordinarily rare, a stark indicator of population collapse. Despite full protection and bag limits, recovery is slow due to the species' late maturity, long lifespan, and site fidelity to estuaries during vulnerable juvenile stages. Every kob released alive represents hope for a species clinging to survival along South Africa's coastline.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~80 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">42 years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">6–7 yrs (♂) / 7–8 yrs (♀)</span></div>
+<div class="stat-box"><span class="stat-label">Current Stock</span><span class="stat-value">1.3% pristine</span></div>
+<div class="stat-box"><span class="stat-label">Common Length</span><span class="stat-value">~100 cm</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>The dusky kob is a large, robust croaker with an elongated body, large head, and powerful build suited to life in turbulent surf zones and estuaries. The body colour is bronze to copper-brown on the back and upper flanks, fading through silver-grey to a white underside. The fins are dusky grey to brown — the feature that gives the species its common name. The mouth is large and terminal with thick lips, and the lower jaw projects slightly beyond the upper. Inside the mouth, the roof (palate) is smooth — a distinguishing feature from closely related species.</p>
+<p>One of the dusky kob's most distinctive features is its swim bladder, which functions as a sound-producing resonating chamber. Males produce deep booming sounds during spawning aggregations by vibrating specialized muscles attached to the swim bladder — these sounds can be heard by divers and even from boats at the surface during peak spawning activity. This sonic courtship display has earned the species its scientific name <em>japonicus</em> and the common name "drums" in some regions.</p>
+<p>Adults in KZN typically measure 80 cm to 1.2 metres and weigh 8 to 25 kg. Maximum recorded size is approximately 2 metres and 80 kg, though fish exceeding 40 kg are now virtually extinct from South African waters. The South African shore angling record stands at 59.1 kg from 1947 — a fish of a size that is almost inconceivable to modern anglers familiar only with the depleted remnant population.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Dusky kob are primarily nocturnal feeders that move into shallow surf zones, rocky shorelines, and estuary mouths under cover of darkness to hunt for prey. They are most active during rough seas, overcast conditions, and turbid water when low visibility gives them an advantage over visually oriented prey. During daylight hours, adults typically retreat to deeper offshore waters or rest in deep channels within estuaries. This nocturnal behavior makes night fishing the most productive strategy for targeting kob along KZN's coastline.</p>
+<p>Juveniles exhibit strong site fidelity to estuarine nursery habitats, remaining within a single estuary system for their first 3 to 5 years before gradually transitioning to the open coast as they approach sexual maturity. This dependence on estuaries during early life stages makes dusky kob highly vulnerable to estuarine degradation from pollution, freshwater abstraction, and development — threats that have compounded the population collapse caused by overfishing.</p>
+<p>Dusky kob aggregate to spawn in shallow coastal waters during summer months, with males producing loud booming sounds to attract females. These spawning aggregations once drew hundreds of fish together — creating spectacular fishing opportunities but also making the species extremely vulnerable to targeted exploitation. Historical accounts describe spawning aggregations off KZN's coast where the booming of courting males could be heard clearly from the beach.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Dusky kob are opportunistic carnivores that feed primarily on fish, crustaceans, and cephalopods. Diet composition shifts with size and habitat — juveniles in estuaries consume primarily crabs, shrimp, and small fish, while large adults in the surf zone target fish prey including mullet, sardines, and various reef-associated species. Squid and octopus are important prey items for adults, particularly at night when cephalopods are active in shallow waters.</p>
+<p>Kob are equipped with excellent chemosensory abilities, using smell and taste to locate prey in turbid water and at night when visual hunting is impossible. They are also capable of producing sounds for communication and echolocation, potentially assisting in prey detection. Their feeding strategy involves cruising slowly through the surf zone or along estuary edges, detecting prey through chemical and auditory cues before accelerating to capture it.</p>
+<ul>
+<li>Fish — mullet, sardines, small carangids</li>
+<li>Crustaceans — crabs, shrimp, prawns</li>
+<li>Cephalopods — squid, octopus, cuttlefish</li>
+<li>Polychaete worms and molluscs (juveniles)</li>
+<li>Occasionally scavenges on carrion</li>
+</ul>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Dusky kob spawn in shallow coastal waters during summer months, with peak spawning activity in KZN occurring between October and March. Males aggregate in spawning areas and produce deep booming sounds to attract females — these sounds are produced by rapidly contracting specialized muscles attached to the swim bladder, creating resonant pulses audible underwater for considerable distances. Females release eggs into the water column where they are fertilized externally.</p>
+<p>One of the most critical factors contributing to dusky kob's vulnerability to overfishing is their late maturity. Males reach sexual maturity at 6 to 7 years (approximately 65 to 75 cm), while females mature even later at 7 to 8 years (70 to 80 cm). This extended juvenile period means that fish take nearly a decade to contribute to reproduction — a life history trait that makes populations extremely slow to recover from depletion. Historical fishing pressure targeted large adults before they could spawn multiple times, collapsing recruitment and driving the population toward functional extinction.</p>
+<p>Maximum confirmed age is 42 years based on otolith analysis, making dusky kob one of the longest-lived coastal fish in South African waters. Growth is relatively slow after maturity, with fish adding only a few centimetres per year once they exceed 80 cm. The combination of late maturity, slow growth, and exceptional longevity means that recovery from current population levels of 1.3% of pristine stock will require decades of strict protection and perfect compliance — a conservation challenge of extraordinary difficulty.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Conservation Crisis — 1.3% of Pristine Stock</h3>
+<p>The dusky kob represents one of the most catastrophic fisheries collapses in South African history. Current population assessments estimate the species at just 1.3% of pristine (pre-exploitation) stock levels — a decline so severe that the species teeters on the edge of functional extinction in South African waters. The drivers of this collapse are well documented: decades of sustained overfishing targeting spawning aggregations and juvenile fish in estuaries, combined with late sexual maturity, slow growth, and estuarine habitat degradation that reduced juvenile survival.</p>
+<p>Historical catch records from the 1940s through 1980s document catches that are staggering by modern standards — multiple kob over 30 kg landed in single outings, fish exceeding 50 kg taken regularly from KZN beaches, and spawning aggregations so dense that the booming of courting males could be heard from shore. Today, any kob over 15 kg is considered a fish of a lifetime, and encounters with feeding aggregations of the size described historically are virtually unknown. This collapse in size structure and abundance reflects the cumulative impact of unsustainable exploitation on a species ill-equipped to withstand intensive fishing pressure.</p>
+<p>Despite full protection in marine protected areas, strict bag limits of one fish per person per day, and a minimum size limit of 60 cm, recovery remains agonizingly slow. Illegal fishing, poaching in marine reserves, and continued fishing pressure on the remnant population all undermine recovery efforts. Perhaps most critically, dusky kob's dependence on estuarine nursery habitat means that recovery requires not only reduced fishing pressure but also protection and restoration of the estuarine systems where juveniles spend their first critical years. Without coordinated action across both fishing regulation and habitat conservation, the dusky kob faces an uncertain future along South Africa's coastline.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>1.3% of Pristine Stock</h4><p>Population assessments estimate dusky kob at just 1.3% of pristine stock levels — one of the most severe population collapses of any South African fish species. This catastrophic decline reflects decades of overfishing combined with late maturity, slow growth, and habitat degradation. Recovery will require decades of strict protection and near-perfect compliance to reverse.</p></div>
+<div class="fact-card"><h4>The Booming Drums</h4><p>Male dusky kob produce deep booming sounds during spawning by vibrating specialized muscles attached to the swim bladder, creating resonant pulses audible to divers and even from boats at the surface. Historical accounts describe spawning aggregations off KZN where the collective booming of hundreds of courting males could be heard clearly from the beach — a sound now almost extinct from South African waters.</p></div>
+<div class="fact-card"><h4>42-Year Lifespan</h4><p>Dusky kob can live for over 42 years — confirmed through otolith analysis — making them one of the longest-lived coastal fish in South African waters. Combined with late sexual maturity at 6 to 8 years, this exceptional longevity means recovery from population collapse will take decades even under optimal conditions of strict protection and zero illegal harvest.</p></div>
+<div class="fact-card"><h4>Estuarine Dependence</h4><p>Juvenile dusky kob are entirely dependent on estuarine nursery habitats for the first 3 to 5 years of life, remaining within a single estuary system before transitioning to the open coast. This estuarine dependence makes the species highly vulnerable to habitat degradation from pollution, development, and freshwater abstraction — threats that have compounded overfishing in driving population collapse.</p></div>
+<div class="fact-card"><h4>The 59 kg Record</h4><p>The South African shore angling record for dusky kob stands at 59.1 kg, caught in 1947 — a fish of a size that is almost inconceivable to modern anglers. Historical photographs show fish exceeding 50 kg taken regularly from KZN beaches through the 1960s and 1970s. Today, any kob over 15 kg is considered exceptional, a stark indicator of how severely the population has been depleted.</p></div>
+<div class="fact-card"><h4>SASSI Red & Endangered</h4><p>Dusky kob are rated Red by SASSI and classified as Endangered — reflecting the species' catastrophic population decline and urgent conservation priority. Every kob released alive represents hope for recovery. Responsible KZN anglers now practice strict catch-and-release, and even the single fish bag limit is considered too high by many conservation advocates who urge complete release of all kob until the population recovers.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

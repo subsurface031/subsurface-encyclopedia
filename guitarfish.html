@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitarfish – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ef5350;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Guitarfish
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Guitarfish.png" alt="Guitarfish">
+                    <p class="image-caption">Order Rhinopristiformes — Guitarfish, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Guitarfish</h2>
+                    <span class="scientific-name">Order Rhinopristiformes</span>
+                    <span class="conservation-badge">⚠ Critically Endangered</span>
+                    <p>Guitarfish are extraordinary evolutionary intermediates between sharks and rays—possessing elongated, shark-like bodies with flattened heads and enlarged pectoral fins that create a distinctive guitar or violin-shaped profile. These unique cartilaginous fish represent some of the ocean's most threatened species, with many populations facing catastrophic declines due to overfishing. Their intermediate morphology reflects an ancient lineage that diverged from other rays over 100 million years ago.</p>
+                    <p>Several guitarfish species inhabit KwaZulu-Natal's coastal waters, where they occupy shallow sandy and muddy bottoms from the surf zone to moderate depths. These bottom-dwelling predators feed on invertebrates and small fish, playing important ecological roles in benthic food webs. Despite their harmless nature and ecological importance, guitarfish populations have collapsed throughout much of their range, making them among the world's most endangered marine fish groups and a conservation priority in KZN waters.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">3 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">227 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">15 – 25 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">6 – 13 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">6 – 12 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pups per Litter</span>
+                            <span class="stat-value">4 – 19</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Guitarfish possess a unique body plan that combines features of both sharks and rays. The head and trunk are dorsoventrally flattened—like typical rays—but the body extends into a muscular, laterally compressed tail with two dorsal fins and a well-developed caudal fin—shark-like features. The pectoral fins are enlarged and wing-like but do not extend as far forward as in typical rays, creating the characteristic guitar or violin-shaped outline when viewed from above.</p>
+                    <p>The snout is elongated and triangular to rounded depending on species, with the mouth positioned on the ventral surface as in rays. Eyes are dorsal and relatively large, with spiracles immediately behind for respiration. The skin is covered with small dermal denticles—like sharks—giving it a rough, sandpaper-like texture. Coloration is typically cryptic, ranging from grey-brown to olive or yellowish-brown dorsally with pale spots or blotches, and white or cream ventrally, providing camouflage against sandy substrates.</p>
+                    <p>Most guitarfish species possess two dorsal fins positioned far back on the tail, and unlike many rays, they have a well-developed caudal fin used for propulsion. The tail lacks the venomous spine found in stingrays but may have small thorns or tubercles along the midline. Size varies considerably among species—small guitarfish reach 60 cm, while large species like the giant guitarfish can exceed 3 meters in length and weigh over 227 kg, making them among the largest rays.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Guitarfish are primarily benthic animals that spend most time resting on sandy or muddy bottoms in shallow coastal waters, often partially buried with only their eyes and spiracles visible. This cryptic behavior provides camouflage from predators and allows ambush opportunities for prey. Unlike more active rays, guitarfish are relatively sedentary with small home ranges, moving primarily to follow prey availability or during seasonal migrations related to temperature or reproduction.</p>
+                    <p>When swimming, guitarfish use their muscular tails for propulsion in an eel-like lateral undulation—more shark-like than the pectoral fin flapping characteristic of most rays. They are capable swimmers when necessary but generally move slowly and deliberately across the bottom. Most activity occurs during crepuscular and nocturnal periods when many prey species are most active, with guitarfish resting during daylight hours.</p>
+                    <p>Guitarfish are generally solitary but may form loose aggregations in areas with optimal conditions, particularly during breeding season or at productive feeding grounds. They are harmless to humans—lacking venomous spines or aggressive behavior—and typically flee when approached. Their docile nature, combined with their tendency to remain in shallow, accessible waters, has made them extremely vulnerable to fishing pressure. Guitarfish show site fidelity to nursery areas and seasonal habitats, with some populations undertaking coastal migrations of hundreds of kilometers.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Guitarfish are carnivorous benthic predators that feed primarily on bottom-dwelling invertebrates and small fish. Their feeding strategy combines patient ambush hunting with active foraging—they rest on the bottom detecting prey through electroreception and vision, then move deliberately to capture detected prey using their protrusible jaws. The elongated snout housing numerous electroreceptors allows effective detection of buried prey organisms.</p>
+                    <p>Feeding typically occurs at night when prey activity peaks. Guitarfish use undulating motions of their pectoral fins to excavate shallow depressions in sediment, exposing hidden prey. Once prey is located, the guitarfish positions itself over the target and rapidly extends its jaws downward to capture the prey by suction and biting. The teeth are small and numerous, arranged in pavement-like bands suitable for crushing hard-shelled prey.</p>
+                    <ul>
+                        <li>Crustaceans (crabs, shrimp, mantis shrimp)</li>
+                        <li>Bivalve mollusks (clams, cockles)</li>
+                        <li>Polychaete worms and other marine worms</li>
+                        <li>Small bottom-dwelling fish</li>
+                        <li>Cephalopods (small octopus, cuttlefish)</li>
+                    </ul>
+                    <p>Diet composition varies by species, location, and season, reflecting the availability of prey in their habitat. Larger guitarfish can consume relatively large prey items including substantial crabs and fish. Feeding rates and growth are influenced by water temperature, with activity and metabolism slowing during cooler months. Juveniles feed primarily on smaller invertebrates, gradually incorporating larger prey items as they grow and their crushing ability increases.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Guitarfish are ovoviviparous—embryos develop inside eggs retained within the mother's uterus where they hatch and continue developing, nourished initially by yolk then increasingly by uterine secretions. This reproductive mode provides protection and supplemental nutrition, though guitarfish produce relatively few offspring compared to egg-laying fish. Sexual maturity is reached late—females at 6 to 13 years depending on species, males slightly earlier—at 70 to 90% of maximum body length.</p>
+                    <p>Mating occurs during specific seasons, varying by location and species but typically corresponding with warmer months in KwaZulu-Natal. Males pursue females and grasp their pectoral fins with modified teeth during copulation, inserting one clasper to transfer sperm. Mating may leave scars and bite marks on female pectoral fins. Fertilization is internal, and females store sperm, sometimes for extended periods before fertilization occurs.</p>
+                    <p>Gestation periods range from 6 to 12 months depending on species and environmental conditions. Litter sizes are modest—typically 4 to 19 pups—with larger species generally producing more offspring. Pups are born fully developed at 20 to 50 cm length depending on species, immediately independent and receiving no parental care. Newborns and juveniles utilize shallow nursery areas—particularly protected bays, estuaries, and surf zones—where they remain during vulnerable early life stages before gradually moving to deeper adult habitats. Females reproduce every 1 to 2 years, and the combination of late maturity, small litter sizes, and long gestation creates very slow population growth rates—making guitarfish populations extremely vulnerable to overfishing and unable to recover quickly from depletion.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Guitarfish inhabit shallow coastal waters, bays, estuaries, and continental shelf areas throughout KwaZulu-Natal, strongly associated with soft substrates—sand, sandy mud, or muddy bottoms—from the intertidal surf zone to depths of approximately 100 meters, though most species concentrate in waters less than 50 meters deep. They require areas with abundant benthic prey and suitable substrate for burying and resting. Temperature preferences vary by species, with most favoring warm temperate to subtropical conditions.</p>
+                <p>Multiple guitarfish species historically occurred in KZN waters, though populations of all species have declined dramatically. The common guitarfish (Rhinobatos rhinobatos) and related species were once abundant in shallow coastal waters but are now rare. The giant guitarfish (Glaucostegus typus)—the largest species reaching over 3 meters—has been virtually eliminated from South African waters. The whitespotted wedgefish (Rhynchobatus djiddensis), technically a closely related group, also occurs in KZN and faces similar severe population declines. These species occupy slightly different niches—some prefer sandy surf zones, others muddy estuaries, and others rocky reef edges with adjacent sand patches.</p>
+                <p>Estuaries and shallow bays serve as critically important nursery habitats where pregnant females give birth and juveniles spend their first years. KZN's estuarine systems including Durban Bay, Richards Bay, and various smaller estuaries historically supported important guitarfish nursery populations. These protected, food-rich environments provide optimal conditions for juvenile growth and survival. Adults often remain in coastal waters but may move seasonally following temperature gradients or migrating to specific breeding or feeding grounds.</p>
+                <p>Guitarfish face catastrophic conservation challenges—they are among the world's most threatened marine fish groups. Globally, approximately 70% of guitarfish and wedgefish species are classified as Critically Endangered, with many populations declining by over 80 to 99% in recent decades. In KZN and South Africa, species that were abundant within living memory have virtually disappeared from many areas. Primary threats include intensive fishing pressure—guitarfish are targeted for their fins (particularly valued in the shark fin trade despite being rays), meat, and skin, and suffer extensive bycatch in trawl, gillnet, and beach seine fisheries operating in their shallow coastal habitats.</p>
+                <p>The combination of their shallow coastal distribution, large body size, slow growth, extremely late maturity, small litter sizes, and long gestation periods makes guitarfish populations unable to sustain any significant fishing mortality. Once depleted, populations require decades to recover—if they can recover at all given ongoing fishing pressure. Additional threats include habitat degradation through coastal development, dredging, pollution, and altered estuarine conditions. Climate change may compound these threats through warming waters, altered prey distributions, sea level impacts on nursery habitats, and increased storm intensity. Conservation requires immediate action including strict fishing regulations or complete harvest bans, protected areas encompassing critical habitats, restoration of degraded nursery areas, and international cooperation to regulate the fin trade driving overfishing worldwide.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Evolutionary Bridge Between Sharks and Rays</h4>
+                    <p>Guitarfish represent an evolutionary intermediate form between sharks and rays—possessing characteristics of both groups. They have flattened heads and enlarged pectoral fins like rays, but also muscular, laterally compressed tails, two dorsal fins, and well-developed caudal fins like sharks. This intermediate morphology reflects their ancient evolutionary position—guitarfish diverged from other rays over 100 million years ago during the Cretaceous period, making them living links to understanding the evolution of body forms in cartilaginous fishes.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>World's Most Threatened Marine Fish Group</h4>
+                    <p>Guitarfish and their close relatives (wedgefish) are the most threatened marine fish groups on Earth. Recent IUCN assessments found that 16 out of 16 assessed species are threatened with extinction, with the majority classified as Critically Endangered—the highest threat category before extinction. Population declines of 80 to 99% have been documented across their ranges. This catastrophic situation represents one of the most severe marine conservation crises, yet receives far less attention than threats to charismatic species like sharks, turtles, or cetaceans.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Valuable Fins Drive Overfishing</h4>
+                    <p>Despite being rays rather than sharks, guitarfish are heavily targeted for the international shark fin trade. Their large fins—particularly the lower caudal lobe and dorsal fins—command high prices in Asian markets where they are considered premium quality, sometimes valued more highly than actual shark fins. A single giant guitarfish can yield fins worth hundreds to thousands of dollars, creating powerful economic incentives for overfishing. This demand has driven intensive, often illegal, targeted fisheries and extensive retention of bycatch, decimating populations worldwide.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Extremely Slow Life History</h4>
+                    <p>Guitarfish exhibit some of the slowest life history characteristics among cartilaginous fishes. They grow slowly, mature extremely late (6 to 13 years or more), have long gestation periods (up to a year), produce small litters (as few as 4 pups), and reproduce infrequently (every 1 to 2 years). This means a guitarfish population exploited beyond sustainable levels could require 20 to 40 years or more to recover—even with complete protection. This biological vulnerability is the fundamental reason guitarfish cannot withstand fishing pressure that other marine species might sustain.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Critical Nursery Habitat Dependence</h4>
+                    <p>Guitarfish display absolute dependence on shallow coastal nursery habitats—particularly sheltered bays and estuaries—for juvenile survival. Females migrate to these areas to give birth, and juveniles remain in shallow protected waters for years before moving to adult habitats. Loss, degradation, or disturbance of these nursery areas through coastal development, dredging, pollution, seine fishing, or altered freshwater flows can eliminate recruitment to adult populations even if adult habitat remains intact. Protecting nursery areas is essential for any population recovery.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Silent Extinction Crisis</h4>
+                    <p>Guitarfish populations have collapsed with remarkably little public awareness or conservation response—what scientists call a "silent extinction." Species that were common and commercially important within living memory have virtually disappeared from large portions of their ranges, yet this loss has received minimal attention compared to declines in more charismatic species. Many younger fishers and marine biologists have never seen guitarfish in regions where they were once abundant—a phenomenon called "shifting baseline syndrome." Urgent action is needed to prevent complete extinction of multiple species—this represents a last opportunity to save some of Earth's most ancient and threatened marine lineages.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

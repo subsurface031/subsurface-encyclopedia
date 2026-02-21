@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        /* Intro block */
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(255, 183, 77, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child { margin-bottom: 0; }
+
+        /* Season overview banner */
+        .season-banner {
+            background: rgba(255, 183, 77, 0.06);
+            border: 1px solid rgba(255, 183, 77, 0.3);
+            border-radius: 2px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .season-banner-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            line-height: 1;
+            margin-top: 0.1rem;
+        }
+
+        .season-banner h3 {
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .season-banner p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.4rem;
+        }
+
+        .season-banner p:last-child { margin-bottom: 0; }
+        .season-banner strong { color: #ffb74d; }
+
+        /* Section headings */
+        .section-title {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        /* Section sub-label */
+        .section-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #78909c;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Month key */
+        .month-key {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 4rem;
+        }
+
+        .month-chip {
+            padding: 0.7rem 1rem;
+            border-radius: 2px;
+            border: 1px solid rgba(100, 149, 237, 0.18);
+            background: rgba(15, 24, 32, 0.7);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #90a4ae;
+            text-align: center;
+        }
+
+        .month-chip.active {
+            border-color: rgba(255, 183, 77, 0.4);
+            background: rgba(255, 183, 77, 0.06);
+            color: #ffb74d;
+        }
+
+        /* Event cards grid */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .event-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-card.our-event {
+            border-color: rgba(255, 183, 77, 0.35);
+        }
+
+        .event-card.our-event:hover {
+            border-color: rgba(255, 183, 77, 0.6);
+        }
+
+        .event-card.public-event {
+            border-color: rgba(100, 149, 237, 0.25);
+        }
+
+        .event-card.public-event:hover {
+            border-color: rgba(100, 149, 237, 0.5);
+        }
+
+        .event-card.coming-soon {
+            border-color: rgba(100, 149, 237, 0.12);
+            opacity: 0.7;
+        }
+
+        /* Event image area */
+        .event-image {
+            width: 100%;
+            height: 195px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event-icon-placeholder {
+            font-size: 5rem;
+            opacity: 0.22;
+            user-select: none;
+        }
+
+        /* Date ribbon — top-left */
+        .date-ribbon {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background: rgba(10, 25, 41, 0.88);
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            padding: 0.35rem 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            color: #90caf9;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .date-ribbon.our {
+            border-color: rgba(255, 183, 77, 0.45);
+            color: #ffb74d;
+        }
+
+        /* Type badge — top-right */
+        .type-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.22rem 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .type-badge.public {
+            background: rgba(100, 149, 237, 0.14);
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            color: #90caf9;
+        }
+
+        .type-badge.ours {
+            background: rgba(255, 183, 77, 0.14);
+            border: 1px solid rgba(255, 183, 77, 0.45);
+            color: #ffb74d;
+        }
+
+        .type-badge.soon {
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            color: #546e7a;
+        }
+
+        /* Event content */
+        .event-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .event-content h3 {
+            color: #e3f2fd;
+            font-size: 1.28rem;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.2rem;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .event-meta-item {
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            color: #78909c;
+            letter-spacing: 0.5px;
+        }
+
+        .event-meta-item span {
+            color: #90a4ae;
+        }
+
+        .event-content p {
+            color: #b0bec5;
+            line-height: 1.85;
+            font-size: 0.94rem;
+            text-align: justify;
+            margin-bottom: 1.3rem;
+            flex: 1;
+        }
+
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.7rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            color: #90a4ae;
+        }
+
+        .tag.our {
+            background: rgba(255, 183, 77, 0.07);
+            border-color: rgba(255, 183, 77, 0.25);
+            color: #ffb74d;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            align-self: flex-start;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        .learn-more.our-btn {
+            color: #ffb74d;
+            border-color: rgba(255, 183, 77, 0.4);
+        }
+
+        .learn-more.our-btn:hover {
+            background: rgba(255, 183, 77, 0.1);
+            border-color: rgba(255, 183, 77, 0.7);
+            color: #ffe082;
+        }
+
+        .learn-more.disabled {
+            color: #546e7a;
+            border-color: rgba(100, 149, 237, 0.15);
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* Events calendar table */
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4rem;
+            font-size: 0.92rem;
+        }
+
+        .calendar-table thead tr {
+            background: rgba(100, 149, 237, 0.09);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+        }
+
+        .calendar-table th {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .calendar-table td {
+            padding: 0.9rem 1.2rem;
+            color: #b0bec5;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        .calendar-table tr:last-child td { border-bottom: none; }
+        .calendar-table tr:hover td { background: rgba(100, 149, 237, 0.04); }
+
+        .cal-badge {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .cal-badge.public { background: rgba(100, 149, 237, 0.1); color: #90caf9; border: 1px solid rgba(100, 149, 237, 0.28); }
+        .cal-badge.ours   { background: rgba(255, 183, 77, 0.1);  color: #ffb74d; border: 1px solid rgba(255, 183, 77, 0.32); }
+        .cal-badge.annual { background: rgba(38, 166, 154, 0.1);  color: #4db6ac; border: 1px solid rgba(38, 166, 154, 0.28); }
+
+        /* Closing block */
+        .closing-block {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(255, 183, 77, 0.5);
+            padding: 2.5rem 3rem;
+            margin-bottom: 4rem;
+            border-radius: 2px;
+        }
+
+        .closing-block h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .closing-block p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .closing-block p:last-child { margin-bottom: 0; }
+
+        .closing-block a {
+            color: #90caf9;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(144, 202, 249, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .closing-block a:hover { border-color: rgba(144, 202, 249, 0.7); }
+
+        /* Coming-soon card (single) */
+        .coming-soon-card {
+            background: rgba(15, 24, 32, 0.5);
+            border: 1px dashed rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .coming-soon-card .cs-icon {
+            font-size: 3rem;
+            opacity: 0.25;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .coming-soon-card h4 {
+            color: #546e7a;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .coming-soon-card p {
+            color: #455a64;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .event-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .intro, .closing-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .calendar-table { font-size: 0.83rem; }
+            .calendar-table th, .calendar-table td { padding: 0.7rem 0.8rem; }
+            .month-key { grid-template-columns: repeat(3, 1fr); }
+            .season-banner { flex-direction: column; gap: 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .event-content { padding: 1.5rem; }
+            .header-logo { display: none; }
+            .month-key { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Upcoming Events</h2>
+                <p>KwaZulu-Natal's coastal calendar is one of the richest in the southern hemisphere — from the spectacular annual Sardine Run that transforms the South Coast into a feeding frenzy involving sharks, dolphins, and gannets, to the quiet magic of watching a loggerhead turtle lumber up a moonlit beach in Maputaland to lay her eggs. Throughout the year, the ocean brings extraordinary events to KZN's doorstep, and an informed coastal visitor is positioned to witness them at their best. This page tracks both the major public marine events and experiences available across KZN, and our own Sub-Surface events and guided experiences — updated regularly as new dates and activities are confirmed.</p>
+                <p>Public events listed here are drawn from KZN's established annual marine calendar — seasonal phenomena, guided ecotourism experiences, conservation volunteer days, and community events that bring people into meaningful contact with the ocean. Our own events — beginning with the KZN Coastal Trek — are designed to complement this calendar by offering a deeper, more immersive engagement with the coastal ecosystems profiled in this encyclopedia. Follow us on social media at <strong>@Subsurface031</strong> to be the first to hear about new Sub-Surface events as they are announced.</p>
+            </section>
+
+            <!-- Season overview banner -->
+            <div class="season-banner">
+                <div class="season-banner-icon">📅</div>
+                <div>
+                    <h3>KZN Marine Events — Season at a Glance</h3>
+                    <p><strong>Now — Autumn / Early Winter (Feb – May):</strong> Sardine Run build-up, humpback whale southbound migration begins, Loggerhead hatchling emergence season wraps up, optimal diving visibility at Sodwana</p>
+                    <p><strong>Winter (Jun – Aug):</strong> Peak Sardine Run (June – July), humpback whale northbound migration, penguin moult season at Stony Point, whale watching prime season across the South Coast</p>
+                    <p><strong>Spring / Summer (Sep – Jan):</strong> Loggerhead and leatherback turtle nesting (Nov – Jan), manta ray aggregations at Sodwana, Whale Shark season begins, whale watching wraps up, beach clean-up events peak ahead of holiday season</p>
+                </div>
+            </div>
+
+            <!-- Month key -->
+            <h2 class="section-title">Best Months for Marine Experiences — KZN</h2>
+            <div class="month-key">
+                <div class="month-chip">Jan — Turtle Nesting</div>
+                <div class="month-chip">Feb — Diving Season</div>
+                <div class="month-chip">Mar — Diving Season</div>
+                <div class="month-chip">Apr — Whale Approach</div>
+                <div class="month-chip active">May — Pre-Sardine Run</div>
+                <div class="month-chip active">Jun — Sardine Run</div>
+                <div class="month-chip active">Jul — Sardine Run / Whales</div>
+                <div class="month-chip active">Aug — Whale Watching Peak</div>
+                <div class="month-chip active">Sep — Whale Watching / Penguins</div>
+                <div class="month-chip">Oct — Manta Rays / Turtles Arrive</div>
+                <div class="month-chip">Nov — Turtle Nesting Begins</div>
+                <div class="month-chip">Dec — Turtle Season / Whale Sharks</div>
+            </div>
+
+            <!-- ==============================
+                 SECTION 1: PUBLIC EVENTS
+            ================================ -->
+            <span class="section-label">Section 01 — Public Marine Events</span>
+            <h2 class="section-title">KZN Public Marine Events & Seasonal Experiences</h2>
+
+            <div class="event-grid">
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="sardine-run.png" alt="Sardine Run KZN">
+                        <div class="date-ribbon">June – July<br>Annual</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>The Sardine Run</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Wild Coast to South Coast KZN</span></div>
+                            <div class="event-meta-item">📅 <span>June – July (peak: mid-June)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Free to observe / guided dives available</span></div>
+                        </div>
+                        <p>The Sardine Run is one of the greatest wildlife spectacles on Earth — billions of sardines migrating northward along the KZN South Coast in a mass so vast it can be seen from space. The sardines are followed by thousands of common and bottlenose dolphins, bronze whaler and dusky sharks, Cape gannets diving from above, and occasionally humpback whales and Bryde's whales that intercept the baitballs from below. Coastal towns like Port Shepstone, Margate, Scottburgh, and Amanzimtoti become focal points for spectators and divers during peak events, with operators offering snorkel and dive experiences within active baitballs. No two Sardine Run seasons are identical in timing or intensity — but June is historically the most reliable window.</p>
+                        <div class="event-tags">
+                            <span class="tag">South Coast KZN</span>
+                            <span class="tag">Free to observe</span>
+                            <span class="tag">Dive operators available</span>
+                            <span class="tag">Annual spectacle</span>
+                        </div>
+                        <a href="https://www.sardinerun.com" target="_blank" class="learn-more">More Information</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="whale-watching-event.png" alt="Humpback Whale Watching KZN">
+                        <div class="date-ribbon">Jun – Nov<br>Annual</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Humpback Whale Watching Season</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Entire KZN Coastline</span></div>
+                            <div class="event-meta-item">📅 <span>June – November</span></div>
+                            <div class="event-meta-item">🎟️ <span>Boat-based tours from R350 – R800pp</span></div>
+                        </div>
+                        <p>Over 30,000 humpback whales migrate through KZN's waters annually on one of the longest mammal migrations on the planet — from their Antarctic feeding grounds northward to breeding and calving areas in the warm tropical Indian Ocean. KZN's warm coastal waters provide an ideal corridor, and whale watching from shore is possible at many headlands and elevated viewpoints along the coast from June through October. Boat-based whale watching tours operate from Durban, Ballito, Shelly Beach, and several other KZN ports, offering close-up encounters with breaching, spy-hopping, and tail-slapping whales at remarkably short distances. August and September typically offer the highest encounter rates as the southbound migration passes through.</p>
+                        <div class="event-tags">
+                            <span class="tag">All KZN ports</span>
+                            <span class="tag">Boat tours available</span>
+                            <span class="tag">Shore viewing possible</span>
+                            <span class="tag">Peak: Aug – Sep</span>
+                        </div>
+                        <a href="https://www.bing.com/maps?q=whale+watching+tours+KZN" target="_blank" class="learn-more">Find Tour Operators</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="turtle-tours.png" alt="Loggerhead Turtle Nesting KZN">
+                        <div class="date-ribbon">Nov – Jan<br>Annual</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Loggerhead & Leatherback Turtle Tours</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>iSimangaliso Wetland Park — Thonga Beach</span></div>
+                            <div class="event-meta-item">📅 <span>November – January (guided nights)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Ezemvelo-authorised guided tours only</span></div>
+                        </div>
+                        <p>The loggerhead and leatherback turtle nesting season on KZN's Maputaland beaches is one of Africa's most extraordinary wildlife experiences. Female turtles that hatched on these same beaches decades ago return every few years to lay their eggs, emerging from the darkness of the ocean to haul themselves above the high-tide line and excavate their nest chambers by hand. Ezemvelo KZN Wildlife authorises a limited number of guided night tours that allow visitors to observe nesting turtles under strict protocols — no torches, no flash photography, minimum group sizes and maximum distances enforced. Accommodation at Bhanga Nek, Rocktail Beach Camp, and Thonga Beach Lodge provides the closest access to active nesting beaches.</p>
+                        <div class="event-tags">
+                            <span class="tag">Maputaland coast</span>
+                            <span class="tag">Guided night tours only</span>
+                            <span class="tag">Ezemvelo-authorised</span>
+                            <span class="tag">Advanced booking essential</span>
+                        </div>
+                        <a href="https://www.isimangaliso.com" target="_blank" class="learn-more">Book Through iSimangaliso</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="penguin-colony.png" alt="African Penguin Stony Point">
+                        <div class="date-ribbon">Year-Round<br>Best: Jul – Oct</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>African Penguin Colony — Stony Point</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Betty's Bay, Western Cape (day trip from KZN)</span></div>
+                            <div class="event-meta-item">📅 <span>Year-round; peak July – October (moult & breeding)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Small entry fee</span></div>
+                        </div>
+                        <p>While African penguins do not breed in KZN itself, the Stony Point colony at Betty's Bay in the Western Cape — one of only a few mainland colonies in the world — is accessible as an extended drive or overnight trip for KZN visitors making their way around the coast. The colony is visible from a well-maintained boardwalk system that allows close observation without disturbance. Peak moult season (July – September) sees the beach densely populated with moulting birds that cannot enter the water until their new feathers are fully grown. This is combined with breeding activity that makes the colony particularly active and engaging. Closer to KZN, occasional individual African penguins strand on KZN beaches — any stranded or oiled penguin should be reported to SANCCOB's KZN response network.</p>
+                        <div class="event-tags">
+                            <span class="tag">Endangered species</span>
+                            <span class="tag">Western Cape colony</span>
+                            <span class="tag">Boardwalk access</span>
+                            <span class="tag">Year-round visits</span>
+                        </div>
+                        <a href="https://www.sanccob.co.za" target="_blank" class="learn-more">SANCCOB — Penguin Conservation</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="beach-cleanup.png" alt="KZN Beach Clean-ups">
+                        <div class="date-ribbon">Monthly<br>Year-Round</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>KZN Beach & Estuary Clean-up Days</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Multiple KZN locations monthly</span></div>
+                            <div class="event-meta-item">📅 <span>Year-round — major drives in Sep (Clean-up & Recycle) & Apr (Earth Month)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Free — volunteers welcome</span></div>
+                        </div>
+                        <p>Beach and estuary clean-up events are held regularly along KZN's coastline, coordinated by a range of organisations including the Two Oceans Aquarium Foundation, WILDOCEANS, Keep it Clean KZN, local surf clubs, and municipal environmental units. September's International Coastal Clean-up, coordinated globally by Ocean Conservancy and locally through various NGOs, is KZN's largest single-day beach clean-up event — generating hundreds of volunteers across dozens of sites from Kosi Bay to the Wild Coast border simultaneously. Individual beach clean-ups are also run monthly at many locations by committed community groups. Participation requires no special equipment — just your own bags and willingness to collect litter.</p>
+                        <div class="event-tags">
+                            <span class="tag">Free to participate</span>
+                            <span class="tag">All ages welcome</span>
+                            <span class="tag">Families encouraged</span>
+                            <span class="tag">Multiple sites monthly</span>
+                        </div>
+                        <a href="https://www.wildoceans.org" target="_blank" class="learn-more">WILDOCEANS — Find Clean-ups</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="manta-rays-event.png" alt="Manta Ray Aggregations Sodwana Bay">
+                        <div class="date-ribbon">Oct – Feb<br>Annual</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Manta Ray Season — Sodwana Bay</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Sodwana Bay, iSimangaliso Wetland Park</span></div>
+                            <div class="event-meta-item">📅 <span>October – February (peak: Nov – Jan)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Via registered dive operators only</span></div>
+                        </div>
+                        <p>Sodwana Bay's reef systems host seasonal aggregations of reef manta rays that arrive each year from October through February to feed on the plankton blooms generated by the area's productive inshore currents. Encounters with manta rays at Sodwana — gliding effortlessly through the blue water above the reef, sometimes in groups of a dozen or more — are among the most memorable wildlife experiences available to divers anywhere in southern Africa. Several Sodwana dive operators run dedicated manta-focused dive excursions during peak season. Mantas can also be encountered while snorkelling at certain sites during periods of particularly dense plankton blooms in the surface water.</p>
+                        <div class="event-tags">
+                            <span class="tag">Sodwana Bay</span>
+                            <span class="tag">Dive operators available</span>
+                            <span class="tag">Snorkelling possible</span>
+                            <span class="tag">Peak: Nov – Jan</span>
+                        </div>
+                        <a href="https://www.isimangaliso.com" target="_blank" class="learn-more">Sodwana Bay Information</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="dolphin-tours.png" alt="Dolphin Watching KZN">
+                        <div class="date-ribbon">Year-Round<br>Best: Jun – Sep</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Dolphin Watching & Swim-with-Dolphins</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Durban, Umhlanga, Sodwana, Shelly Beach</span></div>
+                            <div class="event-meta-item">📅 <span>Year-round; peak encounters during Sardine Run</span></div>
+                            <div class="event-meta-item">🎟️ <span>Boat tours from R350pp</span></div>
+                        </div>
+                        <p>Bottlenose and common dolphins are year-round residents of KZN's inshore waters, frequently encountered from shore and almost guaranteed on any boat-based excursion. The Sardine Run months bring tens of thousands of common dolphins to the South Coast in the largest marine mammal aggregations visible from land anywhere in Africa. During quieter months, resident Durban bottlenose dolphins are reliably encountered close inshore, often bow-riding alongside vessels. Responsible swim-with-dolphin experiences operate from several KZN ports — prioritise operators who follow DFFE guidelines on approach distances and interaction protocols, and who do not harass animals for the benefit of photographs.</p>
+                        <div class="event-tags">
+                            <span class="tag">Year-round</span>
+                            <span class="tag">Shore & boat viewing</span>
+                            <span class="tag">Sardine Run peak</span>
+                            <span class="tag">Multiple locations</span>
+                        </div>
+                        <a href="https://www.bing.com/maps?q=dolphin+tours+KZN" target="_blank" class="learn-more">Find KZN Dolphin Tours</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="sodwana-diving.png" alt="Sodwana Bay Diving">
+                        <div class="date-ribbon">Oct – May<br>Best Visibility</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Sodwana Bay Open Diving Season</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Sodwana Bay — Two Mile to Nine Mile Reef</span></div>
+                            <div class="event-meta-item">📅 <span>Year-round; peak visibility Oct – May</span></div>
+                            <div class="event-meta-item">🎟️ <span>Dive permits required — via SANParks</span></div>
+                        </div>
+                        <p>Sodwana Bay is South Africa's premier coral reef diving destination and one of the top reef dive sites in the Indian Ocean. The reef system extends from Two Mile Reef — a shallow, current-swept wall hosting enormous schools of reef fish — through to the more remote Nine Mile and Quarter Mile reefs with their pristine hard coral gardens. The site is accessible to divers of all experience levels, from open-water beginners at sheltered launch sites to advanced divers exploring the deeper walls. Resident species include potato bass, ragged-tooth sharks (winter months), loggerhead turtles, moray eels, and occasionally whale sharks. Dive entry requires SANParks permits obtained in advance.</p>
+                        <div class="event-tags">
+                            <span class="tag">All certification levels</span>
+                            <span class="tag">SANParks permit required</span>
+                            <span class="tag">Multiple reefs</span>
+                            <span class="tag">Accommodation on-site</span>
+                        </div>
+                        <a href="https://www.sanparks.org" target="_blank" class="learn-more">SANParks Sodwana Permits</a>
+                    </div>
+                </article>
+
+                <article class="event-card public-event">
+                    <div class="event-image">
+                        <img src="ocean-day.png" alt="World Ocean Day KZN">
+                        <div class="date-ribbon">September<br>Annual</div>
+                        <span class="type-badge public">Public Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>World Ocean Day & Marine Conservation Events</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>Durban & various KZN locations</span></div>
+                            <div class="event-meta-item">📅 <span>June 8 (World Ocean Day) & September (Ocean Month)</span></div>
+                            <div class="event-meta-item">🎟️ <span>Mostly free — check organisers for details</span></div>
+                        </div>
+                        <p>World Ocean Day on 8 June and South Africa's Ocean Month in September anchor a series of marine conservation public events across KZN each year. These range from school education programmes and public talks hosted by uShaka Marine World and the eThekwini Beach Safety Unit, to shoreline and estuary monitoring citizen science days run by academic institutions and NGOs, to community awareness campaigns in coastal informal settlements most affected by marine pollution and estuary degradation. Events are coordinated across multiple organisations and vary year to year — follow the WILDOCEANS and Two Oceans Aquarium Foundation social media channels for current listings as the dates approach.</p>
+                        <div class="event-tags">
+                            <span class="tag">June 8 — World Ocean Day</span>
+                            <span class="tag">September — Ocean Month</span>
+                            <span class="tag">Education & awareness</span>
+                            <span class="tag">Community events</span>
+                        </div>
+                        <a href="https://www.wildoceans.org" target="_blank" class="learn-more">WILDOCEANS Event Calendar</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- ==============================
+                 SECTION 2: OUR EVENTS
+            ================================ -->
+            <span class="section-label">Section 02 — Sub-Surface Events</span>
+            <h2 class="section-title">Our Events — Sub-Surface Experiences</h2>
+
+            <div class="event-grid">
+
+                <article class="event-card our-event">
+                    <div class="event-image">
+                        <img src="coastal-trek.png" alt="KZN Coastal Trek Sub-Surface">
+                        <div class="date-ribbon our">Dates<br>TBA 2026</div>
+                        <span class="type-badge ours">Sub-Surface Event</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>KZN Coastal Trek</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📍 <span>KwaZulu-Natal Coastline — Route TBA</span></div>
+                            <div class="event-meta-item">📅 <span>2026 — Dates to be announced</span></div>
+                            <div class="event-meta-item">🎟️ <span>Details to follow — register your interest below</span></div>
+                        </div>
+                        <p>The KZN Coastal Trek is Sub-Surface's flagship guided coastal experience — a multi-day journey along sections of KwaZulu-Natal's coastline that combines the physical experience of walking the coast with guided interpretation of the marine and coastal environments encountered along the way. Participants will engage directly with the ecosystems, species, and conservation challenges documented throughout this encyclopedia — from intertidal reef ecology and estuarine systems to the impacts of coastal development and marine pollution visible from the shoreline itself. The trek is designed to be accessible to motivated participants of reasonable fitness, not technical climbers or endurance athletes. Full details on route, duration, difficulty, cost, and accommodation are in development. Register your interest via our social media channels or email to be notified as soon as dates are confirmed.</p>
+                        <div class="event-tags">
+                            <span class="tag our">Sub-Surface</span>
+                            <span class="tag our">Multi-day guided trek</span>
+                            <span class="tag our">Marine interpretation</span>
+                            <span class="tag our">Dates TBA 2026</span>
+                        </div>
+                        <a href="/cdn-cgi/l/email-protection#cb88b9aeaabfa4b9b8a7aaa9fbf8fa8ba4bebfa7a4a4a0e5a8a4a6f4b8bea9a1aea8bff6809185eb88a4aab8bfaaa7eb9fb9aea0eb294b5feb99aeaca2b8bfaeb9eb82a5bfaeb9aeb8bf" class="learn-more our-btn">Register Your Interest</a>
+                    </div>
+                </article>
+
+                <article class="event-card coming-soon">
+                    <div class="event-image">
+                        <img src="coming-soon.png" alt="More Events Coming Soon">
+                        <span class="type-badge soon">Coming Soon</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>More Events Coming Soon</h3>
+                        <div class="event-meta">
+                            <div class="event-meta-item">📅 <span>Watch this space — 2026 programme in development</span></div>
+                        </div>
+                        <p>We are developing a growing programme of Sub-Surface events and guided experiences for 2026 and beyond. These will include guided reef snorkelling sessions, estuary kayak and walk experiences, photography workshops focused on intertidal and coastal ecosystems, and citizen science participation days. Follow us on social media at <strong>@Subsurface031</strong> across TikTok, Instagram, YouTube, and Facebook to be notified as new events are announced. If you have a specific experience or event type you would like to see us offer, we welcome suggestions via email.</p>
+                        <div class="event-tags">
+                            <span class="tag">Follow @Subsurface031</span>
+                            <span class="tag">More info coming soon</span>
+                        </div>
+                        <a href="/cdn-cgi/l/email-protection#3e7d4c5b5f4a514c4d525f5c0e0d0f7e514b4a52515155105d5153014d4b5c545b5d4a036d4b5c136d4b4c585f5d5b1e7b485b504a4d1edcbeaa1e6d4b59595b4d4a575150" class="learn-more disabled">Announce Soon</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Annual calendar table -->
+            <h2 class="section-title">KZN Marine Events — Annual Calendar Overview</h2>
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Event / Experience</th>
+                        <th>Type</th>
+                        <th>Season / Months</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sardine Run</td>
+                        <td><span class="cal-badge annual">Annual Phenomenon</span></td>
+                        <td>June – July (peak mid-June)</td>
+                        <td>South Coast KZN — Wild Coast to Durban</td>
+                    </tr>
+                    <tr>
+                        <td>Humpback Whale Watching</td>
+                        <td><span class="cal-badge public">Public — Boat Tours</span></td>
+                        <td>June – November (peak Aug – Sep)</td>
+                        <td>Entire KZN coast; Durban, Ballito, South Coast ports</td>
+                    </tr>
+                    <tr>
+                        <td>Loggerhead Turtle Nesting Tours</td>
+                        <td><span class="cal-badge public">Public — Guided (Permit)</span></td>
+                        <td>November – January</td>
+                        <td>Maputaland — Bhanga Nek, Rocktail Bay, Thonga Beach</td>
+                    </tr>
+                    <tr>
+                        <td>Leatherback Turtle Nesting Tours</td>
+                        <td><span class="cal-badge public">Public — Guided (Permit)</span></td>
+                        <td>November – January</td>
+                        <td>Maputaland — same as loggerhead sites</td>
+                    </tr>
+                    <tr>
+                        <td>Manta Ray Season — Sodwana</td>
+                        <td><span class="cal-badge public">Public — Dive Tours</span></td>
+                        <td>October – February (peak Nov – Jan)</td>
+                        <td>Sodwana Bay — Two Mile to Five Mile Reef</td>
+                    </tr>
+                    <tr>
+                        <td>African Penguin Moult & Breeding</td>
+                        <td><span class="cal-badge public">Public — Viewing</span></td>
+                        <td>July – October</td>
+                        <td>Stony Point, Betty's Bay (Western Cape)</td>
+                    </tr>
+                    <tr>
+                        <td>Sodwana Diving — Peak Visibility</td>
+                        <td><span class="cal-badge public">Public — Dive Permit</span></td>
+                        <td>October – May</td>
+                        <td>Sodwana Bay, iSimangaliso Wetland Park</td>
+                    </tr>
+                    <tr>
+                        <td>Dolphin Watching — Sardine Season</td>
+                        <td><span class="cal-badge annual">Annual Phenomenon</span></td>
+                        <td>June – July</td>
+                        <td>South Coast KZN — all inshore waters</td>
+                    </tr>
+                    <tr>
+                        <td>Beach & Estuary Clean-up Days</td>
+                        <td><span class="cal-badge public">Public — Volunteer</span></td>
+                        <td>Monthly; major drives in April & September</td>
+                        <td>Multiple KZN sites — check WILDOCEANS listings</td>
+                    </tr>
+                    <tr>
+                        <td>World Ocean Day Events</td>
+                        <td><span class="cal-badge public">Public — Free</span></td>
+                        <td>June 8 annually</td>
+                        <td>Durban uShaka Marine World & partner venues</td>
+                    </tr>
+                    <tr>
+                        <td>South Africa Ocean Month</td>
+                        <td><span class="cal-badge public">Public — Various</span></td>
+                        <td>September annually</td>
+                        <td>Multiple KZN & national locations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>KZN Coastal Trek — Sub-Surface</strong></td>
+                        <td><span class="cal-badge ours">Sub-Surface Event</span></td>
+                        <td>2026 — Dates TBA</td>
+                        <td>KZN Coastline — Route TBA</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Closing block -->
+            <div class="closing-block">
+                <h3>Stay Connected — Never Miss an Event</h3>
+                <p>KZN's marine events calendar is dynamic — the timing of natural phenomena like the Sardine Run and humpback whale migration varies year to year depending on ocean temperatures, currents, and prey availability. The best way to stay informed on current conditions and event timing is to follow organisations and community groups with eyes on the water. For the Sardine Run specifically, the <a href="https://www.sardinerun.com" target="_blank">Sardine Run website</a> and community groups including Shaka Barker Tours and Salt Rock Sharks provide up-to-the-day baitball and dolphin reports during the June – July window.</p>
+                <p>For Sub-Surface events and guided experiences, follow us across all platforms at <strong>@Subsurface031</strong> on TikTok, Instagram, Facebook, and YouTube. Event announcements, registration details, and participation information will be shared first on social media before appearing on this page. You can also reach us directly at <a href="/cdn-cgi/l/email-protection#b7f4c5d2d6c3d8c5c4dbd6d5878486f7d8c2c3dbd8d8dc99d4d8da"><span class="__cf_email__" data-cfemail="5d1e2f383c29322f2e313c3f6d6e6c1d32282931323236733e3230">[email&#160;protected]</span></a> to register interest in the KZN Coastal Trek or any other upcoming Sub-Surface experience.</p>
+                <p>We are committed to ensuring that all Sub-Surface events are conducted in accordance with the environmental principles documented in this encyclopedia — minimal impact, maximum awareness, and a genuine contribution to the understanding and conservation of KZN's extraordinary coastal environment. We look forward to sharing it with you in person.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                   <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

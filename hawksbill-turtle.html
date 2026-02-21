@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawksbill Turtle – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="turtles.html">Turtles</a>
+                <span>›</span>
+                Hawksbill Turtle
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="hawksbill.png" alt="Hawksbill Turtle">
+                    <p class="image-caption">Eretmochelys imbricata — Hawksbill Turtle, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Hawksbill Turtle</h2>
+                    <span class="scientific-name">Eretmochelys imbricata</span>
+                    <span class="conservation-badge">⚠ Critically Endangered</span>
+                    <p>The hawksbill turtle is one of the most visually stunning animals in the ocean — and one of the most critically threatened. Named for the distinctive narrow, curved beak that resembles the beak of a bird of prey, the hawksbill is intimately associated with coral reef ecosystems, where it plays an irreplaceable ecological role as a specialist predator of sea sponges. Its exquisitely patterned shell — an amber-coloured mosaic of overlapping scutes with amber, orange, and brown markings — is among the most beautiful natural structures in the marine world.</p>
+                    <p>In KwaZulu-Natal, hawksbills are occasional visitors rather than resident nesters in large numbers, most commonly encountered by divers on the coral and rocky reef systems of the northern KZN coast around Sodwana Bay and the iSimangaliso Marine Protected Area. Each sighting is a privilege — globally, the hawksbill population has declined by over 80% in the past century, driven almost entirely by human exploitation of their shells, and they are now one of the rarest sea turtles in the Indian Ocean.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Shell Length</span>
+                            <span class="stat-value">Up to 1.0 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~80 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">30 – 50+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Nesting Season</span>
+                            <span class="stat-value">Nov – Feb</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Eggs per Nest</span>
+                            <span class="stat-value">~140 eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">20 – 25 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The hawksbill is a small to medium-sized sea turtle with a distinctively narrow, elongated head terminating in a sharp, curved beak — the feature from which it takes its name. This specialised beak is perfectly adapted for probing into crevices and recesses in coral reefs to extract sponges and other encrusting organisms that are inaccessible to less precisely equipped predators.</p>
+                    <p>The carapace is one of the most visually striking of all turtles — covered in overlapping scutes arranged in an imbricate (shingled) pattern, particularly pronounced in juveniles. The shell is rich amber, brown, and orange with irregular darker streaks and blotches, creating a tortoiseshell pattern that has been prized by humans for centuries. The scutes become less overlapping and more flush in adults.</p>
+                    <p>The hawksbill has two pairs of prefrontal scales and two claws on each front flipper — distinguishing features from other species. Adults in KZN waters typically measure 70 to 90 cm in carapace length and weigh between 45 and 70 kg, making them noticeably smaller than the loggerhead or green turtle.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Hawksbills are closely associated with coral reef environments throughout their adult lives, rarely venturing far from the reef habitats where their sponge prey is found. They are generally more sedentary than other sea turtle species, establishing home ranges around productive reef areas and returning to the same feeding sites repeatedly. In KZN, they are most reliably encountered on the northern reef systems where coral cover is highest.</p>
+                    <p>They are capable divers, reaching depths of 20 to 30 metres routinely while foraging on reefs, and occasionally deeper when following sponge prey into deeper reef structures. Unlike the more wide-ranging loggerhead or leatherback, hawksbills tend to remain in relatively localised areas for extended periods, making them vulnerable to targeted hunting and local reef degradation.</p>
+                    <p>Hawksbills are notably more tolerant of diver presence than some other sea turtle species and will often continue feeding when approached carefully and respectfully. This approachability, however, has historically made them easier targets for poachers — a fact that has contributed to their catastrophic population decline.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>The hawksbill is the world's most specialised sponge-eating vertebrate. Sponges make up the vast majority of the adult diet — a remarkable dietary choice given that many sponge species contain toxic compounds, silica spicules, and other defences that render them inedible or dangerous to almost every other animal. Hawksbills have evolved physiological tolerances to these toxins that make them uniquely capable of exploiting this abundant but otherwise largely untapped food resource.</p>
+                    <p>By selectively removing sponges from reef surfaces, hawksbills prevent fast-growing sponge species from overgrowing and smothering slower-growing corals — a critical ecosystem service that directly maintains coral reef biodiversity and structure. Reefs without hawksbill turtles show measurable increases in sponge cover and corresponding decreases in coral diversity.</p>
+                    <ul>
+                        <li>Sea sponges (primary diet)</li>
+                        <li>Soft corals and sea anemones</li>
+                        <li>Jellyfish and tunicates</li>
+                        <li>Crustaceans and molluscs</li>
+                        <li>Algae and seagrass (occasionally)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Nesting & Reproduction</h3>
+                    <p>Hawksbill turtles nest in relatively small numbers on KZN's iSimangaliso beaches, typically within the same nesting season as loggerheads and leatherbacks from November through February. They tend to nest on beaches with more vegetation and debris than the open sand preferred by loggerheads, often nesting under or near beach vegetation. Each female produces around 140 eggs per clutch — the largest clutch size of any of the KZN nesting turtles — and may nest two to four times per season.</p>
+                    <p>Female hawksbills reach sexual maturity at 20 to 25 years of age and return to nest on or near their natal beach, though they show somewhat less precise natal homing than loggerheads. The interval between nesting years is typically two to three years. Given the small number of hawksbills nesting in KZN, every successful clutch and hatchling represents a meaningful contribution to the species' survival in the Indian Ocean.</p>
+                    <p>Hatchling hawksbills are among the smallest of all sea turtle hatchlings, measuring just 4 to 4.5 cm at emergence. After entering the ocean, they spend their early juvenile phase in the open ocean, drifting with floating seaweed mats, before recruiting to coral reef habitats as subadults.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Hawksbill turtles in KZN are most strongly associated with the coral reef and rocky reef systems of the northern coast, particularly the multi-site reef complex at Sodwana Bay — one of South Africa's most celebrated dive destinations — and the broader iSimangaliso Marine Protected Area extending north to the Mozambique border. The Two-Mile, Five-Mile, Nine-Mile, and Quartermill reefs at Sodwana collectively provide some of the most productive hawksbill foraging habitat on the KZN coast, with well-developed sponge communities on both shallow and deep reef structures.</p>
+                <p>Hawksbills are not commonly encountered south of the iSimangaliso system in KZN, as suitable coral reef habitat becomes scarcer below approximately 28°S. Occasional individuals are recorded at Aliwal Shoal and Protea Banks, where rocky reef structures support sponge communities, but these are exceptional sightings. The species is most reliably seen by divers at Sodwana's deeper reef sites, particularly at depths of 15 to 30 metres where large barrel sponges and encrusting sponge communities are most abundant.</p>
+                <p>The hawksbill is listed as Critically Endangered on the IUCN Red List — the most severe conservation category before extinction in the wild. Global populations have declined by over 80% over the past century, primarily due to harvesting of their shells for the "tortoiseshell" trade — used in jewellery, ornaments, combs, and spectacle frames — and egg collection. Although international trade in hawksbill products has been banned under CITES since 1977, illegal harvesting continues in parts of their range. In KZN, the primary threats are accidental bycatch in fishing gear, reef degradation from climate-driven coral bleaching, and plastic ingestion.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Critically Endangered</h4>
+                    <p>The hawksbill is one of the most endangered sea turtle species in the world, with global populations having declined by over 80% in the past century. It is listed as Critically Endangered on the IUCN Red List — just one step from extinction in the wild — making every individual sighting in KZN waters a genuinely rare and significant encounter.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tortoiseshell Trade</h4>
+                    <p>The hawksbill's beautiful patterned shell — known as "tortoiseshell" — has been harvested by humans for over 2,000 years for use in jewellery, ornaments, and decorative items. An estimated 9 million hawksbills were killed in the 20th century alone for the tortoiseshell trade. Although now internationally banned, illegal trade continues and remains a significant threat.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Reef Architects</h4>
+                    <p>Hawksbills are considered keystone species of coral reef ecosystems. By selectively grazing sponges, they prevent fast-growing sponge species from overgrowing and smothering coral colonies. Without hawksbills, sponge populations expand rapidly and coral diversity declines — making the turtle's presence or absence a measurable indicator of reef ecosystem health.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Toxic Sponge Immunity</h4>
+                    <p>Many of the sponge species that hawksbills eat are lethally toxic to other animals, containing compounds that cause paralysis, organ damage, or death. Hawksbills have evolved unique physiological detoxification mechanisms that allow them to eat these chemically defended prey without harm — a specialisation found in no other vertebrate species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Glowing in the Dark</h4>
+                    <p>Hawksbill turtles are the first reptile ever recorded exhibiting biofluorescence — they absorb blue light from the ocean and re-emit it as vivid green and red glowing patterns. This remarkable discovery was made in 2015 and is thought to be related to the presence of fluorescent compounds from the sponges and corals they consume.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Largest Clutch in KZN</h4>
+                    <p>Despite being the smallest of the three sea turtles that nest regularly in KZN, the hawksbill lays the largest clutches — averaging around 140 eggs per nest compared to approximately 120 for the loggerhead and 80 fertilised eggs for the leatherback. This high clutch size partially compensates for the species' relatively low nesting numbers in KZN.</p>
+                </div>
+            </div>
+
+            <a href="turtles.html" class="back-link">← Back to Turtles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

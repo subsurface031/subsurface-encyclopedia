@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Lobster (Crayfish) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+<nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Rock Lobster (Crayfish)
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="rock-lobster.png" alt="Rock Lobster">
+                    <p class="image-caption">Panulirus homarus — Rock Lobster (Crayfish), KZN reef systems</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Rock Lobster (Crayfish)</h2>
+                    <span class="scientific-name">Panulirus homarus</span>
+                    <span class="conservation-badge">⚠ Near Threatened</span>
+                    <p>The rock lobster — known throughout KwaZulu-Natal as crayfish or kreef — is one of the most iconic and culturally significant marine animals in the region. These armoured, spiny crustaceans are immediately recognisable by their reddish-brown to olive-green carapace bristling with sharp spines, their extraordinarily long antennae that can exceed the length of their bodies, and their powerful muscular tail that can propel them backward with explosive speed when threatened. Unlike the lobsters of cold northern waters, rock lobsters lack large front claws — their principal weapons are their spines, whip-like antennae, and the crushing force of their powerful walking legs.</p>
+                    <p>Found throughout KZN's rocky reefs from the shallows to depths exceeding 100 metres, rock lobsters are the apex scavengers and predators of the reef community — cleaning up carrion, crushing molluscs and sea urchins, and competing aggressively for the crevice refuges that shelter them through the daylight hours. After dark, they emerge from their dens to prowl the reef in search of food, sometimes travelling hundreds of metres from their daytime retreats. This nocturnal behaviour, combined with their preference for deep, dark crevices, makes rock lobsters simultaneously elusive and exciting quarry for divers.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">~40 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~4 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">1 – 100+ m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~15+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Nocturnal</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Legal Size</span>
+                            <span class="stat-value">80 mm CL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Rock lobsters are large, heavily armoured crustaceans with a hard, calcified exoskeleton — the carapace — covering the cephalothorax, and a segmented, muscular abdomen that terminates in a broad, fan-shaped tail. The carapace is typically reddish-brown to deep olive-green with variable cream or yellow patterning on the sides, and is covered with sharp forward-pointing spines that deter predators and protect the animal when wedged into crevices. Two large, prominent spines project forward above the eyes — the rostral horns — and provide additional armour to the vulnerable head region.</p>
+                    <p>The most distinctive feature of the rock lobster is its pair of enormously long antennae — whip-like sensory organs that can extend two or three times the length of the body and serve as both chemical detectors and defensive weapons. When threatened, a rock lobster will sweep these antennae rapidly back and forth, inflicting painful scrapes on the hands of divers attempting to extract them from crevices. Beneath the antennae are two smaller antennules with bifurcated tips, used primarily for chemical sensing of food and conspecifics.</p>
+                    <p>The ten walking legs are strong and adapted for gripping irregular reef surfaces. The first pair bears small chelae — pincer-like claws — that are used for manipulating food rather than offensive combat. The abdomen carries swimmerets on its underside, and in females these are used to hold and fan the developing eggs. Adult males can be distinguished from females by the absence of small claws on the last pair of walking legs — a feature females use to clean and maintain their egg masses.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Rock lobsters are predominantly nocturnal, spending daylight hours concealed deep within reef crevices, caves, and overhangs. Entering a cave known to shelter lobsters at night can reveal dozens of animals crowded together — often stacked in layers with antennae protruding from every crack. This gregarious daytime sheltering behaviour provides collective protection against predators, and individual lobsters will often return to the same den repeatedly over weeks or months. They emerge after dark to forage across the reef, sometimes moving considerable distances from their daytime refuges.</p>
+                    <p>Despite their armoured appearance, rock lobsters face significant predation pressure from large reef fish including octopuses — their most feared predator — and from sharks, moray eels, and large grouper. When detected in open water, a rock lobster's primary defence is a rapid backward escape response powered by strong contractions of the abdominal muscles — this "tail-flip" can propel the animal several body lengths in an instant. Repeated tail-flips can carry a lobster away from danger surprisingly quickly. When cornered in a crevice, they present their spiny carapace and lashing antennae to the entrance, making extraction extremely difficult.</p>
+                    <p>Rock lobsters communicate through stridulation — producing rasping sounds by rubbing the base of their antennae against ridged structures on the carapace. This sound, audible to divers, is produced primarily as a threat display when the animal feels cornered or threatened. Juveniles and adults also exhibit complex social hierarchies, with larger individuals dominating prime shelter sites and displacing smaller lobsters from desirable crevices.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Rock lobsters are opportunistic omnivores and scavengers that feed on a wide variety of prey encountered during their nocturnal foraging excursions. Their diet shifts somewhat with age and size — juveniles feeding more heavily on soft-bodied invertebrates and algae, while adults increasingly target hard-shelled prey that their powerful mandibles and walking legs can crush. Mussels, whelks, limpets, and other gastropods form a major component of the adult diet in rocky intertidal and shallow subtidal habitats, supplemented by sea urchins whose sharp spines are overcome by the lobster's own armoured body.</p>
+                    <p>Carrion plays an important role in the diet — rock lobsters are attracted to dead fish and invertebrates from considerable distances and will aggregate at carcasses on the reef floor. This scavenging behaviour makes them important contributors to reef nutrient cycling, breaking down organic matter and releasing nutrients back into the system. They also consume encrusting organisms including bryozoans and coralline algae, and will take polychaete worms, small crustaceans, and occasionally slow-moving or encrusting fish.</p>
+                    <ul>
+                        <li>Mussels, limpets, whelks, and other molluscs</li>
+                        <li>Sea urchins and other echinoderms</li>
+                        <li>Carrion and dead organic matter</li>
+                        <li>Polychaete worms and small crustaceans</li>
+                        <li>Coralline algae and encrusting organisms</li>
+                        <li>Juvenile fish and slow-moving invertebrates</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Rock lobsters have a complex life history with several distinct phases. Mating occurs when females moult — shedding their hard exoskeleton to allow mating — and males must locate a receptive female in the brief window between moulting and rehardening of the new shell. Males deposit a sticky spermatophore on the underside of the female's thorax, which she uses to fertilise her eggs as they are extruded. Females carry thousands to hundreds of thousands of eggs attached to their swimmerets for two to five months, depending on water temperature, carefully fanning and cleaning them until they hatch.</p>
+                    <p>The larvae that hatch — called phyllosomas — are flat, transparent, spider-like creatures barely resembling their parents. They drift in the open ocean as plankton for six months to a year, passing through eleven or more larval stages and potentially dispersing hundreds of kilometres from their hatching site. This extended pelagic larval phase connects rock lobster populations across the entire Indian Ocean coastline of southern Africa and contributes to genetic connectivity between geographically distant reefs.</p>
+                    <p>After completing their larval development, post-larval lobsters — pueruli — settle onto shallow reef structures and begin their benthic lives. Juveniles grow rapidly through a series of moults — shedding and replacing their exoskeleton multiple times per year. Growth rates slow with age, and large lobsters may moult only once a year or less. Sexual maturity is typically reached at 3 to 5 years of age. The slow growth of adults and the vulnerability of juveniles to predation means that rock lobster populations recover slowly from depletion — making them highly susceptible to overfishing.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Rock Lobster in KZN: Culture, Fishing & Conservation</h3>
+                <p>The rock lobster occupies a special place in KwaZulu-Natal's coastal culture that goes far beyond its value as a seafood delicacy. For generations, diving for crayfish has been a rite of passage for young people growing up near the KZN coast — a tradition of freediving into reef caves, torchlight searches through dark crevices, and the shared excitement of a successful catch followed by a beach braai. The recreational rock lobster fishery is deeply embedded in the social fabric of coastal communities, from Richards Bay and Ballito in the north to the bluffs and reefs south of Durban and the rocky shores of the South Coast.</p>
+                <p>Recreational harvesting of rock lobsters is tightly regulated under South African law. Harvesters must hold a valid recreational permit, and there are strict limits on the number of lobsters that can be taken per person per day, as well as a minimum legal size — measured as carapace length from the rostral horns to the rear edge of the carapace — designed to ensure that lobsters have had at least one opportunity to reproduce before harvest. Berried females — those carrying eggs — may never be taken, and taking lobsters by SCUBA is prohibited; all recreational harvesting must be done by freediving, adding an element of skill and limiting the depth and duration of any individual dive.</p>
+                <p>Despite these regulations, rock lobster populations along the KZN coast have declined significantly over recent decades. Overfishing — both recreational and commercial — has reduced lobster numbers on accessible reefs close to population centres, and illegal harvesting remains a persistent problem. Climate change is an emerging threat, with warming ocean temperatures affecting lobster physiology, increasing the risk of mass mortality events when water temperatures spike, and potentially disrupting the larval connectivity patterns that replenish depleted reefs.</p>
+                <p>Effective conservation of KZN's rock lobsters requires a combination of strictly enforced legal frameworks, well-designed and adequately sized marine protected areas that serve as breeding reservoirs, public education about sustainable harvesting practices, and ongoing scientific monitoring of population status. The rock lobster's role as a keystone reef species — controlling sea urchin populations and contributing to the structural complexity of reef communities through its feeding and burrowing activities — means that its continued decline would have far-reaching consequences for reef ecosystems throughout KZN's coastal waters.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>No Claws, No Problem</h4>
+                    <p>Unlike the iconic American or European lobsters with their massive front claws, rock lobsters are spiny lobsters — they have no large chelae. Instead, they rely entirely on their armoured body, long spiny antennae, and powerful tail-flip escape response for defence. Their five pairs of walking legs end in small, sharp tips that grip rock surfaces remarkably well, making them extremely difficult to pull from a crevice once they have braced themselves inside.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Stridulation – The Sound of Fear</h4>
+                    <p>When threatened or handled, rock lobsters produce an audible rasping or squeaking sound by rubbing the base of their antennae against a file-like structure on the carapace — a process called stridulation. This sound, clearly audible underwater to divers and on land to people handling the animals, is believed to function as a startle response to predators and may also serve as a communication signal to nearby lobsters. It is one of the tell-tale signs that you've cornered a lobster in a crevice.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Octopus Problem</h4>
+                    <p>Despite their impressive armour, rock lobsters have a powerful nemesis in the form of the octopus. Octopuses are arguably the most effective lobster predator on KZN's reefs — their flexible, armless bodies can reach into the narrowest crevices, their beak can penetrate the joints in the lobster's exoskeleton, and they inject a paralysing venom that immobilises prey. Lobsters are well aware of this threat and will actively flee from octopus scent, a behaviour that experienced spearfishers exploit to help locate lobster dens.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ghost Lobsters</h4>
+                    <p>Rock lobsters must shed their entire exoskeleton — including the hard outer layer of their eyes, antennae, and even the lining of their stomach and gills — in order to grow. In the days immediately after moulting, the new shell is soft and the lobster is almost completely defenceless. During this vulnerable period, lobsters retreat to the deepest available shelter and remain motionless until the new shell hardens sufficiently to offer protection. The shed exoskeleton, or exuvia, is often found in or near lobster dens and can initially be mistaken for a dead animal.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Incredible Larval Dispersal</h4>
+                    <p>Rock lobster larvae — phyllosomas — are among the most remarkable of all marine larvae. These tiny, flat, transparent creatures drift in ocean currents for six months to a year before settling onto reefs, potentially travelling hundreds or even thousands of kilometres from where they hatched. This extraordinary dispersal capacity means that a lobster caught on a reef in Sodwana Bay could have hatched from eggs off the coast of Mozambique or even Madagascar — making rock lobster populations a genuinely regional resource that transcends national borders.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Kreef Braai Tradition</h4>
+                    <p>In KZN's coastal communities, few culinary experiences rival the combination of a successful crayfish dive and a beach braai. Freshly caught rock lobsters are traditionally halved, brushed with garlic butter, and grilled over hot coals — the flesh turning white and sweet as it cooks, filling the air with an aroma that epitomises the KZN coastal lifestyle. This tradition connects generations of coastal families and remains one of the most cherished expressions of KZN's relationship with the sea, even as declining populations make it an increasingly rare and precious experience.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Creator<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

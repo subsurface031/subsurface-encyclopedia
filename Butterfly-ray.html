@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Rays – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+ </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+  <nav></nav>
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Butterfly Rays
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="butterfly.png" alt="Butterfly Ray">
+                    <p class="image-caption">Family Gymnuridae — Butterfly Rays, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Butterfly Rays</h2>
+                    <span class="scientific-name">Family Gymnuridae</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>Butterfly rays are among the most distinctive rays in KwaZulu-Natal's waters—characterized by their extremely wide, wing-like pectoral fins that create a disc much broader than it is long, giving them their namesake butterfly appearance. These graceful bottom-dwelling rays have very short tails relative to their disc width, often lacking the venomous spine found in their stingray relatives, and display remarkable camouflage abilities against sandy substrates.</p>
+                    <p>Several butterfly ray species inhabit KZN's shallow coastal waters, bays, and estuaries, where they feed on small invertebrates and fish buried in soft sediments. These rays are masters of concealment—their flattened bodies, cryptic coloration, and ability to partially bury themselves make them nearly invisible on sandy bottoms. Despite their large size—some species exceed 2 meters in disc width—butterfly rays are often overlooked due to their exceptional camouflage and sedentary nature.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Disc Width</span>
+                            <span class="stat-value">2.3 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">60 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">10 – 15 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">3 – 5 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">6 – 9 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pups per Litter</span>
+                            <span class="stat-value">2 – 8</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Butterfly rays possess the most distinctive body shape among rays—an extremely broad, rhomboidal disc that is much wider than it is long, creating wingspan-to-length ratios that can exceed 2:1. The pectoral fins extend far laterally, creating the characteristic butterfly wing appearance. The disc is notably thin and flexible compared to other rays, with pointed or angular pectoral fin tips that enhance the wing-like silhouette.</p>
+                    <p>The tail is remarkably short—often less than one-third the disc width—and whip-like, tapering to a fine point. Most butterfly ray species lack a venomous tail spine, though some possess small spines or serrated ridges. This absence of a defensive weapon distinguishes them from their stingray relatives and reflects their reliance on camouflage rather than active defense. The tail's reduced size is an adaptation to their sedentary, benthic lifestyle where a long tail would be unnecessary.</p>
+                    <p>Coloration is typically cryptic—matching sandy or muddy substrates where they live. Dorsal surfaces range from grey-brown to olive or reddish-brown, often with subtle mottled patterns, spots, or reticulations that break up their outline. The ventral surface is white or pale. The skin is smooth and the eyes are small and positioned on top of the head, with large spiracles immediately behind for respiration while buried. Adult butterfly rays vary considerably in size by species—from small species reaching 50 cm disc width to large species exceeding 2.3 meters and weighing up to 60 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Butterfly rays are primarily sedentary, benthic animals that spend most of their time resting on sandy or muddy bottoms in shallow coastal waters. They exhibit remarkable ability to remain motionless for extended periods, often partially buried with only their eyes and spiracles visible. This cryptic behavior serves multiple purposes—avoiding predators, ambushing prey, and conserving energy in their nutrient-poor sandy habitats.</p>
+                    <p>When moving, butterfly rays swim with graceful, wave-like undulations of their enormous pectoral fins, creating a distinctive flying motion that inspired their common name. Despite their large size, they are relatively weak swimmers compared to more active rays like eagle rays or mantas. Movement is typically slow and deliberate, with rays gliding just above the bottom or settling periodically to rest and feed.</p>
+                    <p>Butterfly rays are generally solitary but may aggregate in areas with optimal conditions—particularly shallow bays and estuaries with abundant prey. They display strong site fidelity to productive feeding areas, with individual rays returning to the same locations repeatedly. Activity patterns are often crepuscular or nocturnal, with rays most active during dawn, dusk, and nighttime hours when many of their prey species are also active. During high tides, butterfly rays move into very shallow water—sometimes just centimeters deep—to feed on invertebrates in the surf zone. They are harmless to humans unless accidentally stepped on, when their thrashing can cause injury even without a venomous spine.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Butterfly rays are carnivorous benthic predators that feed primarily on small invertebrates and fish living in or on soft sediments. Their feeding strategy combines patient waiting with opportunistic ambush predation. They use highly developed electrosensory capabilities to detect prey buried in sand or mud, allowing them to hunt effectively even when prey is completely concealed and visual cues are absent.</p>
+                    <p>Feeding behavior typically involves the ray settling onto the bottom and using undulations of its disc edges to create small depressions or excavations in sediment, exposing hidden prey. The ray may also blow jets of water from its mouth and spiracles to uncover buried organisms. Once prey is exposed or detected, the ray uses its flexible pectoral fins to pin prey against the substrate before manipulating it to the mouth with coordinated fin movements.</p>
+                    <ul>
+                        <li>Small fish (gobies, flatfish, sand eels)</li>
+                        <li>Crustaceans (shrimp, crabs, mantis shrimp)</li>
+                        <li>Mollusks (bivalves, gastropods)</li>
+                        <li>Polychaete worms and other marine worms</li>
+                        <li>Small cephalopods (occasionally)</li>
+                    </ul>
+                    <p>Butterfly rays possess small mouths with numerous small, pointed teeth arranged in pavement-like bands—suitable for grasping and crushing soft-bodied prey and small shellfish. The teeth are not designed for cutting or tearing large prey; instead, butterfly rays typically consume prey whole or in manageable pieces. Their diet reflects the composition of benthic communities in their habitat, and feeding intensity often correlates with seasonal abundance of key prey species.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Butterfly rays are ovoviviparous—embryos develop inside eggs retained in the mother's uterus, where they eventually hatch and continue developing nourished by yolk reserves and uterine secretions enriched with nutrients. This reproductive strategy provides developing young with protection and supplemental nutrition, enhancing survival rates compared to egg-laying species. Sexual maturity is reached relatively early at 3 to 5 years when individuals reach 60 to 75% of their maximum disc width.</p>
+                    <p>Mating occurs primarily during warmer months in KwaZulu-Natal waters. Courtship and mating behavior follows the typical pattern for rays—males pursue females and grasp their pectoral fins with their teeth during copulation while inserting one of their paired claspers into the female's cloaca to transfer sperm. Multiple males may pursue a single receptive female, with competition sometimes resulting in females bearing multiple mating scars.</p>
+                    <p>Gestation periods range from 6 to 9 months depending on species and environmental conditions, particularly water temperature. Litter sizes are relatively small compared to many other rays—typically 2 to 8 pups, with most species producing 4 to 6 young per litter. Pups are born fully developed at 15 to 30 cm disc width depending on species. They receive no parental care and are immediately independent, though they typically remain in shallow nursery habitats—particularly protected bays and estuaries—during their vulnerable juvenile period. Females likely reproduce annually or biennially depending on food availability and body condition. This modest reproductive output makes butterfly ray populations vulnerable to overfishing—they cannot quickly compensate for elevated mortality rates.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Butterfly rays inhabit shallow coastal waters, bays, estuaries, and continental shelf areas throughout KwaZulu-Natal. They are strongly associated with soft substrates—particularly fine to medium sand and sandy mud—from the surf zone to depths of approximately 200 meters, though most species are most common in waters less than 50 meters deep. They show strong preference for areas with stable sediment and moderate water movement that maintains oxygen levels while not creating excessive turbulence.</p>
+                <p>Several butterfly ray species occur in KZN waters, though taxonomy and species identification remain challenging due to their similar appearance and limited scientific documentation. The spiny butterfly ray (Gymnura altavela) is among the largest species recorded in South African waters, capable of reaching 2.3 meters disc width. Smaller species of Gymnura also inhabit KZN's coastal waters, particularly in sheltered bays and estuaries. These rays are commonly encountered—though often overlooked—in popular swimming and surfing areas where they lie camouflaged on sandy bottoms.</p>
+                <p>Estuaries serve as particularly important habitats for butterfly rays, functioning as nursery areas for juveniles and feeding grounds for adults. KZN's major estuarine systems including Richards Bay, Durban Bay, and the St. Lucia estuary support resident and transient butterfly ray populations. These protected, food-rich environments provide optimal conditions for growth and survival during vulnerable early life stages. Many individuals show strong site fidelity to specific estuaries or bays, returning seasonally or remaining year-round if conditions permit.</p>
+                <p>Butterfly rays face significant conservation challenges throughout their range. They are classified as Vulnerable globally, with many populations showing substantial declines. Primary threats include fishing pressure—both targeted harvest and bycatch in commercial fisheries—particularly bottom trawling and gillnets that operate in their shallow coastal habitats. Their slow growth, late maturity, and low reproductive output make populations unable to sustain significant fishing mortality. Habitat degradation poses additional threats—coastal development, dredging, pollution, and altered freshwater flows into estuaries all impact the soft-sediment habitats and prey communities butterfly rays depend on.</p>
+                <p>In KwaZulu-Natal, butterfly rays receive partial protection within marine protected areas, but much of their core habitat lies outside protected zones where fishing pressure continues. Climate change may compound existing threats through warming waters altering prey distributions, sea level rise impacting estuarine nurseries, and increased storm intensity disturbing benthic habitats. Conservation requires expanded protection of shallow coastal habitats, reduction of fishing bycatch through gear modifications, restoration and protection of estuarine systems, and improved monitoring of population trends to detect and respond to further declines.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Widest Disc-to-Length Ratio</h4>
+                    <p>Butterfly rays possess the widest disc relative to body length among all rays—their disc width can exceed twice their disc length, creating the most extreme wing-like proportions in the ray world. This remarkable body shape is an adaptation to life on flat, featureless sandy bottoms where extreme flattening provides maximum camouflage and allows the ray to cover large areas of substrate while feeding. The enormous pectoral fins also increase the surface area for oxygen exchange across the skin, supplementing gill respiration.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Masters of Sandy Camouflage</h4>
+                    <p>Butterfly rays exhibit extraordinary camouflage abilities, making them nearly invisible on sandy bottoms despite their large size. Their cryptic coloration closely matches substrate color, while subtle mottled patterns break up their outline. They enhance concealment by settling into slight depressions and flicking sand over their disc margins, leaving only eyes and spiracles exposed. This camouflage protects them from predators including large sharks and serves their ambush hunting strategy—prey swims directly over hidden rays unaware of danger until too late.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Reduced Defensive Weapons</h4>
+                    <p>Unlike their stingray cousins, most butterfly rays lack venomous tail spines or possess only small, relatively harmless spines. This absence of a potent defensive weapon reflects their primary defense strategy—camouflage and concealment rather than active defense. Their extremely short tails also limit their ability to strike effectively with any tail-based weapon. This reliance on crypsis over active defense makes butterfly rays vulnerable once detected—they cannot effectively fight off predators and must depend entirely on remaining hidden.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Estuarine Nursery Dependence</h4>
+                    <p>Butterfly rays display strong dependence on estuarine and shallow coastal habitats as nurseries for their young. Pregnant females migrate into protected bays and estuaries to give birth, and newborn rays remain in these shallow, productive areas during their first months or years of life. These nursery habitats provide abundant food, refuge from large predators that cannot access very shallow water, and optimal conditions for rapid growth. Loss or degradation of these critical habitats through coastal development, pollution, or altered freshwater flows can have devastating impacts on butterfly ray populations by eliminating essential areas for juvenile survival.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient and Poorly Studied</h4>
+                    <p>Butterfly rays represent an ancient lineage—fossil evidence suggests the family Gymnuridae has existed for at least 50 million years. Despite their long evolutionary history and wide distribution, butterfly rays remain among the most poorly studied ray groups. Basic aspects of their biology including growth rates, longevity, population dynamics, and even species-level taxonomy remain incompletely understood. This knowledge gap complicates conservation efforts—effective management requires understanding population trends, habitat requirements, and threats, yet such information remains limited for many butterfly ray species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Vulnerable to Bottom Trawling</h4>
+                    <p>Butterfly rays are particularly vulnerable to bottom trawl fisheries that operate in their shallow coastal habitats. Their habit of resting on sandy bottoms places them directly in the path of trawl nets dragged across the seafloor. Their large size makes escape through net meshes impossible, and their relatively fragile bodies compared to other rays means they often suffer mortality even if discarded. Bycatch in shrimp and demersal fish trawls is considered the primary driver of butterfly ray population declines globally. Many populations that historically inhabited heavily trawled areas have been extirpated or reduced to small remnant populations.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

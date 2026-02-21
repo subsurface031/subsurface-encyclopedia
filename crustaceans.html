@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crustaceans – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .crustacean-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .crustacean-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .crustacean-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .crustacean-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crustacean-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .crustacean-content {
+            padding: 2rem;
+        }
+
+        .crustacean-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .crustacean-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        .social-icons img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .crustacean-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .header-logo {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .crustacean-content {
+                padding: 1.5rem;
+            }
+
+            .header-logo {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>The Armoured Inhabitants of KZN's Waters</h2>
+                <p>Crustaceans are among the most diverse and ecologically important groups of animals in KwaZulu-Natal's coastal and freshwater ecosystems. From microscopic copepods that form the foundation of the marine food web to massive rock lobsters prowling reef caves at night, crustaceans occupy every conceivable aquatic niche. Their distinctive exoskeletons — jointed, armoured shells that must be shed and regrown as they mature — and remarkable adaptations for survival have made them one of the most successful animal groups on Earth, with over 67,000 species worldwide and hundreds found in KZN's waters alone.</p>
+
+                <p>In KwaZulu-Natal, crustaceans include commercially important species like rock lobsters and prawns that support valuable fisheries and feed coastal communities; ecosystem engineers like ghost crabs that aerate beaches and recycle organic matter; and reef-dwelling species including mantis shrimp and hermit crabs that contribute to the complex web of interactions that sustain coral reef and rocky shore communities. Tidal pools harbour armies of porcelain crabs and barnacles, while estuaries teem with mud prawns and fiddler crabs that process sediments and create habitat for other species.</p>
+
+                <p>Beyond their ecological roles, crustaceans hold immense cultural and economic significance in KZN. Traditional subsistence fishers harvest prawns, crabs, and rock lobsters for food, while commercial fisheries target prawns and lobsters for local and export markets worth millions annually. Rock lobster diving has become a cherished recreational tradition, connecting people to the ocean through the thrill of the hunt and the satisfaction of a hard-earned catch. Yet many species face serious threats from overfishing, habitat degradation, pollution, and climate change — particularly rock lobsters, whose populations have declined dramatically along much of the South African coast.</p>
+
+                <p>This section profiles 10 of the most common, ecologically significant, and culturally important crustacean species found in KwaZulu-Natal's waters. From the spiny rock lobster to the industrious ghost crab, each species tells a unique story about life in an exoskeleton. Understanding these remarkable animals — their biology, behaviour, and the challenges they face — is essential to ensuring their survival and the health of the ecosystems they help sustain.</p>
+            </section>
+
+            <section id="crustaceans" class="crustacean-grid">
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="rock-lobster.png" alt="Rock Lobster">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Rock Lobster (Crayfish)</h3>
+                        <p>The rock lobster, known locally as crayfish or kreef, is one of KZN's most prized marine species. These spiny lobsters lack the large claws of their cold-water cousins but are armed with sharp spines and antennal whips for defense. Rock lobsters inhabit rocky reefs and caves from shallow water to over 100 metres deep, emerging at night to forage. They are highly sought after by recreational divers and support a valuable commercial fishery, though populations have declined significantly due to overfishing.</p>
+                        <a href="crayfish.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="mantis-shrimp.png" alt="Mantis Shrimp">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Mantis Shrimp</h3>
+                        <p>Mantis shrimp are among the most extraordinary predators in the ocean, armed with specialized raptorial appendages that strike with the acceleration of a .22 caliber bullet. These colorful crustaceans — not true shrimp — live in burrows in sandy or muddy substrates and emerge to ambush prey including fish, crabs, and molluscs. Their eyes are the most complex in the animal kingdom, capable of perceiving polarized light and colors humans cannot imagine.</p>
+                        <a href="Mantis-shrimp.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="ghost-crab.png" alt="Ghost Crab">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Ghost Crab</h3>
+                        <p>Ghost crabs are the pale, fast-moving sentinels of KZN's sandy beaches, scuttling sideways with remarkable speed and darting into burrows at the slightest disturbance. These semi-terrestrial crabs emerge primarily at night to scavenge the strand line for food, playing a vital role in beach ecosystem health by consuming carrion, processing organic matter, and aerating sand through their extensive burrowing. Their burrows can extend over a metre deep and provide refuge from predators and the midday sun.</p>
+                        <a href="Ghost-crab.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="mud-prawn.png" alt="Mud Prawn">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Mud Prawn (Upogebia)</h3>
+                        <p>Mud prawns are the unseen architects of KZN's estuaries and mudflats, living in complex U-shaped burrows that can penetrate a metre or more into the sediment. These burrowing crustaceans filter feed on organic particles and detritus, playing a critical role in nutrient cycling and sediment oxygenation. Their burrows provide habitat for numerous commensal species, and their presence indicates healthy estuarine systems. Mud prawns are a favourite bait for anglers targeting estuarine fish species.</p>
+                        <a href="Mud-prawn.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="rock-crab.png" alt="Rock Crab">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Rock Crab</h3>
+                        <p>Rock crabs are the hardy, opportunistic scavengers of KZN's rocky intertidal zones and shallow reefs. These robust crabs possess powerful claws capable of crushing mollusc shells and tearing apart prey or carrion. They hide in crevices during low tide and emerge to forage when water returns, feeding on algae, barnacles, mussels, and anything else they can overpower or scavenge. Rock crabs are important prey for octopuses, fish, and seabirds.</p>
+                        <a href="Rock-crab.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="hermit-crab.png" alt="Hermit Crab">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Hermit Crab</h3>
+                        <p>Hermit crabs are the quirky nomads of KZN's tidal pools and shallow reefs, living inside empty gastropod shells that they carry on their backs for protection. Unlike true crabs, hermit crabs have soft, vulnerable abdomens that require the borrowed armor of a snail shell. As they grow, they must find progressively larger shells — a process that can involve "shell exchanges" where multiple hermit crabs swap shells in a carefully choreographed sequence based on size.</p>
+                        <a href="hermit-crab.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="swimming-crab.png" alt="Swimming Crab">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Swimming Crab (Blue Crab)</h3>
+                        <p>Swimming crabs, also known as blue crabs or sand crabs, are aggressive, fast-moving predators recognizable by their flattened paddle-like rear legs adapted for swimming. These crabs patrol sandy bottoms and estuaries, hunting fish, molluscs, and other crustaceans with remarkable speed and ferocity. When threatened, they raise their claws in an aggressive defensive posture and can deliver painful pinches. Swimming crabs are commercially harvested in some areas and are considered excellent eating.</p>
+                        <a href="Swimming-crab.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="barnacle.png" alt="Barnacle">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Barnacle</h3>
+                        <p>Barnacles are among the most unusual crustaceans — sedentary filter feeders that cement themselves head-down to rocks, pilings, boats, and even whales, then extend feathery feeding appendages to capture plankton from the water. Despite their limpet-like appearance, barnacles are true crustaceans most closely related to crabs and lobsters. They dominate the upper intertidal zone on KZN's rocky shores, forming dense colonies that provide habitat for other species and serve as important prey for whelks, starfish, and shorebirds.</p>
+                        <a href="Barnacle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="prawn.png" alt="Prawn">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Prawn (Penaeid Shrimp)</h3>
+                        <p>Prawns are the sleek, fast-swimming crustaceans that support one of KZN's most economically important fisheries. These shrimp-like animals inhabit estuaries, lagoons, and shallow coastal waters, feeding on detritus, algae, and small invertebrates. Prawns are critical to the marine food web as both prey and predator, supporting populations of fish, birds, and dolphins. Commercial trawling for prawns is a major industry, though concerns about bycatch and habitat damage have led to increased regulation and efforts toward sustainable practices.</p>
+                        <a href="Prawn.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="crustacean-card">
+                    <div class="crustacean-image">
+                        <img src="fiddler-crab.png" alt="Fiddler Crab">
+                    </div>
+                    <div class="crustacean-content">
+                        <h3>Fiddler Crab</h3>
+                        <p>Fiddler crabs are the charismatic inhabitants of KZN's mangrove forests and estuarine mudflats, instantly recognizable by the males' enormously enlarged claw — which can account for nearly half their body weight. This oversized claw is not used for feeding but as a signal flag and weapon in territorial disputes and courtship displays. Fiddler crabs excavate burrows in soft sediments and emerge at low tide to feed on detritus, playing an important role in nutrient cycling and sediment aeration in estuarine ecosystems.</p>
+                        <a href="Fiddler-crab.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                   <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

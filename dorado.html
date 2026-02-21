@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorado (Mahi-Mahi) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+    <nav></nav>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="fish.html">Fish</a><span>›</span>
+                Dorado (Mahi-Mahi)
+            </div>
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="dorado.png" alt="Dorado (Mahi-Mahi)">
+                    <p class="image-caption">Coryphaena hippurus — Dorado (Mahi-Mahi), KZN</p>
+                </div>
+                <div class="species-intro">
+                    <h2>Dorado (Mahi-Mahi)</h2>
+                    <span class="scientific-name">Coryphaena hippurus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The dorado — known globally as mahi-mahi and affectionately called the "Dorie" by South African anglers — is widely regarded as the most visually spectacular fish in KwaZulu-Natal's offshore waters. No other pelagic fish combines such explosive colour, acrobatic fighting ability, and extraordinary growth rates into a single package. From the bull's dramatic bony forehead to the electric greens, blues, and golds that pulse across the body during feeding, the dorado is an experience as much as a fish — vivid, fast, and utterly unforgettable on light tackle.</p>
+                    <p>In KZN waters, dorado are present year-round along the warm Agulhas Current but are most abundant and accessible between November and May when water temperatures peak and baitfish are plentiful near the surface. They are found associated with floating debris — weed lines, logs, palm fronds, flotsam of any kind — that concentrate baitfish and provide shelter for juvenile fish. Experienced KZN offshore skippers scan the horizon for frigatebirds and floating structure to locate dorado schools, which may number in the dozens around productive current-line debris fields off Durban, Ballito, and Sodwana Bay.</p>
+                    <div class="quick-stats">
+                        <div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2.1 m</span></div>
+                        <div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~40 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">4 – 5 years</span></div>
+                        <div class="stat-box"><span class="stat-label">Top Speed</span><span class="stat-value">93 km/h</span></div>
+                        <div class="stat-box"><span class="stat-label">KZN Season</span><span class="stat-value">Nov – May</span></div>
+                        <div class="stat-box"><span class="stat-label">Maturity Age</span><span class="stat-value">4 – 5 months</span></div>
+                    </div>
+                </div>
+            </section>
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The dorado is one of the ocean's most visually arresting fish, with a body colour that seems almost supernatural in its vibrancy. The back and upper flanks glow with an electric combination of brilliant blue, green, and gold — iridescent hues that shift and flash as the fish moves. The flanks are broad and golden, scattered with dark and light spots, while the belly fades to a bright yellow-white. These colours change dramatically in real time during feeding frenzies — pulsing and shifting between green, gold, and blue — and fade rapidly to a muted yellow-grey within minutes of death, making a living dorado something that photographs simply cannot capture.</p>
+                    <p>The most distinctive anatomical feature is the sexual dimorphism of the head. Bull (male) dorado develop a prominent, steep bony forehead that grows progressively more pronounced with age, eventually protruding dramatically above the roofline of the body. Females have a smoothly rounded head profile. This forehead is a reliable field identification feature for sexing fish at a glance. Both sexes share the same extraordinary single long-based dorsal fin — extending from the head almost to the tail — and a deeply forked, concave caudal fin perfectly adapted for speed and manoeuvrability.</p>
+                    <p>Adults in KZN waters typically measure 80 cm to 1.2 metres and weigh 5 to 20 kg, though exceptional fish approaching 40 kg and 2 metres have been taken offshore. The world record stands at 39.9 kg. Growth is extraordinarily rapid — 3 mm per day on average — allowing a juvenile dorado to reach 1 metre in its first year.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Dorado are surface-oriented, highly active pelagic fish that spend virtually their entire lives in the upper 37 metres of the water column. They are strongly associated with floating surface structure — any object drifting on the ocean surface, from weed lines and palm fronds to lost fishing buoys and wooden pallets, will attract dorado within hours. Juvenile fish use floating debris as shelter from predators; adults use it as a hunting station, patrolling below the structure to ambush the baitfish, squid, and crustaceans that accumulate beneath it.</p>
+                    <p>Dorado are schooling fish that aggregate by size, with schools of similarly sized individuals moving together beneath or alongside floating structure. Schools can contain dozens of fish, and when one school member is hooked and begins fighting near the boat, its schoolmates frequently follow alongside — an extraordinary behaviour that allows a team of anglers to hook multiple fish simultaneously. This sociable quality, combined with their willing aggression toward lures and baits, makes dorado among the most accessible and enjoyable game fish in KZN's offshore environment.</p>
+                    <p>When hooked, dorado are instantly spectacular — greyhounding across the surface in long, skipping leaps, tail-walking, cartwheeling, and performing aerial somersaults that show off their vivid colours at their best. They fight with a combination of speed, aerial acrobatics, and raw power that is exceptional for their size, making them the benchmark light-tackle game fish in KZN offshore fishing circles.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Dorado are voracious, opportunistic carnivores with one of the highest daily food intake rates of any large marine fish — consuming an average of 5.6% of their body weight per day, with juvenile fish reaching up to 19.8% of body weight daily during peak growth periods. This extraordinary appetite is what drives their legendary growth rates and keeps them in a constant state of active hunting. In KZN waters, flying fish are the primary prey, and dorado have evolved alongside flying fish in a predator-prey relationship of extraordinary intensity — dorado will pursue flying fish both in the water and, remarkably, just as they launch into their gliding flight above the surface.</p>
+                    <p>Beneath floating debris and weed lines, dorado exploit the entire ecosystem that accumulates — small baitfish, juvenile triggerfish, crabs, shrimp, squid, and zooplankton all fall prey to these opportunistic hunters. Squid are particularly important at night when they migrate to the surface. Dorado have also been recorded consuming juvenile sea turtles, juvenile sailfish, and even bottle caps — reflecting their indiscriminate opportunism when feeding around surface debris.</p>
+                    <ul>
+                        <li>Flying fish (primary prey)</li>
+                        <li>Mackerel, sardines, and small pelagic fish</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Crabs, shrimp, and zooplankton</li>
+                        <li>Juvenile reef fish under floating debris</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>The dorado possesses one of the most extraordinary reproductive life histories of any large marine fish. Sexual maturity is reached at just 4 to 5 months of age — the earliest of any large pelagic predator — at body lengths as small as 20 cm. This remarkably early maturity, combined with year-round spawning in warm KZN waters, makes dorado one of the most reproductively productive of all oceanic game fish. Females can spawn two to three times per year, producing between 80,000 and 1,000,000 eggs per event. Fertilised eggs hatch within 36 hours, and larvae begin feeding on zooplankton almost immediately.</p>
+                    <p>Growth rates are phenomenal — among the fastest of any marine fish. Dorado average 3 mm of growth per day, reaching 1 metre in their first year and approaching maximum size within two to three years. This rapid growth is fuelled by their enormous daily food consumption and explains why dorado populations remain resilient to fishing pressure compared to slow-growing species. Despite short lifespans of only 4 to 5 years, their reproductive output and growth rate ensure rapid population recovery from depletion events.</p>
+                    <p>In KZN, dorado likely spawn year-round in warmer offshore waters, with peak activity during summer when sea surface temperatures exceed 26°C. Juveniles are commonly found sheltering among sargassum and floating debris, a critical nursery habitat that also exposes them to the full suite of offshore predators. The association with floating structure established in juvenile life persists throughout adulthood, making debris field location the foundation of successful dorado fishing.</p>
+                </div>
+            </div>
+            <div class="info-section-full">
+                <h3>Dorado Fishing in KwaZulu-Natal</h3>
+                <p>Among KZN's offshore fishing community, the dorado holds a special place as the most crowd-pleasing, accessible, and visually rewarding game fish in the bluewater environment. Unlike the deep-water patience required for yellowfin or the specialised knowledge needed for billfish, dorado fishing in KZN is approachable and immediately rewarding — locate floating structure or a current-line weed mat, position the boat alongside it, and present a lure or bait into the school below. The strike, fight, and landing of a dorado — with its pulsing neon colours and spectacular aerial display — is one of the finest experiences in KZN sport fishing.</p>
+                <p>The dorado is locally known as the "Dorie" in KZN and broader South African fishing culture — an affectionate abbreviation that reflects the warmth anglers feel for this species. It is rated Green by SASSI (South Africa's Sustainable Seafood Initiative), reflecting its healthy population status and rapid reproductive rate. This green listing means dorado is a responsible choice for both recreational anglers and seafood consumers, a distinction shared by few other offshore game fish. Its flesh is firm, white, mild-flavoured, and highly versatile — equally at home on the braai, in a sashimi presentation, or pan-fried with lemon and herbs.</p>
+                <p>Despite its healthy global status, dorado populations in KZN face increasing pressure from commercial pelagic longline operations that catch dorado as bycatch while targeting tuna and swordfish throughout the Indian Ocean. Climate change is also altering the distribution and productivity of the Agulhas Current, potentially affecting prey availability and the current-line weed habitats that dorado depend on. Continued monitoring of local populations and responsible recreational fishing practices — including size limits and mindful retention — are important to ensure that the Dorie remains a cornerstone of KZN's offshore fishing experience for future generations.</p>
+            </div>
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card"><h4>Living Colour Display</h4><p>Dorado produce one of the most dramatic colour displays in the fish world — pulsing electric blues, greens, and gold that shift and flash during feeding frenzies and social interactions. These colours are produced by iridophore cells and fade to muted yellow-grey within minutes of death, meaning a living dorado's true beauty is something that must be seen in the water to be believed.</p></div>
+                <div class="fact-card"><h4>Fastest Maturing Fish</h4><p>Dorado reach sexual maturity at just 4 to 5 months of age — extraordinarily early for a fish capable of reaching 40 kg. This rapid maturity, combined with multiple annual spawning events producing up to 1 million eggs each, gives dorado exceptional population resilience compared to slower-maturing species. A dorado born in November may be reproductively active by March of the same season.</p></div>
+                <div class="fact-card"><h4>Bull's Forehead</h4><p>Male dorado (bulls) develop a distinctive steep, bony forehead that grows increasingly prominent with age — sometimes protruding dramatically above the roofline of the body. This sexually dimorphic feature allows instant field identification of sex at a glance: bulls have the blunt, steep forehead while females (cows) have a smoothly rounded head profile. No other pelagic fish displays such obvious sexual dimorphism.</p></div>
+                <div class="fact-card"><h4>3 mm Per Day Growth</h4><p>Dorado grow at an average of 3 mm per day — one of the fastest growth rates of any large marine fish. A juvenile dorado can reach 1 metre in its first year. Combined with their early maturity and high fecundity, this extraordinary growth rate underpins the species' ecological resilience and makes it one of the most sustainable large game fish in KZN offshore waters.</p></div>
+                <div class="fact-card"><h4>The "Dorie" of KZN</h4><p>Locally known as the "Dorie" in KZN and broader South African angling culture, the dorado is rated Green by SASSI — one of the highest sustainability ratings available. This green listing reflects the species' healthy population, rapid reproduction, and broad distribution, making it one of the most ecologically responsible game fish choices for both anglers and seafood consumers in South Africa.</p></div>
+                <div class="fact-card"><h4>Debris Field Hunters</h4><p>Dorado have evolved a remarkable association with floating surface debris — any drifting object, from palm fronds to lost buoys, attracts dorado within hours. Juvenile fish use debris for shelter from predators while adults use it as a hunting station below which baitfish, squid, and crustaceans accumulate. Experienced KZN skippers scan the Agulhas Current lines for floating structure and frigatebird activity to locate schools.</p></div>
+            </div>
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indo-Pacific Bottlenose Dolphin – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 193, 7, 0.5); color: #ffc107; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="cetaceans.html">Cetaceans</a>
+                <span>›</span>
+                Indo-Pacific Bottlenose Dolphin
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="bottlenose-dolphin.png" alt="Indo-Pacific Bottlenose Dolphin">
+                    <p class="image-caption">Tursiops aduncus — Indo-Pacific Bottlenose Dolphin, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Indo-Pacific Bottlenose Dolphin</h2>
+                    <span class="scientific-name">Tursiops aduncus</span>
+                    <span class="conservation-badge">⚠ Near Threatened</span>
+                    <p>The Indo-Pacific bottlenose dolphin is KwaZulu-Natal's most frequently encountered cetacean — a year-round resident whose playful antics, acrobatic displays, and curious interactions with humans have made it an icon of the KZN coast. These highly intelligent, social animals are masters of the surf zone, frequently riding waves alongside surfers, bow-riding in the pressure wave created by boats, and performing spectacular aerial leaps that delight beach-goers from Durban to Sodwana Bay.</p>
+                    <p>Often confused with the closely related common bottlenose dolphin (Tursiops truncatus), the Indo-Pacific bottlenose is slightly smaller, more slender, and possesses distinctive ventral spotting that increases with age. In KZN waters, these dolphins are found in small, relatively stable groups averaging 10 to 20 individuals, though larger temporary aggregations can form when food is abundant. Their preference for shallow coastal and estuarine waters makes them highly visible but also particularly vulnerable to human impacts including shark exclusion nets, boat traffic, pollution, and coastal development.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.6 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~230 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~40 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pod Size (KZN)</span>
+                            <span class="stat-value">10 – 20</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">9 – 13 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">~12 months</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Indo-Pacific bottlenose dolphins are streamlined, medium-sized dolphins with a robust body, short to moderately long beak, and prominent curved dorsal fin positioned midway along the back. The body is predominantly grey — typically darker on the dorsal surface fading to lighter grey or pinkish-grey on the flanks and belly. One of the most distinctive features is the presence of ventral spotting — small dark spots on the belly and lower flanks that become more numerous and pronounced with age, particularly in adults.</p>
+                    <p>The beak is well-defined but shorter and more slender than that of the common bottlenose dolphin, and a distinct crease separates the melon (forehead) from the beak. The dorsal fin is tall, falcate (sickle-shaped), and typically darker than the surrounding body. The flippers are relatively small and pointed. Adult males are slightly larger and more robust than females.</p>
+                    <p>Adults typically measure 2 to 2.6 metres in length and weigh 150 to 230 kg, though KZN individuals tend toward the smaller end of this range. Newborn calves measure approximately 1 metre and weigh 10 to 15 kg at birth. The teeth are conical and sharply pointed — adults possess 23 to 29 pairs of teeth in each jaw, adapted for grasping slippery fish.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Indo-Pacific bottlenose dolphins are among the most playful and interactive cetaceans, exhibiting an extraordinary range of behaviors including breaching, tail-slapping, spyhopping, and surfing. They are enthusiastic bow-riders, frequently positioning themselves in the pressure wave created by boats, and are masters of wave-riding, often seen surfing alongside human surfers in the KZN surf zone — behavior that appears to serve no purpose beyond enjoyment.</p>
+                    <p>They are highly social and live in complex, fluid societies called fission-fusion communities. Core groups of related females and their offspring form the social backbone, while males may form bachelor coalitions or associate temporarily with female groups. In KZN, typical group sizes range from 10 to 20 individuals, though temporary aggregations of 50 or more can occur when feeding on abundant prey or during social interactions.</p>
+                    <p>Indo-Pacific bottlenose dolphins are exceptionally intelligent, possessing large brains relative to body size, complex vocalizations, problem-solving abilities, and evidence of cultural transmission — behaviors learned from conspecifics and passed through generations. They use echolocation to navigate and hunt, producing rapid series of clicks that reflect off objects, creating an acoustic image of their surroundings.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Indo-Pacific bottlenose dolphins are opportunistic generalist predators, consuming a wide variety of fish, cephalopods, and occasionally crustaceans. In KZN waters, they target schooling fish species including sardines, mackerel, mullet, and kob, adapting their hunting strategies to prey type and environmental conditions. They are highly adaptable hunters, employing diverse and sophisticated techniques including cooperative herding, strand feeding, and even tool use in some populations.</p>
+                    <p>In shallow coastal waters, dolphins often work cooperatively to herd fish schools against the shore or into tight balls near the surface before taking turns feeding. During the annual sardine run, Indo-Pacific bottlenose dolphins join massive multi-species feeding frenzies alongside sharks, seabirds, and other marine predators. Some individuals have learned to follow trawlers and steal fish from nets — a learned behavior passed culturally within groups.</p>
+                    <ul>
+                        <li>Schooling fish (sardines, mackerel, mullet, kob)</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Octopus</li>
+                        <li>Occasionally crustaceans and bottom-dwelling fish</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Social Structure</h3>
+                    <p>Indo-Pacific bottlenose dolphins in KZN waters exhibit no distinct breeding season — births occur year-round, though there may be peaks during warmer months. Females reach sexual maturity at 9 to 13 years, and males at 10 to 15 years. After a gestation period of approximately 12 months, females give birth to a single calf, typically in shallow protected waters.</p>
+                    <p>The mother-calf bond is exceptionally strong and enduring. Calves remain closely associated with their mothers for 3 to 6 years, nursing for at least 18 months and learning essential survival skills including hunting techniques, social behaviors, and vocal communication. Females typically give birth every 4 to 6 years, reflecting the extended investment in each calf.</p>
+                    <p>Social structure is matrilineal — daughters often remain with their mothers for life, forming multi-generational female groups. Males leave their natal groups upon reaching sexual maturity and form bachelor coalitions with other males. These coalitions cooperate to gain access to females, and coalition membership can last for decades. The complexity of dolphin social structures rivals that of great apes and elephants.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Conservation Status & Threats</h3>
+                <p>The Indo-Pacific bottlenose dolphin is classified as Near Threatened globally, with some regional populations — including those along the South African coast — facing significant conservation concerns. In KwaZulu-Natal specifically, the dolphin population has been heavily impacted by shark exclusion nets installed along beaches to protect swimmers. These nets, while reducing shark encounters, have inadvertently killed hundreds of dolphins over the decades.</p>
+                <p>Between 1980 and 2015, over 900 Indo-Pacific bottlenose dolphins were killed in KZN shark nets and drumlines. This mortality significantly reduced local populations and altered dolphin behavior — dolphins learned to avoid netted areas, compressing their available habitat and potentially reducing access to important feeding and calving sites. Modified net designs and partial net removals have reduced dolphin mortality in recent years, but the impact continues.</p>
+                <p>Beyond nets, KZN's bottlenose dolphins face numerous additional threats including boat strikes from increasing recreational and commercial vessel traffic, pollution (particularly plastic ingestion and bioaccumulation of toxins), habitat degradation from coastal development, overfishing depleting prey stocks, and ocean noise pollution from shipping and construction activities. Climate change may alter prey distribution and abundance, forcing dolphins to adapt foraging strategies or shift ranges. Despite these pressures, the KZN population persists, testament to the dolphin's adaptability — though continued conservation action and adaptive management are essential for long-term survival.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Surf Zone Masters</h4>
+                    <p>Indo-Pacific bottlenose dolphins are expert wave-riders, frequently seen surfing alongside human surfers along the KZN coast. This behavior appears to serve no hunting or survival purpose — the dolphins seem to surf purely for enjoyment, demonstrating a capacity for play and recreation that rivals our own.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tool Users</h4>
+                    <p>Some populations of Indo-Pacific bottlenose dolphins — particularly in Shark Bay, Australia — have learned to use tools. They tear off marine sponges and wear them over their beaks (rostrums) to protect themselves while foraging on the rocky seafloor for buried fish. This behavior is passed from mothers to offspring, representing a form of animal culture.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Signature Whistles</h4>
+                    <p>Each Indo-Pacific bottlenose dolphin develops a unique signature whistle — essentially a vocal name — within the first few months of life. Dolphins use these whistles to identify themselves and call to specific individuals. This represents one of the few examples of referential communication in non-human animals.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Big Brains</h4>
+                    <p>Bottlenose dolphins possess one of the largest brain-to-body-size ratios in the animal kingdom — second only to humans. Their brains are highly convoluted, contain specialized structures for echolocation processing, and show evidence of self-awareness, problem-solving, and cultural transmission of learned behaviors.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shark Net Victims</h4>
+                    <p>Over 900 Indo-Pacific bottlenose dolphins were killed in KwaZulu-Natal shark exclusion nets between 1980 and 2015. This represents one of the most significant human-caused impacts on the local dolphin population. Modified net designs and seasonal net removal have reduced mortality, but dolphin-net interactions remain a conservation concern.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Multi-Generational Families</h4>
+                    <p>Female Indo-Pacific bottlenose dolphins often remain with their mothers for life, forming multi-generational matrilineal groups. Grandmothers, mothers, daughters, and granddaughters cooperate in raising young, hunting, and protecting the group — a level of social complexity rarely seen outside of primates and elephants.</p>
+                </div>
+            </div>
+
+            <a href="cetaceans.html" class="back-link">← Back to Cetaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leatherback Turtle – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="turtles.html">Turtles</a>
+                <span>›</span>
+                Leatherback Turtle
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="leatherback.png" alt="Leatherback Turtle">
+                    <p class="image-caption">Dermochelys coriacea — Leatherback Turtle, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Leatherback Turtle</h2>
+                    <span class="scientific-name">Dermochelys coriacea</span>
+                    <span class="conservation-badge">⚠ Vulnerable (Critically Endangered — some populations)</span>
+                    <p>The leatherback turtle is the largest reptile on Earth and one of the most extraordinary animals alive. Unlike all other sea turtles, it carries no hard shell — its back is covered by a flexible, rubbery carapace of leathery skin reinforced by thousands of tiny bone fragments embedded in a matrix of cartilaginous tissue. This unique structure gives it a hydrodynamic profile and remarkable flexibility, enabling it to dive deeper and travel farther than any other turtle.</p>
+                    <p>In KwaZulu-Natal, the leatherback is the rarer and more awe-inspiring of the two species that regularly nest on the iSimangaliso coast. Emerging from the sea at night like ancient sea monsters — sometimes exceeding 2 metres in length and 900 kg — nesting leatherbacks are among the most breathtaking wildlife encounters anywhere in Africa. The beaches around Bhanga Nek and Kosi Bay in northern KZN are among the most significant leatherback nesting sites on the entire African continent.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">Over 2 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~900 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">45 – 50+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Nesting Season</span>
+                            <span class="stat-value">Nov – Jan</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Eggs per Nest</span>
+                            <span class="stat-value">~80 viable eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Dive Depth</span>
+                            <span class="stat-value">Over 1,000 m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The leatherback is immediately distinguishable from all other sea turtles by its absence of a hard shell. Instead of scutes, it is covered by smooth, black to dark grey leathery skin with a pinkish-white underside, marked with distinctive white or pale blotches. Seven prominent longitudinal ridges run along the length of the carapace, converging at a pointed tail.</p>
+                    <p>Its front flippers are proportionally the longest of any turtle species relative to body size — sometimes spanning nearly 3 metres tip to tip on large adults — and are perfectly adapted for powerful, efficient swimming across vast distances. The leatherback has no teeth; instead, its jaws are lined with backward-pointing spines called papillae that prevent jellyfish from escaping once caught.</p>
+                    <p>Adult females nesting in KZN typically measure 150 to 180 cm in curved carapace length and weigh between 350 and 600 kg, though exceptional individuals exceeding 900 kg have been recorded globally.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Leatherbacks are the most wide-ranging of all sea turtle species and undertake the longest migrations of any reptile on Earth. Individual turtles nesting in KZN have been tracked crossing the entire Indian Ocean to feeding grounds off the coasts of Sri Lanka, Indonesia, and even into the Pacific. Some populations undertake round-trip migrations of over 20,000 km between nesting beaches and feeding grounds.</p>
+                    <p>They are deep-diving specialists, capable of descending to depths exceeding 1,000 metres — far deeper than any other turtle. They achieve this through a suite of physiological adaptations including a flexible shell that compresses under pressure, a unique ability to lower their metabolic rate during long dives, and a countercurrent heat exchange system that maintains body temperature in cold deep water.</p>
+                    <p>Nesting females come ashore at night, often during high tide, and drag themselves up the beach to excavate a deep nest chamber. The entire nesting process takes one to two hours, during which the female is vulnerable and exhausted. Ezemvelo's teams monitor these events closely to ensure females are not disturbed.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Leatherbacks are almost exclusively specialist jellyfish feeders — a remarkable dietary choice given that jellyfish are approximately 95% water and provide very little nutritional value per mouthful. To sustain a body that can exceed 900 kg, leatherbacks must consume enormous quantities of jellyfish daily, sometimes eating their own body weight or more in a single day.</p>
+                    <p>Their backward-pointing oral papillae and deeply scissor-like jaws are perfectly adapted for capturing soft-bodied, slippery prey. They also consume other gelatinous organisms such as salps, sea squirts, and soft-bodied invertebrates. Tragically, plastic bags floating in the ocean are virtually indistinguishable from jellyfish to a leatherback, and plastic ingestion is a major cause of mortality globally.</p>
+                    <ul>
+                        <li>Jellyfish (primary diet)</li>
+                        <li>Salps and pyrosomes</li>
+                        <li>Sea squirts and tunicates</li>
+                        <li>Soft-bodied invertebrates</li>
+                        <li>Occasionally small fish and squid</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Nesting & Reproduction</h3>
+                    <p>KZN's leatherback nesting season runs from November through January. Females nest every two to three years, producing multiple clutches per season at approximately ten-day intervals. Each nest contains around 80 to 90 fertilised eggs along with a number of smaller, unfertilised eggs — the purpose of which is not fully understood but may help maintain moisture and aeration within the clutch.</p>
+                    <p>Incubation takes approximately 60 to 70 days. Leatherback hatchlings are proportionally enormous compared to other turtle hatchlings — fully scaled replicas of the adults, already showing the characteristic ridges and leathery skin. They emerge at night and scramble to the sea, guided by the brightness of the ocean horizon.</p>
+                    <p>The number of leatherbacks nesting in KZN has historically been much lower than loggerheads — typically fewer than 100 females per season — making each individual female critically important to the population. Ezemvelo's nesting beach patrols and conservation efforts have been instrumental in maintaining this small but vital nesting population.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Leatherback turtles nesting in KZN use the same northern iSimangaliso beaches as loggerheads, with the primary nesting concentration around Bhanga Nek and the wilderness beaches of northern Maputaland near Kosi Bay. These remote, undeveloped beaches — accessible only on foot or by specialised vehicle — provide the darkness, undisturbed sand, and proximity to deep water that leatherbacks require for successful nesting.</p>
+                <p>Between nesting seasons, KZN's leatherbacks disperse into the open Indian Ocean, following jellyfish blooms that aggregate along thermal fronts and upwelling zones. Satellite tracking has revealed that some individuals travel to extraordinarily remote feeding grounds — including waters off the coast of Sri Lanka, around the Maldives, and into the Bay of Bengal — before returning to KZN to nest years later.</p>
+                <p>The global leatherback population has declined catastrophically — by over 70% in the Pacific Ocean — due to egg poaching, longline fishing bycatch, plastic ingestion, and coastal development destroying nesting beaches. The Indian Ocean and Atlantic populations are in better condition, and KZN's nesting beach protection programme is considered critical to maintaining the species' presence in southern Africa. The leatherback is listed as Vulnerable globally but several regional populations are Critically Endangered.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Largest Living Reptile</h4>
+                    <p>The leatherback is the world's largest reptile. The largest confirmed individual — a male that washed ashore in Wales in 1988 — measured 2.56 metres and weighed 916 kg. Even average-sized females nesting in KZN regularly exceed 400 kg, making each encounter an extraordinary privilege.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>No Hard Shell</h4>
+                    <p>Leatherbacks are the sole surviving member of an ancient turtle family — Dermochelyidae — that diverged from all other sea turtles over 100 million years ago. Their leathery, flexible carapace is unique among living turtles and is one of the most remarkable anatomical specialisations in the reptile world.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Deepest Diving Turtle</h4>
+                    <p>Leatherbacks have been recorded diving to depths exceeding 1,280 metres — far deeper than any other turtle and deeper than most marine mammals. Their flexible carapace compresses under pressure without injury, allowing them to exploit jellyfish prey at depth that is inaccessible to all other sea turtle species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>20,000 km Migrations</h4>
+                    <p>Leatherbacks undertake the longest migrations of any reptile. Individuals nesting in KZN have been satellite-tracked crossing the Indian Ocean to feeding grounds thousands of kilometres away. Some Pacific leatherbacks travel over 20,000 km between their nesting beaches and feeding areas.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Plastic Bag Threat</h4>
+                    <p>Floating plastic bags are virtually identical to jellyfish in the water. Leatherbacks worldwide are found dead with stomachs full of plastic, which blocks digestion and causes starvation. A single plastic bag ingested at sea can kill a leatherback — making plastic pollution one of the single greatest threats to the species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Warm Blooded in Cold Seas</h4>
+                    <p>Unlike most reptiles, leatherbacks can maintain body temperatures significantly above the surrounding seawater — allowing them to forage in near-freezing polar waters that would be lethal to other sea turtles. This thermoregulatory ability is achieved through a countercurrent heat exchange system in the blood vessels of the flippers.</p>
+                </div>
+            </div>
+
+            <a href="turtles.html" class="back-link">← Back to Turtles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>
