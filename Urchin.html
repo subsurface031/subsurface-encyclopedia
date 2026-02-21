@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sea Urchins – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Sea Urchins</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="urchin.png" alt="Sea Urchin"><p class="image-caption">Echinothrix & Diadema spp. — Long-spined black sea urchins, KZN reefs</p></div>
+<div class="species-intro">
+<h2>Sea Urchins</h2>
+<span class="scientific-name">Echinothrix, Diadema & Tripneustes spp.</span>
+<span class="conservation-badge">⚠ MODERATE HAZARD — Painful</span>
+<p>Sea urchin spines cause thousands of injuries to KwaZulu-Natal beachgoers, snorkelers, divers, and tidal pool explorers every year. These spiny echinoderms are abundant on KZN's rocky reefs, reef flats, and tidal pools, where they graze on algae and play important ecological roles in controlling algal growth. The long-spined black urchin — the most commonly encountered species in shallow KZN waters — bears slender, brittle spines up to 30 centimeters long that penetrate skin easily and break off inside wounds, requiring careful removal. Some urchin species also bear secondary venomous structures called pedicellariae — tiny jaw-like organs scattered among the spines that deliver painful venom even after the urchin is dead.</p>
+<p>Most sea urchin injuries occur when barefoot swimmers, waders, or tidal pool explorers accidentally step on or brush against urchins hidden in rocky crevices, under ledges, or camouflaged against dark substrates. The slender spines penetrate skin with minimal pressure and snap off at their base, leaving spine fragments embedded in tissue where they cause prolonged pain, inflammation, and risk of secondary infection. While sea urchin wounds are rarely life-threatening to healthy individuals, they are excruciatingly painful and can become seriously infected if spines are not removed properly or if wounds are not cleaned and monitored. The most effective prevention is simple: wear reef shoes or wetsuit booties whenever accessing rocky shores, reef flats, or tidal pools.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Spine Length</span><span class="stat-value">Up to 30 cm</span></div>
+<div class="stat-box"><span class="stat-label">Common Species</span><span class="stat-value">Long-spined black</span></div>
+<div class="stat-box"><span class="stat-label">Pain Duration</span><span class="stat-value">Hours to days</span></div>
+<div class="stat-box"><span class="stat-label">Primary Risk</span><span class="stat-value">Rocky reefs / tide pools</span></div>
+<div class="stat-box"><span class="stat-label">Infection Risk</span><span class="stat-value">Moderate to high</span></div>
+<div class="stat-box"><span class="stat-label">Prevention</span><span class="stat-value">Wear reef shoes</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Are Sea Urchins?</h3>
+<p>Sea urchins are spiny echinoderms — marine invertebrates related to sea stars, brittle stars, and sea cucumbers. Their spherical bodies are protected by a hard calcium carbonate shell called a test, from which hundreds of moveable spines radiate outward in all directions. The spines serve multiple functions: protection from predators, locomotion, and in some species, delivery of venom through specialized structures. Sea urchins graze on algae, seagrass, and organic detritus using a remarkable feeding structure called Aristotle's lantern — a complex jaw apparatus with five self-sharpening teeth that scrape food from rocky substrates.</p>
+<p>Several urchin species inhabit KZN's coastal waters, but the most commonly encountered — and most problematic for human encounters — is the long-spined black urchin, which includes species from the genera Echinothrix and Diadema. These urchins bear extremely long, slender, hollow spines that are brittle and break easily upon penetrating skin. The spines are covered with a thin tissue layer and contain calcium carbonate with a porous structure that fragments when attempts are made to remove them. Some urchin species also possess pedicellariae — tiny jaw-like organs on stalks among the spines that can clamp onto skin and deliver venom, causing additional pain and potential allergic reactions even after the urchin is dead or the spines removed.</p>
+</div>
+<div class="info-section"><h3>Symptoms & Medical Risks</h3>
+<p>Sea urchin injuries cause immediate sharp, burning pain at the puncture site as spines penetrate skin and break off inside tissue. The pain intensifies over minutes as venom from pedicellariae or spine tissue triggers inflammatory responses. The affected area becomes red, swollen, and exquisitely tender to touch. Spine fragments embedded in tissue create a visible pattern of dark spots or streaks under the skin — often described as looking like tattoo marks or dark splinters. Pain typically peaks within 30 to 60 minutes and gradually subsides over several hours to days depending on the number of spines, depth of penetration, and individual sensitivity.</p>
+<p>The primary medical concern with sea urchin injuries is secondary bacterial infection. Spine fragments introduce bacteria from the marine environment deep into tissue, and the brittle calcium carbonate structure makes complete spine removal difficult. Retained spine fragments serve as foreign bodies that promote infection, creating abscesses, cellulitis, and in severe cases, septic arthritis if spines penetrate joints. Spines that break off deep in tissue near joints, tendons, or nerves can cause chronic pain, limited mobility, and may require surgical removal. Allergic reactions to urchin venom occasionally occur, causing systemic symptoms including nausea, dizziness, difficulty breathing, and in rare cases, anaphylaxis requiring emergency treatment.</p>
+<ul>
+<li>Immediate sharp, burning pain at puncture site</li>
+<li>Red, swollen, tender tissue around embedded spines</li>
+<li>Visible dark spots or streaks under skin (spine fragments)</li>
+<li>Pain lasting hours to days depending on injury severity</li>
+<li>High risk of secondary bacterial infection</li>
+<li>Potential for abscess, cellulitis, or septic arthritis</li>
+<li>Rare allergic reactions causing systemic symptoms</li>
+</ul>
+</div>
+<div class="info-section"><h3>First Aid & Treatment</h3>
+<p>The first priority after a sea urchin injury is safe spine removal to reduce pain, minimize infection risk, and prevent long-term complications. Remove any visible spines protruding from the skin using clean tweezers, pulling gently in the direction the spine entered to avoid breaking it into smaller fragments. Do not attempt to remove deeply embedded spines or spines near joints, tendons, or major blood vessels — these require medical attention. After removing accessible spines, soak the affected area in hot water (as hot as can be tolerated without scalding, typically 45°C) for 20 to 40 minutes. Heat denatures venom proteins and provides significant pain relief.</p>
+<p>Some spine fragments will dissolve naturally over days to weeks as the body's immune response breaks down the calcium carbonate structure, though this process is slow and does not always result in complete resolution. For spines that cannot be removed or that break off during removal attempts, monitor the wound carefully for signs of infection: increasing redness, warmth, swelling, pus discharge, red streaks radiating from the wound, or fever. Any of these signs requires immediate medical evaluation. Deep punctures, spines embedded near joints, wounds that do not improve within 48 hours, or systemic symptoms (nausea, dizziness, difficulty breathing) all require professional medical care. Tetanus vaccination status should be current for anyone accessing marine environments.</p>
+<ul>
+<li>Remove visible protruding spines carefully with clean tweezers</li>
+<li>Do NOT attempt to remove deeply embedded spines yourself</li>
+<li>Soak affected area in hot water (45°C) for 20-40 minutes</li>
+<li>Clean wound thoroughly with soap and fresh water</li>
+<li>Monitor closely for signs of infection over 48-72 hours</li>
+<li>Seek medical care for deep punctures, joint involvement, or infection signs</li>
+<li>Ensure tetanus vaccination is current</li>
+</ul>
+</div>
+<div class="info-section"><h3>Prevention & Risk Reduction</h3>
+<p>The single most effective prevention strategy for sea urchin injuries is wearing protective footwear whenever accessing rocky reefs, reef flats, or tidal pools. Reef shoes with thick rubber soles, wetsuit booties, or water shoes with hard bottoms provide excellent protection and prevent the majority of urchin injuries. Choose footwear with closed toes and full coverage — flip-flops and open sandals offer minimal protection. Reef shoes are a minimal investment that prevents an excruciatingly painful injury and potential medical complications.</p>
+<p>When exploring tidal pools or snorkeling over reefs, maintain constant visual awareness of your surroundings. Sea urchins are often camouflaged in crevices, under ledges, or against dark substrates, making them difficult to spot until you're dangerously close. Never place hands or feet into crevices or under overhangs without first visually confirming no urchins are present. Avoid wading or swimming in murky water where visibility is poor and urchins cannot be seen. During night dives or snorkeling, use a dive light to illuminate the substrate ahead of you — urchins are more active at night and easier to encounter in darkness. Finally, never handle live sea urchins, even species without long spines — many possess venomous pedicellariae that can deliver painful stings.</p>
+<ul>
+<li>ALWAYS wear reef shoes or wetsuit booties on rocky shores and reefs</li>
+<li>Choose footwear with thick, puncture-resistant soles and closed toes</li>
+<li>Watch where you place hands and feet — maintain constant visual awareness</li>
+<li>Never reach into crevices or under ledges without checking for urchins</li>
+<li>Avoid wading in murky water with poor visibility</li>
+<li>Use a dive light during night exploration of reefs</li>
+<li>Never handle live sea urchins</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>Long-Spined Black Urchins & KZN Reef Environments</h3>
+<p>The long-spined black urchin — including species like Echinothrix diadema and Diadema species — is the most commonly encountered and most problematic urchin for human injuries in KwaZulu-Natal waters. These urchins are abundant on rocky reefs, reef flats, and in tidal pools throughout KZN, where they play important ecological roles as grazers that control algal growth and maintain reef health. Their extremely long spines — up to 30 centimeters — serve as effective predator deterrents and allow the urchins to wedge themselves into narrow crevices where they shelter during daylight hours before emerging to graze at night.</p>
+<p>These spines are remarkably brittle, breaking easily when they penetrate skin or contact hard surfaces. The brittle structure that makes the spines effective defensive weapons also makes them particularly problematic for human injuries — spines snap off at their base and fragment inside wounds, making complete removal nearly impossible without surgical intervention. The hollow, porous calcium carbonate structure also provides surfaces for bacterial colonization, increasing infection risk. Some long-spined urchins also possess venomous pedicellariae scattered among their spines — tiny three-jawed structures on flexible stalks that clamp onto anything that touches them and inject venom through specialized teeth. These pedicellariae can remain functional even on dead urchins washed onto beaches.</p>
+<p>Understanding urchin behavior can help prevent injuries. Long-spined black urchins are primarily nocturnal grazers that shelter in crevices during the day and emerge onto open reef surfaces at night to feed on algae. Daytime snorkeling over reefs is relatively low-risk if proper footwear is worn, as urchins remain hidden. Night snorkeling or diving dramatically increases encounter risk as urchins move onto exposed substrates where they are easier to contact accidentally. Tidal pool exploration during low tide is high-risk because urchins that normally remain submerged become accessible to wading children and adults. Storm surges and wave action occasionally dislodge urchins and wash them into shallow areas where they would not normally occur, creating unexpected hazards. Finally, certain species — including collector urchins — cover themselves with shells, rocks, and debris, camouflaging their presence completely and making accidental contact almost inevitable for unwary explorers without protective footwear.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Sea Urchin Injuries</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Spines Up to 30 Centimeters Long</h4><p>Long-spined black urchins — the most commonly encountered species in KZN — bear extremely long, slender spines up to 30 centimeters in length. These brittle spines penetrate skin easily and break off at their base, leaving fragments embedded deep in tissue where they cause prolonged pain and high infection risk. The spines' hollow, porous calcium carbonate structure fragments further during removal attempts, making complete extraction nearly impossible without medical intervention.</p></div>
+<div class="fact-card"><h4>Venomous Pedicellariae — Jaws Among Spines</h4><p>Some urchin species possess pedicellariae — tiny three-jawed organs on flexible stalks scattered among the spines that clamp onto anything that touches them and inject venom through specialized teeth. These structures can cause additional pain and potential allergic reactions even after the urchin is dead or the primary spines removed. Pedicellariae remain functional on dead urchins washed onto beaches.</p></div>
+<div class="fact-card"><h4>High Risk of Secondary Infection</h4><p>Spine fragments introduce bacteria from the marine environment deep into tissue, and the brittle calcium carbonate structure makes complete spine removal difficult. Retained spine fragments serve as foreign bodies that promote infection, creating abscesses, cellulitis, and in severe cases, septic arthritis if spines penetrate joints. Any urchin wound showing increasing redness, warmth, swelling, pus, red streaks, or fever requires immediate medical care.</p></div>
+<div class="fact-card"><h4>Hot Water Treatment Denatures Venom</h4><p>Soaking sea urchin injuries in hot water (45°C) for 20 to 40 minutes provides significant pain relief by denaturing venom proteins. This treatment should be initiated as soon as accessible spines are removed. The water should be as hot as can be tolerated without causing burns — test carefully. Hot water immersion is effective for most urchin injuries and is the recommended first-line treatment.</p></div>
+<div class="fact-card"><h4>Spines Dissolve Slowly Over Time</h4><p>Some spine fragments will dissolve naturally over days to weeks as the body's immune response breaks down the calcium carbonate structure. However, this process is slow and does not always result in complete resolution. Deeply embedded spines near joints, tendons, or nerves may require surgical removal if they cause chronic pain or limited mobility. Not all retained spines cause long-term problems, but all require monitoring.</p></div>
+<div class="fact-card"><h4>Reef Shoes Prevent Nearly All Injuries</h4><p>Wearing reef shoes or wetsuit booties with thick, puncture-resistant soles prevents the vast majority of sea urchin injuries. This simple precaution is far more effective than any treatment. Reef shoes are a minimal investment that protects against urchins, stonefish, sharp coral, and countless other hazards on KZN's rocky shores and reefs. Always wear proper footwear — no tidal pool exploration or reef access is worth the risk.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

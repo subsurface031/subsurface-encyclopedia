@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahoo – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="fish.html">Fish</a>
+                <span>›</span>
+                Wahoo
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="wahoo.png" alt="Wahoo">
+                    <p class="image-caption">Acanthocybium solandri — Wahoo, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Wahoo</h2>
+                    <span class="scientific-name">Acanthocybium solandri</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The wahoo is the ocean's great solitary assassin — a long, sleek, razor-toothed predator of explosive speed and deceptive stealth that is widely regarded among KwaZulu-Natal's offshore fishing community as the most electrifying fish to encounter on light tackle. Unlike the schooling tuna and the acrobatic sailfish, the wahoo is fundamentally a lone hunter, ambushing prey from above with a blistering burst of acceleration that ranks among the fastest in the fish world — burst speeds of up to 80 km/h have been recorded, placing the wahoo among the ocean's elite sprinters.</p>
+                    <p>In KZN waters, wahoo are encountered year-round in offshore and deep-water coastal environments, with peak abundance during the warmer months between October and April when the Agulhas Current pushes warm water close to the continental shelf edge. They frequent current lines, underwater ridges, seamounts, and the edges of deep-water canyons — essentially anywhere that baitfish concentrate along oceanographic features. Durban, Ballito, Sodwana Bay, and Richards Bay all produce wahoo regularly, and a "smoking wahoo" — the local name for a fish that strips line from a reel at terrifying speed on the strike — is one of the most prized catches in KZN offshore fishing.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.5 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~83 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~9 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">80 km/h</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KZN Season</span>
+                            <span class="stat-value">Year-round</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Teeth Count</span>
+                            <span class="stat-value">~50 per jaw</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The wahoo is immediately recognizable by its distinctively elongated, torpedo-shaped body, iridescent colouration, and the bold vertical blue-green stripes that run across the flanks — stripes that can appear to glow with electric intensity in clear blue water. The back is a deep blue to blue-green, fading through silver-grey to a white underside. The 25 to 30 vivid cobalt or steel-blue vertical bars — which may fade rapidly after death — break up the body outline in clear offshore water, acting as disruptive camouflage when seen against light-dappled backgrounds from below or from the side.</p>
+                    <p>The jaws are long and beak-like, forming a distinctive snout that narrows to a point. Inside the mouth, approximately 45 to 50 razor-sharp, triangular, compressed teeth in each jaw are amongst the most formidable of any coastal predatory fish of equivalent size. These teeth can sever monofilament fishing line, bisect whole flying fish with a single snap, and cut a bait fish cleanly in two — a capability that frustrates anglers and speaks to the wahoo's extraordinary cutting efficiency. Unlike tuna, the wahoo has a single lateral line running along each flank.</p>
+                    <p>The body is more elongated and narrower in cross-section than tuna, with a relatively small, deeply forked tail and a distinctive series of dorsal finlets behind the main dorsal fin. The first dorsal fin is long, low, and can be folded into a groove. Adults typically measure 1 to 1.8 metres and weigh 10 to 40 kg in KZN waters. The world record stands at 83 kg, though fish exceeding 30 kg are considered large. Males and females grow at similar rates, and females tend to grow slightly larger.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Wahoo are predominantly solitary hunters, an unusual trait among large pelagic predators. While small, loose aggregations of 2 to 6 fish occasionally form around productive feeding areas, the characteristic encounter with wahoo in KZN waters is a single large fish materializing out of the blue at tremendous speed before vanishing just as quickly. This solitary nature, combined with their cryptic colouration and ability to approach from below using upward ambush tactics, makes them one of the most difficult large pelagic fish to spot before the strike.</p>
+                    <p>Wahoo are primarily mid-water and surface predators, spending most time in the upper 40 metres of the water column where baitfish are most concentrated. However, they are capable of deep dives and have been recorded at depths exceeding 330 metres using electronic tags. They are strongly associated with oceanographic features that concentrate prey — current edges, temperature breaks, underwater ridges, and floating debris all attract wahoo reliably. In KZN, the edge of the Agulhas Current and the steep continental shelf drop-off are the most productive wahoo habitats.</p>
+                    <p>The wahoo strike is legendary in fishing circles — an explosive, high-speed attack that strips 50 to 100 metres of line in seconds. Unlike sailfish, wahoo rarely jump after being hooked, instead making a series of blistering, unstoppable straight-line runs that test tackle and angler to the limit. Their razor-sharp teeth present a constant risk of bite-offs on monofilament leaders, and wire traces are routinely used despite the reduced lure action they impose.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Wahoo are hypercarnivorous apex predators whose diet consists almost exclusively of fish and squid. In KZN offshore waters, flying fish are among the most important prey species — wahoo will pursue flying fish both in the water and — remarkably — just as they break the surface and begin to glide, snatching them in mid-flight with explosive leaps. Mackerel, rainbow runners, small tuna, sardines, and various reef-associated species are taken opportunistically depending on location and availability. Squid and cuttlefish supplement the diet particularly at night.</p>
+                    <p>The wahoo's hunting strategy relies almost entirely on speed and stealth. Unlike cooperative hunters such as dolphins or tuna, the solitary wahoo relies on approaching prey undetected before launching a single explosive attack. The long, beak-like jaws and razor teeth allow the wahoo to seize large prey whole or to shear through large fish with a single swift bite — a more energy-efficient approach than the repeated slashing of sailfish or the engulfing lunge of tuna. This selective, precision hunting style is reflected in the wahoo's relatively lean, solitary lifestyle compared to the gregarious, schooling tuna.</p>
+                    <ul>
+                        <li>Flying fish (primary prey in KZN)</li>
+                        <li>Mackerel and small tuna</li>
+                        <li>Rainbow runners and carangids</li>
+                        <li>Sardines, anchovies, and halfbeaks</li>
+                        <li>Squid and cuttlefish</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Wahoo spawn in warm offshore surface waters throughout tropical and subtropical seas, with peak activity in KZN waters occurring during the warmer months between October and March. Spawning appears to occur at night in surface waters, with females releasing eggs that are fertilized externally. Wahoo are highly fecund — a large female may release several million eggs per season in multiple spawning events. Fertilized eggs hatch within two days into tiny larvae that begin feeding on zooplankton almost immediately.</p>
+                    <p>Wahoo grow exceptionally rapidly — one of the fastest growth rates of any large pelagic predator. They can reach 1 metre in their first year, doubling this by age two, and typically exceed 1.5 metres by age three. This rapid growth allows wahoo to quickly outgrow most predators and join the ranks of top ocean predators within their first few years of life. Sexual maturity is reached at approximately 1 to 2 years of age, a remarkably early maturity for a fish capable of reaching 80 kg.</p>
+                    <p>Maximum lifespan is estimated at approximately 9 years, with most commercially caught fish aged between 2 and 5 years. Their fast growth, early maturity, and high fecundity give wahoo good population resilience compared to slow-growing species like potato bass or red steenbras. However, their popularity as a sport and table fish — and their vulnerability to longline and trolling gear — means that populations in heavily fished regions are subject to significant pressure that requires ongoing monitoring.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Wahoo Fishing in KwaZulu-Natal</h3>
+                <p>Among KZN's offshore fishing fraternity, the wahoo occupies a special place in the hierarchy of desirable species. Its combination of extraordinary speed on the strike, powerful runs, and superb eating quality — widely considered the finest table fish of all large pelagic species, with snow-white, mild, dense flesh that rivals any ocean fish — makes it the ultimate bluewater prize for many local anglers. The name "wahoo" is said to derive from the exclamation of anglers who first encountered this fish in Hawaiian waters, overcome by the excitement of the strike.</p>
+                <p>In KZN, wahoo are most reliably targeted by high-speed trolling — running lures and rigged baits at 12 to 18 knots along current lines, drop-offs, and reef edges in depths of 40 to 200 metres. Their aggressive response to fast-moving lures, combined with their association with predictable oceanographic features, makes high-speed trolling a highly effective technique. Wahoo are also taken on slow-trolled live baits, particularly flying fish and bonito, and are increasingly targeted by deep-dropping and vertical jigging techniques over offshore structures.</p>
+                <p>Wahoo are currently classified as Least Concern by the IUCN, reflecting their wide distribution, rapid growth, and early maturity. However, they are subject to significant incidental catch in commercial longline fisheries targeting tuna and billfish throughout the Indian Ocean, and recreational fishing pressure in popular destinations like KZN can be substantial during peak season. As with all pelagic species, sustainable practices — including selective retention, minimum size limits, and responsible catch reporting — are essential to ensure that wahoo remain a plentiful part of KZN's offshore ecosystem for future generations.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>80 km/h Ambush Predator</h4>
+                    <p>The wahoo achieves burst speeds of up to 80 km/h — one of the fastest of any ocean fish — in the initial explosive sprint of its ambush attack. This extraordinary acceleration is generated from a standing start as the wahoo erupts from below its prey, giving the targeted fish virtually no time to react. The strike is so fast that anglers describe it as an instantaneous, unstoppable stripping of line.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Razor Teeth</h4>
+                    <p>Wahoo possess approximately 50 razor-sharp, triangular, compressed teeth in each jaw — among the most efficient cutting teeth of any pelagic fish of equivalent size. These teeth can sever monofilament fishing line instantly, bisect a flying fish with a single snap, and cut clean through the body of a large mackerel in one bite. Wire leaders are essential when targeting wahoo specifically to prevent immediate bite-offs.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Finest Table Fish</h4>
+                    <p>Wahoo — known in Hawaii as "ono," meaning "delicious" — is widely regarded as the finest-tasting large pelagic fish in the ocean. The flesh is snow-white, mild, firm, and slightly flaky, with a delicate flavour that suits every cooking method from raw sashimi to grilling, smoking, and pan-frying. Its exceptional eating quality, combined with its sporting attributes, makes every wahoo encounter a doubly rewarding experience.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Solitary Hunter</h4>
+                    <p>Unlike most large pelagic fish that school for protection and cooperative hunting, the wahoo is fundamentally solitary. This solitary lifestyle reflects its ambush hunting strategy — a lone predator striking from concealment is more effective for single large prey items than cooperative herding. It also means wahoo encounters in KZN waters are typically brief, high-impact events rather than the sustained feeding frenzies seen with tuna or dolphin schools.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Flying Fish Hunter</h4>
+                    <p>Wahoo are one of very few large fish capable of catching flying fish both in the water and in mid-air. They will launch themselves out of the water to intercept flying fish gliding above the surface — a spectacular hunting behaviour rarely witnessed but documented by observers on vessels in KZN and throughout the Indo-Pacific. This ability to exploit prey in two elements simultaneously gives wahoo a significant competitive advantage.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The "Smoking Wahoo"</h4>
+                    <p>KZN offshore anglers use the term "smoking wahoo" to describe the strike of a large fish at high boat speed — the reel screams, line melts off the spool, and smoke rises from the drag system under the extreme heat generated. The world record wahoo of 83 kg was caught off Cabo San Lucas, Mexico. KZN regularly produces fish over 30 kg, with exceptional individuals exceeding 40 kg caught each season off Durban and Sodwana Bay.</p>
+                </div>
+            </div>
+
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

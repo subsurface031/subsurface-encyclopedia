@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whale Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #e57373; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                <span>›</span>
+                Whale Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="whale-shark.png" alt="Whale Shark">
+                    <p class="image-caption">Rhincodon typus — Whale Shark, occasional visitor to KZN's warm coastal waters</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Whale Shark</h2>
+                    <span class="scientific-name">Rhincodon typus</span>
+                    <span class="conservation-badge">⚠ IUCN: Endangered — Protected Species</span>
+                    <p>The whale shark is the largest fish in the world and one of only three filter-feeding shark species — a gentle giant that cruises the world's tropical and warm-temperate oceans sieving enormous quantities of plankton, fish eggs, and small schooling fish through its cavernous mouth. Despite its imposing size, the whale shark poses no threat to humans and is regarded as one of the most thrilling and awe-inspiring encounters available to divers and snorkellers anywhere on Earth. In KwaZulu-Natal, whale sharks are occasional visitors to the warm Agulhas Current waters of the northern coast, appearing most frequently in association with the Sardine Run and the summer plankton blooms that characterise the region's productive inshore waters.</p>
+                    <p>What makes the whale shark's size truly extraordinary is not merely its length but the biological complexity that sustains an animal of such mass on a diet of some of the ocean's smallest organisms. A mature whale shark must filter thousands of cubic metres of water daily to sustain its bulk — cruising with mouth agape, drawing water across specialised filter pads that strain out prey items as small as a few millimetres. This strategy of energetic efficiency has served the species well for tens of millions of years, but it renders whale sharks highly vulnerable to the threats of the modern ocean: vessel traffic, entanglement in fishing gear, and the targeted hunting that has devastated populations across the Indo-Pacific over recent decades.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">~18 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~21,500 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity</span>
+                            <span class="stat-value">25 – 30 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~70 – 130 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Dive Depth</span>
+                            <span class="stat-value">&gt; 1,900 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">IUCN Status</span>
+                            <span class="stat-value">Endangered</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The whale shark is unmistakeable — no other fish approaches its size, and its distinctive colouration makes misidentification impossible. The body is broad and flattened across the head, tapering to a powerful, laterally compressed tail. The enormous, flattened head carries the characteristic terminal mouth — positioned at the very front of the snout rather than underneath as in most sharks — which can gape to over 1.5 metres wide. Five pairs of very large gill slits flank the head, and the skin across the back and flanks is patterned with a unique checkerboard of pale yellow or white spots and stripes on a dark grey or blue-grey background. This pattern is individually unique to each animal, in the same way that human fingerprints differ between individuals, and researchers use photographic identification of spot patterns to track individuals across ocean basins.</p>
+                    <p>The skin itself is among the thickest of any animal — up to 15 centimetres in mature individuals — providing substantial protection against parasites, minor abrasions, and the attentions of smaller fish that often accompany whale sharks in large shoals. The skin surface is covered in dermal denticles, the modified scales common to all sharks, which in the whale shark are arranged in a texture that reduces drag and turbulence as the animal cruises. Two dorsal fins are present — the first is large and prominent, positioned about two-thirds along the body; the second is much smaller. The paired pectoral fins are broad and wing-like, providing lift and fine manoeuvrability despite the animal's enormous mass.</p>
+                    <p>Despite having approximately 3,000 tiny teeth arranged in 300 rows, whale sharks do not use their teeth to capture prey. The teeth are vestigial — thought to be a retained ancestral feature — and the actual feeding mechanism relies entirely on the filter pads lining the gill arches. These pads are a unique structure among sharks, consisting of a dense mesh of cartilaginous rods that trap prey items while water passes through to the gills. Whale sharks can also actively suction-feed at the surface, drawing in concentrated patches of fish eggs or zooplankton with powerful gulping movements.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Whale sharks are largely solitary animals for most of their lives, roaming vast expanses of open ocean in search of productive feeding aggregations. They are, however, capable of forming impressive temporary aggregations at predictable feeding sites — dozens to hundreds of individuals have been documented gathering at locations such as Ningaloo Reef in Australia, Isla Mujeres in Mexico, and the Yucatán coast during mass coral spawning events that trigger eruptions of fish eggs in the water column. These aggregations appear to be driven entirely by food availability rather than social behaviour, and individuals disperse as soon as the food source dissipates.</p>
+                    <p>Despite their slow, gentle surface demeanour — they are frequently encountered cruising just below the surface, apparently indifferent to the presence of divers and snorkellers — whale sharks undertake remarkable deep dives that are only now being revealed through satellite tagging studies. Tagged animals have been tracked diving to depths exceeding 1,900 metres, likely in pursuit of deeper aggregations of prey or for thermoregulatory reasons. These dives are followed by extended periods at or near the surface, and the combination of deep diving and surface time makes whale sharks particularly vulnerable to vessel strike — a significant and underappreciated cause of mortality globally.</p>
+                    <p>Migration patterns remain incompletely understood but are clearly linked to oceanographic productivity cycles. Whale sharks follow the seasonal progression of warm, productive waters, appearing predictably at certain locations during specific seasons each year. In the southern African context, they are most frequently encountered in northern KZN and Mozambican waters during summer and autumn, with sightings correlating strongly with the presence of warm Agulhas Current intrusions and the prey concentrations these generate. Individual sharks tracked across multiple years have shown remarkable fidelity to productive feeding sites, returning to the same locations in the same months across a decade or more.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>The whale shark's diet is dominated by the smallest productive members of the marine food web — a strategy of energetic efficiency that allows an animal of enormous mass to sustain itself in ecosystems where large prey is scarce but microscopic productivity is immense. Primary prey items include zooplankton such as copepods, krill, and small jellyfish; fish spawn including the mass egg releases of coral-spawning reef fish; small schooling fish such as anchovies, sardines, and herrings when they concentrate in sufficient density; and crab larvae during coastal spawning events. The species is entirely opportunistic, exploiting whatever prey type is most abundant at any given time and location.</p>
+                    <p>Feeding typically occurs at or near the surface, where buoyant fish eggs, zooplankton, and juvenile fish concentrate. The whale shark adopts a near-vertical posture when suction-feeding at the surface — rising partly out of the water and then sinking while gulping — and a more horizontal posture when ram-feeding, cruising forward with mouth agape through a patch of concentrated prey. The filter pads are remarkably efficient, capable of retaining prey items as small as a few millimetres while passing enormous volumes of water, and the shark will periodically close its mouth to swallow accumulated prey before resuming feeding.</p>
+                    <ul>
+                        <li>Copepods, krill, and mixed zooplankton</li>
+                        <li>Fish eggs and spawn (especially mass coral spawning events)</li>
+                        <li>Sardines, anchovies, and small schooling fish</li>
+                        <li>Squid and juvenile cephalopods</li>
+                        <li>Crab larvae and other crustacean larvae</li>
+                        <li>Small jellyfish and salps</li>
+                        <li>Occasionally tuna and other larger prey items</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>The reproductive biology of the whale shark remains one of the least understood aspects of this species' life history — a consequence of the difficulty of studying an animal that mates and gives birth in the open ocean, far from where aggregations are typically encountered. What is known comes from a small number of pregnant females that have been examined: whale sharks are ovoviviparous, meaning eggs hatch internally and young are born live. A single pregnant female examined in 1995 was found to carry 300 pups at various stages of development — suggesting that litter sizes may be very large, but that pups are produced in staggered developmental stages rather than all maturing simultaneously.</p>
+                    <p>The age at sexual maturity is estimated at between 25 and 30 years — an extraordinarily long juvenile period that makes whale sharks among the slowest-maturing of all sharks and one of the slowest-maturing of all fishes. This delayed maturity, combined with an estimated maximum lifespan of 70 to potentially 130 years, means that each individual whale shark represents decades of ocean time before it can contribute to population replacement. The consequence for conservation is severe: populations decimated by fishing cannot recover on human timescales. A population that loses a significant proportion of its adult females will take generations — potentially more than a century — to recover to pre-depletion levels even under ideal protection.</p>
+                    <p>Nursery areas and pupping grounds remain almost entirely unknown. Juvenile whale sharks are occasionally encountered at productive coastal sites, but the very young and newborn size classes are virtually never seen — suggesting that birth occurs in remote deepwater areas well away from the shallow aggregation sites where most whale shark research takes place. This knowledge gap is a significant impediment to effective conservation planning, as identifying and protecting nursery habitat is a critical component of recovery for any highly endangered species.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Whale Sharks in KZN Waters, Conservation Status & Legal Protection</h3>
+                <p>In KwaZulu-Natal, whale sharks are irregular but not uncommon visitors to the northern coast during the warmer months, with the highest frequency of encounters occurring between October and April. The area around Sodwana Bay, the iSimangaliso Wetland Park, and the Maputaland Marine Protected Area has historically produced the most consistent sightings, reflecting the warm, productive character of the northern KZN shelf and its proximity to Mozambique's consistently warm coastal waters where whale sharks are more resident. Sightings often coincide with the Sardine Run period and with aggregations of baitfish that attract the same productive plankton blooms that whale sharks exploit — though the sharks themselves are filter-feeders rather than sardine predators, they benefit from the same oceanographic conditions.</p>
+                <p>Whale sharks are fully protected under South African law. The Marine Living Resources Act and its regulations prohibit the capture, killing, or disturbance of whale sharks in South African waters, and the species is listed under CITES Appendix II — requiring that any international trade in whale shark products is regulated and demonstrated to be non-detrimental to wild populations. Despite these protections, whale sharks continue to face pressure from targeted fishing in parts of the Indo-Pacific where enforcement is limited, and from vessel strike in heavily trafficked shipping lanes. South Africa's protected MPA network in northern KZN provides meaningful refuge, but whale sharks are highly migratory and spend much of their lives in international waters where protection is inconsistent.</p>
+                <p>The IUCN Red List currently classifies the whale shark as Endangered — a status reflecting an estimated global population decline of more than 50% over the past 75 years driven primarily by targeted fisheries in Asia, bycatch in purse-seine tuna fisheries, and vessel strike. The population declines have been documented most severely in the Indo-Pacific, where historical commercial fisheries operated at substantial scale in Taiwan, the Philippines, India, and China before partial or full national protections were enacted from the 1990s onwards. Recovery has been slow and inconsistent, and demand for whale shark products — particularly the fins and oil — continues to drive illegal take in unprotected areas.</p>
+                <p>From a tourism perspective, whale shark encounters represent significant conservation-aligned economic value for KZN's northern coast. Well-managed swim-with-whale-shark ecotourism generates revenue that can support marine protection, research, and community conservation engagement — as has been demonstrated at Ningaloo Reef in Australia and Isla Holbox in Mexico, where responsible whale shark tourism has made living whale sharks far more economically valuable than dead ones. KZN operators offering whale shark encounters are expected to follow strict approach guidelines: no touching, no flash photography, maintaining respectful distances, and limiting the number of swimmers in the water simultaneously to minimise disturbance.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The World's Largest Fish</h4>
+                    <p>The whale shark holds the uncontested title of the largest fish on Earth. Verified specimens have been measured at over 12 metres in length, and credible reports from fishing records and historical accounts suggest individuals of 18 metres or more have existed. Despite this extraordinary size, whale sharks are docile filter-feeders that pose no threat to humans — a paradox that makes them one of the most sought-after encounters in recreational diving worldwide.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Individual Spot Patterns</h4>
+                    <p>The pale spot pattern on a whale shark's back is unique to each individual, in the same way that human fingerprints are unique. Researchers use photographic identification of spot patterns — particularly the area behind the gills — to track individual animals across years and ocean basins. The citizen-science platform Wildbook for Whale Sharks has accumulated a global database of thousands of individual animals, allowing migration routes and population sizes to be estimated from diver photographs submitted from around the world.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Deep Diving Giants</h4>
+                    <p>Satellite tagging has revealed that whale sharks are not the surface-cruising animals they appear to be at popular aggregation sites. Tagged individuals regularly dive to depths exceeding 1,000 metres, and one remarkable dive to over 1,900 metres has been recorded — deeper than the light can penetrate and in water temperatures approaching 4°C. The purpose of these extreme dives is not fully understood but may relate to foraging on deep scattering layers of zooplankton or to thermoregulatory needs.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Decades to Maturity</h4>
+                    <p>Whale sharks do not reach sexual maturity until they are estimated to be 25 to 30 years old — one of the longest juvenile periods of any fish. Combined with a potential maximum lifespan of over 100 years, this means that every large adult whale shark in the ocean is an irreplaceable investment of decades of ocean time. The loss of a single mature female through vessel strike or illegal fishing represents a reproductive gap that the population cannot quickly replace, making the protection of large adults especially critical to species recovery.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>300 Rows of Teeth, Never Used</h4>
+                    <p>Whale sharks possess approximately 3,000 teeth arranged across roughly 300 rows — yet they never bite their food. The teeth are entirely vestigial, remnants of the ancestral shark dentition retained through evolution but rendered functionless by the shift to filter-feeding. All feeding is accomplished by the gill-raker filter pads, which strain prey from water pumped through the mouth and gills. The whale shark's teeth serve no known biological function in living animals.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Conservation Tourism Value</h4>
+                    <p>Economic analyses of whale shark ecotourism have consistently found that a living whale shark is worth orders of magnitude more than a dead one. A single whale shark contributing to sustained ecotourism over its lifespan can generate millions of dollars in dive tourism revenue — supporting local economies, marine research, and conservation programmes. This economic reality has been central to arguments for protection in countries where whale sharks were historically targeted commercially, transforming the incentive structure from extraction to preservation.</p>
+                </div>
+            </div>
+
+            <a href="Sassi.html" class="back-link">← Back to Endangered Species &amp; SASSi Listings</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

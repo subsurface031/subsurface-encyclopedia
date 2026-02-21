@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UV Radiation & Heat – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>UV Radiation & Heat</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="uv.png" alt="UV Radiation KZN Beach">
+    <p class="image-caption">KwaZulu-Natal's subtropical sun regularly reaches UV Index 11+ in summer — classified as Extreme by the WHO scale</p>
+</div>
+<div class="species-intro">
+    <h2>UV Radiation & Heat</h2>
+    <span class="scientific-name">Solar ultraviolet radiation — UVA, UVB & UVC exposure on KZN's coast</span>
+    <span class="conservation-badge">⚠ CUMULATIVE HAZARD — High Year-Round Risk</span>
+    <p>Of all the hazards covered in this encyclopedia, UV radiation and heat are by far the most frequently encountered — and among the most consistently underestimated. Every person who visits a KZN beach is exposed to solar radiation, and the cumulative damage from unprotected or under-protected sun exposure is responsible for more long-term health harm than virtually any other coastal hazard on this list. KwaZulu-Natal sits between approximately 27° and 31° south latitude — deep in the subtropics — and receives solar radiation at an intensity that is significantly higher than most of the world's most popular beach destinations. During summer months the UV Index on KZN beaches routinely reaches 11 or above, placing it firmly in the "Extreme" category according to the WHO UV Index scale, where unprotected skin can burn in as little as ten minutes under peak midday sun.</p>
+    <p>Heat presents a separate but related risk. The combination of high ambient temperatures, direct sun, physical activity, and inadequate fluid intake creates the conditions for heat exhaustion and heat stroke — conditions that escalate rapidly, are potentially fatal if untreated, and disproportionately affect children, the elderly, and those with pre-existing cardiovascular or respiratory conditions. On a busy KZN summer beach day, heat-related illness is not a remote possibility — it is a genuine, recurring emergency that lifeguards and paramedics respond to regularly. Understanding both the radiation hazard and the thermal hazard, how they interact, and how to protect yourself and others effectively, is essential knowledge for anyone planning to spend time on KZN's coast.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Peak UV Index</span><span class="stat-value">11–13 (Extreme)</span></div>
+        <div class="stat-box"><span class="stat-label">Burn Time (UV 11)</span><span class="stat-value">~10 minutes</span></div>
+        <div class="stat-box"><span class="stat-label">Peak Season</span><span class="stat-value">October – February</span></div>
+        <div class="stat-box"><span class="stat-label">Recommended SPF</span><span class="stat-value">50+ broad-spectrum</span></div>
+        <div class="stat-box"><span class="stat-label">Peak Hours</span><span class="stat-value">10:00 AM – 3:00 PM</span></div>
+        <div class="stat-box"><span class="stat-label">Skin Cancer Rate</span><span class="stat-value">SA: leading cause</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>Understanding UV Radiation</h3>
+    <p>Ultraviolet radiation is emitted by the sun across three wavelength bands: UVC (100–280 nm), which is almost entirely absorbed by the atmosphere and does not reach the Earth's surface; UVB (280–315 nm), which causes direct DNA damage to skin cells, drives vitamin D synthesis, and is the primary cause of sunburn; and UVA (315–400 nm), which penetrates more deeply into the skin, contributes to premature ageing, suppresses immune function, and plays a significant role in skin cancer development — including the most dangerous form, melanoma. Both UVA and UVB reach KZN's coast in substantial quantities year-round, with intensity peaking in the summer months (October through February) when the sun is most directly overhead.</p>
+    <p>The UV Index is a standardised international scale that quantifies the intensity of UV radiation at the Earth's surface on a given day. A UV Index of 1–2 is Low; 3–5 is Moderate; 6–7 is High; 8–10 is Very High; and 11 and above is Extreme. At UV Index 11, unprotected fair skin can begin to burn in approximately ten minutes. KZN's summer UV Index regularly reaches 11–13 at peak midday, and the Index remains Very High (8–10) even during winter months in the northern parts of the province. Ozone column depletion over the Southern Hemisphere, while less severe than over Antarctica, measurably increases surface UVB levels in KZN compared to equivalent latitudes in the Northern Hemisphere.</p>
+    <ul>
+        <li>UVB: sunburn, DNA damage, primary skin cancer driver</li>
+        <li>UVA: deep penetration, ageing, melanoma risk — not blocked by glass</li>
+        <li>UV Index 11+ (Extreme): burn possible in ~10 minutes unprotected</li>
+        <li>KZN summer peak: UV Index 11–13 between 10 AM and 3 PM</li>
+        <li>UV present year-round — even on cloudy days, 80% of UV penetrates cloud cover</li>
+        <li>Reflection amplifies exposure: sand reflects ~15–25% of UV, sea water ~10%</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Heat Exhaustion & Heat Stroke</h3>
+    <p>Heat-related illness exists on a spectrum, from mild heat cramps through heat exhaustion to heat stroke — a life-threatening medical emergency. Heat exhaustion develops when the body's cooling mechanisms are overwhelmed by a combination of high environmental temperature, humidity, physical exertion, and inadequate hydration. Symptoms include heavy sweating, cool and pale or flushed skin, fast but weak pulse, nausea, headache, dizziness, muscle cramps, and fatigue. The person remains conscious and coherent. Heat exhaustion requires immediate removal from the sun, rest in a cool or shaded environment, rehydration with water or electrolyte drinks, and cooling of the body with wet cloths or immersion.</p>
+    <p>Heat stroke occurs when the body temperature rises to dangerous levels — typically above 40°C — and the body's thermoregulatory mechanisms fail. There are two forms: classic heat stroke, which occurs in individuals who are not exercising but are exposed to prolonged extreme heat (particularly vulnerable are the elderly, infants, and those on certain medications); and exertional heat stroke, which occurs in physically active people in hot, humid conditions. Heat stroke symptoms include high body temperature, hot skin (which may be dry in classic heat stroke or sweaty in exertional heat stroke), rapid and strong pulse, confusion, slurred speech, loss of consciousness, and seizures. Heat stroke is a medical emergency — call 10111 or 112 immediately, move the person to a cool environment, and begin aggressive cooling while awaiting emergency services.</p>
+    <ul>
+        <li>Heat exhaustion: heavy sweating, dizziness, nausea, weak pulse — conscious</li>
+        <li>Heat stroke: body temp above 40°C, confusion, hot skin — medical emergency</li>
+        <li>Children thermoregulate less efficiently — highest risk group</li>
+        <li>Elderly and those on diuretics, antihistamines, or antipsychotics: elevated risk</li>
+        <li>Alcohol significantly impairs heat regulation and hydration</li>
+        <li>High humidity on KZN coast reduces evaporative cooling effectiveness</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Skin Cancer in South Africa</h3>
+    <p>Skin cancer is the most common cancer diagnosed in South Africa, and solar UV radiation is its primary cause. The three main types — basal cell carcinoma (BCC), squamous cell carcinoma (SCC), and melanoma — all have direct aetiological links to cumulative and acute UV exposure over a lifetime. BCC and SCC are highly treatable if caught early but can cause significant disfigurement and, in neglected cases, spread to deeper tissues. Melanoma, while less common than BCC and SCC, is by far the most dangerous form: it metastasises rapidly and has a poor prognosis once it has spread beyond the skin. South Africa's high UV environment, combined with a cultural tendency to underestimate sun damage, creates a population-level skin cancer burden that is a genuine public health problem.</p>
+    <p>The damage that leads to skin cancer is cumulative and largely invisible in the short term. A single severe sunburn in childhood or adolescence is estimated to approximately double the lifetime risk of melanoma. Repeated subclinical UV damage that never causes visible sunburn still accumulates as DNA mutations in skin cells over decades. The visible signs of sun damage — hyperpigmentation, actinic keratoses, leathery skin texture, and solar lentigines — are indicators of long-term UV exposure that preceded them by years or decades. Regular full-body skin checks with a dermatologist or GP, particularly for individuals who have spent significant time outdoors in KZN over their lives, are a key component of skin cancer prevention for long-term coastal residents and visitors.</p>
+    <ul>
+        <li>Skin cancer is South Africa's most commonly diagnosed cancer</li>
+        <li>BCC and SCC: treatable if caught early — annual skin checks recommended</li>
+        <li>Melanoma: rapidly metastasising — early detection is critical to survival</li>
+        <li>One severe childhood sunburn approximately doubles lifetime melanoma risk</li>
+        <li>Cumulative damage: years of UV exposure precedes visible skin changes</li>
+        <li>Seek immediate medical review for any changing mole or new pigmented lesion</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Sun Protection — What Actually Works</h3>
+    <p>Broad-spectrum SPF 50+ sunscreen is the minimum appropriate standard for KZN's coastal UV environment. Broad-spectrum formulations block both UVA and UVB; SPF ratings alone measure only UVB protection. Application must be generous — the test conditions for SPF ratings use 2mg per cm² of skin surface area, approximately twice the amount most people actually apply — and must be reapplied every two hours, immediately after swimming or towelling, and more frequently in conditions of heavy sweating. Most people significantly under-apply sunscreen, effectively reducing their actual protection to well below the stated SPF. Water-resistant formulations are preferable for any beach activity, but no sunscreen remains effective through extended water immersion without reapplication.</p>
+    <p>Sunscreen alone is insufficient protection in KZN's high-UV environment — it should be one component of a layered protection strategy. UPF-rated sun-protective clothing offers reliable, consistent protection that does not degrade with sweating or swimming the way sunscreen does: a standard white cotton t-shirt has an effective UPF of only about 5–7 when wet, while purpose-designed UPF 50+ rash guards and swim shirts block over 98% of UV. Wide-brimmed hats (minimum 7.5 cm brim all round) and UV-blocking sunglasses (400nm UV protection rated) protect the face, scalp, and eyes from both direct and reflected UV. Seeking shade during peak UV hours — 10 AM to 3 PM — and building beach time around the earlier morning and late afternoon hours when the solar angle is lower substantially reduces cumulative UV exposure without eliminating time outdoors.</p>
+    <ul>
+        <li>Sunscreen: broad-spectrum SPF 50+, applied generously, reapplied every 2 hours</li>
+        <li>Apply 15–30 minutes before sun exposure for full activation</li>
+        <li>UPF 50+ rash guards and swim shirts: more reliable than sunscreen in water</li>
+        <li>Wide-brimmed hat (7.5 cm+ brim): protects face, ears, and back of neck</li>
+        <li>UV 400-rated sunglasses: protect against cataracts and macular degeneration</li>
+        <li>Seek shade 10 AM – 3 PM; UV remains significant up to 1–2 hours after sunrise/sunset</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>UV, Heat & KZN's Coastal Climate — Seasonal Patterns & Practical Guidance</h3>
+    <p>KwaZulu-Natal's coastal climate is subtropical humid, characterised by warm, wet summers and mild, dry winters. The combination of high UV, high humidity, and high temperatures that defines a KZN summer beach day creates a compounding hazard profile that differs significantly from drier, cooler environments at equivalent UV levels. High humidity reduces the effectiveness of evaporative cooling — the body sweats but the sweat does not evaporate as efficiently, reducing the body's ability to shed heat. On a still, humid 34°C day in Durban with full sun, the felt heat stress on the human body is substantially higher than the air temperature alone suggests, and the onset of heat exhaustion in children and physically active adults can occur surprisingly rapidly — within one to two hours of inadequate hydration and unshaded activity.</p>
+    <p>Summer in KZN also brings the complication of afternoon thunderstorms, which can develop rapidly from late morning and reach full intensity by early to mid-afternoon. These storms are a UV hazard in their own right: the dramatic cloud build-up of a developing thunderstorm can temporarily block direct sun, leading people to reduce or omit sun protection under overcast conditions. However, UV penetrates cloud cover effectively — up to 80% of UV radiation passes through light to moderate cloud cover — and the visual absence of direct sunshine does not correspond to a meaningful reduction in UV exposure. Beachgoers who abandon sun protection during overcast periods frequently receive significant UV doses they were not anticipating. The UV Index forecast for the day, published daily by the South African Weather Service, reflects the expected maximum UV on a clear day and should be used as the primary guide for protection planning, not the real-time appearance of the sky.</p>
+    <p>Year-round, KZN's winter UV levels remain in the High to Very High range (UV Index 6–9) for the majority of the province. The perception that winter sun is "safe" on a KZN beach is a dangerous misconception: while the risk of heat exhaustion is lower in winter, the UV radiation exposure at a KZN winter beach is comparable to or higher than peak summer UV levels in much of northern Europe. Regular beachgoers and water sports participants who spend significant time on KZN's coast in all seasons should treat year-round sun protection as a non-negotiable habit rather than a summer-only consideration. This applies with particular force to surfers, divers, paddlers, and rock fishers, who routinely spend three to six hours or more in full sun with their faces, necks, and forearms receiving direct and reflected UV throughout the session.</p>
+</div>
+
+<h3 class="section-heading">Critical Facts — UV Radiation & Heat on KZN Beaches</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>UV Is Not Blocked by Cloud</h4>
+    <p>Up to 80% of UV radiation penetrates light cloud cover. An overcast day on a KZN beach can still deliver UV Index levels well into the High or Very High range. The absence of direct sunshine is not a reliable indicator of UV safety — check the daily UV Index forecast from the South African Weather Service and apply sun protection accordingly, regardless of cloud conditions. This misunderstanding is responsible for a significant proportion of unexpected and severe sunburns on KZN beaches.</p>
+</div>
+<div class="fact-card">
+    <h4>Sand & Water Reflect UV</h4>
+    <p>Beach sand reflects approximately 15–25% of UV radiation, and sea water reflects around 10%. This means that even when sitting in the shade of an umbrella or shelter on the beach, you are receiving a meaningful UV dose from reflected radiation bouncing up from the sand around you. UV-protective clothing, sunscreen on all exposed areas including under the chin, and UV-rated sunglasses are necessary even under shade structures. The combination of direct and reflected UV makes a beach environment significantly more UV-intense than an equivalent inland shaded location.</p>
+</div>
+<div class="fact-card">
+    <h4>Children Are the Highest-Risk Group</h4>
+    <p>Children have thinner, more UV-sensitive skin than adults, a higher body surface area to volume ratio (making them heat up faster and dehydrate faster), and a significantly less developed capacity to self-regulate sun and heat exposure. They also tend to be more physically active on beaches, increasing metabolic heat production. Children should be covered with UPF-rated clothing, reapplied with SPF 50+ sunscreen every 90 minutes, kept well hydrated, and taken into shade or air-conditioned environments well before showing signs of heat stress. Sunburn in childhood has disproportionate lifetime health consequences.</p>
+</div>
+<div class="fact-card">
+    <h4>Eyes Need Protection Too</h4>
+    <p>Prolonged UV exposure to the eyes causes photokeratitis (a painful, temporary sunburn of the cornea), accelerates the development of cataracts, and increases the risk of macular degeneration — a leading cause of permanent vision loss. On a bright KZN beach, reflected UV from sand, water, and sky can deliver intense UV doses to unprotected eyes. Sunglasses should be rated UV 400 (blocking 99–100% of both UVA and UVB) and should have lenses large enough to shield peripheral vision. Polarised lenses reduce glare and eye strain but do not by themselves provide UV protection — UV blocking is a separate optical property.</p>
+</div>
+<div class="fact-card">
+    <h4>Heat Stroke Kills — Act Fast</h4>
+    <p>Heat stroke is a medical emergency with a mortality rate that increases significantly with every minute treatment is delayed. If someone at the beach becomes confused, stops sweating, has very hot skin, and loses coherence or consciousness, call 112 immediately and begin aggressive cooling: move them to shade, remove excess clothing, apply cool (not iced) water to the skin, fan aggressively, and place ice packs or cold wet cloths to the neck, armpits, and groin. Do not give fluids by mouth to an unconscious or confused person. Early, aggressive cooling before paramedics arrive materially improves outcomes.</p>
+</div>
+<div class="fact-card">
+    <h4>Hydration Is Not Optional</h4>
+    <p>On a hot KZN summer beach day, an active adult can lose one to two litres of fluid per hour through sweat. Children's fluid loss is proportionally even higher. Thirst is a lagging indicator of dehydration — by the time a person feels thirsty, they are already mildly dehydrated and heat performance is degrading. Drink water before, during, and after beach activity regardless of thirst. Avoid alcohol in the sun — it is a diuretic and impairs the body's temperature regulation. Sports drinks are appropriate for extended physical activity to replace electrolytes lost in sweat, but plain water is appropriate for general hydration and rest periods.</p>
+</div>
+</div>
+
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

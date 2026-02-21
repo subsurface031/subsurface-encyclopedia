@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yellowfin Tuna – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 193, 7, 0.5); color: #ffc107; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sharks.html">Sharks</a></li>
+                <li><a href="crocs.html">Crocs</a></li>
+                <li><a href="hippos.html">Hippos</a></li>
+                <li><a href="rays.html">Rays</a></li>
+                <li><a href="turtles.html">Turtles</a></li>
+                <li><a href="cetaceans.html">Cetaceans</a></li>
+                <li><a href="fish.html">Fish</a></li>
+                <li><a href="crustaceans.html">Crustaceans</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="fish.html">Fish</a>
+                <span>›</span>
+                Yellowfin Tuna
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="yellowfin-tuna.png" alt="Yellowfin Tuna">
+                    <p class="image-caption">Thunnus albacares — Yellowfin Tuna, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Yellowfin Tuna</h2>
+                    <span class="scientific-name">Thunnus albacares</span>
+                    <span class="conservation-badge">⚠ Near Threatened</span>
+                    <p>The yellowfin tuna is one of the ocean's most perfectly engineered predators — a torpedo-shaped powerhouse of speed, endurance, and hydrodynamic efficiency that has conquered every tropical and subtropical ocean on Earth. In KwaZulu-Natal, yellowfin are the premier bluewater game fish, drawing offshore anglers from across the region to the deep water canyons and current lines off Durban, Ballito, Richards Bay, and Sodwana Bay. Their combination of breathtaking beauty — electric yellow finlets and fins set against metallic blue-black and silver bodies — extraordinary fighting stamina, and superb eating quality makes them the most prized single species in KZN's offshore fishing scene.</p>
+                    <p>Yellowfin tuna are warm-water pelagic predators that follow the Agulhas Current along KZN's coastline, concentrating in the offshore zone where warm current edges, temperature breaks, and underwater topography concentrate their prey. They form schools with skipjack tuna, bigeye tuna, and occasionally with dolphins and whale sharks — a remarkable ecological association that has been exploited for centuries by traditional fishers across the Indo-Pacific, who follow dolphins to locate tuna schools below. In KZN waters, yellowfin are typically encountered year-round in offshore waters but are most abundant and closest to shore during the warmer months between October and May.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.4 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~200 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~9 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">75 km/h</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Dive Depth</span>
+                            <span class="stat-value">~1,000 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Body Temp Above Water</span>
+                            <span class="stat-value">Up to +8°C</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The yellowfin tuna is one of the ocean's most beautiful large fish, immediately recognizable by its distinctive colouration and the extraordinary elongation of its dorsal and anal fins in large adults. The body is streamlined, fusiform, and powerfully built, with a smooth, scaleless surface interrupted only by the corselet — a band of enlarged scales around the pectoral fin region. The back and upper flanks are a deep metallic blue-black that transitions through gold and silver to a white belly, sometimes marked with colourless vertical rows of spots and stripes.</p>
+                    <p>The yellow fins that give this species its name are vivid and striking — the second dorsal fin, anal fin, and all nine finlets along the dorsal and ventral surfaces behind them are bright canary yellow with narrow black borders. In large adults exceeding 80 kg, the second dorsal and anal fins elongate dramatically into flowing sickle-shaped lobes that can reach nearly a metre in length — a feature absent in juveniles and distinctive to this species among tunas. Two small keels flank the caudal peduncle, with a larger central keel between them that reduces turbulence at the tail root during high-speed swimming.</p>
+                    <p>Adults average 1 to 1.5 metres and 30 to 70 kg in KZN offshore waters, though fish exceeding 100 kg are caught regularly. The Indian Ocean record stands near 200 kg and 2.4 metres. Females and males are similar in appearance, though males tend to grow larger. The musculature is exceptionally dense and red — rich in myoglobin for sustained aerobic activity — giving yellowfin sashimi its characteristic deep red colour and rich flavour.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Yellowfin tuna are among the most highly migratory fish on the planet, capable of crossing entire ocean basins in pursuit of prey and favourable water temperatures. They are schooling fish that typically aggregate by size class — schools of similarly sized individuals move together, with the largest fish often found at depth or scattered singly below aggregating smaller fish. In KZN waters, yellowfin schools are frequently located along temperature breaks between warm Agulhas Current water and cooler inshore water, where concentrations of prey accumulate.</p>
+                    <p>Yellowfin are endothermic — capable of maintaining their body temperature significantly above the surrounding seawater through a sophisticated countercurrent heat exchange system in their blood vessels called the rete mirabile. This allows them to dive into cold deep water to hunt prey while maintaining warm muscle temperatures for explosive swimming, and to sustain high metabolic rates that power their extraordinary speed and endurance. Body temperatures can exceed surrounding water temperatures by up to 8°C.</p>
+                    <p>When feeding at the surface, yellowfin create spectacular feeding frenzies — boiling the surface as they drive baitfish upward and attack them from below in a frenzy of leaping, slashing, and crashing. These surface feeding events are followed by seabirds, and experienced skippers use bird activity to locate feeding tuna from kilometres away. Yellowfin will feed aggressively on lures, live bait, and cut bait, making them accessible to a range of fishing techniques.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Yellowfin tuna are apex pelagic predators with voracious appetites, consuming enormous quantities of prey relative to their body weight to fuel their high-energy lifestyle. In KZN offshore waters, their diet is dominated by small pelagic fish including mackerel, sardines, flyingfish, and various halfbeaks. Squid and cuttlefish are important prey items, particularly at night when cephalopods migrate into shallower water. Crustaceans — particularly euphausiid shrimp and small crabs — supplement the diet when abundant.</p>
+                    <p>Yellowfin are visual predators that hunt primarily in surface and mid-water zones during daylight hours, but undertake deep foraging dives — sometimes exceeding 1,000 metres — during twilight and night hours when mesopelagic prey migrate vertically. Their large eyes are adapted for vision in low light conditions at depth. Feeding behaviour is highly opportunistic, and schools rapidly adjust their depth and location in response to prey movements, current edges, and underwater topographic features that concentrate baitfish.</p>
+                    <ul>
+                        <li>Mackerel, sardines, and small pelagic fish</li>
+                        <li>Flying fish and halfbeaks</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Euphausiid shrimp and crustaceans</li>
+                        <li>Lanternfish and mesopelagic species (at depth)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Yellowfin tuna in the Indian Ocean spawn year-round with peaks during spring and summer, when sea surface temperatures exceed 24°C. Spawning occurs in offshore surface waters, typically at night or during early morning. Females are highly fecund — a large female weighing 100 kg may produce 6 to 8 million eggs per spawning event, and can spawn multiple times per season. Fertilised eggs hatch within 24 hours into tiny larvae that grow with remarkable speed.</p>
+                    <p>Yellowfin grow rapidly throughout their lives, reaching 50 to 60 cm and 3 to 4 kg in their first year. Sexual maturity is reached at 2 to 3 years of age, corresponding to lengths of approximately 80 to 100 cm. Maximum size is reached at around 5 to 6 years, after which growth slows significantly. The maximum confirmed lifespan is approximately 9 years, though ages exceeding 7 years are unusual due to fishing pressure on this commercially important species.</p>
+                    <p>Juvenile yellowfin are frequently found in mixed schools with skipjack tuna and juvenile bigeye tuna, a schooling association that provides protection from predators and improves foraging efficiency. As they grow, yellowfin progressively segregate into larger, more size-homogeneous schools. Large adult yellowfin, particularly those exceeding 80 kg, are often more solitary or found in smaller groups than juveniles.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Yellowfin Fishing & Conservation in KZN</h3>
+                <p>KwaZulu-Natal's offshore yellowfin fishery is centred on the deep water off the continental shelf edge, where the Agulhas Current creates productive current lines and temperature breaks that concentrate baitfish and the tuna that follow them. Charter operations from Durban, Ballito, Salt Rock, and Richards Bay target yellowfin year-round, with peak fishing during the warmer months of October through May. The world-record yellowfin — a fish of 197 kg — was caught offshore of the Revillagigedo Islands in 2020, but KZN regularly produces fish exceeding 50 kg, with exceptional individuals over 100 kg taken each season.</p>
+                <p>Yellowfin tuna are among the most commercially important fish species on Earth, supporting a multi-billion dollar global industry and forming the backbone of the premium sashimi trade in Japan and Southeast Asia. In the Indian Ocean, they are targeted by longline fleets from Japan, South Korea, Taiwan, and various other nations, as well as purse seine fleets that set nets on schools attracted to fish aggregating devices (FADs). This intense commercial pressure has contributed to population declines across the Indian Ocean, and the species was assessed as Near Threatened by the IUCN in 2021.</p>
+                <p>In KZN, recreational catch-and-release of yellowfin is practised by some anglers, though the species' superb eating quality means most fish are retained. Sustainable fishing practices — including respecting size limits, avoiding spawning aggregations, and limiting kill to what can be consumed — are increasingly embraced by KZN's offshore fishing community. Understanding yellowfin population dynamics, migration routes, and the cumulative impacts of recreational and commercial fishing is essential for ensuring this magnificent species remains abundant in KZN waters for future generations.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Warm-Blooded Fish</h4>
+                    <p>Yellowfin tuna can maintain their body temperature up to 8°C above the surrounding seawater through a countercurrent heat exchange system in their blood vessels. This partial endothermy allows them to dive into cold, deep water to hunt while maintaining warm muscles for explosive swimming — a physiological advantage shared with only a handful of fish species including other tunas and the great white shark.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Never Stop Swimming</h4>
+                    <p>Like all tunas, yellowfin must swim continuously throughout their lives to breathe — they are obligate ram ventilators, meaning they extract oxygen from water flowing through their gills only while swimming forward. If a yellowfin stops moving, it suffocates. This physiological constraint drives their relentlessly active lifestyle and contributes to their extraordinary aerobic capacity and speed.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>75 km/h Sprinters</h4>
+                    <p>Yellowfin tuna are among the fastest fish in the ocean, capable of burst speeds approaching 75 km/h. Their speed is generated by a powerful, stiff lunate tail, a streamlined body that minimises drag, and retractable fins that fold flush against the body during high-speed swimming. Their sustained swimming speed — the speed they can maintain for extended periods — of around 15 km/h also far exceeds most marine fish.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Following Dolphins</h4>
+                    <p>Yellowfin tuna in the Indian Ocean and Pacific frequently associate with dolphin schools, swimming below the dolphins and sharing the same prey schools. Traditional fishers across the Indo-Pacific have exploited this association for millennia, following dolphin pods to locate tuna below. The ecological basis of this association is not fully understood but may provide both species with improved prey detection and herding efficiency.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>1,000 m Dive Depth</h4>
+                    <p>Equipped with large eyes adapted for low-light vision and the ability to maintain warm body temperatures in cold deep water, yellowfin regularly dive to depths exceeding 1,000 metres to exploit mesopelagic prey during night hours. This extraordinary depth range — from surface to abyssal zone — makes yellowfin one of the most vertically mobile predators in the ocean.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The World's Sashimi</h4>
+                    <p>Yellowfin tuna — known as "ahi" in Hawaii and "kihada" in Japan — is the most important tuna species in the global sashimi and sushi trade, valued for its rich flavour, deep red colour, and firm texture. The global yellowfin tuna catch exceeds 1.3 million tonnes annually, making it one of the most commercially significant fish on Earth and placing significant pressure on populations throughout the Indian Ocean.</p>
+                </div>
+            </div>
+
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

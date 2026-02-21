@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whale Evolution – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+
+        .header-logo {
+            width: 90px; height: 90px;
+            object-fit: contain;
+            position: absolute; right: 0; top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem; color: #e3f2fd; font-weight: 400;
+            margin-bottom: 0.3rem; letter-spacing: 3px;
+            text-transform: uppercase; font-family: 'Courier New', monospace;
+        }
+
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+
+        nav a {
+            color: #b0bec5; text-decoration: none; font-size: 0.9rem;
+            padding: 1.2rem 2rem; display: block; transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .intro {
+            margin-bottom: 4rem; padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd; font-size: 1.8rem; margin-bottom: 1.2rem;
+            font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace;
+        }
+
+        .intro p { font-size: 1.05rem; line-height: 1.9; color: #b0bec5; text-align: justify; margin-bottom: 1.5rem; }
+        .intro p:last-child { margin-bottom: 0; }
+
+        .context-banner {
+            background: rgba(13, 71, 161, 0.1);
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            border-radius: 2px; padding: 1.5rem 2rem; margin-bottom: 4rem;
+            display: flex; align-items: flex-start; gap: 1.5rem;
+        }
+
+        .context-banner-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+
+        .context-banner h3 {
+            color: #90caf9; font-family: 'Courier New', monospace;
+            font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px;
+            margin-bottom: 0.5rem; font-weight: 400;
+        }
+
+        .context-banner p { color: #b0bec5; font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+        .context-banner p:last-child { margin-bottom: 0; }
+        .context-banner strong { color: #90caf9; }
+
+        .section-title {
+            color: #e3f2fd; font-family: 'Courier New', monospace;
+            font-size: 1.2rem; font-weight: 400; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .section-label {
+            font-family: 'Courier New', monospace; font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase; color: #78909c;
+            margin-bottom: 0.5rem; display: block;
+        }
+
+        /* Whale image: 19.05h x 20.05w — nearly square (ratio ~0.95:1)
+           We centre it and let it fill up to 680px wide naturally */
+        .hero-image-wrap {
+            width: 100%; margin-bottom: 4rem;
+            display: flex; justify-content: center;
+        }
+
+        .hero-image-wrap img {
+            width: 100%;
+            max-width: 680px;   /* keeps square feel on wide screens */
+            height: auto;
+            display: block;
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem; margin-bottom: 4rem;
+        }
+
+        .timeline-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px; overflow: hidden;
+            transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-card:hover { border-color: rgba(100, 149, 237, 0.45); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); }
+
+        .timeline-card-header {
+            background: rgba(13, 71, 161, 0.12);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 1.2rem 1.8rem; display: flex; align-items: center; gap: 1rem;
+        }
+
+        .era-badge {
+            font-family: 'Courier New', monospace; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 1px;
+            padding: 0.2rem 0.7rem; border-radius: 2px;
+            background: rgba(100, 149, 237, 0.12);
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            color: #90caf9; white-space: nowrap; flex-shrink: 0;
+        }
+
+        .timeline-card-header h3 {
+            color: #e3f2fd; font-family: 'Courier New', monospace;
+            font-size: 1.05rem; font-weight: 400; letter-spacing: 1px;
+        }
+
+        .timeline-card-body { padding: 1.5rem 1.8rem; }
+
+        .timeline-card-body p { color: #b0bec5; font-size: 0.94rem; line-height: 1.85; text-align: justify; }
+
+        .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+
+        .tag {
+            padding: 0.2rem 0.7rem; font-family: 'Courier New', monospace;
+            font-size: 0.72rem; letter-spacing: 0.5px; border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2); color: #90a4ae;
+        }
+
+        .facts-table {
+            width: 100%; border-collapse: collapse;
+            margin-bottom: 4rem; font-size: 0.92rem;
+        }
+
+        .facts-table thead tr {
+            background: rgba(100, 149, 237, 0.09);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+        }
+
+        .facts-table th {
+            color: #e3f2fd; font-family: 'Courier New', monospace;
+            font-weight: 400; font-size: 0.8rem; letter-spacing: 1px;
+            text-transform: uppercase; padding: 1rem 1.2rem; text-align: left;
+        }
+
+        .facts-table td {
+            padding: 0.9rem 1.2rem; color: #b0bec5;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            vertical-align: top; line-height: 1.6;
+        }
+
+        .facts-table tr:last-child td { border-bottom: none; }
+        .facts-table tr:hover td { background: rgba(100, 149, 237, 0.04); }
+        .facts-table td:first-child { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.88rem; white-space: nowrap; }
+
+        .closing-block {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2.5rem 3rem; margin-bottom: 4rem; border-radius: 2px;
+        }
+
+        .closing-block h3 {
+            color: #e3f2fd; font-family: 'Courier New', monospace;
+            font-size: 1.2rem; font-weight: 400; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .closing-block p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .closing-block p:last-child { margin-bottom: 0; }
+        .closing-block a { color: #90caf9; text-decoration: none; border-bottom: 1px solid rgba(144, 202, 249, 0.3); transition: border-color 0.2s ease; }
+        .closing-block a:hover { border-color: rgba(144, 202, 249, 0.7); }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5; padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem;
+        }
+
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+
+        .social-icons a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0;
+        }
+
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .intro, .closing-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .context-banner { flex-direction: column; gap: 0.8rem; }
+            .timeline-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .facts-table { font-size: 0.83rem; }
+            .facts-table th, .facts-table td { padding: 0.7rem 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .header-logo { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+   <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Whale Evolution</h2>
+                <p>The evolutionary history of whales is one of the most dramatic and well-documented transitions in the entire fossil record — a lineage of terrestrial, four-limbed mammals that returned to the sea over roughly 15 million years and in doing so became the largest animals to have ever lived on Earth. The story begins not in the ocean but on the shores of the ancient Tethys Sea, roughly 53 million years ago, with a group of hoofed land mammals related to modern even-toed ungulates — the same group that includes hippos, deer, and pigs. Over successive generations, driven by ecological opportunity and natural selection, these animals gradually became more aquatic, their bodies reshaping over millions of years into the streamlined, fully marine forms we recognise today as baleen and toothed whales.</p>
+                <p>What makes whale evolution particularly remarkable is that the fossil record documenting this transition is exceptionally complete. Palaeontologists have recovered a nearly continuous series of transitional forms spanning from fully terrestrial ancestors through amphibious intermediates to early obligate swimmers — each stage revealing specific anatomical changes in limb proportion, skull shape, nostril position, and skeletal density that track the progressive adaptation to aquatic life. The evolution of whales stands as one of science's most compelling demonstrations of how natural selection can, given sufficient time, produce radical transformation from ancestral forms that look nothing like their descendants.</p>
+                <p>For ocean users and cetacean enthusiasts along KZN's coastline — where humpback whales breach offshore and bottlenose dolphins patrol the surf zone — understanding this evolutionary history deepens every encounter with these animals. The flipper of a humpback whale still contains the bones of a five-fingered hand. The skeleton of a sperm whale still includes vestigial remnants of a pelvis and hind limb, buried deep within the body wall. These are not curiosities — they are the physical signatures of a 50-million-year journey from land to sea.</p>
+            </section>
+
+            <div class="context-banner">
+                <div class="context-banner-icon">🐋</div>
+                <div>
+                    <h3>Whale Evolution — Key Facts</h3>
+                    <p><strong>Origin:</strong> Whales evolved from Artiodactyla (even-toed ungulates) — their closest living relative is the hippopotamus</p>
+                    <p><strong>Transition timeline:</strong> ~53 million years ago (first semi-aquatic ancestors) to ~34 million years ago (fully marine, tail-propelled swimming established)</p>
+                    <p><strong>Two living lineages:</strong> Mysticeti (baleen whales) and Odontoceti (toothed whales) diverged approximately 34 million years ago</p>
+                    <p><strong>Largest animal ever:</strong> The blue whale — a mysticete — reaches up to 33 metres and 190,000 kg, the largest known animal in Earth's history</p>
+                </div>
+            </div>
+
+            <!-- Hero image — near-square (19.05h × 20.05w), centred, max 680px -->
+            <span class="section-label">Evolutionary Diagram</span>
+            <h2 class="section-title">The Whale Family Tree</h2>
+            <div class="hero-image-wrap">
+                <img src="Whale-Evolution.png" alt="Whale Evolution Diagram">
+            </div>
+
+            <span class="section-label">Section 01 — Evolutionary Stages</span>
+            <h2 class="section-title">From Land to Sea — The Transitional Fossil Record</h2>
+
+            <div class="timeline-grid">
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~53 Mya</span>
+                        <h3>Pakicetus — The First Whale</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Pakicetus is the earliest known cetacean ancestor — a fully terrestrial, wolf-sized animal that lived on the shores of the ancient Tethys Sea in what is now Pakistan and India. It walked on four legs, had hooves, and lived primarily on land, but its inner ear anatomy — specifically a thickened dense structure called the involucrum — places it definitively in the cetacean lineage. Pakicetus almost certainly waded into shallow water to feed on fish, but breathed air, slept on land, and gave birth to live young on shore. It is the starting point of the most dramatic evolutionary transition in mammalian history.</p>
+                        <div class="card-tags">
+                            <span class="tag">Terrestrial ancestor</span>
+                            <span class="tag">Pakistan / India</span>
+                            <span class="tag">Four-limbed</span>
+                            <span class="tag">Tethys Sea shoreline</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~50 Mya</span>
+                        <h3>Ambulocetus — The Walking Whale</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Ambulocetus natans — literally "the walking whale that swims" — represents the amphibious stage of cetacean evolution. Larger than Pakicetus, it had powerful hind limbs with large paddle-like feet and could both walk on land and swim in shallow coastal waters. Crucially, its spine flexed vertically — the same up-and-down motion used by modern whales — rather than the lateral flexion used by fish. This tells us that the characteristic tail-driven swimming motion of modern cetaceans evolved from the galloping motion of a running land mammal. Ambulocetus could also hear through its jawbone when underwater — an early step toward the specialised hearing of modern cetaceans.</p>
+                        <div class="card-tags">
+                            <span class="tag">Amphibious</span>
+                            <span class="tag">Vertical spine flexion</span>
+                            <span class="tag">Jaw hearing</span>
+                            <span class="tag">Shallow coastal waters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~47 Mya</span>
+                        <h3>Rodhocetus — Into Open Water</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Rodhocetus marks the transition to open-water swimming. Its hind limbs were greatly reduced and likely could not support the animal's weight on land for extended periods, and its pelvis was no longer fused to the spine — freeing the tail for powerful propulsion. The nostrils had begun migrating backward along the skull, a progressive shift toward the blowhole position of modern whales. Rodhocetus could almost certainly not move efficiently on land, spending most or all of its life in the sea. It represents the point of no return in cetacean evolution — the lineage had committed fully to the ocean.</p>
+                        <div class="card-tags">
+                            <span class="tag">Reduced hind limbs</span>
+                            <span class="tag">Nostril migration begins</span>
+                            <span class="tag">Pelvis freed from spine</span>
+                            <span class="tag">Open ocean swimmer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~40 Mya</span>
+                        <h3>Basilosaurus — The Sea Serpent Whale</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Basilosaurus was an enormous, fully aquatic predator reaching up to 18 metres in length — first mistaken for a reptile when discovered, hence the misleading name. It was entirely marine with a serpentine elongated body, tiny vestigial hind limbs that could not have supported its weight on land, and a fully developed tail fluke. It had a small brain relative to body size and almost certainly lacked echolocation. Basilosaurus represents a now-extinct side branch of cetacean evolution, but its fully marine anatomy documents how complete the transition to the sea had become by 40 million years ago.</p>
+                        <div class="card-tags">
+                            <span class="tag">Fully marine</span>
+                            <span class="tag">Up to 18m long</span>
+                            <span class="tag">Vestigial hind limbs</span>
+                            <span class="tag">Extinct lineage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">~34 Mya</span>
+                        <h3>The Great Divergence — Mysticeti & Odontoceti</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Approximately 34 million years ago, as global ocean temperatures dropped and the Antarctic ice sheet formed, the cetacean lineage split into the two groups that survive today. The Mysticeti (baleen whales) evolved the extraordinary innovation of baleen — rows of keratin plates enabling filter-feeding on vast quantities of small prey in productive polar seas. The Odontoceti (toothed whales) developed increasingly sophisticated echolocation, allowing them to hunt in darkness and communicate with extraordinary complexity. These two lineages have since diversified into over 90 living species found in every ocean on Earth.</p>
+                        <div class="card-tags">
+                            <span class="tag">34 million years ago</span>
+                            <span class="tag">Baleen evolution</span>
+                            <span class="tag">Echolocation develops</span>
+                            <span class="tag">90+ living species today</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <span class="era-badge">Present</span>
+                        <h3>Modern Cetaceans — The Living Result</h3>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p>Today's cetaceans range from the 1.5-metre Māui dolphin to the 33-metre blue whale — the largest animal known to have ever lived. Despite their fish-like external form, every modern whale and dolphin retains unmistakable evidence of terrestrial ancestry: finger bones inside the flipper, vestigial hind limb and pelvic bones buried within the body wall, lungs and a diaphragm rather than gills, and the requirement to breathe atmospheric air. The humpback whales that migrate through KZN's waters each winter are the living endpoint of 50 million years of evolution — animals that returned to the sea but never fully left their mammalian heritage behind.</p>
+                        <div class="card-tags">
+                            <span class="tag">Finger bones in flippers</span>
+                            <span class="tag">Vestigial pelvis retained</span>
+                            <span class="tag">Air-breathing mammals</span>
+                            <span class="tag">KZN humpbacks</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="section-title">Key Transitional Fossils — At a Glance</h2>
+            <table class="facts-table">
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Age (Mya)</th>
+                        <th>Locomotion</th>
+                        <th>Key Transition Feature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pakicetus</td>
+                        <td>~53</td>
+                        <td>Fully terrestrial — four-legged walking</td>
+                        <td>Cetacean inner ear (involucrum) — first diagnostic whale trait</td>
+                    </tr>
+                    <tr>
+                        <td>Ambulocetus</td>
+                        <td>~50</td>
+                        <td>Amphibious — walks on land, swims in shallows</td>
+                        <td>Vertical spine flexion establishes the ancestral swimming motion</td>
+                    </tr>
+                    <tr>
+                        <td>Rodhocetus</td>
+                        <td>~47</td>
+                        <td>Primarily aquatic — reduced hind limbs</td>
+                        <td>Pelvis freed from spine; nostril migration toward blowhole begins</td>
+                    </tr>
+                    <tr>
+                        <td>Dorudon</td>
+                        <td>~41</td>
+                        <td>Fully aquatic — tail-driven swimming</td>
+                        <td>Tail fluke fully developed; hind limbs tiny and non-functional</td>
+                    </tr>
+                    <tr>
+                        <td>Basilosaurus</td>
+                        <td>~40</td>
+                        <td>Fully aquatic — large open-ocean predator</td>
+                        <td>Complete aquatic adaptation; vestigial hind limbs only</td>
+                    </tr>
+                    <tr>
+                        <td>Early Mysticeti</td>
+                        <td>~34</td>
+                        <td>Fully aquatic — filter feeding</td>
+                        <td>Baleen plates evolve; teeth lost in adult forms</td>
+                    </tr>
+                    <tr>
+                        <td>Early Odontoceti</td>
+                        <td>~34</td>
+                        <td>Fully aquatic — active pursuit predation</td>
+                        <td>Echolocation organs develop; asymmetric skull for sound production</td>
+                    </tr>
+                    <tr>
+                        <td>Modern Cetacea</td>
+                        <td>Present</td>
+                        <td>Fully aquatic — tail-driven, streamlined</td>
+                        <td>90+ species; vestigial hind limbs and finger bones retained internally</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="closing-block">
+                <h3>Whale Evolution & KZN's Living Cetaceans</h3>
+                <p>The evolutionary history documented on this page is directly relevant to every cetacean encounter in KZN's waters. When a humpback whale breaches off the South Coast during the winter migration, the power driving that leap comes from the same vertical spine flexion that Ambulocetus used to swim in shallow coastal waters 50 million years ago. When a bottlenose dolphin echolocates a fish in murky estuary water, it is using a biological sonar system refined over 34 million years of Odontoceti evolution — a precision that no human technology can fully replicate.</p>
+                <p>KZN's cetacean species — including humpback whales, sperm whales, common dolphins, and bottlenose dolphins — represent the living result of this extraordinary evolutionary journey. For more on the cetacean species recorded in KZN waters, visit the <a href="cetaceans.html">Cetaceans</a> section of this encyclopedia. For conservation context, visit the <a href="ocean.html">Ocean Awareness &amp; Conservation</a> page.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html">Upcoming Events</a>
+                    <a href="whale-evolution.html" style="color: #90caf9;">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+
+<script src="nav.js"></script>
+
+</body>
+</html>
