@@ -288,8 +288,12 @@
 </footer>
 
 <script>
-    const API_KEY = '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';
-    const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+    // ── ONLY THESE 3 THINGS CHANGED FROM YOUR ORIGINAL ──
+    // 1. API_KEY line deleted — key now lives in Cloudflare Worker secret
+    // 2. API_URL now points to YOUR Worker instead of OpenRouter directly
+    // 3. Model changed to google/gemini-2.0-flash-exp:free (better vision)
+
+    const API_URL = 'https://icy-sea-3661.nixstigr031-b3c.workers.dev';
 
     const SYSTEM_PROMPT = `You are an expert marine biologist specialising in KwaZulu-Natal aquatic species. Identify the species in the image and respond ONLY with valid JSON (no markdown, no extra text):
 {"confidence":85,"commonName":"Yellowfin Tuna","scientificName":"Thunnus albacares","subspecies":"None","family":"Scombridae","order":"Scombriformes","conservationStatus":"LC","conservationStatusLabel":"Least Concern","sassiRating":"Orange","sassiNote":"Longline-caught is orange. Pole-caught is green.","habitat":"Open ocean 0-250m.","distribution":"Pantropical. Common in KZN offshore waters.","typicalSize":"Up to 2.4m 200kg.","identifyingFeatures":"Bright yellow dorsal and anal fins.","dietAndBehaviour":"Apex predator. Schools with dolphins.","kznContext":"Targeted by game fishing operators off Durban and Richards Bay.","description":"2-3 sentence narrative about this species in KZN waters.","cannotIdentify":false,"cannotIdentifyReason":""}
@@ -359,64 +363,44 @@ Status codes: LC NT VU EN CR DD. SASSi: Green Orange Red Unrated. If cannot iden
             ? `Identify this aquatic species. Context: "${contextNote.value.trim()}"`
             : 'Identify this aquatic species from the image.';
 
-        // Try models in order — fall back if one fails
-        const models = [
-            'meta-llama/llama-3.2-11b-vision-instruct:free',
-            'qwen/qwen2-vl-7b-instruct:free'
-        ];
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'google/gemini-2.0-flash-exp:free',
+                    max_tokens: 1200,
+                    messages: [
+                        { role: 'system', content: SYSTEM_PROMPT },
+                        { role: 'user', content: [
+                            { type: 'image_url', image_url: { url: `data:${currentMimeType};base64,${currentBase64}` } },
+                            { type: 'text', text: userText }
+                        ]}
+                    ]
+                })
+            });
 
-        let lastError = null;
-
-        for (const model of models) {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`,
-                        'HTTP-Referer': 'https://subsurface031.github.io',
-                        'X-Title': 'Sub-Surface Encyclopedia'
-                    },
-                    body: JSON.stringify({
-                        model: model,
-                        max_tokens: 1200,
-                        messages: [
-                            { role: 'system', content: SYSTEM_PROMPT },
-                            { role: 'user', content: [
-                                { type: 'image_url', image_url: { url: `data:${currentMimeType};base64,${currentBase64}` } },
-                                { type: 'text', text: userText }
-                            ]}
-                        ]
-                    })
-                });
-
-                if (!response.ok) {
-                    const err = await response.json().catch(() => ({}));
-                    lastError = new Error(err.error?.message || `API error ${response.status}`);
-                    continue; // try next model
-                }
-
-                const data = await response.json();
-                const rawText = data.choices[0].message.content.trim();
-                const cleaned = rawText.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
-                const result = JSON.parse(cleaned);
-
-                result.cannotIdentify
-                    ? showError(result.cannotIdentifyReason || 'Could not identify species.')
-                    : renderResult(result);
-
-                return; // success — stop trying models
-
-            } catch (err) {
-                lastError = err;
-                continue; // try next model
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err.error?.message || `API error ${response.status}`);
             }
+
+            const data = await response.json();
+            const rawText = data.choices[0].message.content.trim();
+            const cleaned = rawText.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
+            const result = JSON.parse(cleaned);
+
+            result.cannotIdentify ? showError(result.cannotIdentifyReason || 'Could not identify species.') : renderResult(result);
+
+        } catch (err) {
+            console.error(err);
+            showError(err.message || 'An unexpected error occurred.');
+        } finally {
+            identifyBtn.disabled = false;
+            identifyBtn.classList.remove('loading');
         }
-
-        // All models failed
-        console.error(lastError);
-        showError(lastError?.message || 'All identification attempts failed. Please try again.');
-
     }
 
     function renderResult(r) {
