@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Encounters – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+        main { padding: 4rem 0; }
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+    <nav></nav>
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="safety.html">Beach Safety</a><span>›</span>
+                Shark Encounters
+            </div>
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="shark.png" alt="Bull Shark, KZN Waters">
+                    <p class="image-caption">Bull shark (Carcharhinus leucas) — KZN's most common large shark</p>
+                </div>
+                <div class="species-intro">
+                    <h2>Shark Encounters</h2>
+                    <span class="scientific-name">Bull, Tiger & Great White Sharks — KwaZulu-Natal</span>
+                    <span class="conservation-badge">⚠ EXTREME HAZARD — Potentially Fatal</span>
+                    <p>KwaZulu-Natal's warm, productive coastal waters support healthy populations of several large shark species, including bull sharks, tiger sharks, and seasonal great white sharks. While the statistical risk of shark attack remains extremely low — you are far more likely to drown in a rip current or die in a car accident driving to the beach — KZN has historically recorded more shark incidents than virtually any other coastline in the world. This pattern, combined with several high-profile fatal attacks during the mid-20th century, led to the installation of the controversial KZN Sharks Board netting and drumline programme in 1952, which has dramatically reduced shark encounters with bathers but at significant ecological cost to shark populations.</p>
+                    <p>Understanding shark behaviour, recognizing high-risk conditions, and following evidence-based safety precautions can reduce your already-low risk of shark encounter to near zero. The vast majority of shark attacks in KZN waters are cases of mistaken identity — sharks investigating unfamiliar objects in turbid water or silhouettes at the surface during low-light conditions. Bull sharks are responsible for most incidents in KZN, followed by tiger sharks and occasional great white sharks during their winter migration along the coast. Blacktip sharks and spinner sharks — common in KZN's surf zone — are generally not considered dangerous to humans despite their abundance.</p>
+                    <div class="quick-stats">
+                        <div class="stat-box"><span class="stat-label">Bull Shark Max Size</span><span class="stat-value">3.5 m / 315 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Tiger Shark Max Size</span><span class="stat-value">5.5 m / 900 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Great White Max Size</span><span class="stat-value">6 m / 2,200 kg</span></div>
+                        <div class="stat-box"><span class="stat-label">Highest Risk Time</span><span class="stat-value">Dawn & Dusk</span></div>
+                        <div class="stat-box"><span class="stat-label">Highest Risk Location</span><span class="stat-value">Estuaries, murky water</span></div>
+                        <div class="stat-box"><span class="stat-label">KZN Net Programme</span><span class="stat-value">Since 1952</span></div>
+                    </div>
+                </div>
+            </section>
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>The Three Species of Concern</h3>
+                    <p>The bull shark (Carcharhinus leucas) is the most frequently encountered large shark in KZN waters and is implicated in the majority of documented attacks. Bull sharks are unique among large sharks in their ability to tolerate freshwater, regularly entering estuaries, river mouths, and even travelling kilometres upstream into river systems — behaviour that brings them into close proximity with bathers and fishers. Adults reach 3.5 metres and 315 kg. They are ambush hunters that exploit turbid water to approach prey undetected, a hunting strategy that unfortunately increases the risk of mistaken-identity encounters with humans in murky surf zones. Bull sharks are resident year-round in KZN.</p>
+                    <p>The tiger shark (Galeocerdo cuvier) is the second-largest predatory shark in KZN waters, reaching up to 5.5 metres and 900 kg. Tiger sharks are opportunistic generalists famous for consuming an extraordinary diversity of prey — fish, seals, turtles, seabirds, dolphins, other sharks, and virtually any object that might conceivably be edible. This indiscriminate feeding behaviour has earned them a reputation as the "garbage cans of the sea" and makes them statistically more likely to bite humans than species with more selective diets. Tiger sharks are most common in KZN during summer months when water temperatures peak.</p>
+                    <p>The great white shark (Carcharodon carcharias) — the ocean's most iconic apex predator — is a seasonal visitor to KZN's coastline, with juveniles and sub-adults migrating north from their Eastern Cape nursery grounds during winter months (May to September) to follow the sardine run and exploit concentrated prey. Great whites can exceed 6 metres and 2,200 kg. While they are capable of inflicting catastrophic injuries, great white attacks in KZN are rare and are generally "investigatory bites" rather than predatory attacks — the shark bites once, realizes the person is not its preferred prey (seals), and releases.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Why Shark Encounters Happen</h3>
+                    <p>The overwhelming majority of shark attacks are cases of mistaken identity, not predatory attacks. Sharks are visual hunters with excellent sensory systems, but in the low-visibility conditions common in KZN's surf zone — turbid water, breaking waves, suspended sediment — visual identification is impaired. A human swimmer at the surface, when viewed from below in poor visibility, presents a silhouette that can resemble the shape of a seal, turtle, or wounded fish. The shark investigates with an exploratory bite, realizes its error, and departs. Tragically, a single exploratory bite from a bull, tiger, or great white shark can cause fatal injuries due to the size and power of these animals.</p>
+                    <p>Dawn and dusk are the highest-risk times for shark encounters because many shark species are crepuscular hunters — most active during the low-light transitional periods when visual ambiguity is greatest and prey species are less vigilant. Night swimming amplifies risk further. Murky water conditions after heavy rain or storms increase encounter risk by reducing visibility for both sharks and swimmers. River mouths and estuaries are high-risk zones because bull sharks actively hunt in these environments, exploiting the concentration of baitfish and the visual cover provided by turbid freshwater outflow.</p>
+                    <p>Human behaviour also plays a role. Swimming alone, venturing far from shore, swimming near fishing activity (which concentrates baitfish and attracts predators), wearing shiny jewellery or high-contrast swimwear, and ignoring beach closures or shark sighting alerts all increase risk. Spearfishing with captured fish attached to your body is particularly dangerous, as the blood and distress signals from the fish can attract sharks from considerable distances. Activities that involve erratic splashing or surface disturbance can trigger investigatory approaches from sharks perceiving a wounded or distressed animal.</p>
+                </div>
+                <div class="info-section">
+                    <h3>Risk Reduction Strategies</h3>
+                    <p>The single most effective risk reduction measure is to swim only at beaches protected by the KZN Sharks Board netting and drumline programme. While controversial from a conservation perspective, the programme has reduced bather encounters with large sharks at protected beaches by approximately 90% since its introduction in 1952. Protected beaches are clearly indicated by signage, and the Sharks Board publishes a list of netted beaches on their website. Swimmers at unprotected beaches assume significantly higher risk, particularly at remote locations without lifeguard surveillance or rapid rescue capacity.</p>
+                    <p>Avoid swimming during dawn (before 7:00 AM) and dusk (after 5:00 PM), and never swim at night. These crepuscular periods are when large sharks are most actively hunting and when visual conditions favour mistaken-identity encounters. Do not enter the water in murky conditions, particularly within 48 hours of heavy rainfall when river mouths and estuaries are discharging turbid freshwater into the surf zone. Turbidity dramatically increases encounter risk by impairing the shark's ability to visually identify potential prey and increasing the likelihood of investigatory approaches.</p>
+                    <ul>
+                        <li>Swim only at beaches with active shark nets or lifeguard surveillance</li>
+                        <li>Avoid swimming at dawn (before 7 AM), dusk (after 5 PM), or at night</li>
+                        <li>Do not swim in murky water or within 48 hours of heavy rain</li>
+                        <li>Stay out of estuaries, river mouths, and channels between sandbars</li>
+                        <li>Never swim alone — sharks are more likely to approach solitary individuals</li>
+                        <li>Avoid areas with active fishing, diving birds, or baitfish schools</li>
+                        <li>Do not wear shiny jewellery or high-contrast swimwear</li>
+                        <li>Avoid erratic splashing or surface disturbance</li>
+                        <li>Obey beach closures and shark sighting alerts immediately</li>
+                        <li>If spearfishing, do not attach fish to your body or belt</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>If You Encounter a Shark</h3>
+                    <p>If you see a shark in the water near you, remain calm. Panicked thrashing and rapid, erratic movements can trigger a predatory response or investigatory approach. Maintain eye contact with the shark — sharks are less likely to approach if they realize they have been detected. Swim smoothly and steadily toward shore or the nearest exit point without turning your back on the shark. If you are with other swimmers, group together and move as a unit toward safety — sharks are less likely to approach multiple individuals swimming in formation than a solitary swimmer.</p>
+                    <p>If a shark approaches closely or behaves aggressively (rapid swimming, tight circles, arched back, dropped pectoral fins), adopt a defensive posture. Position yourself vertically in the water to appear larger and more formidable. If you have any object — a surfboard, dive camera, speargun, rock — place it between yourself and the shark. Do not attempt to outswim a shark — they are capable of burst speeds exceeding 40 km/h and will easily overtake any human swimmer. Your goal is to appear non-prey-like and deter the shark from escalating its investigation.</p>
+                    <p>In the extremely rare event of an imminent attack — the shark is committed to a rapid approach and impact appears inevitable — fight back aggressively. Target the most sensitive areas: the eyes, gills, and snout. Strike with any available object or use your fists, feet, dive knife, or any improvised weapon. Sharks are not indestructible, and determined resistance can deter an attack or cause the shark to release and retreat. If bitten, fight to free yourself and then prioritize immediate exit from the water — even if the shark has retreated, blood in the water may attract additional sharks to the area. Once ashore, apply direct pressure to wounds, elevate injured limbs, call emergency services, and keep the victim warm and calm while awaiting medical help.</p>
+                </div>
+            </div>
+            <div class="info-section-full">
+                <h3>The KZN Sharks Board Programme — Effectiveness & Controversy</h3>
+                <p>The KwaZulu-Natal Sharks Board (now operating under eThekwini Municipality's Beach Safety programme) was established in 1952 in response to a series of fatal shark attacks along the Durban beachfront that created public panic and threatened the region's tourism industry. The Board installed shark nets at 37 beaches along the KZN coastline — large mesh gill nets set parallel to the shore approximately 400 metres offshore in water depths of 10 to 14 metres. These nets do not form a continuous barrier but rather catch sharks as they patrol the coastline, thereby reducing the local shark population density near protected beaches.</p>
+                <p>The programme has been extraordinarily effective at reducing bather-shark encounters at netted beaches — shark attacks at protected beaches declined by approximately 90% following net installation, and fatal attacks became rare. However, the programme is also extraordinarily lethal to sharks and marine megafauna. The Sharks Board's own data documents that the nets kill an average of 500 to 800 sharks annually, including threatened and endangered species such as great white sharks, tiger sharks, bull sharks, and hammerheads. The nets also kill dolphins, turtles, rays, and whales as bycatch — non-target species that become entangled and drown. Environmental advocates have called for the nets to be replaced with non-lethal alternatives including shark spotters, drones, and electronic deterrent systems, but implementation has been slow due to cost and logistical challenges.</p>
+                <p>The ethical debate around the shark nets is complex. On one hand, the programme has saved human lives and protected KZN's critical tourism economy. On the other, it imposes unsustainable mortality on already-threatened shark populations and conflicts with modern conservation values that recognize sharks as ecologically essential apex predators deserving of protection. South Africa's great white shark population has declined precipitously in recent years, driven by multiple pressures including bycatch in shark nets, illegal hunting, prey depletion, and orca predation. The long-term viability of the netting programme in its current form is increasingly questioned, and pressure is mounting for a transition to non-lethal alternatives that balance human safety with marine conservation imperatives.</p>
+            </div>
+            <h3 class="section-heading">Critical Facts About Shark Encounters in KZN</h3>
+            <div class="facts-grid">
+                <div class="fact-card"><h4>Bull Sharks in Freshwater</h4><p>Bull sharks are unique among large sharks in their ability to tolerate and actively exploit freshwater environments — they regularly enter estuaries and river systems, travelling kilometres upstream in search of prey. This freshwater tolerance brings bull sharks into direct contact with people swimming, fishing, and recreating in areas where large shark presence is unexpected, and accounts for the species' involvement in the majority of shark incidents in KZN waters.</p></div>
+                <div class="fact-card"><h4>Mistaken Identity, Not Predation</h4><p>The overwhelming majority of shark attacks on humans are cases of mistaken identity, not deliberate predation. Sharks have evolved to hunt seals, fish, turtles, and other marine prey — humans are not part of their natural diet and provide relatively little nutritional value. When a shark bites a person and realizes its error, it typically releases and departs. Tragically, a single investigatory bite from a large shark can cause fatal injuries.</p></div>
+                <div class="fact-card"><h4>Dawn & Dusk = Highest Risk</h4><p>Dawn and dusk are the most dangerous times for shark encounters because many large shark species are crepuscular hunters — most active during low-light transitional periods when visual ambiguity is greatest. Swimming during these times dramatically increases risk of mistaken-identity encounters. Night swimming amplifies risk further. The simple act of avoiding the water before 7 AM and after 5 PM eliminates a major risk factor entirely.</p></div>
+                <div class="fact-card"><h4>Shark Nets Kill 500–800 Sharks/Year</h4><p>The KZN Sharks Board netting programme kills an estimated 500 to 800 sharks annually, including threatened species such as great white sharks, tiger sharks, bull sharks, and hammerheads. The nets also kill dolphins, turtles, rays, and whales as bycatch. While the programme has reduced bather-shark encounters by ~90% at protected beaches, it imposes unsustainable mortality on already-declining shark populations and conflicts with modern marine conservation values.</p></div>
+                <div class="fact-card"><h4>You're More Likely to Drown</h4><p>Statistically, you are far more likely to drown in a rip current on a KZN beach than to be attacked by a shark — rip currents account for the majority of beach fatalities annually, while shark attacks remain extremely rare. You are also more likely to die in a car accident driving to the beach, be struck by lightning, or suffer a fatal allergic reaction to a bee sting. The media attention sharks receive vastly exceeds their statistical risk as a hazard to beachgoers.</p></div>
+                <div class="fact-card"><h4>Sharks Are Essential to Ocean Health</h4><p>As apex predators, sharks play a critical role in maintaining marine ecosystem balance by regulating prey populations and removing sick or weak individuals. Shark population declines — driven by overfishing, bycatch, habitat loss, and targeted culling — have cascading effects throughout ocean food webs. Healthy shark populations are essential to healthy oceans, making non-lethal shark safety measures preferable to lethal control programmes wherever feasible.</p></div>
+            </div>
+            <a href="safety.html" class="back-link">← Back to Beach Safety</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

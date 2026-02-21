@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potato Bass (Potato Cod) – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Potato Bass (Potato Cod)</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="potato-bass.png" alt="Potato Bass"><p class="image-caption">Epinephelus tukula — Potato Bass (Potato Cod), KZN</p></div>
+<div class="species-intro">
+<h2>Potato Bass (Potato Cod)</h2>
+<span class="scientific-name">Epinephelus tukula</span>
+<span class="sassi-badge">✗ SASSI Red | Critically Endangered</span>
+<p>The potato bass — also known as potato cod or goliath grouper — is one of the largest and most charismatic reef fish in KwaZulu-Natal waters. These gentle giants can exceed 100 kilograms and live for over 40 years, spending their lives patrolling rocky reefs and pinnacles where they've become iconic residents at famous dive sites like Aliwal Shoal and Protea Banks. Their massive size, curious nature, and willingness to approach divers have made them ambassadors for reef conservation and highlights of every dive trip along the KZN coast.</p>
+<p>Despite their imposing size and predatory lifestyle, potato bass are remarkably docile toward humans. Individual fish at popular dive sites have become habituated to divers over decades, approaching closely and even allowing gentle contact — behaviour that has created unforgettable underwater encounters and helped raise awareness about reef conservation. However, this same docile nature and site fidelity has made potato bass extremely vulnerable to spearfishing and overfishing, driving populations to critically low levels and earning the species full legal protection and a Red rating from SASSI.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">2 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">110+ kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">40+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">5–7 years</span></div>
+<div class="stat-box"><span class="stat-label">Depth Range</span><span class="stat-value">5–400 m</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Critically Endangered</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Potato bass are massive, robust groupers with a broad head, large mouth, and powerful body suited to life as ambush predators on rocky reefs. The body is deep and laterally compressed with a rounded profile that gives the species its common name — the distinctive potato-like brown blotches scattered across the body resemble the markings on a potato skin. Background colouration varies from olive-brown to grey-brown, overlaid with irregular dark brown to black blotches and spots. This mottled pattern provides excellent camouflage against rocky reef backgrounds.</p>
+<p>The mouth is enormous — capable of engulfing prey nearly half the fish's own length in a single gulp. Inside the mouth, multiple rows of small, sharp teeth prevent prey from escaping once captured. The eyes are small relative to body size and positioned high on the head, allowing the fish to monitor surroundings while remaining concealed in rocky crevices. The dorsal fin is continuous with 11 spines and 15 to 16 soft rays, while the caudal fin is rounded — typical of grouper species that rely on short bursts of speed rather than sustained swimming.</p>
+<p>Adults at Aliwal Shoal and Protea Banks typically measure 1.2 to 1.8 metres and weigh 30 to 80 kg, though individuals exceeding 100 kg have been recorded. Maximum confirmed size is approximately 2 metres and 110 kg. Sexual maturity is reached at 5 to 7 years of age and 70 to 90 cm length. Potato bass are protogynous hermaphrodites — all individuals begin life as females and transition to males later in life, a reproductive strategy common among grouper species.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Potato bass are sedentary ambush predators that establish territories on rocky reefs, pinnacles, and wrecks where they remain for years or even decades. Individual fish develop strong site fidelity, returning to the same home ranges and sheltering in the same caves and overhangs night after night. This sedentary lifestyle has allowed researchers and divers to recognize individual fish by their distinctive markings, creating opportunities for long-term monitoring and unforgettable repeat encounters with the same charismatic individuals over many years.</p>
+<p>Despite their size and predatory nature, potato bass are remarkably docile toward divers. At popular sites like Aliwal Shoal, individual fish have become habituated to diver presence over decades, approaching closely with curiosity rather than fear. Some fish allow gentle contact and will follow divers throughout dives — behaviour that has made them beloved icons of KZN's dive industry. However, this same docility and approachability made them easy targets for spearfishers before legal protections were enacted, contributing to population collapse.</p>
+<p>Potato bass are crepuscular feeders, most active at dawn and dusk when they emerge from daytime resting sites to hunt. Their hunting strategy involves remaining motionless near ambush points — caves, overhangs, and reef edges — before launching short, explosive attacks to engulf passing prey. They rely on camouflage and patience rather than sustained pursuit, and their massive mouths create powerful suction that draws prey into their jaws even when the fish itself remains stationary.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Potato bass are apex predators with a diverse diet that reflects their size, habitat, and opportunistic feeding strategy. Fish comprise the majority of their diet, including reef-associated species such as smaller groupers, snappers, wrasses, and parrotfish, as well as pelagic visitors like mackerel and trevally. Cephalopods — particularly octopus, cuttlefish, and reef squid — are important prey items, and potato bass have been observed consuming large octopuses that would be challenging prey for most reef predators.</p>
+<p>Crustaceans including spiny lobsters, crabs, and mantis shrimp are also consumed opportunistically. Potato bass have even been documented consuming small sharks and rays, demonstrating their role as true apex predators capable of taking almost any prey encountered within their territories. Their feeding strategy involves gulping prey whole using powerful suction generated by rapid expansion of the buccal cavity — a hunting technique that allows them to capture large, fast-moving prey without extended pursuits.</p>
+<ul>
+<li>Reef fish — groupers, snappers, wrasses, parrotfish</li>
+<li>Pelagic fish — mackerel, trevally, small tuna</li>
+<li>Cephalopods — octopus, cuttlefish, reef squid</li>
+<li>Crustaceans — spiny lobsters, crabs, mantis shrimp</li>
+<li>Occasionally small sharks and rays</li>
+<li>Opportunistic scavenging on dead fish</li>
+</ul>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Potato bass are protogynous hermaphrodites — all individuals begin life as functional females and transition to males later in life based on social hierarchy and size. This sex-change strategy is common among grouper species and ensures reproductive success by maintaining optimal sex ratios within populations. Small fish mature as females at 5 to 7 years of age and 70 to 90 cm length, then transition to males when they reach larger sizes and dominant social positions within their territories.</p>
+<p>Spawning occurs during summer months in aggregations at specific reef sites where multiple individuals gather to release eggs and sperm into the water column. These spawning aggregations are highly vulnerable to fishing pressure because they concentrate large numbers of fish in predictable locations at predictable times. Historical overfishing of spawning aggregations contributed significantly to potato bass population collapse, and protecting these aggregations is critical for population recovery.</p>
+<p>Maximum lifespan exceeds 40 years based on otolith analysis — extraordinary longevity for a reef fish. Growth is relatively rapid during the first 5 to 7 years until sexual maturity, then slows considerably as fish transition from female to male. The combination of late maturity, slow growth after maturity, exceptional longevity, and site fidelity means potato bass populations are extremely slow to recover from overfishing. Decades of strict protection are required for populations to rebuild to sustainable levels.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Conservation Crisis — Critically Endangered Gentle Giants</h3>
+<p>The potato bass represents one of South Africa's most severe marine conservation crises. The species is classified as Critically Endangered globally and rated Red by SASSI — reflecting catastrophic population declines driven by decades of overfishing, spearfishing, and targeted exploitation of spawning aggregations. Historical accounts describe reefs where dozens of large potato bass could be encountered on single dives; today, most KZN dive sites support only a handful of individuals, and even these remnant populations remain vulnerable to illegal fishing and habitat degradation.</p>
+<p>Several factors have contributed to potato bass vulnerability to overfishing. Their docile nature and approachability made them easy targets for spearfishers — fish that approached divers with curiosity were killed at point-blank range before legal protections were enacted. Site fidelity meant that once fish were removed from a reef, they were never replaced by immigrants from other areas. Late sexual maturity, slow growth, and exceptional longevity meant populations could not recover quickly even after fishing pressure was reduced. Finally, protogynous hermaphroditism made populations especially vulnerable because removal of large males disrupted sex ratios and reproductive success.</p>
+<p>Today, potato bass are fully protected in South African waters with zero bag limits and strict penalties for illegal fishing. Marine protected areas at Aliwal Shoal and Protea Banks provide safe havens where populations can slowly recover. However, illegal spearfishing remains an ongoing threat, and enforcement challenges limit the effectiveness of protections. Recovery is further complicated by slow reproduction rates and the fact that current populations represent only a tiny fraction of historical abundance. Every potato bass encountered by divers along the KZN coast represents a conservation success story — but also a reminder of how much has been lost and how fragile these remnant populations remain.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Gentle Giants</h4><p>Despite their massive size and predatory lifestyle, potato bass are remarkably docile toward divers. At popular KZN dive sites, individual fish have become habituated to diver presence over decades, approaching closely with curiosity and even allowing gentle contact. This behaviour has made them beloved ambassadors for reef conservation and created unforgettable underwater encounters that inspire conservation awareness.</p></div>
+<div class="fact-card"><h4>40-Year Lifespan</h4><p>Potato bass can live for over 40 years — extraordinary longevity confirmed through otolith analysis. Combined with late sexual maturity at 5 to 7 years and slow growth after maturity, this exceptional lifespan means populations are extremely slow to recover from overfishing. Decades of strict protection are required for remnant populations to rebuild to sustainable levels.</p></div>
+<div class="fact-card"><h4>Site Fidelity Icons</h4><p>Individual potato bass establish territories on rocky reefs and remain in the same home ranges for years or even decades. This site fidelity has allowed divers and researchers to recognize individual fish by their distinctive markings, creating opportunities for long-term monitoring. However, this same sedentary behaviour made fish easy targets for spearfishers, contributing to population collapse.</p></div>
+<div class="fact-card"><h4>Protogynous Hermaphrodites</h4><p>All potato bass begin life as females and transition to males later in life based on size and social hierarchy. This sex-change strategy is common among groupers and ensures optimal sex ratios within populations. However, removal of large males by fishing disrupts sex ratios and reproductive success, making populations especially vulnerable to overfishing.</p></div>
+<div class="fact-card"><h4>Aliwal Shoal & Protea Banks Icons</h4><p>Potato bass are iconic residents at KZN's world-famous dive sites — Aliwal Shoal and Protea Banks. Encounters with these charismatic giants are highlights of every dive trip, and their presence has helped establish these sites as globally significant marine biodiversity hotspots. Marine protected area status provides critical safe havens where remnant populations can slowly recover.</p></div>
+<div class="fact-card"><h4>SASSI Red & Critically Endangered</h4><p>Potato bass are rated Red by SASSI and classified as Critically Endangered — reflecting catastrophic population declines and urgent conservation priority. They are fully protected in South African waters with zero bag limits. Every encounter with these gentle giants represents a conservation success story and a reminder of the importance of protecting reef ecosystems and the remarkable creatures that call them home.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

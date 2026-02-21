@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotted Grunter – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 193, 7, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmin(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Spotted Grunter</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="spotted-grunter.png" alt="Spotted Grunter"><p class="image-caption">Pomadasys commersonnii — Spotted Grunter, KZN</p></div>
+<div class="species-intro">
+<h2>Spotted Grunter</h2>
+<span class="scientific-name">Pomadasys commersonnii</span>
+<span class="sassi-badge">⚠ SASSI Orange | Vulnerable</span>
+<p>The spotted grunter is one of KwaZulu-Natal's most prized estuarine fish — a silver-bodied species adorned with distinctive black spots that has captured the imagination of anglers for generations. Named for the grunting sound they produce by grinding their pharyngeal teeth, these fish are closely associated with estuaries, tidal creeks, and river mouths where freshwater meets the sea. Spotted grunter can exceed 5 kg and are renowned for their powerful runs, head-shaking fights, and excellent eating quality, making them favourites among estuary anglers who wade the shallows or fish from boats.</p>
+<p>Historically abundant in KZN's estuarine systems, spotted grunter populations have declined significantly due to a combination of overfishing, estuarine degradation, and loss of critical nursery habitats. They are slow-growing, late-maturing fish with specific habitat requirements — characteristics that make populations vulnerable to overexploitation and environmental change. Today they are classified as Vulnerable and rated Orange by SASSI, with strict bag limits and size restrictions in place to protect remaining populations and allow recovery. Conservation requires not only fishing regulations but also restoration and protection of the estuarine habitats these fish depend on throughout their life cycle.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">80 cm</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~7 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">20+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">4–6 years</span></div>
+<div class="stat-box"><span class="stat-label">Habitat</span><span class="stat-value">Estuarine</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Vulnerable</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Spotted grunter are robust, moderately deep-bodied fish with a distinctive silvery appearance adorned with numerous small black spots scattered across the upper flanks and back. The body is laterally compressed with a slightly arched dorsal profile and a moderately pointed head. Background colouration is silver-grey on the back and upper flanks, fading to bright silver-white on the lower flanks and belly. The black spots that give the species its common name are irregularly distributed but typically concentrated above the lateral line, creating a distinctive spotted pattern that makes identification straightforward.</p>
+<p>The dorsal fin is continuous with a deep notch between the spiny and soft-rayed portions, typical of the haemulid family. The anal fin is relatively short-based, and the caudal fin is slightly forked or truncate. The mouth is moderately sized and positioned terminally, with thick, fleshy lips characteristic of grunters. Inside the mouth, spotted grunter possess pharyngeal teeth — specialized teeth located in the throat that they grind together to produce the characteristic grunting or croaking sounds that give the family its common name.</p>
+<p>Adults in KZN estuaries typically measure 35 to 55 cm and weigh 1 to 3 kg, with fish over 4 kg considered exceptional. Maximum recorded size is approximately 80 cm and 7 kg, though fish exceeding 5 kg are now rare in most estuarine systems following decades of fishing pressure. Sexual maturity is reached at 4 to 6 years of age when fish measure 35 to 45 cm — relatively late maturity that contributes to the species' vulnerability to overfishing. Juveniles are similar in appearance to adults but with less pronounced spotting and more subdued colouration.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Spotted grunter are quintessentially estuarine fish that inhabit river mouths, estuaries, tidal creeks, and coastal lagoons throughout their lives, though adults occasionally venture into nearshore marine waters adjacent to estuaries. They are strongly associated with the interface between freshwater and seawater, particularly favouring areas with moderate salinity, muddy or sandy substrates, and structured habitat including mangroves, reed beds, submerged logs, and rock outcrops. These transitional habitats provide food resources, shelter from predators, and optimal conditions for growth.</p>
+<p>Spotted grunter are primarily nocturnal or crepuscular feeders, becoming most active during dawn, dusk, and nighttime hours when they move into shallow water to forage. During daylight they typically rest in deeper pools, channels, or beneath undercut banks and overhanging vegetation. Their movements are strongly influenced by tidal cycles — they often move with incoming tides into shallow feeding areas and retreat to deeper water on outgoing tides. In larger estuarine systems, spotted grunter may undertake movements of several kilometres between resting and feeding areas.</p>
+<p>The characteristic grunting sounds that give grunters their name are produced by grinding pharyngeal teeth together, with the swim bladder acting as a resonating chamber to amplify the sound. These vocalizations serve multiple functions including communication during spawning, territorial defense, and possibly predator deterrence. Anglers often report hearing underwater grunting sounds when schools of spotted grunter are present — a distinctive acoustic signature that has fascinated fishers for generations. Spotted grunter form schools ranging from small groups to aggregations of dozens or even hundreds of individuals, particularly during spawning season and when feeding in productive areas.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Spotted grunter are opportunistic carnivores that feed primarily on invertebrates and small fish found in estuarine mud and sand substrates. Their feeding strategy involves rooting through soft sediments to extract buried prey, using their sensitive snouts and well-developed sense of smell to detect food items concealed in mud. They are particularly effective at locating and consuming burrowing invertebrates that other predators might overlook, filling an important ecological niche in estuarine food webs.</p>
+<p>Crustaceans comprise the majority of the diet, including mud prawns, mantis shrimp, small crabs, and various other shrimps and amphipods. Molluscs are also consumed regularly — particularly small clams, mussels, and gastropods that inhabit estuarine sediments. Polychaete worms and other marine worms are taken opportunistically when encountered. Small fish form a smaller but significant portion of the diet, especially in larger individuals, including gobies, mullet fry, and juvenile estuary species.</p>
+<ul>
+<li>Mud prawns and mantis shrimp (primary prey)</li>
+<li>Crabs and small crustaceans</li>
+<li>Bivalve molluscs and gastropods</li>
+<li>Polychaete worms and marine worms</li>
+<li>Small fish — gobies, mullet fry, juveniles</li>
+<li>Organic detritus and algae (supplemental)</li>
+</ul>
+<p>Feeding activity peaks during dawn, dusk, and nighttime when spotted grunter move into shallow water and mudflats to forage. Incoming tides that flood shallow feeding areas often trigger intense feeding activity as fish access newly inundated habitats rich in invertebrate prey. Their ability to detect prey using olfaction and tactile senses allows effective feeding even in turbid estuarine waters where visibility is limited.</p>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Spotted grunter are gonochoristic with separate sexes throughout life. Sexual maturity is reached relatively late at 4 to 6 years of age when fish measure 35 to 45 cm length — late maturity characteristic of slow-growing, long-lived species and a key factor in their vulnerability to overfishing. Growth rates are moderate during early years, then slow considerably after sexual maturity as energy is increasingly allocated to reproduction rather than somatic growth.</p>
+<p>Spawning occurs during spring and summer months in KZN estuaries, typically from September through February with peak activity in November and December. Mature adults form spawning aggregations at specific locations within estuaries, often at river mouths or tidal channels where salinity, temperature, and water flow conditions are optimal. Females produce moderate numbers of eggs — estimates range from 200,000 to over 500,000 eggs per spawning event depending on body size, though actual fecundity data remains limited for South African populations.</p>
+<p>Eggs are released into the water column where fertilization occurs externally. The eggs are pelagic and drift with estuarine currents, hatching within 24 to 48 hours depending on water temperature. Larval fish remain planktonic for several weeks, feeding on microscopic zooplankton before settling into shallow nursery areas within the estuary. Juveniles grow rapidly during their first years in sheltered estuarine habitats before gradually expanding their range within the estuarine system. Some individuals may remain in natal estuaries throughout life, while others undertake limited movements to adjacent estuarine systems.</p>
+<p>Maximum lifespan exceeds 20 years based on otolith analysis — substantial longevity that, combined with late maturity and specific estuarine habitat requirements, makes spotted grunter populations slow to recover from depletion. Long-lived individuals represent decades of reproductive potential, and removal of large breeding-size fish has disproportionate impacts on population productivity and resilience.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Estuarine Dependence & Conservation Challenges</h3>
+<p>Spotted grunter are obligate estuarine species that depend on functional, healthy estuarine ecosystems throughout their entire life cycle. Unlike many fish that use estuaries as nursery areas but move to marine environments as adults, spotted grunter remain primarily estuarine-resident throughout life. This complete dependence makes them extremely sensitive to estuarine degradation and habitat loss — threats that have intensified dramatically along the KZN coast over recent decades as human development, agriculture, and climate change have impacted estuarine systems.</p>
+<p>Healthy estuaries require complex hydrological conditions including appropriate freshwater inflow, natural salinity gradients, periodic mouth opening and closing cycles, and maintenance of structured habitats including mangroves, reed beds, and mud banks. Many KZN estuaries have been severely altered through upstream water abstraction, agricultural runoff carrying sediments and pollutants, coastal development reducing estuary size and connectivity, invasive species displacing native vegetation, and artificial breaching disrupting natural hydrological cycles. These impacts have degraded habitat quality, reduced prey availability, and limited the capacity of estuarine systems to support spotted grunter populations.</p>
+<p>Fishing pressure has compounded habitat-related declines. Spotted grunter are highly accessible to shore anglers, easily caught using readily available baits, and prized for both sport and table quality — factors that subjected populations to intensive exploitation. Their late maturity means fish require 4 to 6 years to enter breeding populations, and removal of juveniles eliminates future reproductive potential. Predictable aggregating behaviour during spawning made them vulnerable to targeted exploitation at precisely the time when population impacts are most severe. Bag limits, size restrictions, and seasonal closures now protect spotted grunter in South African waters, but compliance remains challenging and illegal fishing continues in many estuarine systems.</p>
+<p>Effective spotted grunter conservation requires integrated approaches addressing both fishing pressure and habitat quality. Strict enforcement of fishing regulations, particularly protection of spawning aggregations and undersized fish, is essential. Equally important is estuarine restoration and protection — ensuring adequate freshwater flows, controlling pollution, managing invasive species, and preserving critical habitats including mangroves and reed beds. Climate change adaptation strategies addressing sea level rise, altered rainfall patterns, and extreme weather events are increasingly critical. Spotted grunter serve as indicators of estuarine health — their conservation requires us to protect and restore the complex estuarine ecosystems they depend on.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>The Grunting Sound</h4><p>Spotted grunter produce distinctive grunting or croaking sounds by grinding specialized pharyngeal teeth located in their throat, with the swim bladder amplifying the sound as a resonating chamber. These vocalizations serve multiple functions including communication during spawning and possibly territorial defense. Anglers often report hearing underwater grunting sounds when schools are present — an acoustic signature that has fascinated fishers for generations.</p></div>
+<div class="fact-card"><h4>Estuarine Specialists</h4><p>Spotted grunter are obligate estuarine species that depend on estuaries throughout their entire life cycle — from larval settlement through adulthood and spawning. Unlike many fish that use estuaries only as nurseries, spotted grunter remain primarily estuarine-resident throughout life. This complete dependence makes them extremely sensitive to estuarine degradation and excellent indicators of estuarine health.</p></div>
+<div class="fact-card"><h4>20-Year Lifespan</h4><p>Spotted grunter can live for over 20 years — substantial longevity confirmed through otolith analysis. Combined with late sexual maturity at 4 to 6 years, this longevity means populations are slow to recover from overfishing. Long-lived individuals represent decades of reproductive potential, and removal of large breeding-size fish has disproportionate impacts on population productivity.</p></div>
+<div class="fact-card"><h4>Nocturnal Feeders</h4><p>Spotted grunter are primarily nocturnal or crepuscular, becoming most active during dawn, dusk, and nighttime when they move into shallow water to feed on invertebrates buried in mud and sand. Their movements are strongly influenced by tides — they move with incoming tides into shallow feeding areas and retreat to deeper water on outgoing tides. This tidal and diurnal behavior pattern is well known to experienced estuary anglers.</p></div>
+<div class="fact-card"><h4>Population Declines</h4><p>Spotted grunter populations have declined significantly throughout their South African range due to combined effects of overfishing and estuarine habitat degradation. They are now classified as Vulnerable and rated Orange by SASSI, with strict bag limits and size restrictions in place. Recovery requires both fishing regulations and restoration of the healthy estuarine habitats these fish depend on throughout their lives.</p></div>
+<div class="fact-card"><h4>Prized Table Fish</h4><p>Spotted grunter are highly regarded for their excellent eating quality — firm white flesh with delicate flavor that lends itself well to various cooking methods. This table quality, combined with their fighting ability and accessibility to shore anglers, made them targets of intensive fishing pressure. Their popularity contributed to population declines, and today catch-and-release is encouraged except when within legal size and bag limits to support population recovery.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

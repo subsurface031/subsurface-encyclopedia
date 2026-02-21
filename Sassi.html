@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endangered Species & SASSi Listings – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        /* Intro block — matches crustaceans landing */
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Section headings */
+        .section-title {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        /* SASSi colour key */
+        .status-key {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .status-key-card {
+            padding: 1.3rem 1.6rem;
+            border-radius: 2px;
+            border: 1px solid;
+        }
+
+        .status-key-card.green { background: rgba(76, 175, 80, 0.07); border-color: rgba(76, 175, 80, 0.35); }
+        .status-key-card.orange { background: rgba(255, 152, 0, 0.07); border-color: rgba(255, 152, 0, 0.35); }
+        .status-key-card.red { background: rgba(244, 67, 54, 0.07); border-color: rgba(244, 67, 54, 0.35); }
+
+        .status-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.45rem;
+            vertical-align: middle;
+        }
+
+        .status-dot.green { background: #81c784; }
+        .status-dot.orange { background: #ffb74d; }
+        .status-dot.red { background: #e57373; }
+
+        .status-key-card h4 {
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-key-card.green h4 { color: #81c784; }
+        .status-key-card.orange h4 { color: #ffb74d; }
+        .status-key-card.red h4 { color: #e57373; }
+
+        .status-key-card p {
+            color: #90a4ae;
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        /* Species cards — same grid as crustaceans landing */
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .species-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .species-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .species-card.red-listed { border-color: rgba(244, 67, 54, 0.28); }
+        .species-card.red-listed:hover { border-color: rgba(244, 67, 54, 0.52); }
+        .species-card.orange-listed { border-color: rgba(255, 152, 0, 0.28); }
+        .species-card.orange-listed:hover { border-color: rgba(255, 152, 0, 0.52); }
+
+        .species-image {
+            width: 100%;
+            height: 210px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .species-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .status-banner {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.22rem 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .status-banner.red { background: rgba(244, 67, 54, 0.18); border: 1px solid rgba(244, 67, 54, 0.48); color: #e57373; }
+        .status-banner.orange { background: rgba(255, 152, 0, 0.14); border: 1px solid rgba(255, 152, 0, 0.42); color: #ffb74d; }
+        .status-banner.green { background: rgba(76, 175, 80, 0.11); border: 1px solid rgba(76, 175, 80, 0.38); color: #81c784; }
+
+        .species-content {
+            padding: 2rem;
+        }
+
+        .species-content h3 {
+            color: #e3f2fd;
+            font-size: 1.35rem;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .sci-name {
+            color: #78909c;
+            font-style: italic;
+            font-size: 0.88rem;
+            display: block;
+            margin: 0.6rem 0 1rem;
+        }
+
+        .species-content p {
+            color: #b0bec5;
+            line-height: 1.85;
+            font-size: 0.94rem;
+            text-align: justify;
+            margin-bottom: 1.3rem;
+        }
+
+        .threat-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.7rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            color: #90a4ae;
+        }
+
+        /* Same learn-more button as crustaceans landing */
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        /* IUCN table */
+        .iucn-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4rem;
+            font-size: 0.92rem;
+        }
+
+        .iucn-table thead tr {
+            background: rgba(100, 149, 237, 0.09);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+        }
+
+        .iucn-table th {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .iucn-table td {
+            padding: 0.9rem 1.2rem;
+            color: #b0bec5;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        .iucn-table tr:last-child td { border-bottom: none; }
+        .iucn-table tr:hover td { background: rgba(100, 149, 237, 0.04); }
+
+        .iucn-badge {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .iucn-badge.cr { background: rgba(183, 28, 28, 0.18); color: #ef9a9a; border: 1px solid rgba(183, 28, 28, 0.38); }
+        .iucn-badge.en { background: rgba(230, 81, 0, 0.18); color: #ffcc80; border: 1px solid rgba(230, 81, 0, 0.38); }
+        .iucn-badge.vu { background: rgba(249, 168, 37, 0.14); color: #ffe082; border: 1px solid rgba(249, 168, 37, 0.32); }
+        .iucn-badge.lc { background: rgba(76, 175, 80, 0.11); color: #a5d6a7; border: 1px solid rgba(76, 175, 80, 0.28); }
+        .iucn-badge.avoid { background: rgba(244, 67, 54, 0.14); color: #e57373; border: 1px solid rgba(244, 67, 54, 0.32); }
+        .iucn-badge.think { background: rgba(255, 152, 0, 0.12); color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.30); }
+        .iucn-badge.green { background: rgba(76, 175, 80, 0.11); color: #a5d6a7; border: 1px solid rgba(76, 175, 80, 0.28); }
+        .iucn-badge.protected { background: rgba(100, 149, 237, 0.1); color: #90caf9; border: 1px solid rgba(100, 149, 237, 0.28); }
+
+        /* SASSi explainer block */
+        .sassi-block {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2.5rem 3rem;
+            margin-bottom: 4rem;
+            border-radius: 2px;
+        }
+
+        .sassi-block h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .sassi-block p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .sassi-block p:last-child { margin-bottom: 0; }
+
+        .sassi-block a {
+            color: #90caf9;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(144, 202, 249, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .sassi-block a:hover { border-color: rgba(144, 202, 249, 0.7); }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .intro, .sassi-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .iucn-table { font-size: 0.83rem; }
+            .iucn-table th, .iucn-table td { padding: 0.7rem 0.8rem; }
+            .status-key { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .species-content { padding: 1.5rem; }
+            .header-logo { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Endangered Species & SASSi Listings</h2>
+                <p>KwaZulu-Natal's coastal and aquatic ecosystems are home to extraordinary biodiversity — but many of the species profiled in this encyclopedia face serious, ongoing threats from overfishing, habitat destruction, pollution, climate change, and bycatch. Understanding which species are under pressure, and why, is the first step toward making choices that support their survival. This page brings together the conservation status of featured species using both the global IUCN Red List framework and the South African Sustainable Seafood Initiative (SASSi) consumer guide — the two most widely recognised tools for communicating species conservation status in South Africa.</p>
+                <p>The IUCN Red List assesses species against global population trends and extinction risk, assigning categories from Least Concern through to Extinct. SASSi, operated by WWF South Africa, focuses specifically on the sustainability of South African fisheries — rating commonly consumed seafood as green (best choice), orange (think twice), or red (avoid) based on stock health, fishing method impacts, bycatch levels, and management effectiveness. These two systems sometimes assign different urgency to the same species, reflecting different geographic scopes and assessment criteria — but together they give the most complete conservation picture available to a KZN consumer or ocean enthusiast.</p>
+                <p>We encourage all users of this encyclopedia — recreational fishers, divers, restaurant-goers, or simply curious coastal visitors — to use this information to make informed decisions. Every choice to avoid a red-listed species, to select a sustainable seafood alternative, or to report suspected illegal harvesting is a genuine contribution to the conservation of KZN's remarkable aquatic heritage.</p>
+            </section>
+
+            <!-- Colour key -->
+            <h2 class="section-title">SASSi Consumer Guide — Colour Key</h2>
+            <div class="status-key">
+                <div class="status-key-card green">
+                    <h4><span class="status-dot green"></span>Green — Best Choice</h4>
+                    <p>Well-managed species with healthy populations and minimal environmental impact. Recommended as a sustainable seafood choice.</p>
+                </div>
+                <div class="status-key-card orange">
+                    <h4><span class="status-dot orange"></span>Orange — Think Twice</h4>
+                    <p>Some concerns around stock health, management, or fishing method impacts. Consider purchasing less frequently or sourcing from certified-sustainable suppliers.</p>
+                </div>
+                <div class="status-key-card red">
+                    <h4><span class="status-dot red"></span>Red — Avoid</h4>
+                    <p>Overfished, poorly managed, or fishing method causes unacceptable environmental damage. SASSi recommends consumers avoid purchasing entirely.</p>
+                </div>
+            </div>
+
+            <!-- Species of greatest concern -->
+            <h2 class="section-title">Species of Greatest Concern</h2>
+            <div class="species-grid">
+
+                <article class="species-card red-listed">
+                    <div class="species-image">
+                        <img src="rock-lobster.png" alt="Rock Lobster">
+                        <span class="status-banner red">SASSi: Avoid</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Rock Lobster (Crayfish)</h3>
+                        <span class="sci-name">Panulirus homarus</span>
+                        <p>Rock lobster populations along the KZN coast have declined dramatically over recent decades due to sustained overexploitation through recreational and commercial harvesting. Illegal night-diving outside permitted seasons continues to put severe pressure on remaining stocks. SASSi rates east coast rock lobster as red — stocks have not recovered sufficiently to support current harvest levels.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Overfishing</span>
+                            <span class="tag">Illegal harvesting</span>
+                            <span class="tag">Slow reproduction</span>
+                            <span class="tag">Climate change</span>
+                        </div>
+                        <a href="crayfish.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card red-listed">
+                    <div class="species-image">
+                        <img src="hammerhead.png" alt="Scalloped Hammerhead Shark">
+                        <span class="status-banner red">IUCN: Critically Endangered</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Scalloped Hammerhead Shark</h3>
+                        <span class="sci-name">Sphyrna lewini</span>
+                        <p>Once abundant in KZN's coastal waters and a fixture of the Sardine Run, scalloped hammerheads have declined catastrophically. Highly valued in the shark fin trade and vulnerable due to their schooling behaviour, the species is now Critically Endangered globally. KZN shark nets incidentally catch hammerheads, adding further pressure to already severely depleted populations.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Fin trade</span>
+                            <span class="tag">Shark nets</span>
+                            <span class="tag">Schooling vulnerability</span>
+                            <span class="tag">Slow reproduction</span>
+                        </div>
+                        <a href="Hammerhead.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card red-listed">
+                    <div class="species-image">
+                        <img src="loggerhead.png" alt="Loggerhead Sea Turtle">
+                        <span class="status-banner red">IUCN: Endangered</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Loggerhead Sea Turtle</h3>
+                        <span class="sci-name">Caretta caretta</span>
+                        <p>Loggerhead sea turtles nest on KZN's northern beaches — particularly in the iSimangaliso Wetland Park — in one of the most significant nesting aggregations in the southern hemisphere. Despite decades of protection, turtles remain threatened by entanglement in fishing gear, marine debris ingestion, artificial lighting disorienting hatchlings, and coastal development encroaching on nesting beaches.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Bycatch entanglement</span>
+                            <span class="tag">Light pollution</span>
+                            <span class="tag">Plastic ingestion</span>
+                            <span class="tag">Beach development</span>
+                        </div>
+                        <a href="Loggerhead-turtle.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card orange-listed">
+                    <div class="species-image">
+                        <img src="prawn.png" alt="Prawn">
+                        <span class="status-banner orange">SASSi: Think Twice</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Prawn (Penaeid Shrimp)</h3>
+                        <span class="sci-name">Penaeus indicus & Metapenaeus monoceros</span>
+                        <p>KZN's commercial prawn trawl fishery operates under management controls but remains concerning due to high bycatch ratios — multiple kilograms of non-target marine life discarded for every kilogram of prawn landed. Estuarine nursery habitat degradation further threatens recruitment success. Consider farmed or trap-caught alternatives where available.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Trawl bycatch</span>
+                            <span class="tag">Estuarine degradation</span>
+                            <span class="tag">Habitat loss</span>
+                        </div>
+                        <a href="Prawn.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card orange-listed">
+                    <div class="species-image">
+                        <img src="mantis-shrimp.png" alt="Mantis Shrimp">
+                        <span class="status-banner orange">SASSi: Think Twice</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Mantis Shrimp</h3>
+                        <span class="sci-name">Odontodactylus & Gonodactylus spp.</span>
+                        <p>Mantis shrimp are not heavily targeted in KZN but are frequently taken as bycatch in prawn trawls and occasionally collected from tidal areas for the aquarium and local seafood trade. Their dependence on healthy sandy and reef habitats makes them sensitive to trawling disturbance and coastal development. SASSi guidance defaults to orange for trawl-associated species in the region.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Trawl bycatch</span>
+                            <span class="tag">Aquarium trade</span>
+                            <span class="tag">Habitat sensitivity</span>
+                        </div>
+                        <a href="Mantis-shrimp.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card red-listed">
+                    <div class="species-image">
+                        <img src="whale-shark.png" alt="Whale Shark">
+                        <span class="status-banner red">IUCN: Endangered</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Whale Shark</h3>
+                        <span class="sci-name">Rhincodon typus</span>
+                        <p>Whale sharks are occasional visitors to KZN's warm coastal waters and are fully protected under South African law. Globally, populations have declined substantially due to targeted fishing in parts of Asia and vessel strike. Their extremely slow maturation — estimated at 25 to 30 years to sexual maturity — and low reproductive rate make recovery from depletion exceptionally slow.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Vessel strike</span>
+                            <span class="tag">Targeted fishing</span>
+                            <span class="tag">Slow maturation</span>
+                        </div>
+                        <a href="Whale-shark.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Stable status species -->
+            <h2 class="section-title">Species With Stable or Least Concern Status</h2>
+            <div class="species-grid">
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="ghost-crab.png" alt="Ghost Crab">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Ghost Crab</h3>
+                        <span class="sci-name">Ocypode cursor & O. ceratophthalmus</span>
+                        <p>Ghost crab populations on KZN's beaches remain relatively healthy. Beach vehicle traffic, artificial lighting, and human disturbance during nesting season cause localised impacts. Their wide range and high reproductive output provide resilience. Protection of undisturbed beach habitat is the most important conservation measure for this species.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Beach vehicles</span>
+                            <span class="tag">Light pollution</span>
+                            <span class="tag">Human disturbance</span>
+                        </div>
+                        <a href="Ghost-crab.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="mud-prawn.png" alt="Mud Prawn">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Mud Prawn (Upogebia)</h3>
+                        <span class="sci-name">Upogebia africana</span>
+                        <p>Mud prawns are Least Concern globally but heavily exploited as fishing bait in KZN estuaries, with documented population depletion in heavily accessed systems. Their slow reproductive rate and burrow-dependent lifestyle mean local population recovery from intensive harvesting is very slow. Sustainable bait harvesting regulations are a critical conservation measure.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Bait harvesting</span>
+                            <span class="tag">Estuarine degradation</span>
+                            <span class="tag">Slow recovery</span>
+                        </div>
+                        <a href="Mud-prawn.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="swimming-crab.png" alt="Swimming Crab">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Swimming Crab (Blue Crab)</h3>
+                        <span class="sci-name">Portunus pelagicus</span>
+                        <p>Blue swimming crab populations in KZN are currently stable, supported by fast growth, high fecundity, and productive estuarine nursery habitats. Primary concerns are estuarine habitat degradation and incidental capture of juveniles in prawn trawl bycatch. Recreational drop-netting is low-impact when bag limits are respected.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Estuarine habitat loss</span>
+                            <span class="tag">Trawl bycatch</span>
+                        </div>
+                        <a href="Swimming-crab.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="hermit-crab.png" alt="Hermit Crab">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Hermit Crab</h3>
+                        <span class="sci-name">Clibanarius virescens & related spp.</span>
+                        <p>Hermit crabs are abundant on KZN's rocky shores and reefs. The collection of gastropod shells for the decorative trade is reducing availability of the borrowed shells they depend on — particularly in high-tourism areas. Tidal pool disturbance and collection for the aquarium trade are secondary concerns. Overall IUCN status remains Least Concern.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Shell collection</span>
+                            <span class="tag">Tidal pool disturbance</span>
+                        </div>
+                        <a href="hermit-crab.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="fiddler-crab.png" alt="Fiddler Crab">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Fiddler Crab</h3>
+                        <span class="sci-name">Uca annulipes & related spp.</span>
+                        <p>Fiddler crabs are currently Least Concern globally, but their dependence on healthy mangrove and estuarine habitats makes them sensitive indicators of ecosystem condition. Mangrove loss and estuarine sedimentation from upstream development are the primary indirect threats in KZN. Population density directly proxies mangrove ecosystem health throughout the coast.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Mangrove loss</span>
+                            <span class="tag">Estuarine sedimentation</span>
+                            <span class="tag">Pollution</span>
+                        </div>
+                        <a href="Fiddler-crab.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+                <article class="species-card">
+                    <div class="species-image">
+                        <img src="barnacle.png" alt="Barnacle">
+                        <span class="status-banner green">IUCN: Least Concern</span>
+                    </div>
+                    <div class="species-content">
+                        <h3>Barnacle</h3>
+                        <span class="sci-name">Chthamalus, Tetraclita & Balanus spp.</span>
+                        <p>Barnacles are abundant, highly resilient, and face no direct exploitation pressure in KZN. Primary threats are indirect — oil spills and chemical pollution can rapidly kill intertidal colonies, and ocean acidification may affect calcification over longer timescales. Rocky shore habitat loss from coastal infrastructure development is a localised concern in KZN.</p>
+                        <div class="threat-tags">
+                            <span class="tag">Oil spills</span>
+                            <span class="tag">Ocean acidification</span>
+                            <span class="tag">Shore development</span>
+                        </div>
+                        <a href="Barnacle.html" class="learn-more">Full Species Profile</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Quick reference table -->
+            <h2 class="section-title">IUCN & SASSi Quick Reference — Featured KZN Species</h2>
+            <table class="iucn-table">
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>IUCN Category</th>
+                        <th>SASSi Rating</th>
+                        <th>Primary Threat in KZN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Scalloped Hammerhead Shark</td>
+                        <td><span class="iucn-badge cr">CR — Critically Endangered</span></td>
+                        <td><span class="iucn-badge avoid">Avoid</span></td>
+                        <td>Fin trade, shark nets, slow reproduction</td>
+                    </tr>
+                    <tr>
+                        <td>Whale Shark</td>
+                        <td><span class="iucn-badge en">EN — Endangered</span></td>
+                        <td><span class="iucn-badge protected">Protected Species</span></td>
+                        <td>Vessel strike, targeted fishing globally</td>
+                    </tr>
+                    <tr>
+                        <td>Loggerhead Sea Turtle</td>
+                        <td><span class="iucn-badge en">EN — Endangered</span></td>
+                        <td><span class="iucn-badge protected">Protected Species</span></td>
+                        <td>Bycatch, light pollution, beach development</td>
+                    </tr>
+                    <tr>
+                        <td>Rock Lobster (Crayfish)</td>
+                        <td><span class="iucn-badge vu">VU — Vulnerable</span></td>
+                        <td><span class="iucn-badge avoid">Avoid</span></td>
+                        <td>Overfishing, illegal harvesting</td>
+                    </tr>
+                    <tr>
+                        <td>Prawn (Penaeid Shrimp)</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge think">Think Twice</span></td>
+                        <td>Trawl bycatch, estuarine habitat loss</td>
+                    </tr>
+                    <tr>
+                        <td>Mantis Shrimp</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge think">Think Twice</span></td>
+                        <td>Trawl bycatch, habitat disturbance</td>
+                    </tr>
+                    <tr>
+                        <td>Mud Prawn (Upogebia)</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge green">Green (bait)</span></td>
+                        <td>Localised bait harvesting depletion</td>
+                    </tr>
+                    <tr>
+                        <td>Swimming Crab (Blue Crab)</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge green">Green</span></td>
+                        <td>Estuarine habitat loss, trawl bycatch</td>
+                    </tr>
+                    <tr>
+                        <td>Rock Crab</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge green">Green</span></td>
+                        <td>Rocky shore disturbance, collection</td>
+                    </tr>
+                    <tr>
+                        <td>Ghost Crab</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge protected">Not Targeted</span></td>
+                        <td>Beach vehicle traffic, light pollution</td>
+                    </tr>
+                    <tr>
+                        <td>Hermit Crab</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge protected">Not Targeted</span></td>
+                        <td>Shell collection, tidal pool disturbance</td>
+                    </tr>
+                    <tr>
+                        <td>Fiddler Crab</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge protected">Not Targeted</span></td>
+                        <td>Mangrove loss, estuarine sedimentation</td>
+                    </tr>
+                    <tr>
+                        <td>Barnacle</td>
+                        <td><span class="iucn-badge lc">LC — Least Concern</span></td>
+                        <td><span class="iucn-badge protected">Not Targeted</span></td>
+                        <td>Oil pollution, ocean acidification</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- SASSi explainer -->
+            <div class="sassi-block">
+                <h3>About SASSi & The IUCN Red List</h3>
+                <p>The <strong>South African Sustainable Seafood Initiative (SASSi)</strong> is operated by WWF South Africa and provides consumer-facing guidance on the sustainability of seafood sold and consumed in South Africa. SASSi ratings are based on comprehensive stock assessments, fishing method impact analyses, management effectiveness evaluations, and bycatch data — updated regularly as new information becomes available. The free <a href="https://wwfsassi.co.za" target="_blank">SASSi app and website</a> allow consumers to check the rating of any seafood species before purchasing. SASSi also works directly with the fishing industry and retailers to promote sourcing of certified-sustainable alternatives.</p>
+                <p>The <strong>IUCN Red List of Threatened Species</strong> is the world's most comprehensive inventory of the global conservation status of biological species. Maintained by the International Union for Conservation of Nature, the Red List uses rigorous scientific criteria to evaluate extinction risk across nine categories: Extinct (EX), Extinct in the Wild (EW), Critically Endangered (CR), Endangered (EN), Vulnerable (VU), Near Threatened (NT), Least Concern (LC), Data Deficient (DD), and Not Evaluated (NE). IUCN assessments are global in scope and may not fully reflect local or regional population conditions — a species that is Least Concern globally may face significant pressures in specific locations such as KZN.</p>
+                <p>The conservation status information on this page is provided for educational purposes and is accurate to the best of our knowledge at the time of publication. Status designations change as new assessments are conducted. We recommend consulting the official <a href="https://www.iucnredlist.org" target="_blank">IUCN Red List website</a> and the <a href="https://wwfsassi.co.za" target="_blank">SASSi consumer guide</a> directly for the most current information on any species.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                   <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

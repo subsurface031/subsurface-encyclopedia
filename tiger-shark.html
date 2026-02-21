@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiger Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffa726;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Tiger Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="tiger.png" alt="Tiger Shark">
+                    <p class="image-caption">Galeocerdo cuvier — Tiger Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Tiger Shark</h2>
+                    <span class="scientific-name">Galeocerdo cuvier</span>
+                    <span class="conservation-badge">⚠ Near Threatened</span>
+                    <p>The tiger shark is one of the ocean's most formidable and ecologically important apex predators. Named for the dark, vertical tiger-like stripes that mark juveniles and young adults, this species ranks among the largest predatory sharks in the world, second only to the great white in terms of documented attacks on humans.</p>
+                    <p>In KwaZulu-Natal's warm Indian Ocean waters, tiger sharks are year-round residents, patrolling coastal reefs, estuaries, and open ocean environments. They play an irreplaceable role in regulating marine food webs — their broad, indiscriminate diet makes them the ocean's ultimate scavengers and ecosystem engineers.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">5.5 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">635 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~50 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 350 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">7 – 10 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">10 – 82 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Tiger sharks are large, heavily built sharks with a broad, blunt snout and a wide mouth lined with distinctive, heavily serrated, cockscomb-shaped teeth — uniquely adapted for cutting through hard prey such as sea turtle shells and bone. Both jaws carry identical teeth, an unusual trait among sharks.</p>
+                    <p>Juveniles and young adults display the characteristic dark, vertical tiger stripes on their flanks that give the species its name. These markings fade significantly with age, and large adults often appear uniformly grey-blue to dark grey on the dorsal surface, with a pale yellow or white underside.</p>
+                    <p>They have a long upper tail lobe, a prominent keel along the caudal peduncle, and distinctive pit organs behind the eyes. Their skin is countershaded — dark above and pale below — providing camouflage both from above and below.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Tiger sharks are largely solitary, nomadic predators that roam vast stretches of ocean. They are primarily nocturnal hunters, moving into shallower coastal waters at night to feed and retreating to deeper water during the day. However, they can be active at any time and are frequently encountered by divers during daylight hours.</p>
+                    <p>They are known for their slow, methodical swimming style and apparent lack of fear toward divers and other large animals. This bold, curious behaviour — combined with their enormous size and powerful bite — makes them one of the more dangerous shark species when humans are present in the water.</p>
+                    <p>Unlike many shark species, tiger sharks do not show clear seasonal migration patterns and can be encountered in KZN waters throughout the year, though sightings are more frequent in warmer months.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Tiger sharks are among the least selective feeders of any large predator on Earth. Their reputation as the "dustbins of the sea" is well earned — their stomachs have yielded licence plates, tyres, clothing, coal, and even a suit of armour. This indiscriminate feeding behaviour is, however, ecologically vital.</p>
+                    <p>They use a slow, investigative approach to potential prey, often bumping or mouthing objects before committing to a bite. Their uniquely serrated teeth can cut through virtually any material, including the shells of sea turtles — a prey item few other predators can tackle.</p>
+                    <ul>
+                        <li>Sea turtles</li>
+                        <li>Dolphins and small cetaceans</li>
+                        <li>Rays and other sharks</li>
+                        <li>Seabirds and sea snakes</li>
+                        <li>Fish, squid, and crustaceans</li>
+                        <li>Marine mammal carrion</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Tiger sharks are aplacental viviparous — pups develop inside individual egg cases within the mother's uterus, nourished by a yolk sac rather than a placenta. This reproductive strategy, known as ovoviviparity, results in large litters of well-developed pups.</p>
+                    <p>Litter sizes are among the largest of any shark species, ranging from 10 to as many as 82 pups after a gestation period of approximately 14 to 16 months. Newborn pups measure between 51 and 76 cm and are born fully independent.</p>
+                    <p>Females reproduce every three years on average. Their relatively low reproductive rate, combined with high demand from the shark fin and liver oil industries, has placed increasing pressure on global populations.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Tiger sharks are highly adaptable and occupy an exceptionally wide range of marine habitats. In KwaZulu-Natal they are found from shallow inshore reefs and estuaries to open ocean environments, and have been recorded at depths of over 350 metres. They are most commonly encountered in the warmer waters of northern KZN, though they range the entire coastline.</p>
+                <p>KZN's shark nets — deployed along popular bathing beaches since 1952 — have historically caught large numbers of tiger sharks, reflecting their abundance in nearshore waters. Today, the KwaZulu-Natal Sharks Board manages these nets and has introduced more selective measures to reduce bycatch of non-target species.</p>
+                <p>Globally, tiger sharks are found in tropical and warm temperate oceans worldwide, with high concentrations around oceanic islands, in the Gulf of Mexico, the Caribbean, and throughout the Indo-Pacific. Despite being listed as Near Threatened, populations face ongoing pressure from directed fishing, fin trade, and accidental bycatch in commercial fisheries.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Ocean's Dustbin</h4>
+                    <p>Tiger sharks are renowned for swallowing almost anything — licence plates, tyres, clothing, and boat parts have all been recovered from their stomachs. This behaviour may help them assess novel objects in their environment.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Unique Teeth</h4>
+                    <p>Tiger sharks possess heavily serrated, cockscomb-shaped teeth that are identical in both jaws — a unique trait among sharks. These teeth can cut through sea turtle shells, bone, and almost any other material.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Turtle Specialists</h4>
+                    <p>Tiger sharks are one of the only predators capable of breaching the hard shells of sea turtles. In areas like Hawaii, they are the primary natural predator of green sea turtles, regulating turtle populations and grazing behaviour.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ecosystem Engineers</h4>
+                    <p>Research in Australia showed that tiger sharks keep dugongs and sea turtles from overgrazing seagrass beds by forcing them to alter their feeding behaviour. Without tiger sharks, entire seagrass ecosystems can collapse.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fading Stripes</h4>
+                    <p>The distinctive tiger stripes that give this shark its name are most vivid in juveniles and young adults. As the shark ages and grows larger, these markings progressively fade until they are barely visible on large adults.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tapetum Lucidum</h4>
+                    <p>Like cats, tiger sharks have a tapetum lucidum — a reflective layer behind the retina that amplifies available light. This gives them exceptional vision in low-light conditions, making them highly effective nocturnal hunters.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

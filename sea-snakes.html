@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sea Snakes & Banded Water Cobras – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Sea Snakes & Banded Water Cobras</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="seasnake.png" alt="Sea Snake KZN">
+    <p class="image-caption">Yellow-bellied sea snake (Hydrophis platurus) — occasional visitor to KZN's beaches after storm events</p>
+</div>
+<div class="species-intro">
+    <h2>Sea Snakes & Banded Water Cobras</h2>
+    <span class="scientific-name">Hydrophis platurus & Naja annulata (estuarine)</span>
+    <span class="conservation-badge">⚠ MODERATE HAZARD — Situational Risk</span>
+    <p>Sea snakes and their estuarine relatives represent a low-frequency but high-consequence hazard on KwaZulu-Natal's coast. The yellow-bellied sea snake — the world's most widely distributed snake species — is an open-ocean pelagic species that occasionally washes ashore on KZN beaches after storms, strong northerly currents, or unusual oceanographic events bring warm tropical water masses close inshore. Encounters are uncommon, but the snake is genuinely dangerous: it carries highly potent neurotoxic and myotoxic venom capable of causing respiratory failure, muscle breakdown, and death, and there is no antivenom readily available in South Africa.</p>
+    <p>In KZN's northern estuarine systems — particularly the lake and river complexes of the iSimangaliso Wetland Park and Kosi Bay — the banded water cobra (Naja annulata) is a genuine estuarine resident rather than a stranded visitor. This large, semi-aquatic cobra inhabits reed beds, mangrove edges, and river banks, hunts fish in shallow water, and has a disposition considerably more defensive than the passive, stranded sea snake. Both species require the same fundamental response from anyone who encounters them: absolute non-interference, calm retreat, and immediate contact with emergency services or wildlife authorities if a bite occurs. The overriding rule for any snake encountered on a KZN beach or estuary is simple and unconditional — do not handle it, regardless of whether it appears dead, injured, or docile.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Venom Type</span><span class="stat-value">Neurotoxic / myotoxic</span></div>
+        <div class="stat-box"><span class="stat-label">Antivenom</span><span class="stat-value">Not available in SA</span></div>
+        <div class="stat-box"><span class="stat-label">Aggression</span><span class="stat-value">Low (sea snake)</span></div>
+        <div class="stat-box"><span class="stat-label">Peak Strandings</span><span class="stat-value">Post-storm / summer</span></div>
+        <div class="stat-box"><span class="stat-label">KZN Estuaries</span><span class="stat-value">Banded water cobra</span></div>
+        <div class="stat-box"><span class="stat-label">Rule #1</span><span class="stat-value">Never handle</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>Yellow-Bellied Sea Snake</h3>
+    <p>The yellow-bellied sea snake (Hydrophis platurus, formerly Pelamis platura) is the most wide-ranging snake on Earth, inhabiting the open surface waters of tropical and subtropical oceans from the east coast of Africa across the Indo-Pacific to the Americas. It is a true oceanic species — spending its entire life at sea, giving birth to live young in the water, and coming ashore only involuntarily when stranded by storms or unusual currents. In KZN, strandings occur most often after sustained northerly or north-easterly winds push warm Mozambique Channel surface water toward the coast, concentrating sea snakes that ride the surface current drift lines.</p>
+    <p>The species is immediately recognisable by its sharply bicoloured pattern: a dark brown or black dorsal surface and a vivid yellow or yellow-orange ventral surface, separated by a clean lateral boundary. The body is strongly laterally compressed — flattened from side to side rather than rounded — with a distinctly paddle-shaped tail adapted for sculling through open water. Adults typically reach 60 to 90 centimetres in length, though larger individuals are occasionally reported. A stranded sea snake on a KZN beach will typically be lying motionless or moving very slowly, often in apparent distress — its terrestrial locomotion is extremely poor and it cannot right itself effectively once overturned on sand.</p>
+    <ul>
+        <li>Distinctive black back, yellow belly — sharply separated lateral boundary</li>
+        <li>Laterally flattened body with paddle-shaped tail</li>
+        <li>60–90 cm typical adult length</li>
+        <li>Stranded individuals appear motionless or weakly moving — still dangerous</li>
+        <li>Occurs on all KZN beaches — most common after northerly wind events</li>
+        <li>Pelagic — not a reef or inshore species; stranding is accidental</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Banded Water Cobra</h3>
+    <p>The banded water cobra (Naja annulata, sometimes classified as Boulengerina annulata) is a large, semi-aquatic cobra native to central and east African freshwater and estuarine systems. In KZN it reaches the southern extent of its range in the northern lake and estuary systems of the iSimangaliso Wetland Park — particularly in the lake and river habitats of Kosi Bay, Lake Sibayi, and the St Lucia estuarine system. It is not a beach species and is unlikely to be encountered by casual beach visitors, but represents a genuine hazard for anglers, canoeists, researchers, and anyone wading in or camping near the reed and mangrove margins of KZN's northern lake systems.</p>
+    <p>The banded water cobra is a robust, powerful snake reaching up to 2.7 metres in larger individuals, with a pattern of alternating dark and pale transverse bands that may fade in older adults. It is an excellent swimmer and diver, capable of remaining submerged for extended periods while hunting fish and frogs. Unlike the docile, non-aggressive sea snake, the banded water cobra has a more typical cobra disposition — defensive when cornered or surprised, capable of spreading a distinct hood when threatened, and prepared to strike if it feels escape is blocked. Its venom is strongly neurotoxic in the cobra family tradition, causing progressive paralysis and respiratory failure without appropriate treatment. Banded water cobra encounters in KZN are rare but have resulted in life-threatening bites — treat this species with maximum respect and report all sightings to Ezemvelo KZN Wildlife.</p>
+    <ul>
+        <li>Large semi-aquatic cobra — up to 2.7 m in large adults</li>
+        <li>Alternating dark and pale transverse banding — may fade in old adults</li>
+        <li>Habitat: reed beds, mangrove margins, lake and river edges</li>
+        <li>KZN range: Kosi Bay, Lake Sibayi, St Lucia systems — northern KZN only</li>
+        <li>More defensive than sea snakes — can spread hood and strike if cornered</li>
+        <li>Strongly neurotoxic venom — respiratory failure without treatment</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Venom & Medical Risk</h3>
+    <p>Sea snake venom is a complex mixture of neurotoxins and myotoxins — nerve-blocking proteins and muscle-dissolving enzymes — that acts by disrupting both nerve signal transmission and skeletal muscle integrity simultaneously. The yellow-bellied sea snake's venom is potent by any measure: the LD50 (median lethal dose in laboratory conditions) places it among the more toxic snake venoms in the world. However, sea snakes in general deliver relatively small venom quantities per bite compared to terrestrial venomous snakes, their small rear-positioned fangs are less efficient at penetrating thick clothing or skin, and the species is genuinely non-aggressive — the majority of documented sea snake bites worldwide involve deliberate handling or accidental trapping of the animal.</p>
+    <p>The critical medical reality for KZN is that there is no sea snake antivenom manufactured or stocked in South Africa. Hospitals in KZN do not routinely carry sea snake antivenom. In the event of a confirmed sea snake bite, emergency treatment is supportive — maintaining airway and respiration, treating for shock, managing rhabdomyolysis (muscle breakdown) — until the victim can potentially be transferred to a facility with appropriate antivenom, or until the body's own immune response begins to manage the envenomation. This is why a sea snake bite in KZN carries serious risk even with prompt emergency response, and why non-handling is the only safe option. The banded water cobra's neurotoxic venom can be treated with polyvalent antivenom (SAIMR Polyvalent Snake Antivenom) available at most KZN hospitals, but time to treatment is critical — neurological symptoms progress rapidly in cobra envenomation.</p>
+    <ul>
+        <li>Sea snake: neurotoxic + myotoxic venom — nerve and muscle damage</li>
+        <li>No sea snake antivenom available in South Africa</li>
+        <li>Sea snake bite treatment is supportive only — maintain breathing, treat shock</li>
+        <li>Banded water cobra: neurotoxic — progressive respiratory paralysis</li>
+        <li>Cobra antivenom (SAIMR Polyvalent) available at KZN hospitals — time critical</li>
+        <li>Symptoms of envenomation may be delayed 30 min to several hours</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>What To Do — Encounters & Bites</h3>
+    <p>The appropriate response to encountering any snake on a KZN beach or in an estuarine environment is identical regardless of species: maintain distance, do not approach, do not attempt to handle, capture, or relocate the animal, and do not allow children or pets to approach. A stranded sea snake on the beach should be reported to the nearest lifeguard, NSRI station, or Ezemvelo KZN Wildlife ranger. They have procedures for safe relocation or, in the case of a dying animal, safe disposal. Never assume a snake is dead — both sea snakes and water cobras can strike reflexively even when mortally injured or apparently dead.</p>
+    <p>In the event of a snakebite — from any species — the immediate priority is to call emergency services (10111 or 112) and get the victim to the nearest hospital emergency department as rapidly as possible. Keep the victim as still as possible — physical activity accelerates venom absorption through increased blood flow. Do not apply tourniquets, do not cut and suck the wound, do not apply ice, and do not administer any medication without medical guidance. Immobilise the bitten limb below heart level if possible and keep the victim calm and still while awaiting or transporting to emergency services. If you can photograph the snake without risk, do so — a photograph significantly assists medical staff in identifying the species and selecting appropriate antivenom. Never attempt to capture or kill the snake for identification — additional bites while attempting capture are a common complication of snakebite incidents.</p>
+    <ul>
+        <li>Maintain distance — do not approach, handle, or attempt to relocate</li>
+        <li>Report sightings to lifeguards, NSRI, or Ezemvelo KZN Wildlife</li>
+        <li>Never assume a snake is dead — reflexive strikes are possible</li>
+        <li>If bitten: call 10111 or 112 immediately and go to the nearest emergency room</li>
+        <li>Keep victim still — immobilise bitten limb below heart level</li>
+        <li>Do NOT: tourniquet, cut & suck, apply ice, or give medication</li>
+        <li>Photograph snake if safe to do so — aids species identification for treatment</li>
+        <li>Poison Helpline: 0861 555 777</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>Sea Snakes in KZN: Stranding Events, Distribution & Ecology</h3>
+    <p>Yellow-bellied sea snake strandings on KZN's beaches follow a distinct seasonal and oceanographic pattern. The species lives at the ocean surface, often aggregating along convergence zones — the visible surface lines of floating debris, foam, and current boundaries where two water masses meet — that concentrate small fish and other prey. When sustained north-easterly to northerly winds push the warm, nutrient-poor Mozambique Channel surface water toward the KZN coast during late spring and summer, sea snakes riding these surface drift lines can be carried toward shore. Storm-generated onshore surge and breaking swell can strand them above the waterline, where their poor terrestrial locomotion leaves them stranded on the sand. Most strandings on KZN beaches occur between October and March, with peaks following significant north-easterly wind events or the arrival of warm water anomalies that bring the Mozambique Counter-current inshore.</p>
+    <p>The apparent frequency of sea snake strandings varies significantly along the KZN coast. Northern KZN beaches — from Kosi Bay south to Sodwana and Cape Vidal — are closer to the warm Mozambique Channel water masses that carry sea snake populations and record more frequent strandings than the central or south KZN coast. The warm Agulhas Current, which flows southward along the outer continental shelf, occasionally carries sea snake individuals further south along the coast, and strandings have been recorded as far south as the Bluff and even the Natal South Coast during exceptional oceanographic events. However, the frequency remains low — most KZN beachgoers who visit regularly throughout their lives will never encounter a stranded sea snake, and those who do encounter one are at no meaningful risk provided they maintain the universal rule of non-contact.</p>
+    <p>From an ecological perspective, the yellow-bellied sea snake is a specialised surface predator that feeds primarily on small fish larvae, particularly the surface-oriented larvae of reef fish species, which it captures by drifting passively at the convergence lines where larvae concentrate. It is a live-bearer — females give birth to 1 to 8 live young directly in the ocean rather than returning to land to lay eggs — and individuals can live for several years. The species has no commercial value and plays a modest role in the open-ocean food web as both predator and prey for larger pelagic fish. Its conservation status is currently Least Concern globally, but surface oil spills and plastic pollution that alter surface drift line dynamics are recognised as emerging threats to pelagic sea snake populations throughout the Indo-Pacific.</p>
+</div>
+
+<h3 class="section-heading">Critical Facts — Sea Snakes & Water Cobras</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>No Antivenom in South Africa</h4>
+    <p>There is no sea snake antivenom manufactured or routinely stocked in South African hospitals. A sea snake bite in KZN cannot be treated with specific antivenom — treatment is entirely supportive, focused on maintaining breathing and managing systemic effects while the body responds to the envenomation. This is why non-handling is the only rational choice when encountering a sea snake on a KZN beach. The risk is not theoretical — sea snake venom is genuinely lethal at sufficient doses, and the absence of antivenom makes any confirmed bite a medical emergency.</p>
+</div>
+<div class="fact-card">
+    <h4>Docile But Still Dangerous</h4>
+    <p>Yellow-bellied sea snakes stranded on beaches are genuinely non-aggressive by reptile standards — they do not chase, rear up, or actively threaten humans. Most documented bites worldwide involved deliberate handling. However, "non-aggressive" does not mean "safe to handle" — a snake that feels trapped, is inadvertently touched, or is disturbed while being moved will bite as a reflex. The combination of potent venom and no local antivenom makes any handling of a stranded sea snake an unjustifiable risk, regardless of how still or incapacitated the animal appears.</p>
+</div>
+<div class="fact-card">
+    <h4>Stranded Snakes May Appear Dead</h4>
+    <p>A sea snake that has been stranded on a beach for some time — dehydrated, heat-stressed, and unable to return to the water — may appear completely motionless and unresponsive. This is not a reliable indicator of death. Reptiles can maintain protective reflexes even when moribund, and a snake that appears dead can deliver a defensive bite when touched or picked up. Never pick up a stranded sea snake to check if it is alive — if it appears dead, report it to lifeguards or wildlife authorities who have safe handling protocols.</p>
+</div>
+<div class="fact-card">
+    <h4>The Banded Water Cobra Is Not a Beach Species</h4>
+    <p>Unlike the sea snake, which washes up on any KZN beach, the banded water cobra is confined to the freshwater and estuarine lake systems of northern KZN — particularly the Kosi Bay, Lake Sibayi, and St Lucia systems. Casual beach visitors at developed resorts south of iSimangaliso are extremely unlikely to encounter one. The risk group is specifically anglers, canoeists, kayakers, and nature-based tourists accessing the lake margins and reed-fringed waterways of the northern KZN wilderness areas, where the species is a genuine resident predator.</p>
+</div>
+<div class="fact-card">
+    <h4>Delayed Symptom Onset</h4>
+    <p>Sea snake envenomation frequently presents with delayed symptom onset — the bite may be painless or only mildly painful initially, with systemic symptoms including muscle weakness, difficulty swallowing, blurred vision, and breathing difficulty developing over 30 minutes to several hours after the bite. This delay leads victims to underestimate the seriousness of the bite and delay seeking treatment. Any confirmed or suspected sea snake bite — even one that initially seems minor — requires immediate emergency medical evaluation. Do not wait for symptoms to develop before calling for help.</p>
+</div>
+<div class="fact-card">
+    <h4>Photograph, Don't Capture</h4>
+    <p>Identifying the snake species is genuinely useful for emergency room staff selecting appropriate antivenom and treatment protocols — but the correct method of identification is a photograph taken from a safe distance, not capture or killing of the animal. Attempting to capture or kill a snake for identification is responsible for a significant proportion of additional snakebite incidents worldwide, as victims are bitten during the attempt. A clear photograph taken from 2 or more metres away using a phone's zoom function provides adequate identification information without any additional risk.</p>
+</div>
+</div>
+
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

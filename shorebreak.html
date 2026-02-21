@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shorebreak & Dumping Waves – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Shorebreak & Dumping Waves</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="wavebreak.png" alt="Shorebreak & Dumping Waves KZN">
+    <p class="image-caption">Dumping shorebreak — KwaZulu-Natal steep-bank beach conditions</p>
+</div>
+<div class="species-intro">
+    <h2>Shorebreak & Dumping Waves</h2>
+    <span class="scientific-name">Dangerous surf conditions on shallow-bank beaches</span>
+    <span class="conservation-badge">⚠ MODERATE HAZARD — Serious Injury Risk</span>
+    <p>Shorebreak is one of the most underestimated hazards on KwaZulu-Natal's beaches — a wave type that breaks with sudden, full force directly onto the shallow sand at the water's edge rather than peaking and rolling further out to sea. Unlike the gradual, rideable waves of an offshore break, shorebreak delivers all its energy in one explosive impact precisely where swimmers, waders, and children are standing. The force is sufficient to drive a person headfirst into the sand with enough violence to cause spinal fractures, concussion, broken limbs, and drowning — and it strikes with almost no warning, giving victims no time to brace or react.</p>
+    <p>KZN's beaches are particularly prone to shorebreak conditions because of the coastline's characteristic steep-bank beach profiles, which slope sharply into deep water just metres from the wet sand. When ocean swells arrive — particularly the long-period southern swells generated by distant storms in the Southern Ocean — they travel across deep water without significantly breaking until they hit the abrupt shallows right at the beach face. At that point, all the accumulated energy of the swell releases instantaneously at the shoreline. The result is a wave that appears deceptively small from a distance but strikes with enormous concentrated force. Post-storm swell events, new swell arrivals after calm periods, and periods of large southern swell are all high-risk windows for serious shorebreak injury on KZN beaches.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Hazard Type</span><span class="stat-value">Impact injury</span></div>
+        <div class="stat-box"><span class="stat-label">Primary Injury</span><span class="stat-value">Spinal / head</span></div>
+        <div class="stat-box"><span class="stat-label">Peak Risk</span><span class="stat-value">Post-storm swell</span></div>
+        <div class="stat-box"><span class="stat-label">Beach Profile</span><span class="stat-value">Steep-bank shores</span></div>
+        <div class="stat-box"><span class="stat-label">Most Vulnerable</span><span class="stat-value">Children & non-swimmers</span></div>
+        <div class="stat-box"><span class="stat-label">Key Rule</span><span class="stat-value">Never dive headfirst</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>What is Shorebreak?</h3>
+    <p>Shorebreak is the term for waves that break directly at the shoreline on a steeply sloping beach, rather than peaking and breaking further offshore over a sandbar or reef. It forms when ocean swells — generated by distant storms and capable of travelling thousands of kilometres with little energy loss — suddenly encounter the very shallow water immediately adjacent to the beach face. Because the water depth drops away so abruptly on steep-bank beaches, the wave has no opportunity to peak and dissipate gradually; it simply slams into the bottom and collapses all its energy vertically at the shore edge.</p>
+    <p>The resulting wave can vary dramatically in apparent size versus actual impact force. A shorebreak wave of 0.5 to 1 metre that appears modest and unthreatening from the street may carry sufficient force to knock an adult off their feet, drag them into the shore zone, and slam them onto the sand hard enough to fracture vertebrae. Critically, shorebreak waves are asymmetric in their danger — they are significantly more dangerous for people entering or exiting the water than for those already swimming beyond them. The moment of maximum exposure is when a person stands at the water's edge in knee-to-thigh deep water, facing the beach, with a breaking wave arriving from behind.</p>
+    <p>KZN's southern and central beaches are particularly susceptible to shorebreak due to their geomorphology — the beaches sit at the base of steep dune faces, the sand profile drops sharply, and long-period Southern Ocean swells arrive with minimal obstruction from offshore sandbars or reefs. Beaches like Amanzimtoti, Scottburgh, Park Rynie, and sections of the South Coast are well known among local surf lifesavers for producing dangerous shorebreak conditions during south swell events.</p>
+</div>
+<div class="info-section">
+    <h3>Recognising Dangerous Conditions</h3>
+    <p>Recognising shorebreak conditions before entering the water can prevent catastrophic injury. The key visual indicator is a wave that shows little or no breaking action further out to sea — no whitewater, no surf zone — but explodes in a thick, compressed curtain of white water directly at the sand. Experienced beachgoers describe this as the ocean appearing "flat" until the last moment, when a wave suddenly pitches and crashes at the shoreline with disproportionate violence relative to its apparent size.</p>
+    <p>Several conditions reliably produce or amplify shorebreak risk on KZN beaches. A new swell arriving after a calm period is one of the most dangerous — the beach can appear completely benign for hours, then suddenly begin producing powerful shorebreak as the swell trains arrive. A rising swell during an incoming tide combines two amplifying factors simultaneously: more wave energy and deeper water at the shore face, allowing larger waves to arrive unbroken. Post-storm conditions — particularly in the 12 to 48 hours after a south coast low-pressure system — frequently produce the most dangerous shorebreak events of the season on KZN's steeper beaches.</p>
+    <ul>
+        <li>Flat water offshore with sudden explosive breaking at the sand — classic shorebreak signature</li>
+        <li>Waves arriving in sets with powerful backwash pulling sand underfoot</li>
+        <li>New swell arriving after prolonged calm period</li>
+        <li>Rising tide combined with increasing swell size</li>
+        <li>Post-storm conditions on steep south-facing beaches</li>
+        <li>Red or yellow flags flown by lifeguards — always check before entering</li>
+        <li>Unusually loud, low-frequency "thump" of waves hitting sand — audible from distance</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Injuries & Mechanism</h3>
+    <p>Shorebreak injuries range from minor abrasions and winding to catastrophic spinal cord injury and drowning. The injury mechanism is consistent: a wave strikes the swimmer or wader from behind or above, drives their head and upper body downward into the shallow sand with the full momentum of the breaking wave behind them, and the compressed water column pins them against the bottom before the wave recedes. The cervical spine — the neck vertebrae — bears the brunt of this compressive force, and fractures or dislocations at cervical level C4 to C6 are the injuries most commonly associated with permanent paralysis in shorebreak incidents.</p>
+    <p>Diving headfirst into shorebreak is the single highest-risk action a beach visitor can take — it is responsible for the majority of surf-related spinal injuries in South Africa. The diver enters the water horizontally, the wave pushes them down faster than they can redirect, and the top of the skull meets the sand with combined wave momentum and body weight. But shorebreak injuries also occur without deliberate diving: simply being caught off-balance and tumbled by a breaking wave in shallow water, or attempting to body surf a shorebreak wave, can produce the same compressive injury mechanism. Children and non-swimmers are at disproportionate risk because their smaller body mass offers less resistance to the wave's force and they are less able to protect themselves during the tumble.</p>
+    <ul>
+        <li>Cervical spinal fracture or dislocation — most severe outcome; can cause permanent paralysis</li>
+        <li>Concussion and traumatic brain injury from head impact with sand</li>
+        <li>Broken collarbone, shoulder, and wrist from impact and tumbling</li>
+        <li>Secondary drowning — unconscious or paralysed victim cannot self-rescue</li>
+        <li>Lacerations and abrasions from sand and shell impact at speed</li>
+        <li>Winding and rib fractures from blunt wave impact on torso</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Prevention & Safe Behaviour</h3>
+    <p>The most effective prevention for shorebreak injury is the simplest: observe the conditions for at least 5 to 10 minutes before entering the water, and never enter if the beach is producing shorebreak that knocks you off balance in knee-deep water. Swim at beaches with active lifeguard surveillance and take the flag colour system seriously — yellow and red flags flown in combination mean dangerous conditions, and shorebreak is frequently the reason. Listen to lifeguard instructions; KZN's surf lifesavers are specifically trained to assess shorebreak risk and will close water access sections proactively when shorebreak becomes dangerous.</p>
+    <p>If you are caught by shorebreak and cannot avoid the wave, the protective response is to curl tightly into a ball with your knees drawn toward your chest and your chin tucked toward your sternum — this posture minimises the risk of the spine absorbing the full compressive impact and presents rounded, resilient body surfaces to the sand rather than the vulnerable cervical spine. Never extend your arms fully overhead in a diving posture when entering water you are uncertain about. Enter the water feet-first at all times on unfamiliar KZN beaches, particularly after swell events or when the offshore surface appears calm and flat despite wave activity at the shoreline.</p>
+    <ul>
+        <li>NEVER dive headfirst into shorebreak — ever, under any conditions</li>
+        <li>Enter and exit the water feet-first on steep-bank beaches</li>
+        <li>Observe conditions for 5–10 minutes before entering — watch full wave sets</li>
+        <li>If knocked down, curl into a ball with chin tucked — protect the neck</li>
+        <li>Swim only at lifeguarded beaches during swell events</li>
+        <li>Supervise children closely — never allow unsupervised play in shorebreak zones</li>
+        <li>Exit the water immediately if conditions deteriorate after you've entered</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>Shorebreak on KZN's South Coast — High-Risk Beaches & Conditions</h3>
+    <p>KwaZulu-Natal's South Coast — the stretch of coastline running from Amanzimtoti south through Scottburgh, Hibberdene, Park Rynie, Pennington, Umzumbe, and beyond — is home to some of the most powerful shorebreak conditions in southern Africa during south swell events. This concentration of risk reflects the South Coast's exposure: the beaches face broadly southeast, receive the full energy of Southern Ocean swells that have travelled from storm systems south of Africa with minimal obstruction, and their characteristic steep beach profiles mean that arriving swell energy has nowhere to dissipate before hitting the shore. During significant south swell events — which can arrive with little warning when a deep low-pressure system moves through the southern oceans — South Coast beaches that appear calm and swimmable in the morning can become genuinely life-threatening within hours as the swell builds and the shorebreak intensifies.</p>
+    <p>Several specific beach characteristics amplify shorebreak risk on the South Coast. The relatively narrow continental shelf means that deep water is close to shore, allowing swells to travel fast and far before shoaling. The prevalence of rocky headlands interspersed with beach bays creates refraction and focusing of swell energy into specific sections of each bay — the middle sections of many South Coast bays receive concentrated swell energy that exceeds what the beaches at the headland ends experience. This focusing effect means that the most dangerous shorebreak on a given beach may be confined to a relatively narrow band of the shoreline, while adjacent sections appear calmer. Lifeguards on South Coast beaches are experienced at identifying these focal zones and adjust their flag positions accordingly — another reason to always check the flags and never swim in an unflagged, unpatrolled section during swell conditions.</p>
+    <p>The North Coast — Ballito, Salt Rock, Shaka's Rock, Sheffield Beach, Blythedale — experiences less extreme shorebreak than the South Coast due to its more northward orientation and the partial sheltering provided by the Mozambique Channel from the dominant southwest swell direction. However, northeast swells generated by tropical systems can produce powerful shorebreak on north-facing North Coast beaches, and the phenomenon is not exclusive to the South Coast. Durban's city beaches — North Beach, South Beach, Addington — sit behind the Durban Bight and are partially sheltered from the worst southern swells, but can experience shorebreak during large easterly swell events. In all cases, local knowledge, lifeguard advice, and direct observation of conditions before entering the water are the most reliable guides to shorebreak risk on any given day.</p>
+</div>
+
+<h3 class="section-heading">Critical Facts About Shorebreak</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>Deceptively Small, Devastatingly Powerful</h4>
+    <p>Shorebreak waves are routinely underestimated because their height at the point of breaking appears modest — 0.5 to 1.5 metres in most dangerous incidents. What makes them lethal is the concentration of all wave energy into a single vertical impact at the shoreline, rather than a gradual dissipation across a surf zone. A 1-metre shorebreak wave in 0.5 metres of water delivers far more concentrated force than a 2-metre wave breaking 50 metres offshore. Never judge shorebreak danger by wave height alone.</p>
+</div>
+<div class="fact-card">
+    <h4>Diving Headfirst Is the Deadliest Decision</h4>
+    <p>The majority of surf-related spinal injuries in South Africa involve a person diving headfirst into shallow water during shorebreak conditions. The diver's momentum combines with the wave's force, driving the skull into the sand with enough energy to fracture cervical vertebrae. The resulting injury — often at C5 or C6 level — can cause instant quadriplegia. This injury is entirely preventable: enter the water feet-first, always, on any KZN beach where conditions are uncertain.</p>
+</div>
+<div class="fact-card">
+    <h4>Backwash Doubles the Danger</h4>
+    <p>Shorebreak beaches generate strong backwash — the seaward return flow of water after each wave breaks on the steep beach face. Backwash undermines footing, destabilises waders trying to stand against it, and can drag people off balance into the next arriving wave just as they are most vulnerable. The combination of incoming shorebreak and outgoing backwash creates a pulsing, bi-directional force field in the shore zone that experienced swimmers respect and novice beachgoers consistently underestimate.</p>
+</div>
+<div class="fact-card">
+    <h4>Swell Period Matters More Than Height</h4>
+    <p>Long-period swells — those generated by powerful distant storms with wave periods of 14 seconds or more — produce far more dangerous shorebreak than local wind swell of equivalent height. This is because long-period waves carry more energy per wave and travel faster in deep water, arriving at the beach with greater momentum. South African surf forecasts show swell period alongside height — when a KZN beach forecast shows "1.5 m at 16 seconds," the shorebreak potential is significantly more dangerous than "1.5 m at 8 seconds" from local wind.</p>
+</div>
+<div class="fact-card">
+    <h4>Secondary Drowning Risk</h4>
+    <p>A shorebreak impact that fractures the spine or causes concussion immediately incapacitates the victim in shallow water — face-down in the shore zone with waves continuing to break over them. Rescuers must reach and stabilise the victim within seconds to prevent secondary drowning. This is why spinal injury protocols for beach rescuers prioritise keeping the victim's airway above water while minimising spinal movement. Bystanders who witness a shorebreak impact that drops a person unconscious or limp in the water must call emergency services immediately and attempt to keep the victim's face above water without bending the neck.</p>
+</div>
+<div class="fact-card">
+    <h4>If Caught — Tuck and Protect</h4>
+    <p>If caught in shorebreak with no escape, the protective posture is to curl tightly — knees to chest, chin tucked firmly toward the sternum, arms wrapped around the knees. This "cannonball" position presents rounded, shock-absorbing body surfaces to impact, keeps the cervical spine in a protected flexed position, and maximises the chance of tumbling through the wave without catastrophic injury. Do not extend arms forward in a protective reach — outstretched arms allow the wave to lever the spine into dangerous hyperextension.</p>
+</div>
+</div>
+
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

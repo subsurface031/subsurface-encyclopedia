@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prawn (Penaeid Shrimp) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Prawn (Penaeid Shrimp)
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="prawn.png" alt="Prawn">
+                    <p class="image-caption">Penaeus indicus & Metapenaeus monoceros — Penaeid Prawns, KZN estuaries and coastal waters</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Prawn (Penaeid Shrimp)</h2>
+                    <span class="scientific-name">Penaeus indicus & related species</span>
+                    <span class="conservation-badge">⚠ Fishery Dependent</span>
+                    <p>Prawns are the sleek, translucent architects of KwaZulu-Natal's most economically valuable coastal fishery — crustaceans so central to the region's marine economy, its cultural food traditions, and the functioning of its estuarine ecosystems that their fate is inextricably linked to the fate of the coastal environment itself. The penaeid prawns of KZN — dominated by the white prawn Penaeus indicus and the speckled prawn Metapenaeus monoceros, with several other species contributing to the overall catch — complete a life cycle that links the open ocean, where adults spawn, to the sheltered estuaries and mangrove-fringed lagoons where juveniles mature, to the shallow coastal reefs and banks where sub-adults forage before returning offshore.</p>
+                    <p>As animals, prawns are deceptively sophisticated: fast, alert, and equipped with sensory systems that make them acutely aware of their environment and the threats within it. Their transparent, segmented bodies, long antennae, and large compound eyes belie the complexity of their behaviour — from the precision of their nocturnal feeding forays across sandy estuary floors to the remarkable offshore migration that adult females undertake to spawn in the deep, high-salinity waters where their eggs hatch and larvae develop. Every stage of this life cycle is critical, and the collapse of any one habitat link in the chain — an estuary degraded by sedimentation, an offshore spawning ground swept by trawl nets — ripples through the entire population with consequences felt from the fishing boats of the Bight to the restaurants of Umhlanga.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">~20 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~60 g</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~2 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Estuaries & coast</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Nocturnal</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 90 m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Penaeid prawns have the classic, immediately recognisable shrimp body plan — long, laterally compressed, and streamlined for rapid backward swimming. The body is divided into a cephalothorax covered by a smooth, calcified carapace and a segmented abdomen that terminates in a broad, fan-shaped tail used for propulsion. A forward-projecting rostrum — a toothed blade projecting from between the eyes — is characteristic of penaeids, and the number, length, and dentition of rostral teeth is a primary feature used to distinguish species. In Penaeus indicus, the rostrum is long and slender with teeth on both the upper and lower edges.</p>
+                    <p>The body colouration of living prawns is typically translucent with variable patterns of brown, grey, and cream stippling that provide effective camouflage against sandy and muddy substrates. The white prawn (Penaeus indicus) lives up to its common name with a predominantly pale, almost transparent body in life, while the speckled prawn (Metapenaeus monoceros) bears distinctive darker speckles across the carapace. Both species turn the familiar pink-orange colour upon cooking due to the denaturing and release of carotenoid pigments bound in the exoskeleton — a colour change that has made prawns one of the most universally recognisable seafoods in the world despite being entirely invisible in living animals.</p>
+                    <p>The appendages are numerous and specialised: five pairs of walking legs adapted for both locomotion and food manipulation, with the first three pairs bearing small chelae for handling food items; swimmerets on the abdomen for swimming and, in females, brooding eggs; and the distinctive long antennae and shorter antennules bristling with chemoreceptors that give prawns their acute sensitivity to dissolved chemicals in the surrounding water. The compound eyes are large and mobile on stalks, providing a wide field of view for detecting predators and orienting in their environment.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Prawns are primarily nocturnal animals — most active from dusk through to the pre-dawn hours when reduced light levels lower their visibility to visual predators. During daylight hours, they bury themselves in soft sediment with only their eyes and antennae protruding, or rest concealed under organic debris and vegetation. As darkness falls, prawns emerge from concealment and begin their foraging movements across the estuary floor or sandy coastal bottom — covering considerable distances during a night's activity as they search for food, suitable habitat, and mates.</p>
+                    <p>The primary escape response of a prawn when threatened is the tail-flip — a rapid, powerful backward propulsion generated by sudden abdominal flexion that can launch the animal several body lengths in a fraction of a second and is virtually impossible to anticipate or intercept. This response is triggered by mechanosensory hairs on the abdomen that detect pressure waves generated by approaching predators. The speed and unpredictability of the tail-flip escape — combined with the translucent camouflage of the living prawn — makes predation on individual alert prawns a challenging proposition for most reef fish and other visual hunters.</p>
+                    <p>Tidal migrations are an important feature of prawn behaviour in KZN's estuaries. Post-larval and juvenile prawns ride incoming tidal currents up-estuary onto productive feeding grounds during flood tides, and drift back down toward the estuary mouth on ebb tides. This tidal surfing conserves energy while allowing extensive coverage of the estuary's feeding grounds and gradual movement toward the mouth as prawns grow and approach the size at which offshore migration is triggered. Large sub-adults and adults undertake more directed offshore migrations — moving out through the estuary mouth and along the coast to offshore spawning grounds — typically during periods of higher wave energy and offshore wind conditions.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Penaeid prawns are omnivorous detritivores and opportunistic predators that feed primarily on the organic-rich surface layer of estuarine and coastal sediments. The mouthparts and associated feeding appendages are well designed for scraping, sieving, and processing fine sediment material — the prawn moves forward in a characteristic head-down posture during feeding, using its walking legs and mouth parts to disturb and process the uppermost few millimetres of sediment, extracting organic particles, bacteria, microalgae, meiofauna, and small invertebrates while rejecting inorganic mineral grains.</p>
+                    <p>In addition to this detrital feeding, prawns actively prey on small animals encountered during their nocturnal foraging. Small polychaete worms are important prey — prawns can detect them through chemical and mechanical cues and excavate them from the sediment surface with surprising efficiency. Small crustaceans including amphipods and copepods, foraminifera, and the larvae of various invertebrates are consumed opportunistically, and prawns will take pieces of larger carrion items when encountered. The dietary flexibility of penaeid prawns — able to subsist on detritus alone when necessary but able to exploit animal prey when available — is a key factor in their ecological success across the diverse habitats they use at different life stages.</p>
+                    <ul>
+                        <li>Organic detritus and sediment surface material</li>
+                        <li>Microalgae including benthic diatoms</li>
+                        <li>Bacteria and sediment microbial communities</li>
+                        <li>Polychaete worms and meiofauna</li>
+                        <li>Small crustaceans — amphipods, copepods</li>
+                        <li>Carrion and organic matter of animal origin</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>The life cycle of penaeid prawns in KZN is a remarkable circular migration between estuarine nursery habitats and offshore spawning grounds. Mating occurs in offshore coastal waters, where females extrude eggs directly into the water column after mating — unlike shrimps that brood eggs on pleopods, penaeids are broadcast spawners that release eggs freely. A large female may spawn hundreds of thousands of eggs per spawning event, and multiple spawning events may occur in a single season. Eggs hatch within hours into nauplius larvae that develop rapidly through several larval stages over 10 to 14 days.</p>
+                    <p>Post-larval prawns — tiny, fully formed juveniles of 10 to 15 millimetres — are transported shoreward by onshore currents and actively swim into estuaries and lagoons on flooding tidal currents. Settlement occurs preferentially in sheltered, vegetated areas — mangrove fringes, seagrass beds, and reed margins — where food is abundant and predation risk is lower than in open water. Juveniles grow rapidly through a succession of moults, moving progressively toward the lower estuary and eventually the estuary mouth as they increase in size, salinity tolerance, and readiness for offshore life.</p>
+                    <p>The offshore migration of sub-adult and adult prawns from estuaries to coastal fishing grounds is driven by hormonal and environmental cues — increasing body size, declining temperature, and rising wave energy are among the triggers that initiate the offshore movement. Once offshore, prawns join the adult population on coastal and offshore sandy banks and demersal habitats where they are targeted by the commercial prawn trawl fishery. Total lifespan is short — rarely exceeding 2 years in the wild — but the combination of high fecundity, rapid growth, and estuarine nursery habitats supports the large population sizes that underpin KZN's commercial prawn industry.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Prawns in KZN: Fisheries, Ecology & the Trawling Debate</h3>
+                <p>The commercial prawn trawl fishery operating off KwaZulu-Natal's coast — primarily targeting white prawn (Penaeus indicus) and speckled prawn (Metapenaeus monoceros) on the Tugela Bank and other nearshore sandy grounds — is one of the most economically significant marine industries in the region, generating significant revenue and employment and supplying the high-quality fresh prawns that appear on menus and in markets throughout KZN. The fishery operates primarily at night when prawns are most active and catchable, using otter trawls that sweep the sandy bottom and capture prawns along with substantial quantities of bycatch — non-target species including juvenile fish, crabs, and other invertebrates that are typically discarded at sea.</p>
+                <p>The bycatch issue is the most contentious aspect of the prawn trawl fishery and one that has driven substantial regulatory reform and ongoing debate within the South African fishing industry and conservation community. Studies on KZN's prawn trawl fishery have documented bycatch ratios — the weight of non-target species caught per unit weight of target prawn — that historically ranged from 3:1 to over 10:1, meaning that for every kilogram of marketable prawn landed, 3 to 10 kilograms of other marine life was caught and discarded. Much of this bycatch comprises juvenile fish of commercially and ecologically important species — placing trawling operations in direct conflict with the sustainability of other coastal fisheries.</p>
+                <p>Alongside the industrial trawl fishery, a significant subsistence and small-scale artisanal prawn fishery operates in KZN's estuaries and coastal shallows using traditional methods — cast nets, seine nets, and fyke traps — that are far less damaging ecologically than bottom trawling. Prawns are a highly valued food source in coastal communities throughout KZN, and prawn harvesting from accessible estuaries and shallow coastal areas represents an important contribution to food security for families without access to commercial fishing infrastructure. Regulating this artisanal sector to ensure sustainable harvesting while protecting the livelihoods of those who depend on it represents a complex management challenge that has no simple solution.</p>
+                <p>The ecological importance of prawns in KZN's coastal food webs is difficult to overstate. As abundant, energy-rich, and widely distributed prey items, they are a primary food source for dozens of commercially and ecologically important species — juvenile and adult kob, dusky kob, and various kingfish feed heavily on prawns in estuaries and shallow coastal waters; bottlenose and humpback dolphins actively hunt prawns in estuarine channels; and sea birds including various terns and herons take prawns from the surface. The cascading effects of prawn population fluctuations — driven by both fishing pressure and the condition of estuarine nursery habitats — resonate through these dependent communities, reinforcing the case for integrated coastal management that protects the entire habitat spectrum on which prawn populations depend.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Why Prawns Turn Pink</h4>
+                    <p>Live prawns are translucent to pale grey — the vivid pink-orange colour of cooked prawns is entirely a product of heat. In life, carotenoid pigments in the exoskeleton are bound to proteins in a complex that masks their colour. When heat denatures these proteins during cooking, the carotenoids are released and immediately express their natural orange-pink colour. This same chemistry explains why lobsters, crabs, and other crustaceans that are not red or pink in life all turn varying shades of orange-red when cooked.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Estuaries as Nurseries</h4>
+                    <p>KZN's estuaries are irreplaceable nursery habitats for penaeid prawns — the sheltered, productive, food-rich conditions of mangrove-fringed estuarine shallows support juvenile prawn survival rates that are orders of magnitude higher than open coastal habitats. Studies have demonstrated that the annual commercial prawn catch in KZN's coastal trawl fishery is directly correlated with the quality and extent of estuarine nursery habitat available to juveniles in preceding years — making the protection of every estuary in the KZN catchment a genuine fisheries management priority, not merely an environmental one.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Tail-Flip Escape</h4>
+                    <p>The tail-flip escape response of a penaeid prawn is one of the fastest movements in the crustacean world — full muscular contraction and backward launch is completed in under 20 milliseconds, making it effectively invisible to the human eye. The movement is powered by enormous fast-twitch muscle fibres that fill most of the abdomen — which is why the "tail" of a prawn is the primary edible portion and has the characteristic dense, springy texture of fast-twitch muscle. The same anatomy that makes prawns difficult to catch also makes them excellent eating.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tidal Surfers</h4>
+                    <p>Post-larval and juvenile prawns use a remarkable tidal surfing behaviour to migrate up-estuary into nursery habitats after settling near the estuary mouth. As the tide begins to flood, juveniles swim upward into the water column and are carried shoreward by the incoming current — covering distances in hours that would take days by swimming alone. When the ebb begins, they descend to the bottom and remain still, avoiding being swept back seaward. This precisely timed vertical migration, repeated over multiple tidal cycles, efficiently transports juveniles deep into the estuarine nursery habitats where their survival is highest.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Bycatch Problem</h4>
+                    <p>For every kilogram of prawns landed by the KZN trawl fishery, several kilograms of non-target marine life are caught and discarded — a bycatch rate that has made prawn trawling one of the most ecologically controversial fishing methods in southern Africa. Regulatory reforms including minimum mesh size requirements, bycatch reduction devices, seasonal and area closures on key juvenile fish habitats, and strict observer coverage have reduced (but not eliminated) the bycatch impact. The tension between the economic value of the prawn fishery and its ecological footprint remains one of the most difficult trade-offs in KZN coastal management.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>A Nocturnal World</h4>
+                    <p>Prawns are so strongly nocturnal that their population density in an estuary can appear to change dramatically between day and night. A daytime survey of an estuary floor may find almost no prawns — they are buried in the sediment or concealed under debris, essentially invisible. The same estuary at night becomes a different world: hundreds of prawns are active and visible in the beam of a torch, moving systematically across the bottom in their characteristic head-down feeding posture. This diel rhythm is driven by predation pressure from visual predators and is so consistent that experienced prawn fishers never fish in daylight.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

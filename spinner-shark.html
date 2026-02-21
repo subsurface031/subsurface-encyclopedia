@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinner Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Spinner Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="spinner.png" alt="Spinner Shark">
+                    <p class="image-caption">Carcharhinus brevipinna — Spinner Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Spinner Shark</h2>
+                    <span class="scientific-name">Carcharhinus brevipinna</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The spinner shark is one of the ocean's most acrobatic predators, renowned for its spectacular feeding displays in which it charges vertically through schools of fish, spinning on its axis before erupting from the water in a twisting aerial leap. This slender, bronze-grey shark is named for this unique hunting behaviour, which makes it one of the most visually striking shark species in KwaZulu-Natal's coastal waters.</p>
+                    <p>Found in warm temperate and tropical waters worldwide, spinner sharks are highly migratory and form large aggregations during seasonal feeding events — including KZN's famous sardine run, where they gather by the hundreds to exploit the massive shoals of sardines moving northward along the coast between May and July. Despite their impressive size and predatory prowess, spinner sharks are not considered dangerous to humans, though their energetic feeding behaviour and tendency to leap from the water make encounters with them memorable events for divers and ocean users.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">3.0 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">90 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">15–20 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 100 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">7–8 years (F)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">3 – 15 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The spinner shark is a slender, streamlined requiem shark with a long, pointed snout and relatively small, round eyes. Its body shape is optimised for rapid acceleration and sustained speed — essential traits for a predator that specialises in pursuing fast-moving schooling fish in open water. The species closely resembles the blacktip shark, and the two are frequently confused, though several key differences distinguish them.</p>
+                    <p>Colouration is grey to bronze-grey on the dorsal surface, transitioning to white on the belly, with faint pale bands visible along the flanks. The defining feature of adult spinner sharks is the presence of conspicuous black tips on most fins — including the second dorsal, anal, pectoral, and lower caudal lobe. Importantly, the anal fin is black-tipped in spinner sharks but not in blacktip sharks, making this one of the most reliable identification features when distinguishing the two species.</p>
+                    <p>The first dorsal fin is positioned further back than in the blacktip shark, originating behind the pectoral fins rather than above them. The dorsal fin itself is relatively small and slightly falcate, with a short rear tip. Spinner sharks lack an interdorsal ridge. Their teeth are narrow, triangular, and finely serrated — well-suited for grasping slippery fish prey rather than tearing at large prey items.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Spinner sharks are highly active, fast-swimming sharks that often form large schools segregated by age and sex. They are strongly migratory, undertaking seasonal movements along coastlines in response to water temperature changes and the availability of prey. In KwaZulu-Natal, spinner sharks are most abundant during the cooler months of the year — particularly during the winter sardine run between May and July — when they aggregate in large numbers to feed on the massive shoals of sardines moving northward along the coast.</p>
+                    <p>The species is best known for its extraordinary feeding behaviour. When pursuing schools of small fish, spinner sharks charge vertically upward through the school with their mouths open, spinning rapidly on their longitudinal axis and snapping at prey in all directions. The momentum of these spiraling feeding runs often carries the shark completely out of the water, resulting in spectacular airborne spins and twists that can reach heights of up to six metres above the surface. This behaviour is thought to disorient prey and maximise capture efficiency during brief feeding opportunities.</p>
+                    <p>Spinner sharks are not considered dangerous to humans. Their small, narrow teeth are adapted for seizing small fish rather than inflicting serious injuries on large animals. However, they can become highly excited during feeding frenzies and may exhibit aggressive behaviour when food is present. There have been no recorded fatalities attributed to spinner sharks, though a small number of non-fatal bites have been documented — usually occurring when sharks are attracted to spearfishing activities or are mistakenly caught by anglers.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Spinner sharks are opportunistic predators that feed primarily on small, fast-moving schooling fish and cephalopods. Their slender bodies, streamlined shape, and powerful swimming abilities make them highly effective pursuit predators capable of chasing down agile prey in open water. They employ both individual and cooperative hunting strategies, often working in loose groups to herd and attack schools of fish.</p>
+                    <p>In KwaZulu-Natal waters, spinner sharks are particularly abundant during the annual sardine run, when they feed heavily on sardines in spectacular multi-species feeding events alongside dusky sharks, copper sharks, common dolphins, and Cape gannets. Their characteristic spinning leaps — performed while feeding — allow them to attack prey from multiple angles and maintain momentum as they chase fish toward the surface.</p>
+                    <ul>
+                        <li>Sardines, anchovies and herring</li>
+                        <li>Tunas, bonito and mackerel</li>
+                        <li>Mullet, sea catfish and lizardfish</li>
+                        <li>Squid, cuttlefish and octopus</li>
+                        <li>Small rays and juvenile fish</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Like all requiem sharks, spinner sharks are viviparous, with embryos developing internally and nourished by a yolk-sac placenta. Females have a single functional ovary and two functional uteri, each divided into compartments to hold individual embryos. After mating, the embryos are initially sustained by their yolk sacs; as the yolk is depleted, the empty sac develops into a placental connection through which the mother provides nutrients for the remainder of gestation.</p>
+                    <p>Gestation lasts between 11 and 15 months — among the longer gestation periods of coastal requiem sharks. Litter sizes range from 3 to 15 pups, with larger females generally producing larger litters. Pups measure between 60 and 75 centimetres at birth and are born in shallow coastal nursery areas, where they remain for several months to avoid predation by larger sharks.</p>
+                    <p>Spinner sharks have a biennial reproductive cycle, meaning females reproduce only every other year rather than annually. This extended interval between litters, combined with relatively small litter sizes and late maturity, makes spinner shark populations vulnerable to overfishing. Males reach sexual maturity at approximately 4 to 5 years of age and 1.3 metres in length, while females mature later, at 7 to 8 years and 1.5 to 1.6 metres. The species is relatively fast-growing compared to other large requiem sharks, with juveniles growing approximately 25 to 30 centimetres per year during their first few years of life.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Spinner sharks are found in warm temperate and tropical waters worldwide, occurring in the Atlantic, Indian, and Pacific Oceans. In the Indian Ocean, they are distributed from South Africa and Madagascar north to the Red Sea and Gulf of Aden, and east to India, Indonesia, and Australia. In KwaZulu-Natal, spinner sharks are encountered along the entire coastline, from the surf zone to offshore waters over the continental shelf, though they prefer depths of less than 30 metres and are most commonly found in shallow coastal habitats.</p>
+                <p>The species is highly migratory and undertakes extensive seasonal movements in response to water temperature changes and prey availability. In KZN, spinner sharks are particularly abundant during the cooler winter months, when they move inshore to feed on the massive sardine shoals that migrate northward along the coast between May and July. During this time, spinner sharks aggregate in large numbers off the southern KZN coast, often feeding in mixed-species groups alongside dusky sharks, copper sharks, and common dolphins.</p>
+                <p>Juvenile spinner sharks use shallow bays, estuaries, and protected coastal areas as nursery grounds, where they remain for several months after birth before gradually dispersing into deeper waters. These nursery habitats — including areas around the iSimangaliso Wetland Park and the bays between Durban and Port Edward — are critical for the survival of young sharks and require protection from habitat degradation and fishing pressure.</p>
+                <p>The spinner shark is listed as Vulnerable on the IUCN Red List, reflecting documented population declines in several regions. In KwaZulu-Natal, spinner sharks have historically constituted a significant proportion of the total catch in beach protection nets, with an average of 136 individuals caught annually between 1978 and 1997. While protective net catches have not shown a clear declining trend over time, the species' preference for inshore nursery habitats makes it particularly susceptible to coastal development, pollution, and fishing pressure. Conservation efforts — including the implementation of alternative bather protection methods and the establishment of marine protected areas — are essential to ensuring the long-term survival of spinner sharks in KZN waters.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Aerial Acrobats</h4>
+                    <p>Spinner sharks can leap as high as six metres above the water surface while spinning — one of the most spectacular feeding displays of any shark species. The momentum generated by their vertical feeding runs carries them completely out of the water in a spiraling, twisting motion that has made them favourites among divers and wildlife photographers.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sardine Run Stars</h4>
+                    <p>Spinner sharks are among the most abundant large predators during KZN's annual sardine run, with hundreds congregating off the southern coast between May and July. They feed alongside dusky sharks, copper sharks, dolphins, and seabirds in one of the ocean's most extraordinary multi-species feeding events — known as the "Greatest Shoal on Earth."</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Mistaken Identity</h4>
+                    <p>Spinner sharks are frequently confused with blacktip sharks due to their similar appearance and overlapping habitats. The two species can be reliably distinguished by the position of the first dorsal fin and the presence of a black tip on the anal fin — which is present in spinner sharks but absent in blacktip sharks.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Spinning Mystery</h4>
+                    <p>The exact reason for the spinner shark's spinning behaviour remains debated among scientists. While most researchers believe it's a feeding strategy to disorient prey and maximise capture efficiency, others have suggested the leaps may help dislodge parasites from their skin. The behaviour is not observed in all populations, suggesting it may be triggered by specific prey species or local conditions.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fast Growers</h4>
+                    <p>Compared to many large shark species, spinner sharks grow relatively quickly, with juveniles adding 25 to 30 centimetres in length per year during their first few years of life. However, growth slows dramatically as they approach maturity, with adults growing only 5 centimetres per year — a pattern typical of many requiem sharks.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Biennial Breeders</h4>
+                    <p>Female spinner sharks reproduce only once every two years, with gestation lasting up to 15 months followed by a resting period before the next pregnancy. This extended reproductive cycle, combined with small litter sizes and late maturity, makes spinner shark populations particularly vulnerable to overfishing and slow to recover from population declines.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

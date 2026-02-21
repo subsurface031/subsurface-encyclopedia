@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mud Prawn (Upogebia) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Mud Prawn (Upogebia)
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="mud-prawn.png" alt="Mud Prawn">
+                    <p class="image-caption">Upogebia africana — Mud Prawn, KZN estuaries and mudflats</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Mud Prawn (Upogebia)</h2>
+                    <span class="scientific-name">Upogebia africana</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The mud prawn is one of KwaZulu-Natal's most ecologically indispensable yet least celebrated creatures — a small, pale crustacean that spends virtually its entire adult life hidden within an elaborate burrow system beneath the surface of estuarine mudflats and sheltered sandy shores. Upogebia africana, the African mud prawn, is the dominant burrowing crustacean in many of KZN's estuaries, occurring in densities that can exceed several hundred individuals per square metre in optimal habitat. Despite their cryptic existence, mud prawns exert a profound and irreplaceable influence on the functioning of estuarine ecosystems — aerating sediments, filtering organic particles, and creating a hidden architecture of tunnels that supports an entire community of other organisms.</p>
+                    <p>To encounter a mud prawn outside its burrow is a rare event — these soft-bodied, vulnerable animals almost never voluntarily emerge into the open. Their world is the burrow: a carefully maintained, U-shaped or Y-shaped tunnel system that they excavate and inhabit for months to years, rarely venturing more than a body length beyond the entrance. Within this underground refuge, mud prawns perform the constant work of filter feeding, pumping water through the burrow to collect suspended food particles and oxygenate their gills, and periodically cleaning and maintaining their tunnel system. The only indication of their extraordinary abundance in a healthy estuary is the carpet of small burrow openings that pockmark the mudflat surface at low tide — easily overlooked, yet representing one of the richest concentrations of animal biomass anywhere in KZN's coastal environment.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">~6 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Burrow Depth</span>
+                            <span class="stat-value">up to 30 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Density</span>
+                            <span class="stat-value">up to 300/m²</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Estuaries</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Feeding</span>
+                            <span class="stat-value">Filter feeder</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~2–3 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Mud prawns are small, elongated crustaceans that superficially resemble true prawns or shrimps, but belong to the thalassinidean group of burrowing crustaceans — more closely related to hermit crabs and lobsters than to the penaeid prawns they resemble. The body is soft and pale — cream, white, or very pale grey — with limited calcification of the exoskeleton compared to most crustaceans. This relative softness is an adaptation to life in burrows: a rigid, heavily armoured body would be a hindrance in the confined tunnels of a mudflat burrow system.</p>
+                    <p>The carapace covers the front half of the body and bears a small rostrum — a forward-projecting spike — between the eyes. The abdomen is long, segmented, and flexible, terminating in a tail fan similar to that of a shrimp, which the animal uses for rapid backward escape movements if extracted from its burrow. The first pair of walking legs bears unequal chelae — small claws used for burrowing, feeding, and burrow maintenance — while subsequent pairs are slender and adapted for gripping burrow walls. The second pair of thoracic appendages bears large, feathery pleopods used to create the water currents that circulate through the burrow for feeding and respiration.</p>
+                    <p>Sexual dimorphism is relatively subtle — females tend to be slightly larger than males and can be identified during the breeding season by the egg masses carried on their pleopods. The eyes are small and reduced, consistent with life in a dark burrow environment where visual acuity is of limited value. The antennae and antennules are the primary sensory organs, detecting chemical cues in the water circulated through the burrow — essential for monitoring water quality, detecting food particles, and sensing the approach of potential predators.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Mud prawns are among the most sedentary of all crustaceans — genuinely homebodies that invest their entire adult lives in the maintenance and defence of a single burrow system. The burrow is excavated shortly after the juvenile settles from the plankton, and the animal may occupy and continuously extend the same tunnel network for its entire lifespan of 2 to 3 years. Burrows are U-shaped or Y-shaped, with two or more entrances at the surface and a deeper horizontal gallery connecting them. The depth of the burrow — typically 20 to 30 centimetres — keeps the inhabitant below the reach of most surface predators and ensures access to moist, oxygenated sediment at all tidal states.</p>
+                    <p>Within the burrow, mud prawns spend the majority of their time performing the rhythmic pleopod-beating movements that draw water in through one entrance, past the animal's feeding appendages, and out through the other entrance. This water-pumping behaviour serves double duty — collecting suspended food particles from the incoming water current, and oxygenating the burrow atmosphere to support the prawn's gill respiration. A single mud prawn can pump several litres of water through its burrow per hour, and across an entire mudflat population, the collective filtration capacity of millions of individual animals represents an enormous water purification service for the estuary.</p>
+                    <p>Mud prawns show limited social behaviour but will aggressively defend their burrow entrances against neighbouring prawns that attempt to colonise adjacent tunnels or excavate too close. When extracted from burrows by bait collectors, they attempt to immediately re-burrow — driving their body headfirst into any available soft substrate with powerful movements of the claws and walking legs. Their vulnerability outside the burrow is extreme: soft-bodied and slow-moving on the surface, they are rapidly consumed by any predator that encounters them.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Mud prawns are suspension feeders — they do not actively hunt or graze, but instead rely entirely on collecting food particles suspended in the water they draw through their burrows. The primary food source is the organic particulate matter — detritus, bacteria, microalgae, and fine suspended sediment particles coated with organic films — that is abundant in the turbid, nutrient-rich water of KZN's estuaries. Particles are collected by the specialised mouthparts and feeding appendages as water passes through, and the collected material is passed to the mouth for ingestion.</p>
+                    <p>The efficiency of this feeding strategy is closely linked to the concentration of suspended organic matter in the overlying water, which fluctuates with tidal state, river flow, and seasonal productivity cycles. During periods of high productivity — when phytoplankton blooms or terrestrial organic matter inputs are elevated following rainfall — mud prawns can feed very efficiently. During low-flow dry season conditions, food availability may be reduced and feeding rates slow accordingly. This tight coupling between feeding rates and estuarine productivity means that mud prawn populations serve as sensitive indicators of overall estuarine ecological condition.</p>
+                    <ul>
+                        <li>Suspended organic detritus and particulate matter</li>
+                        <li>Bacteria and microbial biofilms</li>
+                        <li>Microalgae including benthic diatoms</li>
+                        <li>Fine sediment particles with organic coatings</li>
+                        <li>Phytoplankton during blooms</li>
+                        <li>Dissolved organic compounds absorbed through body surface</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Mud prawns reproduce throughout the year in KZN's warm estuaries, though breeding activity peaks during spring and summer when water temperatures are highest. Mating requires the male to enter the female's burrow — a brief and dangerous excursion outside the protection of his own tunnel. After mating, females brood their egg masses on the pleopods beneath the abdomen for several weeks, carefully aerating and cleaning the developing eggs. Clutch sizes vary with female body size but typically range from several hundred to a few thousand eggs per female.</p>
+                    <p>The eggs hatch into free-swimming zoea larvae that exit the burrow and enter the water column, where they join the estuary's planktonic community. Larval development passes through several zoea stages over 3 to 5 weeks before metamorphosing into juvenile prawns that settle into the sediment and immediately begin excavating their first burrows. Settlement is highly selective — juveniles preferentially settle in areas with fine, cohesive sediment of the correct grain size and organic content, and in proximity to established adult populations whose burrow networks indicate suitable habitat.</p>
+                    <p>Growth from settlement to adult size takes approximately 6 months, and sexual maturity is typically reached within the first year of life. The relatively short lifespan of 2 to 3 years means that mud prawn populations turn over rapidly, and the maintenance of high population densities requires successful recruitment every breeding season. Populations are highly vulnerable to any disturbance that disrupts recruitment — including changes in estuarine hydrology, sediment dynamics, or water quality that affect larval survival and settlement success.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Mud Prawns in KZN: Estuarine Engineers & Bait Species</h3>
+                <p>Mud prawns are the hidden architects of KwaZulu-Natal's estuaries — animals whose ecological importance vastly exceeds what their inconspicuous appearance would suggest. The burrow networks that dense mud prawn populations create in estuarine mudflats fundamentally alter the physical and chemical structure of the sediment they inhabit. By pumping oxygenated water deep into otherwise anoxic sediments, mud prawns create aerobic microhabitats that support diverse communities of bacteria, meiofauna, and infaunal invertebrates that could not exist in undisturbed, oxygen-depleted mud. This "bioirrigation" effect extends metres beyond the immediate burrow in high-density populations, transforming the entire character of the mudflat from an inhospitable, sulphide-rich sediment into a diverse, productive habitat.</p>
+                <p>As prey, mud prawns occupy a critical position in KZN's estuarine food webs. Their enormous abundance makes them a primary food source for a wide range of estuarine predators: wading birds including herons, egrets, and ibises probe the mudflats for prawns at low tide; juvenile and adult fish including spotted grunter, dusky kob, and mullet root through the sediment for them; and larger crabs including the blue swimming crab actively excavate mud prawn burrows. Dolphins that enter KZN's larger estuaries also forage on mud prawn-rich mudflats. This central role as prey for so many ecologically and commercially important species means that healthy mud prawn populations underpin the productivity of the entire estuarine food web.</p>
+                <p>Among KZN's recreational and subsistence anglers, the mud prawn is one of the most prized and effective estuarine baits available. Anglers targeting spotted grunter, dusky kob, and other estuarine species prize freshly collected mud prawns above almost all other natural baits, and the collection of mud prawns from estuarine mudflats — using specially designed suction pumps or by hand-digging at low tide — has become an important part of estuarine fishing culture throughout KZN. The bait-pump industry centred on major KZN estuaries like the St Lucia system, Durban Bay, and the Mtamvuna estuary supports a significant number of informal bait sellers, and the demand for fresh mud prawns drives regular harvesting pressure on populations throughout the coast.</p>
+                <p>Despite their ecological importance, mud prawn populations in several KZN estuaries are under significant pressure from intensive bait collection, estuarine degradation, and freshwater flow reduction caused by upstream water abstractions. Studies on major KZN estuaries have documented local depletion of mud prawn populations on heavily harvested mudflats, with cascading effects on the wading bird and fish communities that depend on them. The ecological functioning of estuaries — their ability to purify water, support fish nurseries, and maintain biodiversity — is inextricably linked to the health of their mud prawn populations, making the conservation of these unremarkable-looking animals a genuine priority for estuarine management in KZN.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Living Water Filters</h4>
+                    <p>A single adult mud prawn can pump up to 3–4 litres of water through its burrow every hour, filtering out suspended organic particles as the current passes its feeding appendages. Across a healthy KZN mudflat supporting 200 prawns per square metre, the combined filtration capacity of the population can process the entire overlying water column multiple times per tidal cycle — making mud prawn populations one of the most effective natural water purification systems in coastal ecosystems.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Premier Estuary Bait</h4>
+                    <p>Among KZN anglers who target spotted grunter — arguably the most sought-after estuarine sport fish in South Africa — the mud prawn is widely regarded as the ultimate bait. Fresh mud prawns collected on the same tide and presented on a light leader near mussel beds and oyster reefs are the preferred offering of serious grunter anglers throughout the KZN coast, and the scarcity of fresh bait on popular estuaries regularly limits fishing success more than any other factor.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Burrow Communities</h4>
+                    <p>Mud prawn burrows are not occupied solely by their excavators — they serve as shelter and habitat for a rich community of commensal organisms. Small polychaete worms, pea crabs, copepods, and tiny bivalves routinely inhabit the tunnels alongside the resident prawn, taking advantage of the oxygen-rich, food-particle-laden water current the prawn maintains. A single burrow system can support dozens of commensal individuals — making each mud prawn effectively a one-animal ecosystem service provider.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sediment Oxygenators</h4>
+                    <p>Estuarine sediments just a few centimetres below the surface are typically completely devoid of oxygen — a harsh, sulphide-rich environment inhospitable to most animals. Mud prawn burrowing and bioirrigation activity transforms this picture entirely, creating pockets of oxygenated sediment extending 30 centimetres or more below the surface. Remove the mud prawns, and within weeks the sediment reverts to anoxic conditions, the associated infaunal community collapses, and the mudflat's ecological function deteriorates dramatically.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Grunter Indicators</h4>
+                    <p>Experienced KZN estuary anglers know that finding productive mud prawn habitat is the key to finding grunter. At low tide, the pockmarked surface of a healthy mud prawn flat — dozens of small paired burrow openings per square metre — is a reliable indicator that grunter will be rooting through the shallows as the tide floods back. The fish follow the rising water onto the flat, systematically working the bottom to extract mud prawns from burrows that become accessible as depth increases.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Freshwater Sensitive</h4>
+                    <p>Mud prawns are highly sensitive to changes in estuarine salinity, and population crashes following extreme floods — which flush estuaries with fresh water — have been documented in KZN. The construction of dams and water abstractions on rivers feeding KZN's estuaries has reduced freshwater inflows, paradoxically increasing average salinity levels and favouring mud prawns in some systems while reducing the flushing and productivity that their larvae depend on in others — a complex management challenge with no simple solution.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

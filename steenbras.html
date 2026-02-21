@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Steenbras – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Red Steenbras</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="red-steenbras.png" alt="Red Steenbras"><p class="image-caption">Petrus rupestris — Red Steenbras, KZN</p></div>
+<div class="species-intro">
+<h2>Red Steenbras</h2>
+<span class="scientific-name">Petrus rupestris</span>
+<span class="sassi-badge">✗ SASSI Red | Critically Endangered</span>
+<p>The red steenbras is one of South Africa's most magnificent and tragically depleted reef fish — a species that once patrolled rocky reefs in large schools but has been driven to the brink of extinction by decades of overfishing. These massive, slow-growing sparids can live for over 50 years and reach weights exceeding 40 kilograms, spending their lives in deep reef habitats where they feed on crustaceans and molluscs crushed by powerful pharyngeal teeth. Their imposing size, fighting ability, and excellent table quality made them highly sought-after by anglers and commercial fishers alike — popularity that proved catastrophic for a species ill-equipped to withstand intensive exploitation.</p>
+<p>Red steenbras are now classified as Critically Endangered and fully protected throughout South African waters, yet populations show little sign of recovery despite decades of legal protection. The combination of late sexual maturity, slow growth, exceptional longevity, and site fidelity to deep reef habitats means recovery will require generations even under perfect conditions of zero fishing mortality. Every red steenbras encountered in KZN waters represents a conservation miracle — a survivor from a species pushed to functional extinction across most of its historical range.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">1.5 m</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">50+ kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">50+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">8–10 years</span></div>
+<div class="stat-box"><span class="stat-label">Depth Range</span><span class="stat-value">10–200 m</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Critically Endangered</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Red steenbras are large, deep-bodied sparids with a distinctive profile characterized by a steep, rounded head and powerful build. The body is laterally compressed with a high dorsal profile that gives the fish an imposing appearance befitting its status as one of the largest sparid species in South African waters. Colouration is variable with depth and age — juveniles and shallow-water adults display pink to copper-red hues on the back and flanks, fading to silver-pink on the belly. Deep-water adults often exhibit darker bronze to brownish-red colouration with a silvery sheen.</p>
+<p>The head is large and rounded with a steep forehead and small, high-set eyes. The mouth is relatively small with thick lips and powerful jaws equipped with molar-like teeth in the throat (pharyngeal teeth) capable of crushing hard-shelled prey including crabs, lobsters, and molluscs. The dorsal fin is continuous with 11 to 12 spines and 10 to 11 soft rays, while the anal fin has 3 spines and 8 rays. The caudal fin is slightly forked in juveniles but becomes truncate in large adults.</p>
+<p>Adults in KZN typically measure 70 cm to 1.2 metres and weigh 15 to 30 kg, though historical records document fish exceeding 40 kg. Maximum confirmed size is approximately 1.5 metres and 50 kg. The South African angling record stands at 42 kg from 1952 — a fish of a size that is almost inconceivable in modern waters. Sexual maturity is reached at 8 to 10 years of age and 60 to 80 cm length — late maturity typical of long-lived, slow-growing species.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Red steenbras are sedentary reef fish that establish home ranges on rocky reefs, deep ledges, and submarine pinnacles where they remain for extended periods. Adults typically inhabit depths between 30 and 150 metres, though juveniles may be found in shallower waters around 10 to 30 metres. They exhibit strong site fidelity, returning to the same home ranges and sheltering in the same caves and overhangs over many years — behaviour that made them vulnerable to targeted fishing pressure at known aggregation sites.</p>
+<p>These fish are primarily diurnal feeders, most active during daylight hours when they forage across reef substrates for crustaceans and molluscs. Their feeding strategy involves methodical searching of rocky crevices and reef interstices, using chemosensory detection to locate prey hidden in the reef structure. Once prey is located, red steenbras use their powerful jaws to dislodge it from the substrate, then crush it with pharyngeal teeth before swallowing.</p>
+<p>Red steenbras were historically observed in small schools or aggregations, particularly during spawning season when multiple individuals gathered at specific reef sites. These spawning aggregations were highly vulnerable to fishing pressure because they concentrated large, reproductively active fish in predictable locations at predictable times. Intensive exploitation of spawning aggregations contributed significantly to population collapse, and few such aggregations are documented in contemporary observations — suggesting that populations may now be too depleted to form functional spawning groups.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Red steenbras are specialist predators of hard-shelled invertebrates, feeding primarily on crustaceans and molluscs that they crush using powerful pharyngeal teeth. This specialized feeding strategy reflects their deep-bodied morphology and strong jaw musculature — adaptations that allow them to exploit prey resources unavailable to most other reef fish. Crustaceans including rock lobsters, crabs, and mantis shrimp comprise the majority of their diet, with molluscs including mussels, chitons, and gastropods also consumed opportunistically.</p>
+<p>Their feeding behaviour involves methodical searching of reef substrates, using chemosensory detection to locate prey hidden in crevices and under rocks. Red steenbras are capable of dislodging prey firmly attached to rocky substrates, and their pharyngeal teeth can crush shells that would defeat the jaws of most predatory fish. This ability to exploit hard-shelled prey allowed red steenbras to occupy a unique ecological niche on South African reefs — a role now largely vacant following population collapse.</p>
+<ul>
+<li>Rock lobsters (spiny lobsters)</li>
+<li>Large crabs — swimming crabs, rock crabs</li>
+<li>Mantis shrimp (stomatopods)</li>
+<li>Mussels and other bivalves</li>
+<li>Chitons and gastropods (limpets, periwinkles)</li>
+<li>Occasionally sea urchins and brittle stars</li>
+</ul>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Red steenbras are protogynous hermaphrodites — all individuals begin life as females and transition to males later in life based on size and social hierarchy. This sex-change strategy is common among large sparid species and ensures optimal sex ratios within populations. Females reach sexual maturity at 8 to 10 years of age and 60 to 70 cm length, then transition to males when they reach larger sizes, typically around 80 to 90 cm and 10 to 15 years of age.</p>
+<p>Spawning occurs during spring and summer months in aggregations at specific reef sites where multiple individuals gather to release eggs and sperm into the water column. These spawning aggregations were once regular features of certain reefs in KZN and the Eastern Cape, but historical overfishing targeted these aggregations intensively, removing large breeding-size fish year after year until populations collapsed. Contemporary observations rarely document spawning aggregations, suggesting populations may now be too depleted to form functional breeding groups.</p>
+<p>Maximum lifespan exceeds 50 years based on otolith analysis — exceptional longevity that places red steenbras among the longest-lived reef fish in South African waters. Growth is relatively rapid during the first 8 to 10 years until sexual maturity, then slows dramatically as fish transition from female to male. The combination of late maturity, slow post-maturity growth, exceptional longevity, and protogynous hermaphroditism means red steenbras populations are extraordinarily slow to recover from depletion. Even under perfect conditions of zero fishing mortality, recovery to sustainable population levels will require multiple decades.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Conservation Catastrophe — From Abundance to Extinction</h3>
+<p>The red steenbras represents one of the most catastrophic fisheries collapses in South African history — a species that was once common and widely distributed but is now functionally extinct across most of its historical range. Historical accounts from the early to mid-20th century describe reefs where red steenbras could be caught regularly in good numbers, with multiple fish over 20 kg landed on single fishing trips. Today, encounters with red steenbras of any size are extraordinarily rare, and fish exceeding 10 kg are virtually absent from South African waters. This collapse reflects decades of unsustainable fishing pressure on a species whose life history made it exceptionally vulnerable to overfishing.</p>
+<p>Multiple factors contributed to red steenbras vulnerability. Late sexual maturity at 8 to 10 years meant fish required nearly a decade to contribute to reproduction — a life history trait that made populations extremely slow to recover from depletion. Exceptional longevity and slow growth after maturity meant older, larger fish represented decades of accumulated reproductive potential, yet these were precisely the fish most targeted by fishers. Protogynous hermaphroditism made populations especially vulnerable because removal of large males disrupted sex ratios and spawning success. Site fidelity and predictable spawning aggregations allowed intensive, targeted exploitation of breeding populations. Finally, the species' excellent table quality and fighting ability made it highly sought-after by both recreational and commercial fishers.</p>
+<p>Red steenbras have been fully protected in South African waters since 2000, with zero bag limits and severe penalties for illegal fishing. Yet despite over two decades of legal protection, populations show little sign of recovery. Occasional juvenile fish are encountered in shallow waters, suggesting some limited recruitment is still occurring, but large breeding-size adults remain extraordinarily rare. The species' extreme life history characteristics — late maturity, slow growth, exceptional longevity — mean that even if all fishing mortality ceased entirely today, recovery to sustainable population levels would require 50 or more years. Red steenbras serve as a sobering reminder of how quickly long-lived, late-maturing species can be driven to functional extinction, and how challenging recovery becomes once populations fall below critical thresholds.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>50-Year Lifespan</h4><p>Red steenbras can live for over 50 years — exceptional longevity confirmed through otolith analysis that places them among the longest-lived reef fish in South African waters. Combined with late sexual maturity at 8 to 10 years and slow growth after maturity, this longevity means recovery from population collapse will require multiple human generations even under perfect conditions of zero fishing mortality.</p></div>
+<div class="fact-card"><h4>The 42 kg Record</h4><p>The South African angling record for red steenbras stands at 42 kg, caught in 1952 — a fish of a size that is almost inconceivable in modern waters where red steenbras over 10 kg are virtually extinct. Historical photographs show multiple fish over 30 kg landed in single trips during the mid-20th century, a stark indicator of how severely populations have been depleted.</p></div>
+<div class="fact-card"><h4>Pharyngeal Crushers</h4><p>Red steenbras possess powerful pharyngeal teeth — molar-like grinding teeth located in the throat capable of crushing hard-shelled prey including rock lobsters, crabs, and molluscs. This specialized feeding apparatus allows them to exploit prey unavailable to most reef predators, occupying a unique ecological niche that is now largely vacant following population collapse.</p></div>
+<div class="fact-card"><h4>Protogynous Hermaphrodites</h4><p>All red steenbras begin life as females and transition to males later in life based on size and social hierarchy. Removal of large males by fishing disrupts sex ratios and spawning success, making populations especially vulnerable to overfishing. This reproductive strategy — common among long-lived sparids — proved catastrophic when combined with intensive exploitation of spawning aggregations.</p></div>
+<div class="fact-card"><h4>Spawning Aggregation Collapse</h4><p>Historical accounts describe spawning aggregations where multiple large red steenbras gathered at specific reef sites during summer months — events that drew anglers from across the region. Intensive targeting of these aggregations removed breeding fish year after year until populations collapsed. Contemporary observations rarely document spawning aggregations, suggesting populations may now be too depleted to form functional breeding groups.</p></div>
+<div class="fact-card"><h4>SASSI Red & Critically Endangered</h4><p>Red steenbras are rated Red by SASSI and classified as Critically Endangered — reflecting catastrophic population collapse and urgent conservation priority. They have been fully protected in South African waters since 2000 with zero bag limits. Despite over two decades of protection, populations show minimal recovery, highlighting the severe challenges of restoring long-lived, late-maturing species once driven to functional extinction.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

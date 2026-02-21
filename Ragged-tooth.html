@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragged-tooth Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        /* Hero */
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block {
+            position: relative;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        /* Info Sections */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        /* Full-width section */
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        /* Facts grid */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+        }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Conservation status badge */
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            color: #ffc107;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+
+            .species-intro h2 { font-size: 1.8rem; }
+
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+
+            .container { padding: 0 20px; }
+
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+
+            nav ul { flex-direction: column; }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a { border-bottom: none; }
+
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Ragged-tooth Shark
+            </div>
+
+            <!-- Hero Section -->
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Raggie.png" alt="Ragged-tooth Shark">
+                    <p class="image-caption">Carcharias taurus — Ragged-tooth Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Ragged-tooth Shark</h2>
+                    <span class="scientific-name">Carcharias taurus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>Known affectionately as the "Raggie" by South African divers, the ragged-tooth shark is one of the most iconic and recognisable shark species in KwaZulu-Natal's waters. Despite their menacing appearance — rows of long, jagged teeth visible even when the mouth is closed — raggies are remarkably docile and pose very little threat to humans.</p>
+                    <p>These sharks are a favourite among divers at world-renowned dive sites such as Aliwal Shoal and Protea Banks, where they congregate in large numbers during the winter months, creating one of the most spectacular shark diving experiences in the world.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">3.2 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">159 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~35 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">1 – 191 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">5 – 7 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation</span>
+                            <span class="stat-value">9 – 12 months</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Physical Description & Behaviour -->
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The ragged-tooth shark has a stout, powerful body with a flattened, conical snout. Its most distinctive feature is its teeth — long, narrow, and smooth-edged, protruding visibly from the jaws even when the mouth is closed, giving the shark its fierce and iconic appearance.</p>
+                    <p>Their colouring is typically grey-brown on the upper body with pale undersides. Juveniles and some adults display scattered dark reddish-brown spots along the flanks and tail, which tend to fade with age.</p>
+                    <p>They have two large, roughly equal-sized dorsal fins set far back on the body, and a large asymmetrical tail fin with a long upper lobe.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Raggies are slow, deliberate swimmers that prefer to hover almost motionless near the seafloor or in underwater caves and overhangs. They are the only shark species known to gulp air at the surface and store it in their stomachs to achieve neutral buoyancy — an extraordinary adaptation.</p>
+                    <p>They are largely nocturnal hunters, becoming most active at night. During the day they are sluggish and rest near rocky reef structures. Despite their fearsome appearance, they are generally non-aggressive toward divers unless provoked or cornered.</p>
+                    <p>Raggies are social sharks, often found in aggregations of dozens or even hundreds of individuals at key sites along the KZN coastline during winter.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Ragged-tooth sharks are opportunistic predators that feed primarily on bony fish, including mullet, bluefish, and sea bass. They also consume rays, squid, crabs, and occasionally smaller sharks.</p>
+                    <p>Their feeding strategy involves slowly stalking prey before launching a rapid strike. Their needle-like teeth are perfectly adapted for gripping slippery fish rather than cutting — prey is swallowed whole rather than bitten into pieces.</p>
+                    <ul>
+                        <li>Bony fish (mullet, bluefish, sea bass)</li>
+                        <li>Rays and skates</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Crabs and lobsters</li>
+                        <li>Smaller sharks</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Raggies have one of the most unusual reproductive strategies in the animal kingdom. They are ovoviviparous, meaning pups develop inside eggs retained within the mother's uterus. However, the developing embryos practice intrauterine cannibalism — the largest embryo in each uterus will consume its siblings, ensuring only the strongest survive.</p>
+                    <p>As a result, females give birth to just two pups per litter — one from each uterus — despite producing many eggs. Pups are born fully formed at approximately 95–105 cm in length.</p>
+                    <p>This extremely low reproductive rate makes the species particularly vulnerable to population decline and slow to recover from overfishing.</p>
+                </div>
+            </div>
+
+            <!-- Habitat -->
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>In KwaZulu-Natal, ragged-tooth sharks are most commonly encountered at two world-famous dive sites: Aliwal Shoal (near Umkomaas) and Protea Banks (near Shelly Beach). During the winter months (June to November), large aggregations gather at these sites, believed to be related to mating and pupping behaviour.</p>
+                <p>They inhabit a wide range of environments including sandy beaches, rocky reefs, shallow bays, and the open ocean. They are typically found at depths between 1 and 30 metres in coastal waters, though they are capable of diving to depths of nearly 200 metres.</p>
+                <p>Beyond KZN, ragged-tooth sharks are distributed throughout the world's temperate and tropical coastal waters, including the Eastern Atlantic, the Mediterranean Sea, the Indian Ocean, and the Western Pacific. In South Africa they are protected under the Sea Fishery Act.</p>
+            </div>
+
+            <!-- Fascinating Facts -->
+            <h3 style="color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Air Gulping</h4>
+                    <p>Raggies are the only known shark to gulp air at the surface and store it in the stomach to control buoyancy — essentially using their gut as a swim bladder.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Intrauterine Cannibalism</h4>
+                    <p>The first embryo to develop in each uterus will consume all other embryos, resulting in only two pups born per litter. This is known as "embryonic oophagy."</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Diver Friendly</h4>
+                    <p>Raggies are considered one of the safest large sharks to dive with. KZN's Aliwal Shoal is regarded as one of the top five shark diving destinations in the world largely due to raggies.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Teeth Always Visible</h4>
+                    <p>Unlike most sharks whose teeth are only visible when the mouth opens, ragged-tooth sharks have teeth so large they protrude permanently outside the closed mouth.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Protected in SA</h4>
+                    <p>The ragged-tooth shark is a fully protected species in South African waters. It is illegal to catch, harm, or disturb them, and they are listed as Vulnerable on the IUCN Red List.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Slow to Reproduce</h4>
+                    <p>Females only reproduce every two to three years, and produce just two pups per litter. This makes population recovery extremely slow after any decline.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

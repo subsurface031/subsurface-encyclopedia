@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nile Crocodile – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #81c784;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crocs.html">Crocodiles</a>
+                <span>›</span>
+                Nile Crocodile
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="croc.png" alt="Nile Crocodile">
+                    <p class="image-caption">Crocodylus niloticus — Nile Crocodile, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Nile Crocodile</h2>
+                    <span class="scientific-name">Crocodylus niloticus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The Nile crocodile is Africa's largest and most formidable reptilian predator—a living relic of the age of dinosaurs that has survived virtually unchanged for millions of years. In KwaZulu-Natal, these magnificent apex predators inhabit rivers, estuaries, lakes, and wetlands from the iSimangaliso Wetland Park to Ndumo Game Reserve, where they maintain essential ecological balance as top predators in freshwater and brackish ecosystems.</p>
+                    <p>Adults typically reach between 4 and 5 meters in length, though exceptional individuals can exceed 6 meters and weigh over 1,000 kilograms. Despite their fearsome reputation, Nile crocodiles are essential ecosystem engineers—regulating fish populations, removing diseased animals, and indicating the health of the wetland systems they inhabit. Their presence in KZN's waterways represents one of South Africa's greatest conservation success stories.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">6+ m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">1,000 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">70 – 100 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">10 – 19 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Clutch Size</span>
+                            <span class="stat-value">25 – 80 eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Incubation</span>
+                            <span class="stat-value">~90 days</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The Nile crocodile possesses a heavily armored, muscular body covered in thick, scaly skin reinforced with bony plates called osteoderms along the back and tail. Their coloration ranges from dark olive-brown to grey-green dorsally, with a pale yellow or cream underside. Juveniles display darker crossbands on the body and tail that fade with maturity.</p>
+                    <p>The head is broad and powerful with a long snout, housing 64 to 68 sharp, conical teeth that are continually replaced throughout their lifetime—up to 45 times. Their eyes, positioned on top of the skull, allow them to remain almost entirely submerged while observing their surroundings. A transparent third eyelid protects the eye underwater while maintaining vision.</p>
+                    <p>Adult males are significantly larger than females, with males averaging 4 to 5 meters and females 2.2 to 3.8 meters. Exceptional males can exceed 6 meters and 1,000 kg. Their immensely powerful tail—accounting for nearly half their total length—propels them through water at speeds up to 35 km/h in short bursts.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Nile crocodiles are ectothermic reptiles that rely on external temperature regulation. They spend much of the day basking on sandbanks and riverbanks, absorbing solar heat to raise their core body temperature to approximately 38°C. By opening their mouths while basking—a behavior called gaping—they can regulate temperature through evaporative cooling from the mouth and throat.</p>
+                    <p>They are primarily nocturnal hunters, becoming most active from late afternoon through the first hours after dark when they use stored solar energy to hunt, socialize, and digest food. As ambush predators, Nile crocodiles exhibit remarkable patience—floating motionless with only eyes, ears, and nostrils above the surface, sometimes waiting hours or even days for prey to approach within striking distance.</p>
+                    <p>Despite their solitary hunting nature, Nile crocodiles display complex social behaviors. During breeding season, males become highly territorial and engage in vocal displays including deep bellows, hisses, and low-frequency grunts. Dominance hierarchies form at communal basking sites and feeding areas, with larger individuals asserting priority through body language and vocalizations.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>The Nile crocodile is an opportunistic apex predator with a diet that changes dramatically with age and size. Hatchlings and juveniles feed primarily on insects, crustaceans, amphibians, and small fish. As they grow, their diet expands to include larger fish—particularly barbel catfish—which constitute up to 70% of an adult's diet in many populations.</p>
+                    <p>Large adults are capable of taking substantial terrestrial prey including zebras, wildebeest, warthogs, impala, and even occasionally young elephants or lions. They employ a characteristic ambush technique—exploding from the water to seize animals drinking at the water's edge, then dragging them underwater to drown. Large prey is dismembered through a violent spinning motion called the death roll.</p>
+                    <ul>
+                        <li>Fish (especially barbel catfish)</li>
+                        <li>Terrestrial mammals (zebra, antelope, buffalo)</li>
+                        <li>Birds (waterfowl, wading birds)</li>
+                        <li>Other reptiles (including other crocodiles)</li>
+                        <li>Carrion (when fresh prey unavailable)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Nile crocodiles reach sexual maturity slowly—females typically at 10 to 12 years when they reach 2.2 to 3 meters in length, and males at 12 to 19 years when they exceed 3.3 meters. Breeding season varies regionally but in KwaZulu-Natal typically occurs during the dry winter months of August through October, with nesting in November and December.</p>
+                    <p>Females excavate nest holes in sandy riverbanks, dry stream beds, or beaches—digging burrows up to 50 cm deep and several meters from the water's edge but above the high-water mark. A clutch of 25 to 80 eggs is deposited (larger females produce more eggs), then covered with sand or soil. The female guards the nest vigilantly for the entire 90-day incubation period.</p>
+                    <p>Nile crocodiles exhibit temperature-dependent sex determination—nest temperatures between 31.7°C and 34.5°C produce males, while cooler or warmer temperatures produce females. When hatchlings are ready to emerge, they vocalize from within their eggs. The mother responds by excavating the nest and often gently cracking eggs in her mouth to assist emergence. She then carefully transports hatchlings to the water in her mouth, providing protection for several weeks or even months.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The Nile crocodile inhabits virtually all permanent and seasonal freshwater bodies throughout KwaZulu-Natal—from rivers and lakes to estuaries, swamps, and even brackish coastal lagoons. They are found from sea level to elevations exceeding 1,000 meters, though they prefer warm, lowland waters where basking opportunities and prey abundance are greatest.</p>
+                <p>KwaZulu-Natal supports three of South Africa's most significant Nile crocodile populations. The St. Lucia estuarine system within iSimangaliso Wetland Park—a UNESCO World Heritage Site—harbors approximately 1,200 individuals, making it the country's second-largest breeding population. The third-largest population thrives in Ndumo Game Reserve along the Mozambique border, where the Usutu and Pongola river floodplains provide ideal habitat. Smaller but stable populations persist in the Thukela (Tugela) River system and various coastal estuaries along the KZN coast.</p>
+                <p>Historically, Nile crocodiles faced severe population declines throughout their African range due to commercial hunting for skins during the 1940s through 1970s. Following CITES Appendix I listing in 1973 and subsequent conservation efforts, populations have recovered substantially in many protected areas. In South Africa, the species is currently listed as Least Concern, though populations remain vulnerable to habitat destruction, human-wildlife conflict, pollution, and climate change impacts on nesting sites and sex ratios. The successful recovery of KZN's crocodile populations stands as a testament to effective conservation management and protected area establishment.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Africa's Largest Reptile</h4>
+                    <p>The Nile crocodile is the largest reptile in Africa and one of the largest living reptiles on Earth—rivaled only by the saltwater crocodile of Southeast Asia and Australia. Exceptional individuals can exceed 6 meters in length and weigh over 1,000 kilograms, making them among the most formidable predators on the continent.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient Lineage</h4>
+                    <p>Crocodilians have existed for over 200 million years, surviving the extinction event that killed the dinosaurs. The Nile crocodile's body plan has remained virtually unchanged for millions of years—a testament to its evolutionary perfection as an ambush predator in aquatic environments.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Incredible Bite Force</h4>
+                    <p>Nile crocodiles possess one of the strongest bite forces ever measured in any living animal—estimated at 5,000 pounds per square inch (psi). This crushing power allows them to kill large prey and consume bones, hooves, and horns. Paradoxically, the muscles that open their jaws are extremely weak—a human can hold a crocodile's mouth shut with bare hands.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Remarkable Parental Care</h4>
+                    <p>Unlike most reptiles, Nile crocodiles exhibit extensive parental care. Females guard their nests for three months, assist hatchlings in emerging from eggs by gently cracking shells in their mouths, carry hatchlings to water, and protect them for weeks or months after hatching. Both parents may participate in protecting the young—rare behavior among reptiles.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Temperature Determines Sex</h4>
+                    <p>The sex of Nile crocodile hatchlings is determined not by genetics but by nest temperature during incubation. Temperatures between 31.7°C and 34.5°C produce males, while cooler or warmer temperatures produce females. This makes crocodile populations particularly vulnerable to climate change, which could skew sex ratios and threaten long-term population viability.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Conservation Success Story</h4>
+                    <p>The recovery of Nile crocodile populations in KwaZulu-Natal represents one of South Africa's most successful conservation achievements. Once hunted nearly to extinction for their skins, populations in protected areas like iSimangaliso and Ndumo have rebounded dramatically since the 1970s. The St. Lucia system alone now supports approximately 1,200 individuals—demonstrating the effectiveness of protected area management and international trade restrictions.</p>
+                </div>
+            </div>
+
+            <a href="crocs.html" class="back-link">← Back to Crocodiles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

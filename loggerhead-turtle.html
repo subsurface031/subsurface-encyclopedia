@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loggerhead Turtle – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem; color: #e3f2fd; font-weight: 400;
+            margin-bottom: 0.3rem; letter-spacing: 3px;
+            text-transform: uppercase; font-family: 'Courier New', monospace;
+        }
+
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+
+        nav a {
+            color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem;
+            padding: 1.2rem 2rem; display: block; transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem; font-family: 'Courier New', monospace;
+            font-size: 0.85rem; color: #78909c; letter-spacing: 1px;
+        }
+
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+
+        .image-caption {
+            font-size: 0.8rem; color: #78909c; font-style: italic;
+            margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem; color: #e3f2fd; font-weight: 400;
+            letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem;
+        }
+
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge {
+            display: inline-block; padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5); color: #ffa726;
+            font-family: 'Courier New', monospace; font-size: 0.85rem;
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+
+        .info-section h3 {
+            color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px;
+            font-family: 'Courier New', monospace; text-transform: uppercase;
+            margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul { list-style: none; padding: 0; }
+
+        .info-section ul li {
+            color: #b0bec5; font-size: 0.98rem; line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative;
+        }
+
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem; margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px;
+            font-family: 'Courier New', monospace; text-transform: uppercase;
+            margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading {
+            color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem;
+            font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block; padding: 0.7rem 2rem; background: transparent;
+            color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem;
+            letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem;
+        }
+
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5; padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem;
+        }
+
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="turtles.html">Turtles</a>
+                <span>›</span>
+                Loggerhead Turtle
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="loggerhead.png" alt="Loggerhead Turtle">
+                    <p class="image-caption">Caretta caretta — Loggerhead Turtle, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Loggerhead Turtle</h2>
+                    <span class="scientific-name">Caretta caretta</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The loggerhead turtle is KwaZulu-Natal's most iconic nesting sea turtle and a cornerstone of the province's marine conservation legacy. Named for their exceptionally large, powerful heads — housing massive jaw muscles capable of crushing hard-shelled prey — loggerheads have been returning to the beaches of the iSimangaliso Wetland Park for thousands of years, guided by the Earth's magnetic field back to the very beach where they hatched.</p>
+                    <p>KZN's loggerhead nesting beaches between Maphelane and Kosi Bay represent the most southerly loggerhead nesting sites in Africa and among the most significant in the entire Indian Ocean. Ezemvelo KZN Wildlife has monitored and protected these nesting turtles since 1963, making this one of the longest-running sea turtle conservation programmes on the continent.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Shell Length</span>
+                            <span class="stat-value">Up to 1.2 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~200 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">70+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Nesting Season</span>
+                            <span class="stat-value">Oct – Feb</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Eggs per Nest</span>
+                            <span class="stat-value">~120 eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Incubation</span>
+                            <span class="stat-value">60 – 80 days</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The loggerhead's most distinctive feature is its disproportionately large head — broader and more robust than any other sea turtle species. This powerful head houses the enlarged jaw muscles needed to crush the shells of molluscs, crabs, and other hard-bodied invertebrates that form the bulk of its diet.</p>
+                    <p>The carapace (shell) is reddish-brown to orange-brown on the dorsal surface, with a heart-shaped profile and typically five pairs of costal scutes. The plastron (underside) is creamy yellow. Adult females nesting in KZN average around 90 cm in curved carapace length, though larger individuals exceeding 1.2 m are recorded.</p>
+                    <p>Loggerheads have two pairs of prefrontal scales between the eyes and a relatively small head in juveniles that grows proportionally larger with age. Their flippers are adapted for powerful, efficient swimming across vast ocean distances.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Loggerheads are largely solitary animals that spend the majority of their lives at sea, coming ashore only to nest. Females return to nest on the same beaches where they were born — sometimes after migrations of thousands of kilometres — guided by the Earth's magnetic field in a remarkable feat of biological navigation that science is still working to fully understand.</p>
+                    <p>Nesting females emerge from the sea at night, laboriously hauling themselves up the beach to excavate a nest chamber using their rear flippers. After depositing approximately 120 eggs, they carefully fill and disguise the nest before returning to the ocean. A single female may nest three to five times per season, at intervals of around two weeks, before departing for years before nesting again.</p>
+                    <p>Hatchlings emerge after 60 to 80 days, typically at night, and make their way to the ocean guided by the brightest horizon — a behaviour disrupted by artificial lighting from coastal development, which can disorient hatchlings and lead them away from the sea.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Loggerheads are primarily carnivorous, using their powerful, heavy jaws to crush and consume hard-shelled prey that most other marine animals cannot tackle. This specialised feeding ability gives them access to food resources unavailable to other sea turtle species, reducing competition and allowing them to thrive across a wide range of coastal habitats.</p>
+                    <p>In KZN waters, loggerheads feed on the diverse invertebrate communities associated with coral reefs, rocky reefs, and sandy bottom habitats. Juveniles in their early oceanic phase feed on jellyfish and floating organisms at the surface, while subadults and adults transition to bottom-feeding on benthic invertebrates.</p>
+                    <ul>
+                        <li>Crabs, lobsters and shrimp</li>
+                        <li>Molluscs (clams, mussels, whelks)</li>
+                        <li>Sea urchins and starfish</li>
+                        <li>Jellyfish and salps</li>
+                        <li>Sponges and corals (occasionally)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Nesting & Reproduction</h3>
+                    <p>KZN's loggerhead nesting season runs from October through February, peaking in December and January. Females nest every two to three years on average, producing multiple clutches per season. Each nest contains approximately 100 to 126 eggs, and the incubation period ranges from 60 to 80 days depending on sand temperature.</p>
+                    <p>A critical feature of loggerhead reproduction is temperature-dependent sex determination — the temperature of the sand during incubation determines the sex of the hatchlings. Warmer nests produce more females; cooler nests more males. Climate change-driven increases in beach sand temperature are increasingly skewing sex ratios toward females, threatening long-term population viability.</p>
+                    <p>Ezemvelo KZN Wildlife's turtle monitoring teams patrol nesting beaches nightly throughout the season, tagging females, recording nest locations, and in some areas relocating nests to safe hatcheries to protect them from coastal flooding and predation.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Loggerheads nest along approximately 200 km of KwaZulu-Natal's northern coastline, from Maphelane at the mouth of the uMfolozi River northward to Kosi Bay near the Mozambique border. The core nesting area lies within the iSimangaliso Wetland Park — a UNESCO World Heritage Site — where beach habitat is protected from coastal development and artificial lighting. Sodwana Bay, Cape Vidal, and the wilderness beach areas between them are the most important nesting sites.</p>
+                <p>Outside of the nesting season, KZN's loggerheads disperse widely across the Indian Ocean. Satellite tagging has tracked individuals travelling to feeding grounds as far as the East African coast, the Mozambique Channel, and the waters around Madagascar. Juveniles undertake a trans-oceanic migration into the Atlantic and back before returning to KZN waters as subadults — a journey that may take a decade or more.</p>
+                <p>Threats to loggerheads in KZN include entanglement in fishing nets and longlines, plastic ingestion (mistaking floating plastic bags for jellyfish), beach erosion and flooding of nests due to rising sea levels, artificial lighting that disorients both nesting females and hatchlings, and predation of eggs by monitor lizards, crabs, and other animals. Ezemvelo's long-running monitoring programme has demonstrated population recovery over recent decades, providing one of the conservation success stories of the KZN coast.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Magnetic Navigation</h4>
+                    <p>Loggerheads can detect the Earth's magnetic field and use it as a GPS system to navigate across entire ocean basins. Females imprint on the unique magnetic signature of their birth beach as hatchlings and use this information decades later to return to the exact same beach to nest.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>60 Years of Monitoring</h4>
+                    <p>Ezemvelo KZN Wildlife has monitored loggerhead nesting on the iSimangaliso coast since 1963 — making it one of Africa's oldest continuous wildlife monitoring programmes. Data collected over six decades has transformed our understanding of sea turtle population dynamics and the effectiveness of beach protection measures.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Temperature Sex Determination</h4>
+                    <p>The sex of loggerhead hatchlings is determined not by genetics but by the temperature of the sand in which the eggs incubate. Nests above 29°C produce mainly females; cooler nests produce more males. Warming beaches due to climate change are producing increasingly female-skewed populations.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Lost Years</h4>
+                    <p>After hatching, juvenile loggerheads disappear into the open ocean for years — a period called the "lost years." KZN hatchlings are carried by ocean currents into the Atlantic Ocean, where they drift for up to a decade before returning to African waters as subadults.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Crushing Jaws</h4>
+                    <p>The loggerhead's massive head and jaw muscles generate one of the most powerful bites of any turtle species — capable of crushing the shells of hard clams, conch, and even horseshoe crabs. This gives them access to prey species that are off-limits to most other marine predators.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Most Southerly Nesting in Africa</h4>
+                    <p>KZN's loggerhead nesting beaches are the most southerly on the African continent. The warm Agulhas Current keeps these beaches warm enough for successful incubation — a critical factor that makes the iSimangaliso coastline unique and irreplaceable for the species' survival in southern Africa.</p>
+                </div>
+            </div>
+
+            <a href="turtles.html" class="back-link">← Back to Turtles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tides & Tidal Trapping – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+
+/* ── Tide & weather link buttons ── */
+.tide-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 1.1rem; }
+.tide-link-btn { display: flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.7rem 0.8rem; background: rgba(15, 24, 32, 0.85); color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.32); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.75rem; letter-spacing: 0.8px; text-transform: uppercase; transition: all 0.2s ease; text-align: center; line-height: 1.35; }
+.tide-link-btn:hover { background: rgba(100, 149, 237, 0.12); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+.tide-link-btn .btn-icon { font-size: 0.95rem; flex-shrink: 0; }
+.tide-links-label { font-size: 0.72rem; color: #78909c; font-family: 'Courier New', monospace; letter-spacing: 0.5px; text-align: center; margin-top: 0.55rem; }
+
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffb74d; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(255, 152, 0, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } .tide-links { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<script src="nav.js"></script>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Tides & Tidal Trapping</div>
+<section class="species-hero">
+
+<div class="species-image-block">
+    <img src="tides.png" alt="KZN Tides">
+    <p class="image-caption">Semi-diurnal tidal pattern — KwaZulu-Natal coastline</p>
+
+    <!-- ── Live tide & weather quick links ── -->
+    <div class="tide-links">
+        <a href="https://www.tide-forecast.com/" target="_blank" rel="noopener" class="tide-link-btn">
+            <span class="btn-icon">🌊</span> KZN Tide Times
+        </a>
+        <a href="https://www.windy.com/-Waves-waves?waves,-29.858,31.029,10" target="_blank" rel="noopener" class="tide-link-btn">
+            <span class="btn-icon">🌬️</span> Wind & Swell Map
+        </a>
+        <a href="https://tideschart.com/SouthAfrica/KwaZuluNatal/eThekwiniMetropoleMunicipality/Durban/" target="_blank" rel="noopener" class="tide-link-btn">
+            <span class="btn-icon">📅</span> Tide Calendar
+        </a>
+        <a href="https://www.surf-forecast.com/ target="_blank" rel="noopener" class="tide-link-btn">
+            <span class="btn-icon">🏄</span> surf forcast
+        </a>
+    </div>
+    <p class="tide-links-label">Live data — all links open in new tab</p>
+</div>
+
+<div class="species-intro">
+<h2>Tides & Tidal Trapping</h2>
+<span class="scientific-name">KZN's Semi-Diurnal Tidal Cycle</span>
+<span class="conservation-badge">⚠ MODERATE HAZARD — Situational Risk</span>
+<p>KwaZulu-Natal experiences a semi-diurnal tidal pattern — two high tides and two low tides occurring in approximately every 24-hour period. This rhythmic rise and fall of sea level, driven by the gravitational pull of the moon and sun, creates predictable but powerful water movement that shapes KZN's coastal environment and creates serious hazards for anyone accessing rocky shores, tidal pools, or low-lying beach areas. Rising tides trap rock fishers on ledges cut off from shore, flood tidal pools and reef flats with surprising speed, and inundate low-lying beach sections that were dry and accessible hours earlier. More people drown while rock fishing in KZN than in almost any other beach-related activity, and tidal trapping is a primary contributing factor.</p>
+<p>Understanding the tidal cycle is essential safety knowledge for anyone fishing from rocks, exploring intertidal reefs, accessing remote beach sections by foot, or planning activities around tidal pools. Tidal ranges — the vertical difference between low and high tide — vary throughout the month based on the alignment of the moon, sun, and Earth. Spring tides around new and full moons produce the largest tidal ranges, with high tides reaching further up the shore and low tides exposing more reef than usual. Neap tides around quarter moons produce smaller ranges. The single most important safety precaution for coastal access is checking tide tables before departure and maintaining constant awareness of tide state and direction while on the rocks or shore.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Tidal Pattern</span><span class="stat-value">Semi-diurnal</span></div>
+<div class="stat-box"><span class="stat-label">Tides per Day</span><span class="stat-value">2 high / 2 low</span></div>
+<div class="stat-box"><span class="stat-label">Spring Tide Range</span><span class="stat-value">~1.8 m</span></div>
+<div class="stat-box"><span class="stat-label">Neap Tide Range</span><span class="stat-value">~0.6 m</span></div>
+<div class="stat-box"><span class="stat-label">Primary Risk</span><span class="stat-value">Rock fishing / trapping</span></div>
+<div class="stat-box"><span class="stat-label">Prevention</span><span class="stat-value">Check tide tables</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Causes Tides?</h3>
+<p>Tides are the periodic rise and fall of sea level caused by the gravitational forces exerted by the moon and sun on Earth's oceans. The moon — being much closer to Earth than the sun — exerts the stronger tidal force, creating two tidal bulges on opposite sides of Earth: one on the side facing the moon (where gravitational pull is strongest) and one on the opposite side (where gravitational pull is weakest and centrifugal force dominates). As Earth rotates beneath these tidal bulges, any fixed coastal location experiences two high tides and two low tides approximately every 24 hours and 50 minutes — the period it takes for the moon to return to the same position relative to that location.</p>
+<p>The sun also contributes to tides, though its effect is roughly half that of the moon due to its much greater distance from Earth. When the sun, moon, and Earth align during new and full moons, their gravitational forces combine to produce spring tides — exceptionally high high tides and exceptionally low low tides with the greatest tidal range. When the sun and moon are at right angles during quarter moons, their forces partially cancel each other, producing neap tides with smaller tidal ranges. The term "spring" has nothing to do with the season — spring tides occur twice monthly year-round. Understanding this monthly cycle of spring and neap tides allows coastal users to predict when tidal ranges will be greatest and adjust their activities accordingly.</p>
+</div>
+<div class="info-section"><h3>Rock Fishing Fatalities</h3>
+<p>More people drown while rock fishing along KZN's coastline than in almost any other single beach-related activity. Rock fishing fatalities occur when anglers are swept from ledges by rogue waves, trapped by rising tides on rocks cut off from shore access, or knocked into the water by swells they didn't see coming because they turned their back on the ocean. The combination of slippery algae-covered rocks, powerful wave action, deep water immediately offshore from fishing spots, and the common practice of fishing alone creates lethal conditions that claim lives every year.</p>
+<p>Tidal trapping is a primary contributor to rock fishing fatalities. Anglers access low-lying rock platforms during low tide, focusing intently on fishing and losing track of time and tide state. As the tide rises, water floods channels and gullies that provided access routes, cutting off escape. By the time the angler realizes they're trapped, the water is too deep and turbulent to cross safely. Attempting to swim through surge channels or climb wet rock faces in rising swells frequently results in drowning. The situation is compounded during spring tides when the rate of water level rise is fastest and the extent of tidal flooding greatest. Every rock fisher must check tide tables before departure, fish with a companion, wear a life jacket, and maintain constant awareness of both wave action and tide state.</p>
+<ul>
+<li>Rock fishing is KZN's deadliest beach-related activity</li>
+<li>Tidal trapping cuts off escape routes from low-lying platforms</li>
+<li>Spring tides create fastest water level rise and greatest flooding extent</li>
+<li>Rogue waves sweep anglers from ledges without warning</li>
+<li>Turning your back on the ocean is frequently fatal</li>
+<li>ALWAYS wear a life jacket, fish with a companion, check tide tables</li>
+</ul>
+</div>
+<div class="info-section"><h3>Spring vs Neap Tides</h3>
+<p>Spring tides and neap tides represent the extremes of the monthly tidal cycle, driven by the changing alignment of the sun, moon, and Earth. Spring tides occur during new and full moons when the sun and moon align on the same side of Earth (new moon) or on opposite sides (full moon). In both configurations, their gravitational forces add together, producing the highest high tides and lowest low tides of the month — a condition called maximum tidal range. In KZN, spring tides typically produce tidal ranges around 1.8 metres, meaning the vertical difference between high and low tide can exceed nearly 2 metres at certain locations.</p>
+<p>Neap tides occur during first and quarter moons when the sun and moon are at right angles relative to Earth. In this configuration, their gravitational forces partially cancel each other, producing the smallest tidal ranges of the month. KZN neap tides typically produce ranges around 0.6 metres — less than half the spring tide range. For coastal users, this means high tides during neap periods don't flood as far up the shore, and low tides don't expose as much reef. Rock fishing access is safer during neap tides because rising water floods platforms more slowly and to a lesser extent. Conversely, tidal pool exploration is more productive during spring low tides when maximum reef area is exposed. Understanding where you are in the spring-neap cycle allows you to plan coastal activities with appropriate safety margins.</p>
+<ul>
+<li>Spring tides: new & full moons — greatest tidal range (~1.8 m in KZN)</li>
+<li>Neap tides: quarter moons — smallest tidal range (~0.6 m in KZN)</li>
+<li>Spring tides flood platforms faster and higher — increased trapping risk</li>
+<li>Spring low tides expose maximum reef area for exploration</li>
+<li>Neap tides are safer for rock fishing due to slower, limited flooding</li>
+<li>Check moon phase to understand tidal range expectations</li>
+</ul>
+</div>
+<div class="info-section"><h3>Safe Coastal Access</h3>
+<p>Safe access to rocky shores, tidal pools, and low-lying beach sections requires understanding tidal timing, maintaining constant situational awareness, and planning escape routes before you commit to a location. The first and most critical step is checking tide tables for your intended location before departure. Tide tables — available online, in fishing shops, and via smartphone apps — provide predicted times and heights of high and low tides for specific dates and locations. Identify whether you'll be accessing rocks during a rising or falling tide, and calculate how much time you have before the next high tide will flood your access route.</p>
+<p>When accessing rock platforms or tidal pools, scout your entry and exit routes carefully while the tide is still low. Identify multiple escape routes in case your primary route becomes blocked. Mark the high water line — visible as a band of darker rock, algae, or barnacles — and monitor the water level relative to this line throughout your visit. If you're rock fishing, set a mental alarm for 2 hours before predicted high tide and begin moving to higher ground well before water reaches your access route. Never wait until water is already flooding your exit path before attempting to leave — channels that were ankle-deep 15 minutes earlier can become chest-deep surge zones where escape is impossible. Finally, fishing or exploring alone on remote rock platforms is extraordinarily dangerous. Always have a companion who can call for help if something goes wrong.</p>
+<ul>
+<li>Check tide tables for your location before departure — ALWAYS</li>
+<li>Identify tide direction (rising or falling) and time until next high tide</li>
+<li>Scout multiple escape routes before committing to a rock platform</li>
+<li>Monitor water level constantly relative to high water marks</li>
+<li>Begin moving to safety 2+ hours before predicted high tide</li>
+<li>Never fish or explore alone on remote rocky shores</li>
+<li>If trapped, call emergency services immediately — don't attempt to swim</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>Tidal Trapping Scenarios & Real-World Risks</h3>
+<p>Tidal trapping scenarios unfold in similar patterns across KZN's rocky coastline. An angler or tidal pool explorer accesses a low-lying rock platform, reef flat, or isolated beach section during low tide when access routes are dry and easily passable. They become engrossed in fishing, exploring, or photographing marine life and lose track of time and tide state. Meanwhile, the tide turns and begins rising. Water floods low-lying channels, gullies, and rock pools that provided access routes, gradually cutting off escape. By the time the person realizes they're trapped, the water filling the access route is too deep to wade through safely, and attempting to climb alternate routes up slippery rock faces or through surge zones is life-threatening.</p>
+<p>The speed of tidal rise varies dramatically based on location, tidal range, and local topography. During spring tides on relatively flat reef platforms, water can advance several meters horizontally per hour, flooding large areas with surprising speed. In narrow channels and gullies, rising water creates strong tidal currents that sweep swimmers off their feet. The situation becomes critical when people underestimate how quickly conditions change — a channel that was knee-deep and passable 15 minutes ago becomes chest-deep with surging currents where crossing is impossible. Panic sets in, leading to poor decisions: attempting to swim through surge channels, climbing wet rock faces without proper holds, or waiting too long for rescue while hypothermia sets in from cold water exposure.</p>
+<p>Real-world tidal trapping incidents in KZN demonstrate consistent patterns: victims accessed rocks 2 to 3 hours before high tide — giving them inadequate safety margin. They failed to monitor water levels or recognize warning signs of rising tide. They had no escape plan and didn't scout alternate routes. They were often alone with no one to call for help. By the time they recognized the danger, their access route was flooded and conditions were too dangerous to attempt escape. Emergency services were called only after the situation became critical. The lesson is clear: tidal trapping is entirely preventable with basic planning, constant situational awareness, and conservative safety margins. If you're accessing rocks for the first time or unfamiliar with the local tidal patterns, go with someone experienced who knows the area, or wait for a neap tide cycle when tidal ranges are minimal and flooding is less severe.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Tides & Tidal Safety</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Semi-Diurnal Pattern — 2 High & 2 Low Tides Daily</h4><p>KwaZulu-Natal experiences a semi-diurnal tidal pattern with two high tides and two low tides every ~24 hours and 50 minutes. This means high and low tides occur roughly 50 minutes later each day. If high tide is at 8:00 AM today, it will be around 8:50 AM tomorrow. This advancing pattern must be accounted for when planning multi-day coastal activities. Tide tables provide precise predicted times for specific locations.</p></div>
+<div class="fact-card"><h4>Spring Tides Occur at New & Full Moons</h4><p>Spring tides — producing the greatest tidal ranges — occur twice monthly during new and full moons when the sun and moon align and their gravitational forces combine. These are NOT seasonal and have nothing to do with the spring season. Spring tides in KZN produce tidal ranges around 1.8 metres, flooding rock platforms extensively and creating maximum tidal trapping risk. Check moon phase before accessing rocky shores.</p></div>
+<div class="fact-card"><h4>Rock Fishing is KZN's Deadliest Beach Activity</h4><p>More people drown while rock fishing along KZN's coastline than in almost any other beach-related activity. Tidal trapping, rogue waves, slippery rocks, fishing alone, and not wearing life jackets combine to create lethal conditions. ALWAYS wear a life jacket, fish with a companion, check tide tables, never turn your back on the ocean, and monitor tide state constantly throughout your session.</p></div>
+<div class="fact-card"><h4>Water Floods Access Routes Surprisingly Fast</h4><p>During spring tides on flat reef platforms, rising water can advance several meters horizontally per hour. Channels that were ankle-deep and passable 15 minutes ago become chest-deep surge zones where crossing is impossible. This rapid flooding catches people off guard, especially those engrossed in fishing or exploration who lose track of time. Begin moving to safety 2+ hours before predicted high tide — don't wait until water is already flooding your exit route.</p></div>
+<div class="fact-card"><h4>Neap Tides Are Safer for Rock Access</h4><p>Neap tides — occurring during quarter moons — produce the smallest tidal ranges of the month (~0.6 m in KZN). High tides during neap periods don't flood as far up the shore, and rising water advances more slowly. For inexperienced coastal users or those accessing unfamiliar locations, neap tides provide safer conditions with reduced trapping risk. Check the moon phase and plan rock fishing or tidal pool exploration during neap cycles if possible.</p></div>
+<div class="fact-card"><h4>If Trapped — Call for Help, Don't Swim</h4><p>If trapped by rising tide with no safe escape route, call emergency services immediately (10111 or 112) and the National Sea Rescue Institute (087 094 9774). Do NOT attempt to swim through surge channels or flooded access routes — this is frequently fatal. Move to the highest available ground, stay calm, conserve energy, and wait for professional rescue. If you have a companion, they should move to high ground and guide rescuers to your location.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3><p>Email: <a href="mailto:Creatorslab031@outlook.com">C<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

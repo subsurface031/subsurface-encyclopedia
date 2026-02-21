@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stingrays – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Stingrays
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="Stingrays.png" alt="Stingray">
+                    <p class="image-caption">Family Dasyatidae — Stingrays, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Stingrays</h2>
+                    <span class="scientific-name">Family Dasyatidae</span>
+                    <span class="conservation-badge">⚠ Varies by Species</span>
+                    <p>Stingrays are among the most common and diverse rays found in KwaZulu-Natal's coastal waters, estuaries, and sandy flats. These bottom-dwelling rays are characterized by their flattened, disc-shaped bodies, whip-like tails armed with one or more venomous barbed spines, and remarkable ability to camouflage themselves by partially burying in sand or mud. The family Dasyatidae includes numerous species ranging from small estuary stingrays to large oceanic forms.</p>
+                    <p>In KZN waters, several stingray species are commonly encountered, including the blue stingray, brown stingray, and the impressive short-tail stingray that can exceed 2 meters in disc width. These rays play crucial ecological roles as benthic predators, feeding on worms, mollusks, and crustaceans buried in sediment. Their venomous tail spines are purely defensive weapons—stingrays are generally docile and only sting when accidentally stepped on or threatened.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Disc Width</span>
+                            <span class="stat-value">2.1 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">350 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">15 – 25 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">3 – 7 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">4 – 12 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pups per Litter</span>
+                            <span class="stat-value">1 – 13</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Stingrays possess a distinctive diamond or oval-shaped disc formed by greatly enlarged pectoral fins that extend forward and merge with the sides of the head. The body is dorsoventrally flattened—perfectly adapted for a benthic lifestyle—with the dorsal surface typically matching the color of the substrate they inhabit. Coloration ranges from sandy brown and grey to olive-green or blue-grey, often with spots or mottled patterns that provide excellent camouflage.</p>
+                    <p>The most distinctive feature is the long, whip-like tail that can be 1.5 to 2 times the disc length. Near the base of the tail, stingrays possess one or more serrated, venomous spines—retroserrate stingers that can measure 5 to 37 cm depending on species and individual size. These barbed spines are covered in a thin layer of skin containing venom-producing tissue. The spines are periodically shed and replaced throughout the ray's life.</p>
+                    <p>The mouth and gill slits are located on the ventral surface, while eyes and spiracles (respiratory openings) are positioned on the dorsal surface. This arrangement allows stingrays to breathe while buried in sediment—drawing water in through spiracles and expelling it through gill slits. Size varies dramatically among species: small estuary stingrays may reach only 45 cm disc width, while large short-tail stingrays can exceed 2.1 meters and weigh over 350 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Stingrays are primarily sedentary, benthic animals that spend much of their time partially buried in sand or mud with only their eyes and spiracles visible. This behavior serves multiple purposes: camouflage from predators, ambush positioning for prey, and thermoregulation. They use undulating motions of their pectoral fins to excavate depressions in soft substrate where they settle and cover themselves by flicking sand over their bodies.</p>
+                    <p>When not buried, stingrays move gracefully across the bottom using wave-like undulations of their disc, creating the distinctive "flying" motion that gives rays their name. They can also swim in mid-water when necessary, though most species rarely venture far from the bottom. Activity patterns are often crepuscular—most active during dawn and dusk—though some species feed throughout day and night depending on tidal cycles and prey availability.</p>
+                    <p>Stingrays are generally solitary, though temporary aggregations occur at productive feeding areas or during mating season. They are not aggressive toward humans and use their venomous tail spine purely defensively. When threatened, a stingray will typically flee. If cornered or stepped on, it arches its tail forward over its body and strikes downward, driving the spine into the threat. The resulting wound can be extremely painful and dangerous due to both the mechanical trauma from the barbed spine and the venom it delivers.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Stingrays are carnivorous benthic predators specialized for detecting and extracting prey buried in sediment. They possess highly developed electrosensory systems—ampullae of Lorenzini—that detect the bioelectric fields generated by hidden prey organisms. Combined with excellent senses of smell and touch, these adaptations make stingrays highly effective hunters of cryptic prey.</p>
+                    <p>Feeding behavior typically involves the ray slowly gliding over substrate while sweeping its head from side to side, searching for prey with electroreceptors. Once prey is detected, the ray uses the leading edges of its pectoral fins to pin the animal against the bottom or excavate it from the sediment. Some species also blow jets of water from their mouths or gills to uncover buried prey, creating small craters in sandy bottoms.</p>
+                    <ul>
+                        <li>Polychaete worms and other marine worms</li>
+                        <li>Mollusks (clams, snails, small mussels)</li>
+                        <li>Crustaceans (crabs, shrimp, amphipods, isopods)</li>
+                        <li>Small fish and fish eggs</li>
+                        <li>Cephalopods (small octopus, squid)</li>
+                    </ul>
+                    <p>Stingrays possess modified teeth arranged in flat pavements designed for crushing hard-shelled prey. The teeth are continuously replaced throughout their lives, with new rows moving forward to replace worn teeth—similar to sharks. Different species show dietary specialization based on jaw structure, with some species adapted for crushing hard shells while others target softer-bodied prey like worms and fish.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Stingrays are ovoviviparous—embryos develop inside eggs retained within the mother's uterus. The eggs hatch internally, and embryos continue developing nourished initially by yolk, then increasingly by uterine secretions rich in proteins and lipids called "uterine milk." This reproductive mode provides developing young with protection and nutrition, increasing survival rates compared to egg-laying species.</p>
+                    <p>Sexual maturity varies by species and ranges from 3 to 7 years of age, typically when individuals reach 50 to 70% of their maximum size. Mating behavior involves the male pursuing the female, eventually grasping one of her pectoral fins with his teeth to hold her during copulation. Males possess paired claspers—modified pelvic fins used to transfer sperm—and insert one clasper into the female's cloaca during mating.</p>
+                    <p>Gestation periods range from 4 months in smaller species to 12 months in larger species. Litter size varies dramatically—from a single pup in some large species to 13 or more in others. Pups are born as miniature versions of adults, fully developed and immediately capable of independent life. They receive no parental care after birth. Female stingrays in many species show strong philopatry—returning to specific nursery areas where they were born to give birth to their own young. These shallow, protected nursery habitats—often estuaries and coastal bays—are critical for juvenile survival.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Stingrays inhabit virtually every marine and estuarine habitat in KwaZulu-Natal, from shallow surf zones and tidal pools to estuaries, bays, coral reefs, and offshore sandy bottoms exceeding 200 meters depth. Different species show distinct habitat preferences—some are exclusively estuarine, others prefer shallow coastal waters, while large oceanic species range across continental shelves. The unifying requirement is soft substrate (sand, mud, or fine gravel) suitable for burying and supporting prey populations.</p>
+                <p>Several stingray species commonly occur in KZN waters. The blue stingray (Dasyatis chrysonota) inhabits shallow coastal waters and estuaries, reaching about 60 cm disc width. The brown stingray (Dasyatis sp.) prefers sandy bottoms near reefs from shallow water to 150 meters depth. The short-tail stingray (Bathytoshia brevicaudata)—the largest stingray in South Africa—can exceed 2 meters disc width and 350 kg, inhabiting both coastal and offshore waters. The estuary stingray (Hemitrygon fluviorum) is smaller and exclusively found in estuarine and freshwater environments, including the St. Lucia system.</p>
+                <p>Estuaries serve as critically important nursery habitats for many stingray species. KZN's major estuaries—including St. Lucia, Richards Bay, Durban Bay, and numerous smaller systems—support high densities of juvenile stingrays that use these protected, food-rich environments during their vulnerable early years. Many species show ontogenetic habitat shifts—juveniles in estuaries and shallow bays, adults in deeper coastal and offshore waters. Some species undertake seasonal movements tracking water temperature or prey abundance.</p>
+                <p>Conservation status varies among stingray species. Some remain common and populations appear stable, while others face population declines from overfishing, habitat loss, and environmental degradation. Stingrays are taken as bycatch in commercial trawl and gillnet fisheries, targeted in some recreational fisheries, and suffer habitat loss through coastal development, pollution, and degradation of nursery estuaries. Their position as benthic predators makes them vulnerable to accumulating toxins and pollutants that settle in sediments. Climate change may impact stingrays through warming waters, altered prey distributions, sea level rise affecting nursery estuaries, and ocean acidification impacting their molluscan prey.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Venomous Defensive Weapon</h4>
+                    <p>The stingray's tail spine is a sophisticated defensive weapon. The barbed spine is covered with a thin sheath containing venom-producing cells. When the spine penetrates flesh, the sheath tears, releasing venom into the wound. The venom contains proteins that cause intense pain, tissue necrosis, and cardiovascular effects. The retroserrate barbs make removal difficult and cause additional trauma. Despite their fearsome reputation, stingrays are docile and only sting when threatened—most injuries occur when people accidentally step on buried rays.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Masters of Camouflage</h4>
+                    <p>Stingrays are masters of camouflage with remarkable ability to match substrate color and texture. Their skin contains chromatophores—pigment cells that can rapidly change color and pattern. Within minutes of settling on new substrate, a stingray can adjust its coloration to match its surroundings. They enhance camouflage by flicking sand over their bodies, leaving only eyes and spiracles exposed. This concealment protects them from predators like sharks and allows ambush hunting of unsuspecting prey.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Electrical Prey Detection</h4>
+                    <p>Stingrays possess highly sensitive electroreceptors called ampullae of Lorenzini concentrated on their ventral surface and around their head. These organs detect the weak bioelectric fields generated by all living organisms—even prey completely buried in sediment generates detectable electrical signals from muscle contractions and nerve activity. This electroreception allows stingrays to hunt effectively in complete darkness or turbid water where vision is useless, detecting hidden prey with remarkable precision.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient Lineage</h4>
+                    <p>Stingrays belong to an ancient lineage extending back over 100 million years to the Cretaceous period when dinosaurs still roamed Earth. Fossil evidence shows that stingray body plans have remained remarkably stable through geological time—modern stingrays would be recognizable to observers from 60 million years ago. Their success stems from superbly adapted body plans for benthic life—flattened bodies, camouflage abilities, effective sensory systems, and defensive weapons that have proven effective across millions of years of evolution.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Critical Nursery Habitats</h4>
+                    <p>Estuaries and shallow coastal bays serve as critically important nursery habitats for many stingray species. Female stingrays often return to the same locations where they were born to give birth—a behavior called natal philopatry. These shallow, protected areas provide juvenile rays with abundant food, refuge from large predators, and optimal conditions for growth. Loss or degradation of these nursery habitats through coastal development, pollution, or altered freshwater flows can have devastating impacts on stingray populations by eliminating essential habitat for vulnerable early life stages.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Threats from Fishing and Habitat Loss</h4>
+                    <p>Many stingray species face population declines globally from overfishing and habitat degradation. They are particularly vulnerable to bottom trawling—which directly captures rays and destroys benthic habitats. Slow growth, late maturity, and low reproductive rates mean populations cannot sustain significant fishing pressure. Degradation of estuarine nursery habitats through pollution, altered freshwater flows, and coastal development eliminates critical areas for juvenile survival. Some species that were once common have disappeared from portions of their historical range, highlighting the vulnerability of these ancient bottom-dwelling predators to modern human impacts.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

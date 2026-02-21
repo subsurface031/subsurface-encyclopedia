@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub-Surface Encyclopedia – KwaZulu-Natal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .shark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .shark-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .shark-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .shark-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shark-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .shark-content {
+            padding: 2rem;
+        }
+
+        .shark-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .shark-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .shark-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .shark-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>KwaZulu-Natal's Magnificent Sharks</h2>
+                <p>The warm Indian Ocean waters along KwaZulu-Natal's coastline create one of the world's most diverse marine environments, home to an extraordinary array of shark species that have inhabited these waters for millions of years. From the rocky reefs of Aliwal Shoal to the sheltered estuaries of the St. Lucia system, our coast provides critical habitat for species ranging from the gentle ragged-tooth shark to the formidable Zambezi bull shark.</p>
+                
+                <p>These apex predators are far more than fearsome hunters—they are essential architects of marine health, maintaining the delicate balance of ocean ecosystems by regulating prey populations and ensuring biodiversity. The presence of healthy shark populations indicates thriving ocean environments, benefiting not only marine life but also the coastal communities that depend on fishing, tourism, and recreation.</p>
+                
+                <p>KwaZulu-Natal has become a global destination for shark research and eco-tourism, with sites like Protea Banks and Aliwal Shoal attracting marine biologists and diving enthusiasts from around the world. However, many shark species face unprecedented threats from overfishing, habitat degradation, and climate change. Understanding these remarkable creatures—their behavior, ecological importance, and conservation needs—is the first step toward ensuring their survival for future generations.</p>
+                
+                <p>This encyclopedia serves as a comprehensive resource for residents, visitors, students, and conservationists seeking to learn about all aquatic species that call KwaZulu-Natal home. While this section focuses on sharks, the broader encyclopedia documents the full diversity of marine and freshwater life in our waters—from rays and fish to crocodiles and hippos. Each species profiled here plays a unique role in our aquatic ecosystems, and each has a story worth discovering.</p>
+            </section>
+
+            <section id="sharks" class="shark-grid">
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="Raggie.png" alt="Ragged-tooth Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Ragged-tooth Shark</h3>
+                        <p>Also known as the sand tiger shark, these gentle giants are commonly seen at Aliwal Shoal and Protea Banks. Despite their fierce appearance with protruding teeth, they're docile and popular with divers. They gather in large numbers in KZN's waters during winter months.</p>
+                        <a href="ragged-tooth.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="hammerhead.png" alt="Hammerhead Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Hammerhead Shark</h3>
+                        <p>Scalloped hammerheads are occasionally spotted along KZN's coast, particularly around deeper reefs. Their distinctive head shape provides enhanced sensory capabilities for hunting. These magnificent creatures often travel in schools and are considered vulnerable due to overfishing.</p>
+                        <a href="hammerhead.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="tiger.png" alt="Tiger Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Tiger Shark</h3>
+                        <p>Named for their distinctive striped pattern, tiger sharks are apex predators found in KZN's warmer waters. They're known for their varied diet and powerful jaws. These solitary hunters can grow up to 5 meters and are important for maintaining ecosystem balance.</p>
+                        <a href="tiger-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="Blacktip.png" alt="Blacktip Reef Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Blacktip Reef Shark</h3>
+                        <p>Easily identified by their distinctive black-tipped fins, these sharks frequent KZN's shallow reefs and coastal areas. They're relatively small, reaching about 1.6 meters, and are known for their impressive leaping behavior. They're timid around humans and prefer warmer waters.</p>
+                        <a href="blacktip-reef-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="lemon.png" alt="Lemon Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Lemon Shark</h3>
+                        <p>Named for their yellowish-brown coloration, lemon sharks are stocky and powerful. They inhabit shallow coastal waters and mangrove areas in northern KZN. These social sharks often rest on the seafloor during the day and are important subjects for shark research.</p>
+                        <a href="lemon-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="copper.png" alt="Copper Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Copper Shark</h3>
+                        <p>Also called bronze whalers, copper sharks are common along KZN's coast, especially during the sardine run. They're streamlined, fast swimmers that often hunt in groups. These beautiful sharks can reach 3 meters in length and are known for their cooperative hunting strategies.</p>
+                        <a href="Copper-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="Zambezi.png" alt="Zambezi (Bull) Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Zambezi (Bull) Shark</h3>
+                        <p>Famous for their ability to thrive in both salt and freshwater, Zambezi sharks frequent KZN's estuaries and river mouths. They're stocky, aggressive hunters and one of the few shark species that can survive in freshwater. The name "Zambezi" reflects their presence in African rivers.</p>
+                        <a href="zambezi-bull-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="mako.png" alt="Mako Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Mako Shark</h3>
+                        <p>Known as the fastest shark in the ocean, mako sharks can reach speeds of up to 74 km/h. These sleek, powerful predators are occasionally spotted in KZN's offshore waters. With their streamlined bodies and remarkable agility, makos are prized game fish but face threats from commercial fishing.</p>
+                        <a href="mako-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="dusky.png" alt="Dusky Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Dusky Shark</h3>
+                        <p>One of the most commonly encountered sharks along KZN's coast, dusky sharks are particularly abundant during the annual sardine run. These large, bronze-colored sharks can grow up to 4 meters and are important apex predators in coastal ecosystems. Their population faces pressure from both commercial and recreational fishing.</p>
+                        <a href="dusky-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="spinner.png" alt="Spinner Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Spinner Shark</h3>
+                        <p>Famous for their spectacular spinning leaps out of the water, spinner sharks are frequently seen in KZN's warmer waters, especially during summer months. They feed on small fish in schools and their acrobatic displays make them favorites among marine enthusiasts. These slender sharks can reach lengths of 2.5 to 3 meters.</p>
+                        <a href="spinner-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="spotted-gully.png" alt="Spotted Gully Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Spotted Gully Shark</h3>
+                        <p>Common in KZN's shallow coastal waters and estuaries, spotted gully sharks are easily identified by their distinctive spotted pattern. These smaller sharks, typically 1 to 1.5 meters long, are harmless to humans and often found in rocky reefs and kelp beds. They play an important role in maintaining healthy inshore ecosystems.</p>
+                        <a href="spotted-gully-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="smoothhound.png" alt="Smoothhound Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Smoothhound Shark</h3>
+                        <p>Regularly caught by anglers along KZN's coastal areas, smoothhound sharks are small to medium-sized sharks that feed primarily on crustaceans and small fish. Their smooth skin and relatively docile nature make them distinct from other shark species. These bottom-dwelling sharks are important indicators of coastal ecosystem health.</p>
+                        <a href="smoothhound-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="oceanic-blacktip.png" alt="Oceanic Blacktip Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Oceanic Blacktip Shark</h3>
+                        <p>Common in both offshore and coastal waters of KZN, oceanic blacktip sharks are larger and more robust than their reef-dwelling cousins. They can reach up to 2.7 meters and are frequently encountered by divers and fishermen. These active predators are known for their speed and agility when hunting schooling fish.</p>
+                        <a href="oceanic-blacktip-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="shark-card">
+                    <div class="shark-image">
+                        <img src="tope.png" alt="Tope Shark">
+                    </div>
+                    <div class="shark-content">
+                        <h3>Tope Shark</h3>
+                        <p>Fairly common in southern KZN waters, tope sharks are slender, grey sharks that prefer cooler temperatures. Growing up to 2 meters, they're popular among recreational anglers and are known for their strong fighting ability. Tope sharks migrate seasonally and play an important role in regulating populations of smaller fish and squid.</p>
+                        <a href="tope-shark.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olive Ridley Turtle – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 152, 0, 0.5); color: #ffa726; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="turtles.html">Turtles</a>
+                <span>›</span>
+                Olive Ridley Turtle
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="olive-ridley.png" alt="Olive Ridley Turtle">
+                    <p class="image-caption">Lepidochelys olivacea — Olive Ridley Turtle, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Olive Ridley Turtle</h2>
+                    <span class="scientific-name">Lepidochelys olivacea</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The olive ridley is the smallest and most abundant of all sea turtle species, yet it is responsible for one of the most extraordinary mass wildlife events on Earth — the arribada. Thousands, and sometimes hundreds of thousands, of female olive ridleys converge simultaneously on just a handful of beaches worldwide to nest in a synchronised mass nesting event that remains one of nature's most overwhelming spectacles. This strategy — safety in numbers for eggs and hatchlings — is unique among sea turtles and sets the olive ridley apart from all its relatives.</p>
+                    <p>In KwaZulu-Natal, the olive ridley is not a resident nesting species but an occasional visitor to offshore and coastal waters, and a periodic stranding species along the KZN shoreline. Named for its distinctive olive-grey carapace, it is the most wide-ranging of all sea turtles and is found across the Indian, Pacific, and Atlantic Oceans. While a KZN sighting is always notable, the olive ridley's true global significance lies far to the north — on the mass nesting beaches of Odisha in India and the Pacific coast of Mexico, where its arribadas draw wildlife enthusiasts from around the world.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Shell Length</span>
+                            <span class="stat-value">Up to 75 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~50 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">50+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Eggs per Nest</span>
+                            <span class="stat-value">~110 eggs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Incubation</span>
+                            <span class="stat-value">45 – 65 days</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">10 – 15 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The olive ridley is the smallest of all sea turtles, with a distinctive near-circular, heart-shaped carapace that is more rounded and compact than other species. Adults typically measure 60 to 70 cm in carapace length — considerably smaller than a loggerhead or green turtle. The carapace colouration is a uniform olive-grey to grey-green, giving the species its common name, with a pale yellowish plastron.</p>
+                    <p>One of the olive ridley's distinguishing anatomical features is the variable number of costal scute pairs — typically six to nine pairs, more than any other sea turtle species. This variability is unusual among turtles and can be used alongside other features for species identification. The head is relatively small and triangular, with a slightly hooked beak adapted for the species' varied omnivorous diet.</p>
+                    <p>Despite being the smallest sea turtle, the olive ridley is robustly built and highly capable in the open ocean. Males are typically slightly smaller than females and, like other sea turtles, are distinguished by their longer tails and the presence of a curved claw on each front flipper.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>The olive ridley is the most pelagic of all hard-shelled sea turtles — spending the majority of its life in the open ocean rather than in nearshore habitats. This oceanic lifestyle makes it rarely encountered by coastal divers and beachgoers in KZN, with most records coming from offshore waters or from individuals that have stranded on beaches after being injured or disoriented.</p>
+                    <p>The species' most remarkable behavioural characteristic is the synchronised mass nesting event known as an arribada — from the Spanish word for "arrival." During an arribada, thousands to hundreds of thousands of females converge on a single beach over just a few days, all nesting simultaneously. The beaches of Gahirmatha and Rushikulya in Odisha, India, and Ostional and Nancite in Costa Rica are among the most famous arribada sites, with some events involving over 600,000 turtles nesting in a single week.</p>
+                    <p>Outside of nesting, olive ridleys are solitary, wide-roaming travellers that follow oceanic currents and prey availability across entire ocean basins. Their movements in the Indian Ocean — including KZN waters — are not as well studied as those of loggerheads and leatherbacks, partly because of the species' predominantly offshore distribution.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>The olive ridley is the most omnivorous of all sea turtle species, with a highly varied diet that reflects its wide-ranging oceanic lifestyle. Unlike the dietary specialists among sea turtles — the carnivorous loggerhead, the herbivorous green turtle, or the sponge-eating hawksbill — the olive ridley opportunistically consumes whatever prey is available, from surface-drifting jellyfish to bottom-dwelling crustaceans depending on where in the water column it finds itself at any given time.</p>
+                    <p>This dietary flexibility is considered one of the key reasons for the olive ridley's success as the world's most abundant sea turtle — the ability to exploit diverse food sources across multiple habitats gives it a resilience that more specialised species lack. In KZN's offshore waters, olive ridleys likely feed predominantly on jellyfish, salps, and other gelatinous organisms alongside pelagic crustaceans.</p>
+                    <ul>
+                        <li>Jellyfish and salps</li>
+                        <li>Shrimp and crabs</li>
+                        <li>Sea urchins and molluscs</li>
+                        <li>Fish eggs and small fish</li>
+                        <li>Algae and seagrass (occasionally)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Nesting & Reproduction</h3>
+                    <p>Unlike the other four sea turtle species found in KZN waters, the olive ridley does not maintain a significant nesting presence along the KZN or broader South African coastline. The nearest major nesting beaches to KZN are along the East African coast — particularly in Mozambique and Tanzania — and on Indian Ocean islands. Olive ridleys recorded in KZN waters are most likely individuals from these northern populations that have moved southward with the Agulhas Current.</p>
+                    <p>The olive ridley reaches sexual maturity considerably earlier than other sea turtle species — at 10 to 15 years — one of the reasons it maintains the largest global population despite significant fishing mortality. Females produce one to three clutches per season, with each clutch containing approximately 110 eggs. The incubation period of 45 to 65 days is also shorter than most other species.</p>
+                    <p>The arribada nesting strategy — while spectacular — also creates concentrated vulnerability. When 600,000 turtles nest on a single beach in a week, the sheer density of eggs and hatchlings attracts enormous numbers of predators, and the intense activity can cause nests to be destroyed by later-nesting females digging into existing clutches. Despite these losses, the overwhelming numbers ensure sufficient hatchling survival.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The olive ridley is primarily an oceanic species in the KZN context, found in the open Indian Ocean waters offshore of the province rather than in the nearshore coastal environments where loggerheads, green turtles, and hawksbills are regularly encountered. Its presence in KZN waters is periodic and tied to oceanographic conditions — particularly the behaviour of the Agulhas Current system, which can carry pelagic animals southward from tropical waters into KZN's offshore zone.</p>
+                <p>Olive ridley strandings on KZN beaches do occur, typically involving individuals that have been caught in fishing gear (particularly gillnets and longlines) or have become debilitated by cold water temperatures when swept too far south by oceanographic events. Stranded turtles are collected by Ezemvelo KZN Wildlife and the Two Oceans Aquarium's sea turtle rescue programme, rehabilitated, and released when conditions allow. Any olive ridley sighting in KZN — whether at sea or as a stranding — is recorded as part of ongoing sea turtle monitoring efforts along the coast.</p>
+                <p>Globally, the olive ridley is listed as Vulnerable on the IUCN Red List. Despite being the most abundant sea turtle, it faces significant threats including mass mortality in trawl fisheries — where hundreds of thousands of individuals are accidentally caught each year — targeted egg collection at nesting beaches, entanglement in gillnets, and plastic ingestion. The concentration of nesting at just a handful of arribada beaches creates extreme vulnerability to any threats affecting those specific locations, making the species' global abundance somewhat misleading as an indicator of conservation security.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The Arribada</h4>
+                    <p>The olive ridley is the only sea turtle species to nest in mass synchronised events called arribadas. On certain beaches in India and Costa Rica, up to 600,000 females arrive within days of each other to nest simultaneously — one of the greatest wildlife spectacles on Earth and a strategy with no parallel among reptiles.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Most Abundant Sea Turtle</h4>
+                    <p>The olive ridley is the most abundant sea turtle in the world, with global nesting populations estimated at over 800,000 females. Yet despite this abundance, it remains listed as Vulnerable due to the extreme concentration of nesting at just a few beaches and catastrophic bycatch mortality in industrial trawl fisheries.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Earliest Maturing Turtle</h4>
+                    <p>Olive ridleys reach sexual maturity at just 10 to 15 years of age — faster than any other sea turtle species. This relatively rapid maturity, combined with high nesting frequency, is the key reason the olive ridley maintains the world's largest sea turtle population despite significant ongoing mortality from human activities.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Smallest Sea Turtle</h4>
+                    <p>At typically 60 to 70 cm in shell length and under 50 kg, the olive ridley is the smallest sea turtle species in the world — barely half the size of an adult loggerhead. Despite this small stature, it is an accomplished open-ocean traveller, crossing entire ocean basins between nesting seasons with remarkable navigational precision.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Trawl Bycatch Crisis</h4>
+                    <p>Hundreds of thousands of olive ridleys die every year as bycatch in industrial shrimp trawl fisheries — particularly in the Bay of Bengal and Gulf of Mexico. A single trawl haul can capture and drown dozens of turtles. The introduction of Turtle Excluder Devices (TEDs) in some fisheries has reduced this mortality, but enforcement remains inconsistent across much of the species' range.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Rare KZN Visitor</h4>
+                    <p>The olive ridley is the rarest sea turtle to be encountered in KZN waters, with records predominantly from offshore sightings and beach strandings rather than from reef dives or coastal foraging observations. Any confirmed sighting in KZN — whether alive at sea or stranded on a beach — should be reported to Ezemvelo KZN Wildlife to contribute to ongoing monitoring of the species' distribution in South African waters.</p>
+                </div>
+            </div>
+
+            <a href="turtles.html" class="back-link">← Back to Turtles</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Crab – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Rock Crab
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="rock-crab.png" alt="Rock Crab">
+                    <p class="image-caption">Plagusia chabrus — Rock Crab, KZN rocky intertidal and shallow reef habitats</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Rock Crab</h2>
+                    <span class="scientific-name">Plagusia chabrus & related species</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The rock crab is the tough, tenacious inhabitant of KwaZulu-Natal's most challenging coastal environment — the rocky intertidal zone, where the relentless assault of waves, the scorching heat of low-tide exposure, and the constant risk of desiccation would defeat most animals. These robust, flattened crabs have evolved a suite of physical and behavioural adaptations that allow them to thrive in the surge-swept crevices, rocky platforms, and shallow reefs that line KZN's coastline, from the battered headlands of the South Coast to the warm reefs and boulder fields of the northern shores. Several species occupy this niche in KZN waters, with Plagusia chabrus — the red bait crab — among the most commonly encountered by rock pool visitors and coastal explorers.</p>
+                    <p>Rock crabs are the quintessential opportunists of the intertidal world — equal parts predator, scavenger, and herbivore, capable of exploiting almost any food resource the rocky shore presents. Their powerful claws can crush the shells of mussels and limpets, scrape encrusting algae from rock surfaces, tear apart carrion, and deliver a painfully effective pinch to any finger incautious enough to stray within reach. What rock crabs lack in speed or sophistication, they make up for in sheer toughness and adaptability — surviving conditions that would kill more delicate animals, and returning season after season in robust numbers to their preferred crevices and rock pools throughout the KZN coast.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Carapace Width</span>
+                            <span class="stat-value">up to 10 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Rocky intertidal</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 30 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Tidal cycles</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Diet</span>
+                            <span class="stat-value">Omnivore</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~3–5 years</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Rock crabs are characterised by a distinctly flattened, broadly oval carapace — a body form that is a direct adaptation to life in the surge zone, where a streamlined, low-profile body presents minimal resistance to wave action and allows the animal to wedge itself tightly into crevices. The carapace surface is typically rough and granular in texture, providing grip against smooth wet rock surfaces. Colouration varies by species: Plagusia chabrus displays a striking pattern of reddish-brown to brick-red with paler mottling, while other rock crab species found in KZN range from dark olive-green to black, providing effective camouflage against the algae-covered and barnacle-encrusted surfaces they inhabit.</p>
+                    <p>The claws — chelae — are well developed and powerful, with ridged inner surfaces designed for gripping and crushing. The right and left claws may be of similar size or slightly asymmetrical, and both are capable of delivering significant force — enough to crush the shells of mussels and whelks and to cut through the tough attachment threads of mussels and barnacles. The walking legs are strong and bear sharp dactyl tips that hook into micro-irregularities on rock surfaces, allowing rock crabs to cling against the powerful pull of receding waves and maintain their position on near-vertical rock faces in surge conditions that would sweep away less well-adapted animals.</p>
+                    <p>The undersurface of the carapace bears a series of grooves and ridges that trap a layer of water against the gills when the crab is exposed at low tide — a simple but effective mechanism for slowing desiccation during emersion. The eyes are mounted on short, robust stalks and have a wide field of view well suited to the constantly changing visual environment of the surge zone, where rapidly shifting light patterns, foam, and turbulent water create a complex and challenging visual scene that the crab must parse to detect food, predators, and potential mates.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Rock crabs are tidal in their activity patterns, emerging to forage when the tide covers their rocky habitat and retreating to shelter in crevices, under boulders, and in deep rock pool recesses as the tide drops and exposes the shore. This tidal rhythm is not simply a response to physical conditions — it is an endogenous biological clock that continues to tick even when rock crabs are removed from the shore and placed in constant laboratory conditions, reflecting the deep integration of tidal cycles into their physiology. During low tide, rock crabs in shallow pools may continue limited foraging, particularly in shaded, wave-splashed pools where desiccation is minimal.</p>
+                    <p>Rock crabs are aggressively territorial in their use of prime crevice shelters — the best hiding places are vigorously defended against conspecifics, and size-matched males will engage in pushing contests and claw-wrestling bouts that can last several minutes. Larger individuals invariably win these contests and claim the most sheltered, centrally located crevices, while smaller crabs are pushed to less desirable peripheral positions. This dominance hierarchy means that the largest rock crabs on a given stretch of shore have privileged access to both the best shelter and the most food-rich foraging areas adjacent to their refuges.</p>
+                    <p>When alarmed, rock crabs move rapidly sideways — the characteristic crab gait — and flatten themselves against the rock surface, using their strong legs to maintain grip against the substrate. In the surge zone, this response is highly effective at preventing dislodgement by waves; the combination of flattened body profile and powerful leg grip allows rock crabs to withstand wave forces that would be fatal to animals without these adaptations. If dislodged, a rock crab will tumble in the water column and immediately attempt to right itself and grip any available substrate before being carried further offshore.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Rock crabs are true omnivores — one of the most dietary-flexible animals on KZN's rocky shores. Their feeding behaviour shifts opportunistically depending on what is available in their immediate territory, and a single rock crab may consume algae, crush mussels, scrape barnacles, and tear apart a dead fish in the course of a single tidal cycle. This dietary flexibility is a critical survival advantage in the intertidal zone, where the availability of specific food types fluctuates dramatically with season, weather, and local disturbance events.</p>
+                    <p>Mussels and limpets are among the most important prey items where they co-occur with rock crabs. Rock crabs attack mussels by inserting the tip of one claw between the shell valves and levering them apart — a technique that requires patience and strength but yields a nutritious meal. Limpets are dislodged from rock surfaces by a sudden lateral blow from the claw that breaks the suction grip before the limpet can clamp down. Smaller barnacles are scraped directly from the rock and crushed in the mouthparts, while larger barnacle individuals are picked off individually and processed by the chelae before ingestion.</p>
+                    <ul>
+                        <li>Mussels, limpets, and periwinkles</li>
+                        <li>Barnacles and encrusting organisms</li>
+                        <li>Encrusting and filamentous algae</li>
+                        <li>Carrion — dead fish, birds, and invertebrates</li>
+                        <li>Small crabs, worms, and intertidal invertebrates</li>
+                        <li>Detritus and organic particulate matter</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Rock crab reproduction follows a seasonal cycle broadly linked to water temperature and day length, with peak mating activity in KZN's spring and early summer. Mating requires the female to have recently moulted — the soft, newly moulted condition of the female's exoskeleton allows mating to occur, as the hard shell of an intermolt female prevents copulation. Males identify pre-moult females through chemical cues in the water and may carry them in a premating embrace for days before moulting occurs — a behaviour called "mate guarding" that ensures the male is present and first to mate when the female's new shell is still soft.</p>
+                    <p>Fertilised eggs are brooded by the female beneath the abdomen, attached to the pleopods in a compact, spongy mass. A single clutch may contain several thousand to tens of thousands of eggs depending on female size, and the female aerates and cleans them throughout the incubation period of 3 to 6 weeks. Larvae — zoea — hatch into the plankton and spend 4 to 6 weeks developing through several larval stages before metamorphosing into megalopa and settling onto rocky substrates. Juveniles closely resemble adults from the moment of settlement and immediately adopt the crevice-hiding, intertidal lifestyle of their parents.</p>
+                    <p>Rock crabs reach sexual maturity within their first or second year and typically live for 3 to 5 years in the wild. Population size and structure on any given stretch of rocky shore are closely linked to the availability of suitable crevice habitat — shores with complex, irregular surfaces supporting many crevices carry denser, more stable rock crab populations than smooth, exposed platforms with limited shelter. The species is generally abundant throughout KZN's rocky coast and does not face significant conservation concern, though it is subject to collection for bait and occasionally for food in some coastal communities.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Rock Crabs in KZN: Rocky Shore Ecology</h3>
+                <p>KwaZulu-Natal's rocky shores are among the most biologically diverse intertidal habitats in the southern hemisphere, supporting complex communities of algae, molluscs, echinoderms, and crustaceans that are structured by the interplay of wave exposure, tidal height, temperature, and species interactions. Rock crabs occupy a pivotal position in this community as generalist predators and scavengers capable of influencing the distribution and abundance of many other species. On shores where rock crabs are abundant, mussel and limpet populations are typically lower and more spatially variable than on crab-free shores, reflecting the significant predation pressure that rock crabs exert on these dominant space occupiers.</p>
+                <p>The ecological impact of rock crabs extends beyond their direct predation on prey species. By overturning rocks, excavating beneath boulders, and removing algal material during feeding, rock crabs create physical disturbance patches on the shore that provide settlement opportunities for early successional species. Small areas of cleared rock surface — created by a foraging rock crab's passage — are rapidly colonised by algal spores, barnacle larvae, and young mussels that would otherwise be excluded by the dense biofilm and organism cover of an undisturbed surface. This disturbance-mediated community diversification is an important but often overlooked ecological service provided by rock crab foraging.</p>
+                <p>Rock crabs are themselves important prey for a range of KZN coastal predators. Octopuses are particularly effective rock crab predators, pursuing them into crevices and using their flexible bodies to extract crabs that the crab's own grip cannot protect. Large reef fish including Roman and red stumpnose prey on rock crabs in shallow subtidal areas. Kelp gulls and other larger shorebirds take rock crabs from exposed rock surfaces at low tide, carrying them aloft and dropping them onto hard surfaces to break the shell. Pied kingfishers and African oystercatchers will also take small rock crabs opportunistically.</p>
+                <p>For coastal visitors to KZN, rock crabs are among the most readily observed inhabitants of the rocky shore — visible in tidal pools, beneath overturned boulders, and scrambling across exposed rock surfaces during the middle tidal range. The vivid reddish colouration of Plagusia chabrus makes it particularly easy to spot against the grey and brown of barnacle-covered rock. However, rock pool visitors should resist the temptation to handle rock crabs carelessly — the claws of even a medium-sized individual are capable of breaking skin, and larger animals can inflict genuinely painful injuries. Observing these animals in their natural habitat without disturbance is both safer and more rewarding than attempting to catch or handle them.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Wave Warriors</h4>
+                    <p>Rock crabs in the surge zone regularly experience wave forces equivalent to several times their own body weight acting against their grip on the substrate. Their ability to withstand these forces relies on a combination of their flattened, low-drag body profile, the powerful grip of their dactyled walking legs in rock surface irregularities, and remarkably strong leg musculature relative to their size. Laboratory measurements have shown that rock crabs can resist pull forces of several hundred grams — far exceeding the weight of their own body — before releasing their grip.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Mussel Opener</h4>
+                    <p>The technique rock crabs use to open mussels — inserting a claw tip and levering the valves apart — requires both strength and patience, as mussels can hold their valves tightly closed for extended periods. Rock crabs have been observed spending up to 20 minutes working persistently at a single mussel, taking advantage of any momentary relaxation of the adductor muscle to advance the claw tip further between the valves. This patience in the face of difficult prey is an indication of a degree of problem-solving ability rarely attributed to crustaceans.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Tidal Clocks</h4>
+                    <p>Rock crabs possess an internal circatidal clock — a biological timekeeping mechanism that runs on an approximately 12.4-hour cycle matching the tidal period — that regulates their activity levels independently of actual tidal conditions. Crabs kept in constant conditions in the laboratory continue to show peaks of activity at the times when the tide would be high at their home shore, maintaining this rhythm for days without any tidal cue. This internal clock ensures that foraging behaviour is optimally timed to coincide with the most productive tidal phases.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Autotomy Escape</h4>
+                    <p>Like many crustaceans, rock crabs possess the remarkable ability to deliberately shed a leg or claw that has been seized by a predator — a behaviour called autotomy. The limb detaches cleanly at a specialised fracture plane near the base, and muscles surrounding the fracture plane contract to seal off the wound and prevent blood loss. The predator retains only the detached appendage while the crab escapes. Remarkably, the lost limb begins regenerating at the next moult, gradually returning to near-normal size over several subsequent moulting cycles.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Rocky Shore Engineers</h4>
+                    <p>Rock crabs indirectly shape the community structure of the rocky shore simply through their foraging behaviour. By creating small clearings of bare rock surface as they feed, they generate settlement patches that maintain diversity in what would otherwise become mono-dominant communities of mussels or encrusting algae. Experimental removal of rock crabs from enclosed shore sections in southern Africa has resulted in dramatic increases in mussel cover and corresponding decreases in algal and invertebrate diversity — demonstrating their keystone role in maintaining intertidal community structure.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Bait & Traditional Food</h4>
+                    <p>Rock crabs have been harvested by coastal communities along the KZN coast for generations, both as bait for line fishing from rocks and as a food source in their own right. The meat, while modest in volume compared to commercial crab species, is sweet and flavourful. Rock crabs are occasionally used as bait for resident reef fish including Roman, stumpnose, and blacktail when targeting fish from rocky shore and harbour wall positions. In some northern KZN communities, rock crabs are collected and eaten boiled or grilled, representing a small but culturally significant component of traditional coastal food practices.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

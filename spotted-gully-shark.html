@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotted Gully Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #81c784;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Spotted Gully Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="spotted-gully.png" alt="Spotted Gully Shark">
+                    <p class="image-caption">Triakis megalopterus — Spotted Gully Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Spotted Gully Shark</h2>
+                    <span class="scientific-name">Triakis megalopterus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The spotted gully shark, also known as the sharptooth houndshark or affectionately as "sweet William," is a beautiful, small-bodied houndshark endemic to southern Africa. Recognisable by its grey-brown colouration adorned with irregular black spots that become more prominent with age, this shy, bottom-dwelling species is a common resident of KwaZulu-Natal's shallow coastal waters, rocky reefs, and kelp forests.</p>
+                    <p>Despite being one of the most frequently encountered sharks along South Africa's coast, spotted gully sharks are remarkably elusive and timid, retreating into rocky crevices when approached by divers. They are highly specialised benthic predators, spending most of their time swimming just above the seafloor in sandy areas near gullies and rocky outcrops — a behaviour that gave them their common name. Though currently listed as Least Concern, their slow growth rate, late maturity, and long gestation period make them particularly vulnerable to fishing pressure.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.0 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">50 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">25–30 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 50 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">14–16 years (F)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">6 – 12 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The spotted gully shark is a medium-sized houndshark with a stout, somewhat cylindrical body and a relatively short, blunt snout. It has widely spaced nostrils and distinctive catlike eyes — a feature shared by many houndshark species. One of its most identifiable characteristics is the relative size of its dorsal fins: the first and second dorsal fins are nearly equal in height, with the second dorsal fin being only slightly smaller — a unique trait that distinguishes it from most other sharks.</p>
+                    <p>Colouration is dark grey to bronzy-brown on the dorsal surface, transitioning to pale grey or white on the underside. The defining feature of adult spotted gully sharks is their irregular pattern of small, black spots scattered across the back and sides. These spots are typically absent or faint in juveniles but become increasingly prominent with age, making larger individuals instantly recognisable. The skin often appears slightly loose, giving the shark a somewhat wrinkled appearance.</p>
+                    <p>The spotted gully shark's teeth are small and tightly packed, forming a pavement-like crushing surface ideally suited for feeding on hard-shelled prey such as crabs and lobsters. Each tooth has a small, sharp central cusp flanked by broader bases — allowing the shark to both grasp slippery prey and crush the shells of crustaceans. The pectoral fins are large and rounded, providing excellent manoeuvrability in the complex rocky habitats this species prefers. The caudal fin has a small but well-defined lower lobe and an upper lobe with a subtle ventral notch near the tip.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Spotted gully sharks are primarily nocturnal, becoming most active at night when they emerge from rocky crevices and caves to hunt for crustaceans and small fish. During the day they are typically found resting in deep crevices, swim-throughs, or beneath rocky overhangs, where they remain motionless and well-camouflaged against the reef. They are notably shy and reclusive, retreating deeper into cover when disturbed by divers — unlike the more curious sevengill or pyjama sharks that often share the same habitat.</p>
+                    <p>This species is highly resident and exhibits strong site fidelity, with tagging studies revealing that most individuals remain in small home ranges and rarely move more than a few kilometres from their core habitat. However, some adults have been recorded travelling distances exceeding 900 kilometres, suggesting that while the species is generally philopatric, long-range dispersal does occasionally occur. Males tend to be more mobile than juveniles, though there is no evidence of seasonal migrations to specific breeding or pupping areas.</p>
+                    <p>During summer months, spotted gully sharks are known to form aggregations in shallow bays, particularly in areas like False Bay near Cape Town. These gatherings often include many pregnant females, leading researchers to believe they may be related to reproductive behaviour. The sharks are entirely harmless to humans and pose no threat even when approached underwater, though their timid nature means close encounters are rare.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Spotted gully sharks are opportunistic benthic predators with a diet that shifts dramatically with size and age. Juveniles under one metre in length feed almost exclusively on crustaceans — particularly Cape rock crabs, which constitute the vast majority of their diet. As they grow, their feeding repertoire expands to include a wider variety of prey including bony fish, cephalopods, and even small sharks and rays.</p>
+                    <p>The species' tooth morphology reflects its dual feeding strategy: the pavement-like crushing surfaces allow it to process hard-shelled prey such as crabs, slipper lobsters, and spiny lobsters, while the small, sharp central cusps enable it to grasp and manipulate slippery fish and cephalopods. Studies have shown that larger individuals — those exceeding 1.4 metres — derive approximately half of their diet from bony fish, particularly reef-dwelling species such as morwongs, sea catfish, drums, and porgies.</p>
+                    <p>Spotted gully sharks primarily hunt at night, coinciding with the peak activity periods of many of their prey species — particularly Cape rock lobster, which emerges from crevices after dark to forage. They have been observed pursuing prey almost onto the shore, and they occasionally deviate from their nocturnal habits to exploit seasonal feeding opportunities. One notable example is the mass spawning of chokka squid in False Bay and other southern Cape locations, during which spotted gully sharks feed during daylight hours to take advantage of the abundant, easily captured prey.</p>
+                    <ul>
+                        <li>Cape rock crabs and other crustaceans</li>
+                        <li>Slipper lobsters and spiny lobsters</li>
+                        <li>Bony fish (morwongs, catfish, drums, porgies)</li>
+                        <li>Cephalopods (octopus, squid, cuttlefish)</li>
+                        <li>Small sharks, rays, and guitarfish</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Spotted gully sharks are aplacental viviparous, meaning embryos develop inside the mother without a placental connection. The embryos initially rely on large yolk sacs for nutrition; once the yolk is depleted, they hatch from their egg cases within the uterus and continue developing as free-swimming embryos until birth. This extended gestation period lasts an extraordinary 18 to 20 months — nearly two full years — making it one of the longest known gestation periods among houndshark species.</p>
+                    <p>Females give birth to litters of 6 to 12 pups measuring between 30 and 45 centimetres at birth. Pupping occurs primarily between May and August — coinciding with the winter months in southern Africa. Newborn pups settle in shallow, sheltered bays and estuaries where they remain for several years, feeding primarily on small crustaceans while gradually growing and developing. The use of these nursery areas provides protection from larger predators and access to abundant food resources.</p>
+                    <p>Sexual maturity is reached late in life — males mature at approximately 11 to 13 years of age and 1.2 to 1.4 metres in length, while females mature even later, at 14 to 16 years and 1.3 to 1.5 metres. This late maturity, combined with the long gestation period and the biennial or triennial reproductive cycle (females reproduce only once every two to three years), results in an extremely low reproductive output. The species' maximum lifespan is estimated at 25 to 30 years, with age validated through vertebral band-pair analysis in both wild and captive individuals.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The spotted gully shark is endemic to southern Africa, with a distribution extending from southern Angola along the Atlantic coast, around the Cape, and into the Indian Ocean as far north as KwaZulu-Natal. In South Africa, the species is most abundant along the Western and Eastern Cape coasts, where suitable rocky reef habitat is plentiful. In KwaZulu-Natal, spotted gully sharks are found at the northeastern edge of their range and are less common than in the Cape region, though they do occur in suitable habitats along the coast.</p>
+                <p>This species is highly specialised for life in shallow, inshore environments. They are most commonly found in sandy habitats adjacent to rocky reefs, gullies, and kelp forests, where they can easily access both the hard substrates favoured by their crustacean prey and the complex three-dimensional structure provided by rocky outcrops and crevices. Most individuals are found in water less than 10 metres deep, though the species has been recorded at depths of up to 50 metres. Spotted gully sharks seldom venture into open water, instead remaining close to the bottom where they can retreat into shelter when threatened.</p>
+                <p>Juveniles use shallow bays, estuaries, and protected coastal habitats as nursery grounds. These areas provide not only abundant crustacean prey but also shelter from larger predators such as broadnose sevengill sharks, which are known to prey on spotted gully sharks. Nursery habitats along the KZN coast — including sheltered bays and estuarine mouths — are critical to the survival of young sharks during their vulnerable early years.</p>
+                <p>The spotted gully shark is currently listed as Least Concern on the IUCN Red List, reflecting an estimated stable or increasing population trend. However, this assessment requires careful interpretation. The species is highly susceptible to overfishing due to its restricted range, slow growth rate, late maturity, and low reproductive output. It is frequently caught by recreational shore and ski-boat anglers — often mistaken for the more resilient smoothhound sharks — and is also taken as bycatch in commercial demersal longline fisheries targeting school sharks in the Western Cape. While spotted gully sharks are legally classified as a non-commercial species in South Africa and cannot be harvested commercially, enforcement remains challenging, and misidentification by fishers continues to be a concern. Ongoing monitoring and the protection of critical nursery habitats will be essential to ensuring the long-term survival of this endemic southern African species.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Sweet William</h4>
+                    <p>One of the spotted gully shark's endearing common names is "sweet William" — a reflection of its gentle, harmless nature. Despite its fearsome-sounding scientific name megalopterus (meaning "large wing"), this shark is docile and poses absolutely no threat to humans, even when encountered by divers in close quarters.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Endemic to Southern Africa</h4>
+                    <p>The spotted gully shark is found nowhere else on Earth — it is entirely endemic to the southern African coastline. This restricted distribution makes the species particularly vulnerable to regional threats such as coastal development, pollution, and overfishing, as there are no backup populations elsewhere.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>20-Month Pregnancy</h4>
+                    <p>Female spotted gully sharks carry their developing pups for an astonishing 18 to 20 months — nearly two full years. This is one of the longest gestation periods of any houndshark and contributes to the species' very slow population growth rate, making recovery from overfishing extremely challenging.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Crab Specialists</h4>
+                    <p>Juvenile spotted gully sharks are crab-eating machines, with the Cape rock crab constituting over 90% of their diet. Their pavement-like teeth are perfectly adapted for crushing crab shells, and they've been observed pursuing crabs almost onto the beach during nocturnal hunting forays.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Summer Aggregations</h4>
+                    <p>During summer months, particularly in False Bay near Cape Town, spotted gully sharks gather in large numbers in shallow water — often including many pregnant females. Scientists believe these aggregations may be linked to reproductive behaviour, though the exact purpose remains a subject of ongoing research.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Shy Cave Dwellers</h4>
+                    <p>Spotted gully sharks are notoriously shy and reclusive, spending their days hiding in rocky crevices and caves. Divers often employ a two-person strategy to observe them: one diver enters a swim-through from one side while the other waits at the exit to photograph the fleeing sharks as they emerge.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

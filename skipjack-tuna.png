@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skipjack Tuna – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="fish.html">Fish</a>
+                <span>›</span>
+                Skipjack Tuna
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="skipjack-tuna.png" alt="Skipjack Tuna">
+                    <p class="image-caption">Katsuwonus pelamis — Skipjack Tuna, KZN offshore waters</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Skipjack Tuna</h2>
+                    <span class="scientific-name">Katsuwonus pelamis</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The skipjack tuna is the smallest, most abundant, and most ecologically important member of the tuna family — a powerhouse of muscle and speed that forms the backbone of both the global tuna fishing industry and the open ocean's food web. In KwaZulu-Natal's offshore waters, skipjack are common year-round in the warm Agulhas Current, forming large, fast-moving schools that feed voraciously on whatever prey they can find. While they lack the size and prestige of their larger cousins — yellowfin and bigeye — skipjack more than compensate with their sheer abundance, aggressive feeding behaviour, and critical ecological role as both predator and prey.</p>
+                    <p>Distinguished by distinctive dark horizontal stripes along the lower flanks and belly — unique among tunas — skipjack are built for relentless, high-speed travel across vast expanses of open ocean. They are the most tropical of all tuna species, preferring water temperatures above 20°C and avoiding the colder waters that other tunas routinely exploit. This warm-water specialisation has made skipjack hugely successful in the Indian Ocean, where they support commercial purse-seine and pole-and-line fisheries worth billions annually while simultaneously feeding everything from dolphins and sailfish to seabirds and whale sharks.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">1.1 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~34 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">~65 km/h</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~12 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KZN Season</span>
+                            <span class="stat-value">Year-round</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 260 m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Skipjack tuna are compact, muscular fish with the characteristic fusiform body shape of all tunas — streamlined and perfectly adapted for sustained high-speed swimming. The dorsal surface is dark purplish-blue, fading to silver on the lower flanks and belly. The most distinctive feature is a series of 4 to 6 bold, dark horizontal stripes that run along the lower flanks and belly from behind the pectoral fins to the tail. These stripes are unique among tuna species and make skipjack instantly identifiable at close range.</p>
+                    <p>The body is scaleless except for the corselet — a band of enlarged, modified scales behind the head and along the lateral line. The first dorsal fin is tall and triangular with 14 to 16 spines, and can be folded flat into a groove along the back during high-speed swimming. The second dorsal fin is much smaller and followed by a series of 7 to 9 small yellow finlets between the tail and the main dorsal and anal fins. The tail is deeply forked and crescent-shaped, designed for maximum thrust and efficiency.</p>
+                    <p>Adults typically measure 50 to 80 centimetres and weigh 3 to 12 kilograms, though exceptional individuals can reach 1.1 metres and exceed 30 kilograms. Males and females are similar in appearance. The flesh is dark red — much darker than yellowfin or bigeye — with a strong flavour that is prized in some culinary traditions but considered less desirable than the paler, milder flesh of larger tunas in sashimi markets.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Skipjack tuna are among the most social and gregarious of all ocean predators. They form large, densely packed schools that can contain thousands of individuals, often mixing with yellowfin tuna, bigeye tuna, and juvenile billfish. These schools are highly mobile, travelling tens of kilometres per day in search of prey concentrations. Skipjack schools often associate with floating objects — driftwood, kelp rafts, buoys, and artificial fish aggregating devices (FADs) — a behaviour exploited extensively by commercial purse-seine fisheries.</p>
+                    <p>When feeding, skipjack schools create spectacular surface disturbances visible from great distances. The water boils with activity as hundreds or thousands of tuna drive baitfish to the surface, leaping clear of the water in pursuit and creating a feeding frenzy that attracts seabirds, dolphins, and other predators. In KZN waters, working birds circling over skipjack schools are a primary method used by recreational anglers to locate offshore feeding activity during the summer months.</p>
+                    <p>Skipjack are capable of remarkable bursts of speed — approaching 65 km/h over short distances — though their cruising speed is typically 5 to 10 km/h. They maintain body temperatures several degrees above ambient water temperature using a specialised heat-exchange system, though they are less endothermic than larger tunas. Most feeding activity occurs in the upper 50 metres of the water column, though skipjack are capable of diving to at least 260 metres when pursuing deep-dwelling prey.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Skipjack tuna are aggressive, opportunistic predators that consume virtually anything they can catch and swallow. Their diet is dominated by small schooling fish including sardines, anchovies, mackerel, flying fish, and juvenile fish of many species. Squid and cuttlefish are also important prey items, particularly at night when mesopelagic squid species migrate toward the surface. Skipjack also consume large quantities of crustaceans including krill, mantis shrimp, and small crabs when these are abundant.</p>
+                    <p>Feeding occurs primarily during daylight hours when visual predation is most effective. Skipjack schools employ coordinated hunting strategies to herd baitfish into tight concentrations — driving prey against the surface where escape options are limited, then attacking in frenzied bursts that see dozens of tuna feeding simultaneously. This cooperative behaviour maximises feeding efficiency and is one reason skipjack form such large schools compared to solitary or pair-feeding predators.</p>
+                    <ul>
+                        <li>Sardines, anchovies, and pilchards</li>
+                        <li>Mackerel, scad, and flying fish</li>
+                        <li>Squid, cuttlefish, and octopus</li>
+                        <li>Krill, copepods, and mantis shrimp</li>
+                        <li>Juvenile fish including tunas and jacks</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Skipjack tuna grow rapidly and mature early compared to larger tuna species. Sexual maturity is reached at approximately 1.5 to 2 years of age when fish measure around 40 to 45 centimetres in length. This early maturity is essential to their life history strategy — skipjack compensate for their smaller size and shorter lifespan with rapid growth and high reproductive output. Maximum lifespan is estimated at around 12 years, though most individuals in heavily fished populations probably do not exceed 6 to 8 years of age.</p>
+                    <p>Spawning occurs year-round in tropical waters, with peaks during warmer months. Females are highly fecund, releasing between 100,000 and 2 million eggs per spawning event depending on body size. Skipjack are batch spawners — females release multiple batches of eggs over the course of the spawning season rather than spawning once per year. Eggs are tiny, pelagic, and hatch within 24 hours in warm water. Larvae and juveniles grow extraordinarily rapidly, reaching 20 to 30 centimetres within their first year.</p>
+                    <p>There is no parental care — eggs, larvae, and juveniles are entirely planktonic and subject to extremely high mortality from predation, starvation, and environmental factors. Juvenile skipjack form schools almost immediately upon reaching a few centimetres in length, and exhibit adult-like schooling and feeding behaviours by the time they reach 15 to 20 centimetres. This rapid development allows skipjack populations to recover quickly from fishing pressure compared to slower-growing, late-maturing species like bluefin tuna.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Skipjack Tuna in KZN Waters & Global Fisheries</h3>
+                <p>Skipjack tuna are present in KwaZulu-Natal's offshore waters year-round, with peak abundance during the warmer months between October and April when sea surface temperatures in the productive offshore zone exceed 22°C. They are most commonly encountered 20 to 60 kilometres offshore in association with current edges, temperature breaks, and concentrations of baitfish. During the sardine run, skipjack join the feeding frenzy alongside dolphins, sharks, and other predators, though they are less conspicuous than the larger game fish that dominate angling attention.</p>
+                <p>In KZN's recreational fishery, skipjack are often regarded as by-catch — too small to be a primary target but willing biters on trolled lures and live baits intended for yellowfin and dorado. Despite their modest size, skipjack provide excellent sport on light tackle, and their firm, flavourful flesh is highly regarded when properly prepared. Locally, skipjack are sometimes called "bonito" or "striped tuna," though these names can cause confusion as they are also applied to other species.</p>
+                <p>Globally, skipjack tuna are the most important commercial tuna species by volume, accounting for approximately 60% of total tuna catches worldwide. The Indian Ocean supports enormous skipjack fisheries, with purse-seine fleets from multiple nations targeting the species using fish aggregating devices (FADs) and free-swimming school sets. Pole-and-line fisheries — a more selective and sustainable method that uses live bait to catch skipjack one at a time — remain important in parts of the Indian Ocean and are the basis for "pole-and-line caught" eco-labels favoured by sustainability-conscious consumers.</p>
+                <p>Despite intensive fishing pressure, skipjack tuna populations remain relatively healthy compared to other tuna species. Their early maturity, rapid growth, high reproductive output, and preference for warm tropical waters that are less accessible to longline fleets have helped buffer populations from collapse. The species is currently classified as Least Concern by the IUCN, though continued monitoring is essential to ensure that fishing pressure does not exceed sustainable levels. The skipjack's role as a cornerstone of the global canned tuna industry — and its critical ecological importance as prey for larger predators including marlins, sharks, and toothed whales — means that maintaining healthy skipjack populations is essential both economically and ecologically.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The Tuna in Your Can</h4>
+                    <p>Skipjack tuna is the primary species used in canned tuna worldwide — accounting for approximately 70% of global canned tuna production. When you open a can labelled "chunk light tuna" in most supermarkets, you're almost certainly eating skipjack. Its darker flesh and stronger flavour distinguish it from the "white tuna" (albacore) found in premium canned products, and it's generally considered more sustainable than other tuna species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Belly Stripes Mystery</h4>
+                    <p>The distinctive dark horizontal stripes along skipjack's lower flanks are unique among tunas and their evolutionary purpose remains somewhat mysterious. Scientists believe the stripes may serve as disruptive colouration to confuse predators, as schooling cues that help individuals maintain cohesion with the school, or as a form of counter-shading that breaks up the fish's silhouette when viewed from below against the bright surface.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>FAD Fisheries Controversy</h4>
+                    <p>Skipjack's natural tendency to aggregate beneath floating objects has been exploited by industrial fisheries that deploy tens of thousands of fish aggregating devices (FADs) across the ocean. While FAD fishing is highly efficient for catching skipjack, the massive purse-seine nets also entangle juvenile yellowfin and bigeye tuna, sea turtles, sharks, and rays — creating a major conservation controversy about the true cost of cheap canned tuna.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fastest Growing Tuna</h4>
+                    <p>Skipjack tuna exhibit some of the fastest growth rates of any large pelagic fish. Juveniles can grow 1 to 2 centimetres per month during their first year, reaching 30 centimetres by age one and sexually mature at 40 to 45 centimetres by age two. This rapid growth means skipjack populations can recover relatively quickly from fishing pressure compared to slow-growing bluefin tuna that may not mature until age 5 or older.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Essential Prey Species</h4>
+                    <p>Despite being predators themselves, skipjack tuna play a critical role as prey for larger ocean predators. Billfish including marlin and sailfish, large sharks, toothed whales, and even seabirds feed extensively on skipjack. Their abundance and wide distribution make them one of the most important energy conduits in the open ocean food web — converting small prey into biomass that larger predators depend on for survival.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Pole-and-Line Tradition</h4>
+                    <p>Traditional pole-and-line skipjack fishing — where fishermen use barbless hooks and live bait to catch fish one at a time — is one of the oldest and most sustainable tuna fishing methods. A skilled pole-and-line vessel crew can catch hundreds of skipjack per hour during peak feeding activity, providing employment for coastal communities while minimising bycatch of non-target species. Products labelled "pole-and-line caught" command premium prices in sustainability-focused markets.</p>
+                </div>
+            </div>
+
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Southern Right Whale – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="cetaceans.html">Cetaceans</a>
+                <span>›</span>
+                Southern Right Whale
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="southern-right-whale.png" alt="Southern Right Whale">
+                    <p class="image-caption">Eubalaena australis — Southern Right Whale, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Southern Right Whale</h2>
+                    <span class="scientific-name">Eubalaena australis</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The southern right whale is one of the great conservation success stories of the marine world — a species brought to the brink of extinction by commercial whaling, yet now thriving once again in the waters of the Southern Hemisphere. Named by whalers as the "right" whale to hunt because they were slow-moving, floated when killed, and yielded enormous quantities of oil and baleen, these gentle giants were hunted relentlessly from the 1700s through the early 1900s, reducing their global population from an estimated 100,000 to fewer than 300 individuals by 1920.</p>
+                    <p>In KwaZulu-Natal, southern right whales migrate past the coastline between June and November, traveling between Antarctic feeding grounds and calving areas along the South African coast. While the Western Cape — particularly Hermanus and the De Hoop Nature Reserve — hosts the largest concentrations of southern rights in South Africa, sightings along the KZN coast are increasingly common as the population continues its remarkable recovery. Mothers with newborn calves are particularly drawn to sheltered bays where they nurse and rest before continuing their journey south.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">18 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~80 tonnes</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">70+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Migration Season</span>
+                            <span class="stat-value">Jun – Nov</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Calving Interval</span>
+                            <span class="stat-value">3 – 5 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">~12 months</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Southern right whales are immediately recognizable by their massive, rotund bodies, enormous heads that comprise up to one-third of their total body length, and the complete absence of a dorsal fin. The body is predominantly black, though some individuals display white patches on the belly and chin. The most distinctive feature is the presence of callosities — raised, roughened patches of thickened skin on the head that are colonized by whale lice (cyamids), barnacles, and other marine organisms, giving them a whitish, yellowish, or pinkish appearance.</p>
+                    <p>The pattern of callosities on each whale is unique and permanent — like human fingerprints — allowing researchers to identify and track individual whales throughout their lives. The largest callosity sits atop the rostrum (upper jaw) and is called the bonnet. Additional callosities appear along the lower jaw, above the eyes, and on the chin. The lower jaw is deeply arched, creating a distinctive bow shape when viewed from above.</p>
+                    <p>Southern rights possess 200 to 270 baleen plates on each side of the upper jaw, making them among the most efficient filter-feeders in the ocean. Adult females are slightly larger than males, with females averaging 15 to 16 metres in length and males 14 to 15 metres. The largest recorded individuals have exceeded 18 metres and 80 tonnes.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Southern right whales are slow, deliberate swimmers, typically traveling at speeds of 5 to 8 km/h, though they can achieve short bursts of 15 km/h when necessary. They are highly curious and approachable, often investigating boats and swimmers — behavior that made them particularly vulnerable to whalers but now makes them favorites of whale watchers along the South African coast.</p>
+                    <p>They are known for several distinctive surface behaviours including breaching (launching their massive bodies out of the water), lobtailing (slapping the water surface with their tail flukes), and sailing — holding their tail flukes above the surface to catch the wind like a sail, allowing currents to push them along the surface. This sailing behavior is unique to right whales and can continue for extended periods.</p>
+                    <p>Southern rights are generally solitary or found in small groups, though aggregations of 10 or more individuals can occur on feeding grounds or in calving bays. Males compete aggressively for access to females during the breeding season, sometimes forming "surface active groups" where multiple males simultaneously attempt to mate with a single female. Mother-calf pairs are inseparable during the first months of the calf's life.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Southern right whales are obligate filter feeders, consuming enormous quantities of zooplankton — primarily copepods and krill — during the austral summer in Antarctic and sub-Antarctic waters. They employ a technique called skim-feeding, swimming slowly through dense concentrations of prey with their mouths wide open. Water flows continuously through the baleen plates, which trap prey while allowing water to escape through the sides of the mouth.</p>
+                    <p>Unlike many baleen whales that take large gulps, southern rights feed continuously and passively, often remaining at or near the surface for hours while moving through plankton swarms. A feeding southern right whale can process over 2,000 kg of krill per day during peak feeding season. The long, fine baleen plates — reaching up to 2.8 metres in length — are perfectly adapted for capturing tiny copepods as small as 3 mm.</p>
+                    <ul>
+                        <li>Copepods (primary diet)</li>
+                        <li>Antarctic krill (Euphausia superba)</li>
+                        <li>Other zooplankton and small invertebrates</li>
+                        <li>Minimal feeding during breeding/calving season</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Migration & Reproduction</h3>
+                    <p>Southern right whales undertake annual migrations between Antarctic and sub-Antarctic feeding grounds and warmer coastal waters where breeding and calving occur. The whales observed along the KZN coast are part of a population that migrates north from approximately June through September, with southbound return migration occurring from September through November.</p>
+                    <p>Females give birth to a single calf after a gestation period of approximately 12 months. Calves are born in sheltered coastal bays, weighing around 1,000 kg and measuring 4 to 6 metres in length. The bond between mother and calf is exceptionally strong. Calves nurse on extraordinarily rich milk — containing approximately 60% fat — and can gain up to 30 kg per day during their first months of life.</p>
+                    <p>Calves are weaned at approximately 12 months but often remain with their mothers for several additional months. Females reach sexual maturity at 7 to 10 years and typically calve every 3 to 5 years, making population recovery slow despite current protection. The long calving interval reflects the enormous energetic investment required to produce and nurse a calf to independence.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Conservation Status & Recovery</h3>
+                <p>The recovery of southern right whales from near-extinction represents one of the greatest conservation achievements in marine biology. By the time international protection was granted in 1935, the global population had been reduced to perhaps 300 individuals from a pre-whaling population estimated at 100,000. South African waters were particularly devastated — historical whaling records suggest that tens of thousands of southern rights were killed along the South African coast between 1785 and 1935.</p>
+                <p>Since protection, the population has grown exponentially. The South African population — which includes whales calving along the Western Cape and migrating past KZN — is now estimated at approximately 6,000 individuals and increasing at roughly 7% annually. The global population exceeds 15,000 whales. In 2018, the IUCN downlisted the species from Endangered to Least Concern, though ongoing monitoring and protection remain essential.</p>
+                <p>Despite this remarkable recovery, southern right whales still face significant threats including entanglement in fishing gear and shark nets (a particular concern in KZN waters), ship strikes in busy shipping lanes, kelp gull attacks on calves (an emerging threat in South Africa where gulls feed on the skin and blubber of living whales), ocean noise pollution, and climate-driven changes to zooplankton abundance and distribution in feeding grounds. Continued vigilance and adaptive management are necessary to ensure that this recovery continues into the future.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The "Right" Whale to Hunt</h4>
+                    <p>Southern right whales earned their unfortunate name from whalers who considered them the "right" whale to hunt. They were slow-moving and easy to approach, floated when killed (making retrieval simple), and yielded enormous quantities of oil and extremely long baleen plates. These same traits nearly drove the species to extinction.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Unique Callosity Patterns</h4>
+                    <p>Each southern right whale has a unique pattern of callosities — raised, roughened patches of skin on the head colonized by whale lice and barnacles. These patterns remain constant throughout the whale's life, functioning like fingerprints and allowing researchers to identify and track individual whales across decades.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Largest Testicles in the Animal Kingdom</h4>
+                    <p>Male southern right whales possess the largest testicles in the animal kingdom, each weighing approximately 500 kg — about 1% of the whale's total body weight. This extraordinary testicular development reflects intense sperm competition among males competing to fertilize females.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Sailing Behavior</h4>
+                    <p>Southern right whales engage in a unique behavior called sailing — holding their massive tail flukes vertically above the surface to catch the wind, allowing ocean currents and breezes to push them along the surface. This behavior can continue for extended periods and is thought to be a form of play or social interaction.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>V-Shaped Blow</h4>
+                    <p>Southern right whales produce one of the most distinctive blows (exhalations) of any whale species. Because they have two separate blowholes positioned wide apart on top of the head, the blow forms a distinctive V-shape that can reach 5 metres high — making them easy to identify even from great distances.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Conservation Success Story</h4>
+                    <p>The southern right whale population has grown from fewer than 300 individuals in the 1920s to over 15,000 today — an increase of over 5,000% in less than a century. The South African population, virtually extinct by 1935, now numbers approximately 6,000 individuals. This recovery is one of the greatest achievements in marine conservation history.</p>
+                </div>
+            </div>
+
+            <a href="cetaceans.html" class="back-link">← Back to Cetaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

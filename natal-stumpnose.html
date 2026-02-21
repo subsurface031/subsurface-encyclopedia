@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natal Stumpnose – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.sassi-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="header-inner">
+<div class="header-title">
+<h1>Sub-Surface Encyclopedia</h1>
+<p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+</div>
+<img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+</div>
+</div>
+</header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="fish.html">Fish</a><span>›</span>Natal Stumpnose</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="natal-stumpnose.png" alt="Natal Stumpnose"><p class="image-caption">Rhabdosargus sarba — Natal Stumpnose, KZN</p></div>
+<div class="species-intro">
+<h2>Natal Stumpnose</h2>
+<span class="scientific-name">Rhabdosargus sarba</span>
+<span class="sassi-badge">✓ SASSI Green | Least Concern</span>
+<p>The Natal stumpnose is a robust, deep-bodied sparid common along KwaZulu-Natal's rocky coastlines, reefs, and estuaries. Named for their distinctively blunt, rounded snout that gives them a "stump-nosed" appearance, these silver-grey fish typically weigh 2 to 4 kg and are among the most frequently encountered species by rock and surf anglers. Natal stumpnose are members of the seabream family Sparidae — a diverse group that includes many important commercial and recreational species throughout temperate and subtropical oceans.</p>
+<p>Natal stumpnose are adaptable fish that inhabit a range of coastal habitats from wave-swept rocky shores and tidal pools to deeper reefs and occasionally estuaries. They feed primarily on mussels, barnacles, and other hard-shelled invertebrates, using powerful jaws equipped with specialized crushing teeth to break open shells and extract the soft tissue within. This ecological niche as hard-substrate grazers makes them important components of rocky shore communities where they control invertebrate populations and contribute to nutrient cycling. Their populations remain relatively healthy, and they are currently rated Green by SASSI, providing sustainable fishing opportunities for recreational anglers.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Max Length</span><span class="stat-value">80 cm</span></div>
+<div class="stat-box"><span class="stat-label">Max Weight</span><span class="stat-value">~6 kg</span></div>
+<div class="stat-box"><span class="stat-label">Lifespan</span><span class="stat-value">15+ years</span></div>
+<div class="stat-box"><span class="stat-label">Maturity</span><span class="stat-value">3–4 years</span></div>
+<div class="stat-box"><span class="stat-label">Habitat</span><span class="stat-value">Rocky Coastal</span></div>
+<div class="stat-box"><span class="stat-label">Conservation</span><span class="stat-value">Least Concern</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>Physical Description</h3>
+<p>Natal stumpnose are moderately deep-bodied, laterally compressed fish with robust build and distinctive rounded head profile. The body is oval in outline with a high back and relatively deep profile — typical of sparids adapted for maneuvering in rocky habitats and wave-swept shorelines. Background colouration is silver-grey on the back and upper flanks, fading to bright silver-white on the lower flanks and belly. Faint vertical bars or bands sometimes visible on the flanks, particularly in juveniles and stressed individuals, though these markings are less prominent than in related species.</p>
+<p>The most distinctive feature is the blunt, rounded snout that gives the species its common name. The head profile slopes steeply from the dorsal fin to the snout, and the mouth is relatively small and positioned slightly below the midline of the head — adaptations for bottom feeding on attached invertebrates. Inside the mouth, Natal stumpnose possess specialized dentition consisting of chisel-like incisors at the front for scraping and detaching prey, and broad molar-like teeth toward the back for crushing shells — a dental arrangement perfectly suited for their feeding ecology.</p>
+<p>The dorsal fin is continuous with a moderate notch between the spiny and soft-rayed portions, and there is a distinctive black blotch or spot on the upper pectoral fin base — a useful identification feature that distinguishes Natal stumpnose from similar species. The scales are relatively large and clearly defined, and the lateral line is well-developed and follows the body contour smoothly from head to tail. Adults in KZN waters typically measure 30 to 50 cm and weigh 2 to 4 kg, though individuals can exceed 80 cm and 6 kg under optimal conditions. Sexual maturity is reached at 3 to 4 years of age when fish measure 25 to 35 cm length.</p>
+</div>
+<div class="info-section"><h3>Behaviour</h3>
+<p>Natal stumpnose are primarily coastal fish associated with rocky substrates including rocky reefs, boulder fields, wave-washed rocky shores, breakwaters, piers, and occasionally structured habitats within estuaries. They are well-adapted to high-energy environments and are commonly found in the surf zone where waves crash against rocky shores — an environment that would be challenging for many other fish species. Their deep body and powerful swimming ability allow them to maintain position in strong currents and surge, accessing food resources that are unavailable to less robust species.</p>
+<p>These fish are diurnal feeders, most active during daylight hours when they forage across rocky substrates scraping and picking at attached invertebrates. At night they typically rest in crevices, under ledges, or among rocks where they are protected from nocturnal predators. Natal stumpnose often form small schools or loose aggregations, particularly during feeding, though they are not as strongly schooling as some other coastal species. The presence of stumpnose schools is often indicated by the characteristic scraping and clicking sounds they produce while feeding — audible to nearby snorkelers and divers.</p>
+<p>Natal stumpnose exhibit some degree of site fidelity, with individual fish returning to the same feeding areas repeatedly. They undertake limited seasonal movements along the coastline, with some individuals moving into deeper water during winter months and returning to shallower areas during summer. Juveniles utilize estuaries and tidal pools as nursery areas where they find shelter and abundant food, gradually moving to more exposed rocky coastlines as they grow and develop greater swimming ability and body mass to withstand wave action.</p>
+</div>
+<div class="info-section"><h3>Diet & Feeding</h3>
+<p>Natal stumpnose are specialized benthic feeders that consume primarily hard-shelled invertebrates attached to or living on rocky substrates. Their feeding behavior involves methodical foraging across rock surfaces, using their chisel-like front teeth to scrape barnacles, mussels, and algae from rocks, and their crushing molar teeth to break open shells and extract soft tissue. This feeding strategy requires substantial jaw force — studies have demonstrated that Natal stumpnose can generate bite forces exceeding 100 Newtons, sufficient to crush thick-shelled mussels and barnacles.</p>
+<p>Mussels comprise a major portion of the diet, particularly brown mussels that form dense beds on rocky shores throughout KZN. Barnacles are consumed regularly, scraped directly from rock surfaces or crushed if attached shells are thick. Limpets and other gastropods are taken opportunistically, and various other hard-shelled invertebrates including chitons, small crabs, and sea urchins are consumed when encountered. Algae and organic material scraped from rocks are ingested along with invertebrate prey, providing supplemental nutrition.</p>
+<ul>
+<li>Mussels — brown mussels, ribbed mussels</li>
+<li>Barnacles scraped from rocky substrates</li>
+<li>Limpets and other gastropods</li>
+<li>Small crabs and other crustaceans</li>
+<li>Sea urchins and chitons</li>
+<li>Algae and organic material (supplemental)</li>
+</ul>
+<p>The ability to consume hard-shelled prey that many other fish cannot access allows Natal stumpnose to exploit abundant food resources on rocky shores. Their feeding activity influences invertebrate community structure and distribution, preventing mussels and barnacles from completely monopolizing available space and creating opportunities for other species. The scraping and crushing sounds produced during feeding are characteristic components of the acoustic environment on rocky shores where stumpnose are abundant.</p>
+</div>
+<div class="info-section"><h3>Reproduction & Life History</h3>
+<p>Natal stumpnose are gonochoristic with separate sexes throughout life. Sexual maturity is reached at 3 to 4 years of age when fish measure 25 to 35 cm length — moderately early maturity that contributes to population resilience. Growth is relatively rapid during the first 3 to 4 years until sexual maturity, then slows considerably as energy is increasingly allocated to reproduction rather than continued body growth.</p>
+<p>Spawning occurs during spring and summer months in KZN coastal waters, typically from September through February with peak activity in November and December. Mature adults move to spawning areas — often at reef edges adjacent to deeper water — where they release eggs and sperm into the water column. Females produce moderate numbers of eggs with fecundity increasing with body size — larger females produce more eggs than smaller ones, making protection of large breeding-size fish important for population productivity.</p>
+<p>The eggs are pelagic and buoyant, drifting in coastal currents while developing. Hatching occurs within 24 to 48 hours depending on water temperature, and larval fish remain planktonic for several weeks feeding on microscopic zooplankton. After the planktonic phase, juvenile fish settle into shallow nursery habitats including tidal pools, protected rocky shores, and occasionally estuaries. These nursery areas provide shelter from predators and abundant food resources for rapidly growing juveniles.</p>
+<p>Maximum lifespan exceeds 15 years based on otolith analysis — substantial longevity that provides multiple opportunities for reproduction over an individual's lifetime. This longevity, combined with moderately early maturity and wide distribution across diverse coastal habitats, contributes to population resilience. Natal stumpnose populations have remained relatively healthy compared to many other coastal species, though continued sustainable management remains important to prevent overfishing.</p>
+</div>
+</div>
+<div class="info-section-full"><h3>Ecological Role & Fishing Importance</h3>
+<p>Natal stumpnose play important ecological roles as specialized consumers of hard-shelled invertebrates on rocky shores and reefs. By feeding on mussels and barnacles, they prevent these filter-feeding invertebrates from completely monopolizing available space on rock surfaces — creating habitat heterogeneity that supports diverse communities of other species. Their feeding activity also contributes to nutrient cycling, converting invertebrate biomass into fish biomass that supports higher trophic levels including predatory fish, seabirds, and marine mammals.</p>
+<p>The scraping feeding behavior of stumpnose influences the structure and composition of rocky shore communities in ways analogous to the roles of grazing herbivores in terrestrial ecosystems. By removing barnacles and mussels, they create open space that can be colonized by algae, allowing algal diversity to persist even on heavily populated shores. This grazing pressure maintains a dynamic balance between filter-feeders and algae, preventing either group from completely dominating and creating the complex mosaic of habitats characteristic of healthy rocky shores.</p>
+<p>From a human perspective, Natal stumpnose are important recreational and subsistence fishing targets throughout their range. They are readily accessible to shore anglers fishing from rocks, piers, and breakwaters, making them popular with anglers who may not have access to boats or offshore waters. Stumpnose are relatively easy to catch using simple tackle and readily available baits, providing accessible fishing opportunities that introduce new generations to marine angling. Their firm white flesh is good eating, and they are considered worthwhile table fish though not premium like some other sparids.</p>
+<p>Natal stumpnose populations in South Africa currently appear healthy and sustainable, rated Green by SASSI. Several factors contribute to this resilience. Moderately early maturity at 3 to 4 years allows fish to begin reproducing before reaching sizes most commonly caught by anglers. Wide distribution across extensive rocky coastlines reduces vulnerability to localized fishing pressure. Substantial longevity provides multiple reproductive opportunities over an individual's lifetime. Finally, their occurrence in wave-swept rocky shores — environments that are challenging to fish effectively — provides some refuge from fishing pressure.</p>
+<p>However, continued monitoring and management remain essential. Climate change may alter coastal conditions through warming waters, sea level rise affecting intertidal habitats, and increased storm intensity restructuring rocky shore communities. Ocean acidification could impact the calcifying invertebrates that stumpnose feed on, with cascading effects on stumpnose populations. Maintaining healthy stumpnose populations requires protecting coastal rocky shore habitats, managing fishing pressure sustainably through appropriate size limits and bag limits, and preserving water quality that supports the invertebrate communities stumpnose depend on for food.</p>
+</div>
+<h3 class="section-heading">Fascinating Facts</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>Shell-Crushing Specialists</h4><p>Natal stumpnose possess powerful jaws equipped with specialized teeth — chisel-like incisors at the front for scraping and detaching prey from rocks, and broad molar-like teeth toward the back for crushing shells. Studies have measured bite forces exceeding 100 Newtons in adult stumpnose — sufficient to crush thick-shelled mussels and barnacles that many other fish cannot access. This specialized feeding apparatus allows them to exploit abundant food resources unavailable to competitors.</p></div>
+<div class="fact-card"><h4>Wave-Adapted Feeding</h4><p>Natal stumpnose are remarkably well-adapted to feeding in high-energy wave-swept environments that would challenge many other fish species. Their deep, laterally compressed bodies and powerful swimming ability allow them to maintain position in surge and strong currents while feeding on attached invertebrates. This adaptation gives them exclusive access to food resources in environments where competition from other species is reduced.</p></div>
+<div class="fact-card"><h4>Acoustic Signatures</h4><p>The characteristic scraping and clicking sounds produced by feeding Natal stumpnose create distinctive acoustic signatures on rocky shores where they are abundant. These sounds — generated by teeth scraping against rock and shells crushing between jaws — are audible to nearby snorkelers and divers, and may serve communicative functions within stumpnose schools. The acoustic environment of rocky shores is shaped significantly by the feeding activity of these specialized grazers.</p></div>
+<div class="fact-card"><h4>Nursery Habitat Use</h4><p>Juvenile Natal stumpnose utilize tidal pools and sheltered rocky shores as nursery areas where they find protection from predators and abundant food while developing swimming ability and body mass. As they grow, juveniles gradually move to more exposed coastlines with stronger wave action — environments that provide more food resources but require greater physical capability to exploit. This ontogenetic habitat shift is typical of many rocky shore species.</p></div>
+<div class="fact-card"><h4>Ecological Grazers</h4><p>Natal stumpnose function as ecological grazers that prevent mussels and barnacles from completely monopolizing space on rocky shores. Their feeding creates habitat heterogeneity that supports diverse communities of other species, maintaining dynamic balance between filter-feeders and algae. This grazing pressure is analogous to the role of herbivorous grazers in terrestrial ecosystems, demonstrating that similar ecological principles operate in both marine and terrestrial environments.</p></div>
+<div class="fact-card"><h4>Population Resilience</h4><p>Natal stumpnose populations remain relatively healthy compared to many other coastal species, currently rated Green by SASSI. This resilience stems from moderately early maturity, wide distribution across extensive rocky coastlines, substantial longevity providing multiple reproductive opportunities, and occurrence in wave-swept habitats that provide some refuge from fishing pressure. Their healthy status demonstrates that sustainable fisheries are achievable when life history traits and habitat characteristics combine favorably with management approaches.</p></div>
+</div>
+<a href="fish.html" class="back-link">← Back to Fish</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us</h3>
+<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+<p>Phone: +27 66 346 8954</p>
+<p>Social Media: @Subsurface031</p></div>
+<div class="footer-section"><h3>Conservation Partners</h3>
+<a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3>
+<a href="Sassi.html">Endangered Species & SASSi Listings</a>
+<a href="safety.html">Beach Safety & Hazard Warnings</a>
+<a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+<a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+<a href="whale-evolution.html">Whale Evolution</a>
+<a href="human-evolution.html">Human Evolution</a></div>
+</div>
+<div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div>
+</div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

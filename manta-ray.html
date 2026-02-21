@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manta Ray – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="rays.html">Rays</a>
+                <span>›</span>
+                Manta Ray
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="manta.png" alt="Manta Ray">
+                    <p class="image-caption">Mobula birostris — Giant Manta Ray, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Manta Ray</h2>
+                    <span class="scientific-name">Mobula birostris</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The giant manta ray is the largest ray species in the world—a magnificent filter-feeding giant that can reach wingspans exceeding 7 meters and weights of up to 3,000 kilograms. These graceful marine creatures are among the ocean's most intelligent and charismatic animals, known for their curiosity, complex social behaviors, and remarkable acrobatic abilities including spectacular breaching displays.</p>
+                    <p>In KwaZulu-Natal's warm waters, manta rays are seasonal visitors, most commonly encountered during summer months when plankton blooms attract these gentle giants. The Aliwal Shoal and Protea Banks off the KZN coast are renowned manta ray aggregation sites where divers regularly encounter these majestic animals. Mantas play a vital role in marine ecosystems as planktivorous filter feeders, consuming vast quantities of zooplankton and helping to regulate marine food webs.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Wingspan</span>
+                            <span class="stat-value">7+ m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">3,000 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">40+ years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Sexual Maturity</span>
+                            <span class="stat-value">8 – 10 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Gestation Period</span>
+                            <span class="stat-value">12 – 13 months</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Swim Speed</span>
+                            <span class="stat-value">24 km/h</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The giant manta ray possesses a distinctive diamond-shaped body with enormous triangular pectoral fins that give it a wingspan that can exceed 7 meters from tip to tip. The body is dorsoventrally flattened with a relatively thick, muscular build. Their dorsal coloration ranges from black to dark grey or blue-grey, often with distinctive white shoulder patches and unique spot patterns on the ventral surface that serve as individual identification markers—like fingerprints.</p>
+                    <p>The most distinctive features are the cephalic fins—horn-like projections on either side of the wide, rectangular mouth that can be unfurled forward to channel plankton-rich water into the mouth during feeding. When not feeding, these fins curl into tight spirals, giving mantas their alternative name "devilfish." The mouth is positioned at the front of the head rather than underneath, an adaptation for filter feeding in open water.</p>
+                    <p>Manta rays possess the largest brain-to-body ratio of any fish, with a highly developed cerebellum and brain regions associated with learning, problem-solving, and communication. Their eyes are positioned on the sides of the head, providing excellent binocular vision. They lack a venomous barb on the tail—unlike many other ray species—making them completely harmless to humans. Adult giant mantas typically weigh 1,000 to 2,000 kg, though exceptional individuals can exceed 3,000 kg.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Manta rays are highly intelligent, social animals that display complex behaviors including coordinated group feeding, sophisticated communication, and apparent play behavior. They are often observed in aggregations ranging from a few individuals to groups exceeding 100 animals, particularly at productive feeding areas and cleaning stations where small fish remove parasites and dead skin.</p>
+                    <p>These rays are known for their curiosity and frequently interact with divers, often circling back repeatedly to investigate the unusual bubbling creatures. They display individual personalities, with some individuals being bold and inquisitive while others are shy and cautious. Mantas appear to recognize individual humans and have been observed returning to interact with specific divers they have encountered before.</p>
+                    <p>Manta rays perform spectacular aerial displays, launching their massive bodies completely out of the water in breaching behavior that can reach heights of 2 meters or more. The purpose of breaching is debated—theories include parasite removal, communication, courtship displays, or simply playful behavior. They are strong, efficient swimmers capable of sustained speeds of 15 km/h and bursts up to 24 km/h, using their powerful pectoral fins to generate thrust through wing-like flapping motions.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Giant manta rays are obligate filter feeders that consume enormous quantities of zooplankton—primarily small crustaceans such as copepods, mysid shrimp, and krill—along with small fish and fish larvae. An adult manta can filter up to 60 cubic meters of water per hour through its gill rakers, consuming approximately 13 to 14 kg of plankton daily—about 12% of their body weight weekly.</p>
+                    <p>Mantas employ several sophisticated feeding strategies. The most common is "ram feeding"—swimming forward with mouth open and cephalic fins extended to funnel plankton-rich water into the mouth. They also perform "chain feeding" where multiple individuals swim in a line, taking advantage of the concentrated plankton stirred up by preceding animals. In a behavior called "cyclone feeding," mantas swim in vertical circles through dense plankton patches, creating a vortex that concentrates prey.</p>
+                    <ul>
+                        <li>Copepods and other small crustaceans (primary diet)</li>
+                        <li>Mysid shrimp and krill</li>
+                        <li>Small fish and fish larvae</li>
+                        <li>Other zooplankton species</li>
+                    </ul>
+                    <p>Manta rays follow seasonal plankton blooms, undertaking long-distance migrations of hundreds or even thousands of kilometers to exploit rich feeding grounds. In KwaZulu-Natal, mantas are most abundant during summer months when upwelling and nutrient-rich currents create ideal plankton conditions along the coast.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Giant manta rays have one of the lowest reproductive rates of any marine species, making populations extremely vulnerable to overfishing. Females reach sexual maturity between 8 and 10 years of age at approximately 4 to 5 meters wingspan, while males mature slightly earlier at 6 to 7 years. Mating has been observed primarily during spring and summer months in KZN waters.</p>
+                    <p>Courtship is elaborate and can last for hours, with multiple males pursuing a single female in "mating trains." The female swims rapidly while males follow closely behind, with the successful male eventually grasping one of the female's pectoral fins with his teeth and maneuvering into position for copulation, which occurs belly-to-belly and lasts 60 to 90 seconds.</p>
+                    <p>Manta rays are ovoviviparous—embryos develop inside eggs that remain within the mother's body until they hatch. After a gestation period of 12 to 13 months, the female gives birth to typically one pup, very rarely twins. Pups are born at approximately 1.2 to 1.4 meters wingspan and weigh 9 to 11 kg. They are immediately independent with no parental care. The reproductive cycle is slow—females reproduce only once every 2 to 5 years—resulting in extremely low population growth rates. This reproductive strategy, combined with late maturity and small litter size, means manta populations cannot recover quickly from exploitation.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>Giant manta rays are pelagic animals that inhabit tropical and subtropical oceans worldwide, typically in coastal waters but also venturing into open ocean. They are found from the surface to depths exceeding 1,000 meters, though they are most commonly encountered in the upper 80 meters where plankton concentrations are highest. Mantas require warm water temperatures above 19°C and are most abundant in areas with strong currents and upwelling that create productive plankton conditions.</p>
+                <p>In KwaZulu-Natal, manta rays are seasonal migrants that visit coastal waters primarily during the warmer months from October through April, coinciding with peak plankton productivity. The most reliable manta ray encounters occur at Aliwal Shoal near Umkomaas and Protea Banks off Shelly Beach—both world-renowned diving sites where mantas congregate at cleaning stations and to feed in plankton-rich currents. These sites support regular sightings with some individuals returning year after year, identifiable by their unique ventral spot patterns.</p>
+                <p>Satellite tagging studies have revealed that mantas are highly mobile, capable of traveling thousands of kilometers. Some individuals tagged in South African waters have been tracked across the Indian Ocean, demonstrating the species' capacity for trans-oceanic migration. However, many individuals also show site fidelity, returning to the same productive areas and cleaning stations seasonally. This combination of long-range movement and site fidelity has important conservation implications—protecting critical aggregation sites like those in KZN is essential for regional populations.</p>
+                <p>The giant manta ray is classified as Vulnerable on the IUCN Red List, with populations declining globally by an estimated 30% over the past three generations. Major threats include targeted fishing for the international gill raker trade (used in traditional Chinese medicine), bycatch in commercial fisheries, boat strikes, entanglement in fishing gear, pollution, and climate change impacts on plankton productivity. In South Africa, manta rays receive legal protection—all harvest and trade is prohibited. However, illegal fishing, accidental bycatch, and habitat degradation remain concerns. Long-term conservation requires international cooperation, enforcement of protection measures, reduction of bycatch, and protection of critical habitat including KZN's important aggregation sites.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Largest Ray Species on Earth</h4>
+                    <p>The giant manta ray is the largest ray species in the world, with confirmed wingspans exceeding 7 meters and weights up to 3,000 kg. Unconfirmed reports suggest wingspans may reach 9 meters. Despite their enormous size, mantas are completely harmless to humans—they lack the venomous tail spine found in many other ray species and feed exclusively on microscopic plankton.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Remarkable Intelligence</h4>
+                    <p>Manta rays possess the largest brain of any fish species, with the highest brain-to-body ratio among fish. They have passed the mirror self-recognition test—a measure of self-awareness that only a few animal species have achieved, including great apes, elephants, dolphins, and magpies. This suggests mantas possess sophisticated cognitive abilities including self-awareness, learning, memory, and possibly even culture.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Unique Individual Patterns</h4>
+                    <p>Each manta ray has a unique pattern of spots on its ventral (belly) surface that remains stable throughout life, functioning like a fingerprint. Scientists use these spot patterns to identify and track individual mantas through photo-identification databases. This has revealed that some individuals live for 40 years or more and demonstrate remarkable site fidelity, returning to the same locations year after year, sometimes decade after decade.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Social Animals with Cleaning Stations</h4>
+                    <p>Manta rays regularly visit "cleaning stations"—specific reef locations where small fish such as wrasses and butterflyfish remove parasites, dead skin, and mucus from the mantas' bodies. These cleaning sessions can last 30 minutes or more. Individual mantas have been observed queuing patiently for their turn, displaying sophisticated social behavior and apparent understanding of reciprocal relationships with cleaner fish species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Spectacular Breaching Behavior</h4>
+                    <p>Manta rays are capable of launching their massive bodies completely out of the water in spectacular aerial displays, reaching heights of 2 meters or more above the surface. The sound of a 2,000 kg manta crashing back into the ocean can be heard from considerable distances. While the purpose of breaching is debated, it may serve functions including communication, parasite removal, courtship display, or birthing assistance.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Threatened by Gill Raker Trade</h4>
+                    <p>Manta rays face severe population declines globally, driven primarily by demand for their gill rakers in international markets where they are sold as a health tonic despite having no proven medicinal value. A single kilogram of dried gill rakers can sell for over $500, making mantas lucrative targets. This trade, combined with their extremely low reproductive rate—females produce only one pup every 2 to 5 years—has pushed populations toward collapse in many regions. International trade is now regulated under CITES, but illegal fishing continues.</p>
+                </div>
+            </div>
+
+            <a href="rays.html" class="back-link">← Back to Rays</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

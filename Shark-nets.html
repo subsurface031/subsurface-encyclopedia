@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KZN Shark Nets — The Bycatch Problem – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.6); color: #e57373; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #4db6ac; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #4db6ac; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="ocean.html">Ocean Awareness</a><span>›</span>KZN Shark Nets — The Bycatch Problem</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="shark-nets.png" alt="KZN Shark Nets">
+    <p class="image-caption">KZN's shark net programme has operated since 1952 — providing genuine swimmer protection while simultaneously killing thousands of non-target marine animals annually, including protected turtles, dolphins, and rays.</p>
+</div>
+<div class="species-intro">
+    <h2>KZN Shark Nets</h2>
+    <span class="scientific-name">The bycatch problem — protecting swimmers vs protecting marine biodiversity</span>
+    <span class="conservation-badge">⚠ SERIOUS — Ethical Debate</span>
+    <p>The KwaZulu-Natal shark net programme is one of the longest-running and most contested wildlife management operations in South Africa. Since 1952, monofilament mesh nets deployed at beaches along the KZN coastline have reduced shark bite incidents on protected beaches to a fraction of what they would otherwise be — a genuine and significant public safety achievement in a province where recreational beach use is both economically important and culturally central to coastal life. The nets have saved lives. That is not in dispute. What is in dispute — increasingly, and with growing scientific evidence on the bycatch side of the ledger — is whether the method used to achieve this safety outcome is still justifiable given the marine biodiversity cost it imposes, and whether alternative technologies now available could achieve comparable safety outcomes with a fraction of the non-target mortality.</p>
+    <p>The core of the bycatch problem lies in a fundamental and widespread misunderstanding about how the nets work. KZN's shark nets are not barriers. They do not form a wall between swimmers and sharks. They are monofilament gill nets set parallel to the shoreline, typically in water 6–11 metres deep and at some distance from the beach itself, that work by entangling and drowning sharks — and anything else — that happen to swim through them. Sharks caught in the nets cannot be released alive; the overwhelming majority are dead or fatally injured by the time the nets are checked. Non-target animals including dolphins, turtles, rays, and ecologically important shark species are caught and killed in the same way, without any mechanism to separate target from non-target at the point of capture. Every season's bycatch data from the KwaZulu-Natal Sharks Board — which is publicly available — documents this toll in detail. The question the community must answer is whether this cost is acceptable, and if not, what should replace it.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Programme Start</span><span class="stat-value">1952</span></div>
+        <div class="stat-box"><span class="stat-label">Beaches Protected</span><span class="stat-value">37 KZN beaches</span></div>
+        <div class="stat-box"><span class="stat-label">Net Type</span><span class="stat-value">Monofilament gill nets</span></div>
+        <div class="stat-box"><span class="stat-label">Net Depth</span><span class="stat-value">6–11 metres</span></div>
+        <div class="stat-box"><span class="stat-label">Key Bycatch Species</span><span class="stat-value">Turtles, dolphins, rays</span></div>
+        <div class="stat-box"><span class="stat-label">Managed By</span><span class="stat-value">KZN Sharks Board</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>How the Nets Work — and What They Actually Do</h3>
+    <p>A shark net in the KZN context is a monofilament gill net — a length of near-invisible fine mesh suspended vertically in the water column, anchored at the bottom and buoyed at the surface, set parallel to the shore at depths of approximately 6–11 metres. These nets are set at intervals along protected beaches and checked by the KwaZulu-Natal Sharks Board's vessels at regular intervals — typically every one to two days — with any entangled animals removed and recorded. The nets are not continuous: there are gaps between individual net sections, and the nets do not extend from the shoreline to the deployment point. Animals can and do swim around, under, and through gaps in the net array.</p>
+    <p>The mechanism by which the nets reduce shark bite incidents is not by forming a physical barrier but by reducing the local density of sharks in the area through ongoing entanglement and lethal removal. A beach with nets in place has, on average, fewer sharks in the nearshore zone — because some proportion of the sharks that would otherwise be there have been caught. The safety effect is real but probabilistic rather than absolute: nets reduce the risk of shark encounter, but do not eliminate it. This distinction matters for the ethical evaluation of the programme: the nets achieve their safety objective through ongoing lethal removal of sharks from the local marine environment, at a cost that includes both target species and a substantial non-target bycatch. A public that believes the nets form an impenetrable barrier may assess this trade-off very differently from one that understands what the nets actually do.</p>
+    <ul>
+        <li>Shark nets are gill nets — not barriers; not connected to shore</li>
+        <li>Set parallel to shore at 6–11 m depth; checked every 1–2 days</li>
+        <li>Reduce shark bite risk by reducing local shark population through lethal removal</li>
+        <li>Do not prevent sharks from reaching the beach — reduce probability only</li>
+        <li>Animals caught are typically dead or fatally injured by time of retrieval</li>
+        <li>KZNSB publishes annual bycatch data — all species and numbers recorded publicly</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>The Bycatch Toll — What the Nets Kill</h3>
+    <p>The KwaZulu-Natal Sharks Board publishes annual catch statistics for the shark net programme, and these records provide the most detailed available picture of the programme's non-target impact. Alongside the target species — primarily bull sharks (Carcharhinus leucas), tiger sharks (Galeocerdo cuvier), and great white sharks (Carcharodon carcharias) — the nets catch an extensive list of animals that pose no threat to swimmers. Among the most ecologically and legally significant non-target animals caught annually are loggerhead and leatherback turtles, both fully protected under South African and international law. Turtles caught in shark nets typically drown when unable to surface to breathe, and survival rates for entangled turtles that are still alive when nets are checked are poor.</p>
+    <p>Indo-Pacific bottlenose dolphins and humpback dolphins — both legally protected species — are also documented bycatch in KZN's nets. Rays, including mantas and eagle rays, are caught in numbers. Many of the shark species caught are themselves of global conservation concern: the scalloped hammerhead (Sphyrna lewini) and smooth hammerhead (Sphyrna zygaena) are both classified as Endangered on the IUCN Red List, and the dusky shark (Carcharhinus obscurus) is Vulnerable. The ethical tension is not simply between human safety and conservation — it is also between protecting swimmers from a small number of dangerous shark species and simultaneously killing large numbers of ecologically important animals that are entirely non-threatening to bathers and whose deaths impose a measurable cost on the marine environment they inhabit.</p>
+    <ul>
+        <li>Loggerhead and leatherback turtles: both caught and frequently drowned — legally protected</li>
+        <li>Indo-Pacific bottlenose and humpback dolphins: protected species caught annually</li>
+        <li>Scalloped and smooth hammerhead sharks: IUCN Endangered — significant bycatch</li>
+        <li>Dusky shark: IUCN Vulnerable — routinely caught in KZN nets</li>
+        <li>Great white shark: Vulnerable and fully protected — killed in nets annually</li>
+        <li>Rays: mantas, eagle rays, and other species caught as non-target bycatch</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Alternative Technologies — What Exists</h3>
+    <p>The argument that bycatch mortality is the unavoidable price of swimmer protection becomes progressively less convincing as alternative technologies mature and demonstrate operational effectiveness. The most significant alternative in active use in KZN is the SMART (Shark Management Alert in Real Time) drumline — a baited hook set on a moored line fitted with a satellite transmitter that sends an alert when a shark takes the bait. When the alert is received, a response vessel checks the line, can tag the animal, assess its condition, and release it alive. SMART drumlines are considerably more selective than gill nets — they primarily target large sharks rather than catching anything that swims through mesh — and they allow live release of both target and non-target animals when caught in viable condition.</p>
+    <p>Other technologies with demonstrated or emerging application include electrical shark deterrent barriers that create a continuous repellent field without harming non-target species; personal electronic shark deterrents worn by swimmers and surfers; drone-based real-time shark surveillance programmes that can detect and alert for shark presence without any lethal component; and enhanced aerial and vessel patrols during peak beach usage periods. The KwaZulu-Natal Sharks Board has been actively trialling SMART drumlines at selected KZN beaches since 2015 and has progressively replaced some net sets with drumline arrays, particularly at sites where bycatch of sensitive species has been most severe. The pace of transition remains contested — conservation organisations advocate faster replacement while the Sharks Board emphasises the need to demonstrate safety equivalence before full transition at any given beach. This is a live, ongoing management process rather than a settled debate.</p>
+    <ul>
+        <li>SMART drumlines: satellite-alert baited hooks — live release of non-target species possible</li>
+        <li>Electrical shark barriers: continuous repellent field — no non-target mortality</li>
+        <li>Personal electronic deterrents: worn by individual swimmers and surfers</li>
+        <li>Drone surveillance: real-time shark detection and beach alert — fully non-lethal</li>
+        <li>KZNSB trialling SMART drumlines since 2015 — progressive replacement of selected net sets underway</li>
+        <li>Conservation organisations advocate faster transition — Sharks Board requires safety equivalence evidence</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>How to Engage With This Issue</h3>
+    <p>The shark net debate in KZN is genuinely complex — it involves real tensions between human safety, marine biodiversity, animal welfare, and the governance of public coastal infrastructure — and it deserves engagement that matches that complexity. Dismissing the safety concern is not honest: shark bites are rare but do occur, cause serious injury and death, and communities have a legitimate interest in managing risk at public beaches. Dismissing the bycatch concern is equally dishonest: the annual documented kill of protected turtles, dolphins, and conservation-listed shark species in a government-managed programme is a real and ongoing ecological cost. The question is whether the balance currently struck by the programme is still the right one given what is now known about the alternatives.</p>
+    <p>Public engagement is accessible because the KwaZulu-Natal Sharks Board is a public entity that publishes its data, holds public meetings, and is democratically accountable through provincial government. Reading the KZNSB's annual catch reports — freely available — is the foundation of an informed position. Participating in public consultation processes when programme methods are under review gives conservation-minded members of the public a direct voice. Supporting organisations including the Endangered Wildlife Trust and the Two Oceans Aquarium Foundation that engage technically with the bycatch issue and advocate for less lethal technologies amplifies that voice through the channels most likely to influence institutional decisions. Staying informed as the SMART drumline transition progresses at KZN beaches — and supporting the political conditions that make that transition possible — is perhaps the most productive form of engagement available to ordinary KZN citizens who care about both swimmer safety and marine biodiversity.</p>
+    <ul>
+        <li>Read KZNSB annual catch statistics — public data, the basis of an informed view</li>
+        <li>Engage with public consultation processes when programme methods are reviewed</li>
+        <li>Support organisations advocating for transition to selective alternatives</li>
+        <li>Report live bycatch animals observed in or near nets to KZNSB immediately</li>
+        <li>Support the political conditions for the SMART drumline transition programme</li>
+        <li>Engage local government and municipal representatives on shark safety policy preferences</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>The Shark Net Debate — History, Science & the Path Forward</h3>
+    <p>The KZN shark net programme was established in 1952 in response to a series of fatal and serious shark attacks on KZN beaches during the late 1940s and early 1950s that generated significant public alarm and political pressure for action. The attacks — some of which occurred at Amanzimtoti, Scottburgh, and Durban's popular bathing beaches — were genuine tragedies, and the government of the day responded with the best tools available at the time: gill nets, deployed on the reasonable expectation that reducing shark numbers in the vicinity of popular beaches would reduce the probability of incidents. By most assessments the programme achieved this objective: shark bite incidents on net-protected KZN beaches declined substantially after net deployment, and in the decades since, KZN's protected beaches have had a significantly lower incidence of attacks than equivalent unprotected stretches of coast.</p>
+    <p>What was not fully understood in 1952 — and what subsequent marine science has progressively revealed — is the ecological role of sharks as keystone predators in marine food web regulation; the global conservation status of many of the species now routinely caught as bycatch; and the scale of non-target mortality that a non-selective entanglement method applied continuously over more than seven decades would generate and sustain. Sharks are now understood to be ecologically critical: their removal from reef systems triggers cascading changes in the abundance and behaviour of prey species, reorganising reef communities in ways that are frequently harmful to reef health and biodiversity. The global decline of shark populations is a well-documented conservation crisis driven by overfishing and bycatch, and KZN's shark nets contribute to that decline for several species of regional and global significance — including species that are themselves legally protected.</p>
+    <p>The path forward that conservation scientists most consistently advocate is not the immediate removal of all KZN shark nets — which would create a real, if probabilistic, increase in shark bite risk at currently protected beaches — but a managed, evidence-based transition to more selective alternatives, beginning at beaches where bycatch of sensitive species is most severe and where SMART drumlines or other technologies have demonstrated comparable safety outcomes. The Sharks Board's own research and the results of drumline trials at pilot sites provide the scientific basis for this transition. What it requires is the political will to accept a somewhat less absolute safety guarantee in exchange for substantially reduced ecological harm — a trade-off that the community, through its elected representatives, ultimately has the authority to make for itself. The conservation community's role is to ensure that this decision — when it is made — is made with full knowledge of what the current programme costs, and what the alternatives can genuinely offer.</p>
+</div>
+
+<h3 class="section-heading">Key Facts — KZN Shark Nets & the Bycatch Problem</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>The Nets Are Not Barriers</h4>
+    <p>The most consequential public misunderstanding about KZN's shark nets is that they form a protective barrier between swimmers and the open ocean. They do not. Shark nets are gill nets set parallel to shore — not connected to the beach, not reaching from surface to seafloor in a continuous wall, not enclosing the swimming area. Sharks can and do pass through gaps and around net ends to reach protected beaches. The nets reduce the probability of encounter by reducing local shark density through lethal removal — they do not eliminate the possibility. A public calibrating its acceptance of the programme's bycatch costs against a belief in barrier protection that is factually incorrect is not making a fully informed decision.</p>
+</div>
+<div class="fact-card">
+    <h4>Great White Sharks Are Caught and Killed</h4>
+    <p>Great white sharks (Carcharodon carcharias) — listed as Vulnerable on the IUCN Red List and fully protected under South African law — are caught in KZN's shark nets annually. A great white entangled in a gill net cannot be reliably released alive: the stress and physical injury of entanglement, combined with the inability to breathe while stationary, typically results in death or fatal injury by the time the net is checked. The legal paradox of a fully protected species being killed in a legally sanctioned government programme has been noted by conservation lawyers and has driven significant advocacy for the shift to SMART drumlines, which allow live release of great whites and other protected species when encountered.</p>
+</div>
+<div class="fact-card">
+    <h4>SMART Drumlines Are Already Operating in KZN</h4>
+    <p>The KwaZulu-Natal Sharks Board has been deploying SMART (Shark Management Alert in Real Time) drumlines at selected KZN beaches since 2015 as part of a progressive trial and transition programme. SMART drumlines use satellite-connected alert systems that notify a response vessel when a shark takes the bait, allowing the crew to respond within hours, tag the animal, and release it alive if it is in viable condition. Early data from KZN trials showed target shark catch rates comparable to net sets, with the critical advantage of allowing live release of non-target and legally protected species. The Sharks Board's annual reports document the ongoing expansion of drumline deployment and the replacement of net sets at selected locations.</p>
+</div>
+<div class="fact-card">
+    <h4>Dolphins Caught in the Nets Are Legally Protected</h4>
+    <p>Indo-Pacific bottlenose dolphins (Tursiops aduncus) and humpback dolphins (Sousa plumbea) — both protected under South African environmental legislation — are caught in KZN's shark nets annually. Dolphins caught in gill nets typically drown because they cannot surface to breathe. Unlike sharks, which are the intended target of the programme, dolphins are universally non-threatening to swimmers and their capture is entirely unintentional collateral damage. The ongoing bycatch of protected dolphin species in a government-managed programme is one of the strongest conservation arguments for transitioning to selective alternatives that allow non-target species to be assessed and released rather than killed indiscriminately.</p>
+</div>
+<div class="fact-card">
+    <h4>Shark Bites — Keeping Proportionality</h4>
+    <p>Shark bites on humans, while serious and sometimes fatal, are rare events relative to the billions of ocean interactions that occur annually. South Africa typically records between 5 and 20 shark bite incidents per year nationally — and KZN's net-protected beaches account for a small fraction of even this low number. The statistical risk of shark bite per ocean swimming session is vanishingly small. This does not mean the risk is unreal or that taking it seriously is irrational — it means that the management response should be proportionate to the actual risk level. Whether a programme that kills thousands of non-target animals annually is proportionate to managing a risk at this level is a legitimate question that the community has a right and a responsibility to ask.</p>
+</div>
+<div class="fact-card">
+    <h4>The Sharks Board — Public Transparency</h4>
+    <p>The KwaZulu-Natal Sharks Board is notable among wildlife management agencies for the public transparency it maintains regarding the programme's outcomes. Annual catch reports — broken down by species, size, condition on retrieval, and beach location — are published and publicly accessible on the KZNSB website. This transparency has been a double-edged asset: it has enabled the conservation community to document and publicise the bycatch toll with precision, driving advocacy for programme reform — while also demonstrating that the Sharks Board is committed to rigorous scientific monitoring of its programme. Engaging with the Sharks Board's published data is the most productive starting point for anyone seeking to participate meaningfully in this debate.</p>
+</div>
+</div>
+
+<a href="ocean.html" class="back-link">← Back to Ocean Awareness</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

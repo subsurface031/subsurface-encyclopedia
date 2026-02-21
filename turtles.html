@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtles – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .turtle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .turtle-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .turtle-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .turtle-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .turtle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .turtle-content {
+            padding: 2rem;
+        }
+
+        .turtle-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .turtle-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .turtle-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .turtle-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>Ancient Mariners of KwaZulu-Natal</h2>
+                <p>Sea turtles are among the oldest living reptiles on Earth, their lineage stretching back over 100 million years to the age of the dinosaurs. In KwaZulu-Natal, these ancient mariners hold a place of profound ecological and cultural significance. The province's coastline — particularly the iSimangaliso Wetland Park and the beaches around Sodwana Bay and Cape Vidal — hosts some of the most important sea turtle nesting and foraging grounds in the entire Indian Ocean region.</p>
+
+                <p>Five species of sea turtle have been recorded in KZN waters, each occupying a distinct ecological role. The loggerhead and leatherback turtles are the most iconic, returning year after year to nest on the same beaches where they themselves were born — a phenomenon known as natal philopatry that has persisted along this coastline for millennia. The iSimangaliso coast supports the most southerly loggerhead nesting beaches in Africa, and one of the most significant leatherback nesting sites on the continent.</p>
+
+                <p>Sea turtles are vital to the health of marine ecosystems. Loggerheads control populations of hard-shelled invertebrates, green turtles graze seagrass beds into productive nursery habitats, leatherbacks regulate jellyfish populations, and hawksbills maintain reef health by feeding on sponges that would otherwise smother corals. The loss of any sea turtle species would trigger cascading effects across multiple ecosystems simultaneously.</p>
+
+                <p>Despite their remarkable resilience over geological timescales, all five species found in KZN waters are now classified as Vulnerable, Endangered, or Critically Endangered. Threats including egg poaching, bycatch in fishing gear, coastal development, plastic pollution, and climate-driven beach erosion have pushed these ancient creatures to the brink. KZN's Ezemvelo KZN Wildlife runs one of Africa's longest-running and most successful sea turtle conservation programmes, having monitored and protected loggerhead and leatherback nesting on the iSimangaliso coast since 1963.</p>
+            </section>
+
+            <section id="turtles" class="turtle-grid">
+
+                <article class="turtle-card">
+                    <div class="turtle-image">
+                        <img src="loggerhead.png" alt="Loggerhead Turtle">
+                    </div>
+                    <div class="turtle-content">
+                        <h3>Loggerhead Turtle</h3>
+                        <p>KZN's most commonly nesting sea turtle, loggerheads are named for their large, powerful heads and crushing jaws. They nest along the iSimangaliso beaches between October and February, with females returning to the exact beach where they were born. These remarkable reptiles can live for over 70 years and travel thousands of kilometres across the Indian Ocean.</p>
+                        <a href="loggerhead-turtle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="turtle-card">
+                    <div class="turtle-image">
+                        <img src="leatherback.png" alt="Leatherback Turtle">
+                    </div>
+                    <div class="turtle-content">
+                        <h3>Leatherback Turtle</h3>
+                        <p>The largest reptile on Earth, the leatherback can reach over 2 metres in length and weigh up to 900 kg. Unlike other sea turtles, it has no hard shell — instead a flexible, leather-like carapace studded with tiny bone fragments. KZN's iSimangaliso coast is one of Africa's most important leatherback nesting sites, with females arriving from as far as the Arctic to lay their eggs.</p>
+                        <a href="leatherback-turtle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="turtle-card">
+                    <div class="turtle-image">
+                        <img src="green-turtle.png" alt="Green Turtle">
+                    </div>
+                    <div class="turtle-content">
+                        <h3>Green Turtle</h3>
+                        <p>Named not for the colour of their shell but for the greenish tint of their fat, green turtles are the only herbivorous sea turtle species. They are important grazers of KZN's seagrass beds and are regularly sighted foraging along the coast. While they nest on iSimangaliso beaches in smaller numbers than loggerheads, green turtles are a frequent and beloved sight for divers throughout KZN's reefs.</p>
+                        <a href="green-turtle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="turtle-card">
+                    <div class="turtle-image">
+                        <img src="hawksbill.png" alt="Hawksbill Turtle">
+                    </div>
+                    <div class="turtle-content">
+                        <h3>Hawksbill Turtle</h3>
+                        <p>One of the most visually striking of all sea turtles, the hawksbill is named for its narrow, pointed beak that resembles a bird of prey. This critically endangered species is a specialist feeder on sea sponges and is closely associated with coral reef environments. Hawksbills are occasionally encountered on KZN's northern reefs around Sodwana Bay, where they play a vital role in maintaining reef health.</p>
+                        <a href="hawksbill-turtle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="turtle-card">
+                    <div class="turtle-image">
+                        <img src="olive-ridley.png" alt="Olive Ridley Turtle">
+                    </div>
+                    <div class="turtle-content">
+                        <h3>Olive Ridley Turtle</h3>
+                        <p>The smallest and most abundant of all sea turtles, the olive ridley is named for its distinctive olive-grey carapace. Although not a regular nesting species in KZN, olive ridleys are periodically encountered in offshore and coastal waters, occasionally washing ashore as strandings. Their remarkable mass nesting events — known as arribadas — make them one of the most extraordinary spectacles in the natural world.</p>
+                        <a href="olive-ridley-turtle.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

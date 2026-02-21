@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Safety & Hazard Warnings – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        /* Intro block */
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(244, 67, 54, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child { margin-bottom: 0; }
+
+        /* Emergency banner */
+        .emergency-banner {
+            background: rgba(183, 28, 28, 0.12);
+            border: 1px solid rgba(244, 67, 54, 0.4);
+            border-radius: 2px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .emergency-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            line-height: 1;
+            margin-top: 0.1rem;
+        }
+
+        .emergency-banner h3 {
+            color: #ef9a9a;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .emergency-banner p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.4rem;
+        }
+
+        .emergency-banner p:last-child { margin-bottom: 0; }
+
+        .emergency-banner strong { color: #ef9a9a; }
+
+        /* Section headings */
+        .section-title {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        /* Hazard severity key */
+        .severity-key {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .severity-card {
+            padding: 1.3rem 1.6rem;
+            border-radius: 2px;
+            border: 1px solid;
+        }
+
+        .severity-card.extreme { background: rgba(183, 28, 28, 0.08); border-color: rgba(183, 28, 28, 0.4); }
+        .severity-card.high { background: rgba(244, 67, 54, 0.07); border-color: rgba(244, 67, 54, 0.35); }
+        .severity-card.moderate { background: rgba(255, 152, 0, 0.07); border-color: rgba(255, 152, 0, 0.35); }
+        .severity-card.low { background: rgba(249, 168, 37, 0.07); border-color: rgba(249, 168, 37, 0.3); }
+
+        .severity-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.45rem;
+            vertical-align: middle;
+        }
+
+        .severity-dot.extreme { background: #ef5350; }
+        .severity-dot.high { background: #e57373; }
+        .severity-dot.moderate { background: #ffb74d; }
+        .severity-dot.low { background: #ffe082; }
+
+        .severity-card h4 {
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .severity-card.extreme h4 { color: #ef5350; }
+        .severity-card.high h4 { color: #e57373; }
+        .severity-card.moderate h4 { color: #ffb74d; }
+        .severity-card.low h4 { color: #ffe082; }
+        .severity-card p { color: #90a4ae; font-size: 0.88rem; line-height: 1.7; }
+
+        /* Hazard cards grid */
+        .hazard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .hazard-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hazard-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .hazard-card.extreme { border-color: rgba(183, 28, 28, 0.35); }
+        .hazard-card.extreme:hover { border-color: rgba(183, 28, 28, 0.6); }
+        .hazard-card.high { border-color: rgba(244, 67, 54, 0.28); }
+        .hazard-card.high:hover { border-color: rgba(244, 67, 54, 0.55); }
+        .hazard-card.moderate { border-color: rgba(255, 152, 0, 0.28); }
+        .hazard-card.moderate:hover { border-color: rgba(255, 152, 0, 0.52); }
+        .hazard-card.low-border { border-color: rgba(249, 168, 37, 0.25); }
+        .hazard-card.low-border:hover { border-color: rgba(249, 168, 37, 0.5); }
+
+        .hazard-image {
+            width: 100%;
+            height: 210px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hazard-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Placeholder icon for cards without images */
+        .hazard-icon-placeholder {
+            font-size: 5rem;
+            opacity: 0.25;
+            user-select: none;
+        }
+
+        .severity-banner {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.22rem 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .severity-banner.extreme { background: rgba(183, 28, 28, 0.2); border: 1px solid rgba(183, 28, 28, 0.5); color: #ef5350; }
+        .severity-banner.high { background: rgba(244, 67, 54, 0.18); border: 1px solid rgba(244, 67, 54, 0.48); color: #e57373; }
+        .severity-banner.moderate { background: rgba(255, 152, 0, 0.14); border: 1px solid rgba(255, 152, 0, 0.42); color: #ffb74d; }
+        .severity-banner.low { background: rgba(249, 168, 37, 0.12); border: 1px solid rgba(249, 168, 37, 0.38); color: #ffe082; }
+
+        .hazard-content { padding: 2rem; }
+
+        .hazard-content h3 {
+            color: #e3f2fd;
+            font-size: 1.35rem;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .hazard-subtitle {
+            color: #78909c;
+            font-style: italic;
+            font-size: 0.88rem;
+            display: block;
+            margin: 0.6rem 0 1rem;
+        }
+
+        .hazard-content p {
+            color: #b0bec5;
+            line-height: 1.85;
+            font-size: 0.94rem;
+            text-align: justify;
+            margin-bottom: 1.3rem;
+        }
+
+        .hazard-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.7rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            color: #90a4ae;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        /* Quick reference table */
+        .hazard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4rem;
+            font-size: 0.92rem;
+        }
+
+        .hazard-table thead tr {
+            background: rgba(100, 149, 237, 0.09);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+        }
+
+        .hazard-table th {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .hazard-table td {
+            padding: 0.9rem 1.2rem;
+            color: #b0bec5;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        .hazard-table tr:last-child td { border-bottom: none; }
+        .hazard-table tr:hover td { background: rgba(100, 149, 237, 0.04); }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .level-badge.extreme { background: rgba(183, 28, 28, 0.18); color: #ef5350; border: 1px solid rgba(183, 28, 28, 0.38); }
+        .level-badge.high { background: rgba(244, 67, 54, 0.14); color: #e57373; border: 1px solid rgba(244, 67, 54, 0.32); }
+        .level-badge.moderate { background: rgba(255, 152, 0, 0.12); color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.30); }
+        .level-badge.low { background: rgba(249, 168, 37, 0.10); color: #ffe082; border: 1px solid rgba(249, 168, 37, 0.28); }
+        .level-badge.variable { background: rgba(100, 149, 237, 0.1); color: #90caf9; border: 1px solid rgba(100, 149, 237, 0.28); }
+
+        /* Safety tips block */
+        .safety-block {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2.5rem 3rem;
+            margin-bottom: 4rem;
+            border-radius: 2px;
+        }
+
+        .safety-block h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .safety-block p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .safety-block p:last-child { margin-bottom: 0; }
+
+        .safety-block a {
+            color: #90caf9;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(144, 202, 249, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .safety-block a:hover { border-color: rgba(144, 202, 249, 0.7); }
+
+        /* General tips grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tip-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            border-radius: 2px;
+            transition: border-color 0.2s ease;
+        }
+
+        .tip-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .tip-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .hazard-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .intro, .safety-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .hazard-table { font-size: 0.83rem; }
+            .hazard-table th, .hazard-table td { padding: 0.7rem 0.8rem; }
+            .severity-key { grid-template-columns: 1fr 1fr; }
+            .emergency-banner { flex-direction: column; gap: 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .hazard-content { padding: 1.5rem; }
+            .header-logo { display: none; }
+            .severity-key { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Beach Safety & Hazard Warnings</h2>
+                <p>KwaZulu-Natal's coastline is one of the most spectacular and biodiverse in the world — but the ocean demands respect. The same warm, productive waters that attract dolphins, turtles, and whale sharks also harbour hazards that injure and kill beachgoers every year. Rip currents account for the majority of lifeguard rescues and drowning deaths on KZN beaches. Marine stings from bluebottles and sea urchin punctures send thousands of people to hospital annually. Bacterial contamination renders certain beaches unsafe to swim in for days or weeks after heavy rainfall. And KZN's semi-diurnal tidal cycle creates predictable but powerful water movement that catches unwary rock fishers and shoreline explorers off guard.</p>
+                <p>This section of the encyclopedia profiles the primary hazards facing ocean users on KZN's beaches, rivers, and inshore reefs — explaining what each hazard is, why it occurs in KZN's specific coastal environment, and critically, what to do if you or someone nearby is affected. Each hazard category links through to a dedicated information page with full detail on identification, treatment, and prevention. Understanding these hazards does not diminish the joy of ocean access — it enables safer, more confident, and more informed engagement with one of KZN's greatest natural treasures.</p>
+                <p>Always check current conditions before entering the water. If a beach has a lifeguard presence, swim between the flags. No catch or fishing spot is worth risking your life. When in doubt, stay out.</p>
+            </section>
+
+            <!-- Emergency contacts -->
+            <div class="emergency-banner">
+                <div class="emergency-icon">🚨</div>
+                <div>
+                    <h3>Emergency Contacts — KwaZulu-Natal</h3>
+                    <p><strong>National Sea Rescue Institute (NSRI):</strong> 087 094 9774 — 24-hour maritime rescue</p>
+                    <p><strong>Emergency Services (Police / Ambulance / Fire):</strong> 10111 (landline) | 112 (mobile)</p>
+                    <p><strong>eThekwini Beach Safety (Durban Metro Lifeguards):</strong> 031 311 9144</p>
+                    <p><strong>Poison Information Helpline (marine stings, ingestion):</strong> 0861 555 777</p>
+                </div>
+            </div>
+
+            <!-- Severity key -->
+            <h2 class="section-title">Hazard Severity Guide</h2>
+            <div class="severity-key">
+                <div class="severity-card extreme">
+                    <h4><span class="severity-dot extreme"></span>Extreme — Potentially Fatal</h4>
+                    <p>Can cause death or severe permanent injury without immediate intervention. Requires urgent emergency response.</p>
+                </div>
+                <div class="severity-card high">
+                    <h4><span class="severity-dot high"></span>High — Serious Risk</h4>
+                    <p>Capable of causing serious injury or illness. Medical attention is strongly recommended in most cases.</p>
+                </div>
+                <div class="severity-card moderate">
+                    <h4><span class="severity-dot moderate"></span>Moderate — Painful & Potentially Dangerous</h4>
+                    <p>Causes significant pain and may require medical treatment, particularly for vulnerable individuals.</p>
+                </div>
+                <div class="severity-card low">
+                    <h4><span class="severity-dot low"></span>Low — Minor Risk</h4>
+                    <p>Usually causes only minor discomfort. Awareness and basic precautions are sufficient for most people.</p>
+                </div>
+            </div>
+
+            <!-- Primary hazards -->
+            <h2 class="section-title">Primary Ocean & Beach Hazards</h2>
+            <div class="hazard-grid">
+
+                <article class="hazard-card extreme">
+                    <div class="hazard-image">
+                        <img src="rip-current.png" alt="Rip Current">
+                        <span class="severity-banner extreme">Extreme — Potentially Fatal</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Rip Currents</h3>
+                        <span class="hazard-subtitle">Seaward channels of fast-moving water</span>
+                        <p>Rip currents are the single most dangerous hazard on KZN's beaches, responsible for the majority of lifeguard rescues and surf drownings in the region. These powerful, narrow channels of water rush seaward through gaps in sandbars, pulling swimmers away from shore faster than most people can swim. Rips are often invisible to the untrained eye and are most dangerous for swimmers who panic and exhaust themselves fighting the current directly.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Drowning risk</span>
+                            <span class="tag">All KZN beaches</span>
+                            <span class="tag">Year-round</span>
+                            <span class="tag">Swimmer awareness critical</span>
+                        </div>
+                        <a href="rip-currents.html" class="learn-more">Full Information & Dangerous Beaches</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card extreme">
+                    <div class="hazard-image">
+                        <img src="shark.png" alt="Shark">
+                        <span class="severity-banner extreme">Extreme — Potentially Fatal</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Shark Encounters</h3>
+                        <span class="hazard-subtitle">Bull, Tiger & Great White Sharks</span>
+                        <p>KZN's warm, productive coastal waters are home to several large shark species including bull sharks, tiger sharks, and seasonal great whites. While unprovoked attacks are statistically rare, they do occur — KZN has historically recorded more shark incidents than almost any other coastline in the world, a pattern that has driven the controversial KZN shark net programme. Understanding shark behaviour and following basic precautions dramatically reduces risk.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Bull shark</span>
+                            <span class="tag">Tiger shark</span>
+                            <span class="tag">Estuaries & open coast</span>
+                            <span class="tag">Dawn & dusk highest risk</span>
+                        </div>
+                        <a href="shark-safety.html" class="learn-more">Full Information & Risk Reduction</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card high">
+                    <div class="hazard-image">
+                        <img src="ecoli.png" alt="E. coli Water Contamination">
+                        <span class="severity-banner high">High — Serious Health Risk</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>E. Coli & Water Contamination</h3>
+                        <span class="hazard-subtitle">Bacterial pollution from stormwater & sewage</span>
+                        <p>Following heavy rainfall, stormwater runoff and sewage overflows flush coliform bacteria — including E. coli — into KZN's rivers, estuaries, and inshore coastal waters. Swimming in contaminated water can cause gastrointestinal illness, ear infections, and eye infections. Several KZN beaches regularly exceed safe bacterial limits after rainfall events, with some urban and peri-urban sites remaining problematic even in dry conditions. eThekwini Municipality publishes water quality results for monitored beaches.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Post-rainfall risk</span>
+                            <span class="tag">Estuaries & river mouths</span>
+                            <span class="tag">Gastrointestinal illness</span>
+                            <span class="tag">Monitor water quality reports</span>
+                        </div>
+                        <a href="ecoli.html" class="learn-more">Full Information & Affected Beaches</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card moderate">
+                    <div class="hazard-image">
+                        <img src="bluebottle.png" alt="Bluebottle Jellyfish">
+                        <span class="severity-banner moderate">Moderate — Painful & Dangerous</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Bluebottle (Portuguese Man O' War)</h3>
+                        <span class="hazard-subtitle">Physalia utriculus</span>
+                        <p>Bluebottles are among the most common and painful marine hazards on KZN's beaches. These colonial organisms — often mistaken for jellyfish — carry venomous tentacles that cause intense, immediate burning pain and raised welts on contact. Strandings occur when onshore winds push bluebottles onto beaches, sometimes in their thousands. While most stings are excruciatingly painful but not life-threatening to healthy adults, severe systemic reactions requiring emergency treatment can occur, particularly in children or allergic individuals.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Onshore wind events</span>
+                            <span class="tag">Summer peaks</span>
+                            <span class="tag">Do not rub the sting</span>
+                            <span class="tag">Hot water treatment</span>
+                        </div>
+                        <a href="bluebottle.html" class="learn-more">Full Information & Treatment</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card moderate">
+                    <div class="hazard-image">
+                        <img src="urchin.png" alt="Sea Urchin">
+                        <span class="severity-banner moderate">Moderate — Painful</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Sea Urchins</h3>
+                        <span class="hazard-subtitle">Echinothrix, Diadema & Tripneustes spp.</span>
+                        <p>Sea urchin spines cause thousands of injuries to KZN beachgoers and divers each year. The long-spined black urchin is common on KZN's reef flats and rocky shores, and its slender, brittle spines penetrate skin easily and break off, requiring careful removal. Some species also bear secondary venomous pedicellariae — tiny jaw-like organs that can deliver painful venom even after the urchin is dead. Reef shoes and careful foot placement are the most effective prevention.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Rocky reefs & tidal pools</span>
+                            <span class="tag">Spine removal required</span>
+                            <span class="tag">Infection risk</span>
+                            <span class="tag">Wear reef shoes</span>
+                        </div>
+                        <a href="urchin.html" class="learn-more">Full Information & Treatment</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card moderate">
+                    <div class="hazard-image">
+                        <img src="tides.png" alt="Tides KZN">
+                        <span class="severity-banner moderate">Moderate — Situational Risk</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Tides & Tidal Trapping</h3>
+                        <span class="hazard-subtitle">KZN's semi-diurnal tidal cycle</span>
+                        <p>KwaZulu-Natal experiences a semi-diurnal tidal pattern — two high tides and two low tides in approximately every 24-hour period. Rising tides trap rock fishers on ledges, cut off access to tidal pools, and flood low-lying beach areas with surprising speed. Understanding the tidal cycle is essential safety knowledge for anyone fishing from rocks, exploring intertidal reefs, or accessing remote beach sections by foot. Tidal ranges vary seasonally and are amplified during spring tides around new and full moons.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Rock fishing risk</span>
+                            <span class="tag">Tidal trapping</span>
+                            <span class="tag">Spring vs neap tides</span>
+                            <span class="tag">Check tide tables</span>
+                        </div>
+                        <a href="tides.html" class="learn-more">Full Information & Tide Cycle Explained</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Secondary hazards -->
+            <h2 class="section-title">Additional Hazards & Things to Look Out For</h2>
+            <div class="hazard-grid">
+
+                <article class="hazard-card high">
+                    <div class="hazard-image">
+                        <img src="boxjelly.png" alt="Box Jellyfish, KZN">
+                        <span class="severity-banner high">High — Medical Attention Advised</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Box Jellyfish & Other Jellyfish</h3>
+                        <span class="hazard-subtitle">Carybdea & Chiropsella spp.</span>
+                        <p>Several species of jellyfish inhabit KZN's coastal waters, with occurrence peaking in summer. Small box jellyfish — far less lethal than their Indo-Pacific relatives but still capable of causing severe pain and systemic reactions — are occasionally encountered in warm, sheltered bays. Moon jellies and other species cause mild to moderate stings. Any jellyfish sting causing chest tightness, difficulty breathing, or spreading pain beyond the sting site requires emergency medical attention immediately.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Summer prevalence</span>
+                            <span class="tag">Sheltered bays</span>
+                            <span class="tag">Systemic reaction possible</span>
+                        </div>
+                        <a href="jellyfish.html" class="learn-more">Full Information & Treatment</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card high">
+                    <div class="hazard-image">
+                        <img src="stonefish.png" alt="Stonefish">
+                        <span class="severity-banner high">High — Medical Attention Advised</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Stonefish & Scorpionfish</h3>
+                        <span class="hazard-subtitle">Synanceia & Scorpaena spp.</span>
+                        <p>Stonefish are the world's most venomous fish and are present on KZN's northern reefs and sandy shallows, camouflaged almost perfectly against rock and rubble. Stepping on a stonefish drives venomous dorsal spines deep into the foot, causing immediate, excruciating pain that can last hours and may cause cardiovascular complications. Scorpionfish — related but less venomous — are far more commonly encountered by divers and snorkellers. Both require immediate hot-water immersion and urgent medical care.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Rocky reef & rubble zones</span>
+                            <span class="tag">Northern KZN coast</span>
+                            <span class="tag">Reef shoes essential</span>
+                            <span class="tag">Hot water treatment</span>
+                        </div>
+                        <a href="stonefish.html" class="learn-more">Full Information & Treatment</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card moderate">
+                    <div class="hazard-image">
+                        <img src="wavebreak.png" alt="Wavebreak">
+                        <span class="severity-banner moderate">Moderate — Serious Injury Risk</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Shorebreak & Dumping Waves</h3>
+                        <span class="hazard-subtitle">Dangerous surf conditions on shallow-bank beaches</span>
+                        <p>KZN's beaches frequently experience powerful shorebreak — waves that break directly onto a steeply sloping beach in shallow water rather than further out. Shorebreak is disproportionately dangerous because it strikes swimmers and waders with full force and can slam bodies into the sand, causing spinal injuries, concussion, and broken limbs. Shallow-bank beaches like certain sections of the South Coast are particularly prone to dumping shorebreak after approaching swells or storms. Never dive headfirst into shorebreak.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Spinal injury risk</span>
+                            <span class="tag">Post-storm swell</span>
+                            <span class="tag">Steep beach profiles</span>
+                            <span class="tag">Never dive head-first</span>
+                        </div>
+                        <a href="shorebreak.html" class="learn-more">Full Information & Safe Zones</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card moderate">
+                    <div class="hazard-image">
+                        <img src="seasnake.png" alt="Sea Snake, KZN">
+                        <span class="severity-banner moderate">Moderate — Situational Risk</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Sea Snakes & Banded Water Cobras</h3>
+                        <span class="hazard-subtitle">Pelamis platura & estuarine species</span>
+                        <p>The yellow-bellied sea snake is occasionally washed ashore on KZN beaches, particularly after storms and strong northerly currents bring warm pelagic water close inshore. While highly venomous, sea snakes are non-aggressive and almost never bite unless handled or trapped. Banded water cobras inhabit KZN's northern estuaries and lake systems. A snake found on the beach should never be handled — report it to lifeguards or NSRI. Any suspected snakebite requires immediate emergency medical treatment.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Post-storm strandings</span>
+                            <span class="tag">Northern estuaries</span>
+                            <span class="tag">Never handle</span>
+                            <span class="tag">Emergency response required</span>
+                        </div>
+                        <a href="sea-snakes.html" class="learn-more">Full Information</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card low-border">
+                   <div class="hazard-image">
+                        <img src="uv.png" alt="UV Radiation & Heat">
+                        <span class="severity-banner low">Moderate — Cumulative Risk</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>UV Radiation & Heat</h3>
+                        <span class="hazard-subtitle">KZN's subtropical sun intensity</span>
+                        <p>KwaZulu-Natal receives some of the highest UV radiation levels in South Africa, with the UV index regularly reaching 11 or above during summer — well into the "Extreme" classification range. Sunburn occurs within 10 minutes of unprotected exposure at peak UV. Repeated sun exposure is the leading cause of skin cancer in South Africa. Heat exhaustion and heat stroke are serious risks during summer beach days, particularly for children and the elderly. Broad-spectrum SPF 50+ sunscreen, protective clothing, and adequate hydration are non-negotiable.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">UV Index 10+ in summer</span>
+                            <span class="tag">Skin cancer risk</span>
+                            <span class="tag">Children especially vulnerable</span>
+                            <span class="tag">SPF 50+ sunscreen required</span>
+                        </div>
+                        <a href="uv-heat.html" class="learn-more">Full Information</a>
+                    </div>
+                </article>
+
+                <article class="hazard-card low-border">
+                   <div class="hazard-image">
+                        <img src="coneshell.png" alt="Cone Shells">
+                        <span class="severity-banner low">Low — Awareness Required</span>
+                    </div>
+                    <div class="hazard-content">
+                        <h3>Cone Shells & Other Molluscs</h3>
+                        <span class="hazard-subtitle">Conus spp. — venomous gastropods</span>
+                        <p>Cone shells are beautifully patterned marine snails found on KZN's northern reefs and sandy areas. Despite their attractive appearance, all cone shells are capable of firing a venomous harpoon-like tooth that can penetrate skin and deliver toxins causing paralysis and, in rare cases, death. There is no antivenom. The rule on KZN reefs: if a shell looks alive or has a living animal inside, do not pick it up. Rock and tidal pool exploration should also be done with care to avoid disturbing fire urchins, bristle worms, and stinging hydroids.</p>
+                        <div class="hazard-tags">
+                            <span class="tag">Northern reefs</span>
+                            <span class="tag">Do not handle live shells</span>
+                            <span class="tag">No antivenom exists</span>
+                            <span class="tag">Tidal pool awareness</span>
+                        </div>
+                        <a href="cone-shells.html" class="learn-more">Full Information</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Quick reference table -->
+            <h2 class="section-title">KZN Beach Hazard Quick Reference</h2>
+            <table class="hazard-table">
+                <thead>
+                    <tr>
+                        <th>Hazard</th>
+                        <th>Severity</th>
+                        <th>Peak Season / Conditions</th>
+                        <th>Immediate Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rip Current</td>
+                        <td><span class="level-badge extreme">Extreme</span></td>
+                        <td>Year-round; worst after storms</td>
+                        <td>Don't fight current — swim parallel to shore, then angle in</td>
+                    </tr>
+                    <tr>
+                        <td>Shark Encounter</td>
+                        <td><span class="level-badge extreme">Extreme</span></td>
+                        <td>Year-round; dawn & dusk highest risk</td>
+                        <td>Exit water calmly; apply pressure to wounds; call emergency services</td>
+                    </tr>
+                    <tr>
+                        <td>E. Coli / Water Contamination</td>
+                        <td><span class="level-badge high">High</span></td>
+                        <td>48–72 hours after heavy rainfall</td>
+                        <td>Exit water; check water quality reports; see doctor if symptoms develop</td>
+                    </tr>
+                    <tr>
+                        <td>Box Jellyfish / Jellyfish</td>
+                        <td><span class="level-badge high">High</span></td>
+                        <td>Summer (Oct – Mar); warm inshore water</td>
+                        <td>Remove tentacles without rubbing; hot water immersion; seek help if systemic reaction</td>
+                    </tr>
+                    <tr>
+                        <td>Stonefish / Scorpionfish</td>
+                        <td><span class="level-badge high">High</span></td>
+                        <td>Year-round on northern reefs</td>
+                        <td>Immerse in hottest bearable water immediately; seek emergency care</td>
+                    </tr>
+                    <tr>
+                        <td>Bluebottle (Portuguese Man O' War)</td>
+                        <td><span class="level-badge moderate">Moderate</span></td>
+                        <td>Summer; onshore wind days</td>
+                        <td>Remove tentacles; immerse in hot water; seek help if severe reaction</td>
+                    </tr>
+                    <tr>
+                        <td>Sea Urchin Spine</td>
+                        <td><span class="level-badge moderate">Moderate</span></td>
+                        <td>Year-round; reef & rocky shore</td>
+                        <td>Remove visible spines carefully; soak in hot water; see doctor if spines break off deep</td>
+                    </tr>
+                    <tr>
+                        <td>Tidal Trapping</td>
+                        <td><span class="level-badge moderate">Moderate</span></td>
+                        <td>Spring tides; full & new moon</td>
+                        <td>Check tide tables before rock access; move to high ground early</td>
+                    </tr>
+                    <tr>
+                        <td>Shorebreak</td>
+                        <td><span class="level-badge moderate">Moderate</span></td>
+                        <td>After approaching swell or storm</td>
+                        <td>Never dive headfirst; enter and exit feet-first; exit water immediately</td>
+                    </tr>
+                    <tr>
+                        <td>Sea Snake</td>
+                        <td><span class="level-badge moderate">Moderate</span></td>
+                        <td>Post-storm strandings; summer</td>
+                        <td>Do not handle; report to lifeguards; emergency services if bitten</td>
+                    </tr>
+                    <tr>
+                        <td>UV Radiation / Heat</td>
+                        <td><span class="level-badge variable">Cumulative</span></td>
+                        <td>Year-round; peak Oct – Feb</td>
+                        <td>Apply SPF 50+; hydrate; seek shade; treat heat exhaustion with rest and fluids</td>
+                    </tr>
+                    <tr>
+                        <td>Cone Shell</td>
+                        <td><span class="level-badge low">Low</span></td>
+                        <td>Year-round; northern reefs</td>
+                        <td>Do not handle; emergency services if stung — no antivenom available</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- General safety tips grid -->
+            <h2 class="section-title">Essential Beach Safety Rules — KZN</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Swim Between the Flags</h4>
+                    <p>Flagged swimming areas are patrolled by trained lifeguards and are selected to avoid the worst rip current channels and other hazards. The flags are not arbitrary — they represent the day's safest entry and exit points based on current conditions. Always swim between them, and never swim at unpatrolled beaches alone.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Never Swim Alone</h4>
+                    <p>Even experienced swimmers can be caught out by rips, cramp, or sudden illness. Always swim with a companion and maintain visual contact. Never enter the water at night, at river mouths after rain, or in conditions you are not confident about.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Check Conditions Before You Go</h4>
+                    <p>Surf reports, tide tables, and water quality data for KZN beaches are available online and via eThekwini Municipality. A quick check before leaving home could prevent a dangerous encounter with a contaminated beach, an extreme spring tide, or a 4-metre swell that makes swimming conditions life-threatening.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Rock Fishing Safety</h4>
+                    <p>More people drown while rock fishing in KZN than in any other single beach activity. Always wear a life jacket, never turn your back on the ocean, fish with a companion, and know your tide times. If a rogue wave catches you — do not try to fight it back to the same rock. Swim away from the rock face and signal for help.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Protect Your Feet on Reefs</h4>
+                    <p>Reef shoes or wetsuit booties prevent the majority of sea urchin, stonefish, and coral injuries. Any access to reef, rocky shore, or tidal pool environments should be done with your feet protected. A good pair of reef shoes is a minimal investment against a potentially serious injury.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Respect Closed Beaches</h4>
+                    <p>When beaches are closed — whether due to shark activity, bacterial contamination, red flag surf conditions, or jellyfish events — the closure is based on real, assessed risk. Ignoring closures puts you and the rescue personnel who must respond to your emergency at serious risk. No swim, surf, or fishing trip is worth a preventable fatality.</p>
+                </div>
+            </div>
+
+            <!-- Advisory block -->
+            <div class="safety-block">
+                <h3>Staying Informed — KZN Beach Safety Resources</h3>
+                <p>The <strong>eThekwini Beach Safety Unit</strong> (Durban Metro Lifeguards) monitors and manages the city's patrolled beaches year-round and publishes water quality data for beaches under municipal management. Their beach status page and social media channels provide up-to-date information on closures, shark alerts, and contamination events. For beaches outside eThekwini — including many on the South Coast and North Coast — check with the relevant local municipality before entering the water after heavy rain.</p>
+                <p>The <strong>National Sea Rescue Institute (NSRI)</strong> operates rescue stations along the KZN coast and provides extensive public safety education material on rip currents, rock fishing safety, and boating emergencies. Their website at <a href="https://www.nsri.org.za" target="_blank">nsri.org.za</a> includes safety guides, drowning prevention resources, and station contact information for the entire South African coastline.</p>
+                <p>The <strong>South African Weather Service</strong> provides surf and sea condition forecasts, UV index readings, and swell forecasts that are relevant to beach safety planning. UV warnings in KZN frequently reach the Extreme category (UV Index 11+) during summer — treating sun protection as optional on a KZN beach is a health risk that accumulates over time into genuine harm.</p>
+                <p>Finally: if you witness a person in distress in the water on any KZN beach, call emergency services immediately (10111 or 112) and alert the nearest lifeguard. Do not enter dangerous surf conditions to attempt a rescue unless you are a trained lifeguard — well-meaning bystander rescues frequently result in multiple drowning victims. Throw or extend something to the distressed swimmer from the shore, and keep eyes on them until professional help arrives.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

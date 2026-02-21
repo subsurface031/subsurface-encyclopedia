@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tope Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Tope Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="tope.png" alt="Tope Shark">
+                    <p class="image-caption">Galeorhinus galeus — Tope Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Tope Shark</h2>
+                    <span class="scientific-name">Galeorhinus galeus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The tope shark, also known as the soupfin shark, school shark, or snapper shark, is a medium-sized houndshark found in temperate coastal waters worldwide. Distinguished by its slender grey-brown body, long pointed snout, and characteristic second dorsal fin that is nearly equal in size to the anal fin, the tope is a highly migratory species that undertakes extensive seasonal movements along continental coastlines. In South Africa, it is known locally as the "vaalhaai" and was historically one of the first shark species to be commercially exploited.</p>
+                    <p>Despite their elegant appearance and relatively docile nature, tope sharks face unprecedented conservation challenges. The species has suffered severe population declines across much of its global range due to intensive commercial fishing driven by demand for their meat, fins, and particularly their liver oil — once prized as one of the richest natural sources of vitamin A. In South African waters, tope populations have declined by more than 50% since 1991, leading to regional assessments classifying the species as Vulnerable and prompting urgent calls for improved fisheries management and marine protected area expansion.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.0 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">45 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">55–70 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 550 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">13–15 years (F)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">6 – 52 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The tope shark is a slender, elongated houndshark with a streamlined body optimised for sustained, efficient swimming across long distances. The head is moderately narrow with a long, pointed snout and relatively large, oval eyes positioned laterally. Small spiracles — vestigial gill openings — are present behind each eye. The mouth is large and crescent-shaped, extending well back beneath the eye, with small, sharp, blade-like teeth arranged in multiple rows. The teeth possess a single pointed central cusp and are finely serrated along the edges, well-suited for grasping slippery fish prey.</p>
+                    <p>Colouration is dark grey to bronze-brown on the dorsal surface with a subtle metallic sheen, transitioning abruptly to white or pale cream on the ventral surface. A faint pale band is often visible along the flanks. The fins are somewhat dusky, particularly at the tips, and juvenile tope under 60 centimetres in length often display conspicuous black markings on the dorsal and caudal fins — a feature that fades with age. The pectoral fins have a distinctive white trailing edge in juveniles, which also becomes less prominent in adults.</p>
+                    <p>One of the tope's most distinctive anatomical features is its second dorsal fin, which is unusually large for a houndshark and nearly equal in height to the anal fin. This sets the tope apart from closely related species like the smoothhound shark, which has a much smaller second dorsal fin. The caudal fin is asymmetrical with a long, prominent upper lobe and a well-developed lower lobe. A distinctive notch is present near the tip of the upper lobe — a characteristic feature of the species. The tope lacks an interdorsal ridge between the first and second dorsal fins, further distinguishing it from some requiem sharks.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Tope sharks are highly migratory and form small schools segregated by age and sex. They undertake extensive seasonal latitudinal and inshore-offshore migrations in response to water temperature changes, prey availability, and reproductive requirements. Tagging studies have documented extraordinary long-distance movements — individuals tagged in the United Kingdom have been recaptured over 2,000 kilometres away in locations as distant as Iceland, the Canary Islands, the Azores, and the Mediterranean Sea. In Australia, tope migrate more than 1,000 kilometres along the southern coast, with some individuals even crossing the Tasman Sea to reach New Zealand.</p>
+                    <p>In South African waters, although detailed movement data is limited, seasonal differences in catch composition and location strongly suggest migrations between nursery grounds, feeding areas, and pupping sites. Tope typically move northward along the coast during winter months when water temperatures decline, then return to southern waters during summer. This migratory behaviour exposes them to fishing pressure across multiple jurisdictions and emphasises the need for coordinated regional management strategies.</p>
+                    <p>Tope sharks exhibit strong sexual and size-based segregation. Adult females often occupy shallower coastal waters — particularly during pregnancy — while males and juveniles tend to range more widely across deeper continental shelf habitats. This segregation is thought to reduce competition for food resources and provide pregnant females with access to sheltered nursery areas when they are ready to give birth. Tope are entirely harmless to humans and pose no threat even when handled. They are a popular target for recreational anglers due to their strong fighting ability and impressive stamina on the line.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Tope sharks are opportunistic predators with a diverse diet that shifts with size, season, and geographic location. They are primarily piscivorous, feeding heavily on small to medium-sized bony fish, though they also consume cephalopods, crustaceans, and occasionally other elasmobranchs. Unlike some houndsharks that specialise in crushing hard-shelled prey, tope possess blade-like teeth designed for grasping and swallowing fish whole or in large pieces.</p>
+                    <p>The species feeds both in open water and near the seabed, employing a combination of active pursuit and opportunistic scavenging. Juveniles in nursery areas feed primarily on small schooling fish such as sardines, anchovies, and juvenile hake, as well as shrimp and small squid. As they grow, tope incorporate larger prey including flatfish, rockfish, midshipmen, salmon, and various reef-dwelling species. They are also known to feed on hagfish, lamprey, and even smaller sharks and rays when the opportunity arises.</p>
+                    <p>Tope are most active during dawn and dusk, coinciding with the peak activity periods of many schooling fish species. They often hunt cooperatively in loose aggregations, using their superior swimming endurance to pursue and exhaust prey over extended distances. Their highly developed sense of smell and electroreception allow them to detect prey even in low-visibility conditions or when buried beneath the substrate.</p>
+                    <ul>
+                        <li>Sardines, anchovies, herring and pilchards</li>
+                        <li>Flatfish, rockfish, midshipmen and salmon</li>
+                        <li>Hake, haddock, whiting and mullet</li>
+                        <li>Squid, octopus and cuttlefish</li>
+                        <li>Crabs, shrimp, marine worms and sea urchins</li>
+                        <li>Small sharks, rays and skates</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Tope sharks are ovoviviparous, meaning embryos develop within eggs that are retained inside the mother's body until hatching. There is no placental connection — embryos are sustained entirely by a large yolk sac throughout development. This reproductive mode is intermediate between egg-laying and true viviparity, with the mother providing protection and oxygenation but no direct nutritional support beyond the yolk.</p>
+                    <p>Mating occurs during spring and early summer, with ovulation following shortly thereafter. After fertilisation, the embryos develop slowly within thin-walled egg capsules inside the female's paired uteri. Gestation lasts an extraordinary 12 months — a full year — making tope one of the few shark species with an annual reproductive cycle that spans precisely one calendar year. Litter sizes are highly variable and strongly correlated with female body size, ranging from as few as 6 pups in small females to as many as 52 pups in very large individuals. The average litter size is approximately 25 to 35 pups.</p>
+                    <p>Pups measure between 30 and 40 centimetres at birth and are born fully developed, with functional teeth and the ability to hunt immediately. Parturition occurs in shallow coastal nursery areas during late spring and summer — typically between November and February in South African waters. These nursery habitats — including sheltered bays, estuaries, and sandy flats — provide critical refuge from predation and access to abundant prey during the pups' vulnerable first years of life.</p>
+                    <p>Tope sharks are exceptionally slow-growing and late-maturing. Males reach sexual maturity at approximately 12 to 17 years of age and 1.4 to 1.6 metres in length, while females mature even later, at 13 to 15 years and 1.5 to 1.8 metres. Maximum lifespan varies regionally but is estimated at 55 to 70 years in some populations, making tope among the longest-lived houndsharks. This combination of late maturity, slow growth, long lifespan, and annual reproduction results in a highly conservative life history strategy that makes populations extremely vulnerable to overfishing and slow to recover from depletion.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The tope shark has a nearly cosmopolitan distribution in temperate and subtropical waters, occurring in the Atlantic, Indian, and Pacific Oceans. The species is found throughout the Eastern Atlantic from Iceland and Norway south to South Africa and the Mediterranean Sea; in the Western Atlantic from southern Brazil to Argentina; in the Western Indian Ocean along the South African coast; in the Southwest Pacific around Australia and New Zealand; in the Central Pacific near Hawaii; and in the Eastern Pacific from British Columbia south to Chile and Peru. Genetic studies have revealed significant population structuring across ocean basins, with three geographically distinct clades identified in the Southern Hemisphere: South America, South Africa, and Australia-New Zealand.</p>
+                <p>Tope sharks are primarily demersal, preferring to swim near the seafloor over continental and insular shelves at depths ranging from the surf zone down to approximately 550 metres. They are most commonly encountered in water less than 100 metres deep, though they have been recorded in submarine canyons and along continental slopes at much greater depths. The species shows a strong preference for temperate waters with sea surface temperatures between 10°C and 20°C, and they typically avoid tropical regions with consistently warm water exceeding 23°C.</p>
+                <p>In KwaZulu-Natal, tope sharks occur at the northern edge of their South African range. They are most abundant along the cooler southern KZN coast, particularly during winter months when the Agulhas Current weakens and cooler water from the south penetrates northward. Tope are rarely encountered in the warmer waters of northern KZN, where sea surface temperatures often exceed their thermal tolerance. Juveniles use shallow coastal bays and sandy flats as nursery grounds, remaining in these protected habitats for several years before dispersing into deeper offshore waters as they mature.</p>
+                <p>The tope shark is listed globally as Vulnerable on the IUCN Red List, with regional assessments ranging from Least Concern in the Eastern North Pacific to Critically Endangered in the Southwest Atlantic. In South Africa, the species is assessed as Vulnerable, reflecting a documented population decline exceeding 50% since 1991. Tope were the first shark species to be commercially exploited in South Africa and remain one of the top five most commercially valuable species, targeted for their meat, fins, and historically for their liver oil — once prized as one of the richest natural sources of vitamin A. During World War II, demand for tope liver oil skyrocketed when other sources of vitamin A became scarce, leading to intensive fishing that decimated populations. Following the war, synthetic vitamin A production reduced fishing pressure somewhat, but tope continue to be heavily exploited by demersal longline, commercial linefish, and inshore trawl fisheries. Catches declined from 692 tonnes in 1952 to 329 tonnes by 2016 — a decline driven not by reduced effort but by the collapse of available biomass. Projections indicate a greater than 60% probability that tope shark populations will decline by more than 85% over three generation lengths, placing the species at serious risk of regional extinction without immediate conservation intervention. No species-specific conservation measures are currently in place in South Africa, underscoring the urgent need for catch limits, expanded marine protected areas, and the protection of critical nursery habitats to ensure the long-term survival of this iconic species in KZN waters.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Vitamin Shark</h4>
+                    <p>During World War II, tope sharks were intensively harvested for their liver oil, which was discovered to be one of the richest natural sources of vitamin A. With other vitamin sources scarce during wartime, tope liver oil became extremely valuable, and prices skyrocketed — leading to population collapses that persist to this day despite decades of reduced fishing pressure.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Marathon Migrators</h4>
+                    <p>Tope sharks are among the most migratory of all coastal sharks. Individuals tagged in the United Kingdom have been recaptured over 2,000 kilometres away in the Canary Islands, Iceland, and the Mediterranean Sea. Some Australian tope have even crossed the Tasman Sea to New Zealand — a journey exceeding 1,600 kilometres across open ocean.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Ancient Elders</h4>
+                    <p>Tope sharks are exceptionally long-lived, with maximum lifespans estimated at 55 to 70 years depending on the population. This makes them among the longest-lived houndsharks and means that large adults encountered today may have been born before the 1970s — living through decades of environmental change and fishing pressure.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Many Names</h4>
+                    <p>The tope shark has accumulated more common names than almost any other shark species, reflecting its wide distribution and commercial importance. Names include soupfin shark, school shark, snapper shark, liver-oil shark, vitamin shark, sweet william, penny dog, miller's dog, rig, soupie, and in South Africa, vaalhaai — Afrikaans for "grey shark."</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Globally Depleted</h4>
+                    <p>Tope shark populations have been severely depleted across much of their global range. In the Southwest Atlantic, the species is assessed as Critically Endangered following population collapses exceeding 80%. In South Africa, catches have declined by more than 50% since 1991 despite continued fishing effort — indicating that biomass, not fishing activity, is driving the decline.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Angler's Prize</h4>
+                    <p>Tope sharks are highly prized by recreational anglers for their powerful fighting ability and impressive stamina. They are known for making long, sustained runs when hooked and can battle for extended periods before tiring. This fighting spirit, combined with their tendency to form schools, makes them popular targets for shore and boat anglers worldwide.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

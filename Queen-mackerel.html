@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Mackerel – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="fish.html">Fish</a>
+                <span>›</span>
+                Queen Mackerel (Natal Snoek)
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="queen-mackerel.png" alt="Queen Mackerel">
+                    <p class="image-caption">Scomberomorus plurilineatus — Queen Mackerel, KZN coastal waters</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Queen Mackerel (Natal Snoek)</h2>
+                    <span class="scientific-name">Scomberomorus plurilineatus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The queen mackerel — known locally throughout KwaZulu-Natal as Natal snoek or simply "couta" — is one of the coast's most iconic and hard-fighting game fish. Sleek, fast, and devastatingly aggressive when feeding, queen mackerel epitomise the thrill of inshore fishing along KZN's coastline. These torpedo-shaped predators patrol beaches, rocky points, river mouths, and offshore reefs throughout the year, hunting in packs for sardines, anchovies, and squid with a ferocity that makes them favourites among shore anglers, ski-boat fishers, and kayak anglers alike.</p>
+                    <p>Distinguished by their elongated silver body marked with rows of faint bronze or copper spots, razor-sharp triangular teeth, and a powerful forked tail built for explosive acceleration, queen mackerel are perfectly adapted to life as high-speed coastal hunters. When hooked, they combine blistering initial runs that strip line from reels, spectacular aerial leaps that see them shake and twist violently to throw the hook, and relentless fighting stamina that tests even experienced anglers. Their excellent table qualities — firm white flesh with a rich, slightly oily flavour — combined with their accessibility to shore-based and small-boat fishers make them one of KZN's most popular recreational species.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">1.2 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~18 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">~70 km/h</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~9 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KZN Season</span>
+                            <span class="stat-value">Year-round</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 200 m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>Queen mackerel possess the classic mackerel body plan — long, streamlined, and built for sustained high-speed pursuit. The body is laterally compressed with a deeply forked tail that delivers explosive thrust. The dorsal surface is metallic blue-grey to greenish-grey, fading to brilliant silver on the flanks and white on the belly. The flanks are marked with multiple longitudinal rows of bronze or copper spots that give the species its scientific name plurilineatus — meaning "many lines." These spots are more prominent in juveniles and tend to fade with age, though they remain visible in good light.</p>
+                    <p>The head is elongated with a pointed snout and large eyes positioned well forward — adaptations for visual hunting of fast-moving prey. The mouth is large and filled with razor-sharp, triangular, laterally compressed teeth designed for slicing through fish rather than gripping. These teeth are a serious hazard — queen mackerel are notorious for biting through fishing line and inflicting deep lacerations on unwary anglers attempting to remove hooks. The jaw structure allows queen mackerel to open their mouths extremely wide, enabling them to swallow relatively large prey whole.</p>
+                    <p>Two dorsal fins sit well separated on the back — the first is tall and spinous with 15 to 18 spines that fold flat during high-speed swimming, while the second is much smaller and soft-rayed. Behind the second dorsal and anal fins are series of 5 to 6 small finlets that reduce turbulence along the trailing edge of the body. Adults typically measure 60 to 90 centimetres and weigh 3 to 10 kilograms, though exceptional individuals approaching 1.2 metres and 18 kilograms are recorded from KZN waters.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Queen mackerel are fast-swimming, highly social predators that hunt in loosely coordinated schools ranging from a few individuals to several dozen fish. They are primarily diurnal hunters — most active during daylight hours when visual predation is most effective — though they will feed opportunistically at night when prey is abundant or conditions are favourable. Queen mackerel are most commonly encountered inshore during early morning and late afternoon when they move close to beaches, rocky points, and river mouths to intercept baitfish concentrations.</p>
+                    <p>When feeding, queen mackerel engage in spectacular surface-feeding frenzies that are visible from considerable distances. Schools drive baitfish to the surface, creating boiling patches of whitewater as fish slash through the panicked prey with their razor-sharp teeth. These feeding events often attract seabirds — terns and gulls diving on the scattered baitfish — and the presence of working birds is a primary method used by anglers to locate feeding schools. The frenzy can last from a few minutes to over an hour, with the school moving rapidly along the coastline as it pursues fleeing prey.</p>
+                    <p>Queen mackerel are capable of extraordinary bursts of speed — approaching 70 km/h over short distances — making them among the fastest fish in KZN's coastal waters. This speed is essential both for hunting fast-swimming prey like sardines and flying fish, and for evading larger predators including sharks, dolphins, and game fish. When hooked, queen mackerel make powerful, sustained runs and will leap clear of the water repeatedly — shaking their heads violently in attempts to throw the hook.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Queen mackerel are aggressive, opportunistic predators that feed primarily on small to medium-sized schooling fish. Their diet is dominated by sardines, anchovies, and pilchards — the same baitfish that support much of KZN's marine food web. They also consume mackerel, horse mackerel, flying fish, and juvenile fish of many species including mullet, springer, and even smaller queen mackerel. Squid and cuttlefish are important secondary prey, particularly during periods when baitfish are less abundant or when mackerel schools encounter squid aggregations offshore.</p>
+                    <p>Feeding strategies vary depending on prey behaviour and environmental conditions. When hunting schooling fish near the surface, queen mackerel attack in coordinated charges — driving prey into tight bait balls and slashing through them with open mouths and snapping jaws. Individual fish may consume a dozen or more sardines in a single feeding bout. When feeding on flying fish, queen mackerel use explosive surface strikes to ambush prey as they emerge from the water. Squid are typically hunted at greater depths and are consumed whole after being seized with a quick strike.</p>
+                    <ul>
+                        <li>Sardines, anchovies, and pilchards</li>
+                        <li>Mackerel, horse mackerel, and scad</li>
+                        <li>Flying fish and halfbeaks</li>
+                        <li>Squid, cuttlefish, and octopus</li>
+                        <li>Juvenile fish including mullet and springer</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Queen mackerel are relatively fast-growing fish that reach sexual maturity at approximately 2 to 3 years of age when they measure around 50 to 60 centimetres in length. Maximum lifespan is estimated at around 9 years, though most individuals in heavily fished populations probably do not exceed 5 to 6 years. This relatively short lifespan means that queen mackerel populations are dependent on consistent recruitment — successful spawning and survival of juveniles — to maintain abundance in the face of natural and fishing mortality.</p>
+                    <p>Spawning occurs in warm coastal waters during spring and summer months, with peak activity between October and March in KZN. Females are highly fecund, releasing hundreds of thousands to over a million eggs per spawning season depending on body size. Eggs are tiny, pelagic, and buoyant, drifting in the upper water column where they hatch within 24 to 36 hours in warm water. Larvae and juveniles grow rapidly, reaching 20 to 30 centimetres within their first year. Juveniles often remain in sheltered bays and estuaries where food is abundant and predation risk is lower than in open water.</p>
+                    <p>There is no parental care — eggs, larvae, and juveniles are entirely planktonic and subject to high mortality from predation by jellyfish, other fish, and seabirds. Survival rates are strongly influenced by environmental conditions including water temperature, food availability, and ocean currents. Successful recruitment events — years when large numbers of juveniles survive to adulthood — are critical to maintaining healthy queen mackerel populations and can lead to dramatic fluctuations in abundance from year to year.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Queen Mackerel in KZN Waters & Fishing Culture</h3>
+                <p>Queen mackerel are present in KwaZulu-Natal's coastal waters year-round, though their nearshore abundance fluctuates with the seasonal movements of baitfish, water temperature, and oceanographic conditions. They are most abundant inshore during the warmer months between October and April when sardine runs, mackerel schools, and other prey concentrations draw queen mackerel close to beaches, rocky points, piers, and river mouths. During winter, many fish move offshore or northward into warmer waters, though resident populations remain accessible to anglers throughout the year.</p>
+                <p>Queen mackerel hold a special place in KZN's recreational fishing culture. They are accessible to shore anglers fishing from beaches, rocks, and piers; to ski-boat anglers trolling lures or fishing live baits close inshore; and increasingly to kayak anglers who pursue them in the surf zone and around rocky headlands. The sight of feeding mackerel schools driving baitfish at the surface — marked by diving birds and boiling water — sends anglers scrambling for rods and running toward the action in scenes that play out on KZN beaches every summer.</p>
+                <p>Traditional fishing methods include trolling small chrome spoons and rapalas behind ski-boats, casting metal lures or live baits into feeding schools from shore, and drifting or slow-trolling live sardines or mackerel near rocky points and drop-offs. Queen mackerel strike with explosive aggression, often hooking themselves before the angler can react, and their initial runs can be heart-stopping — stripping 50 or more metres of line in seconds. The combination of accessibility, fighting ability, and excellent eating quality makes queen mackerel one of KZN's most popular target species.</p>
+                <p>Despite recreational and commercial fishing pressure, queen mackerel populations in KZN appear relatively stable compared to many other coastal species. Their fast growth, early maturity, high reproductive output, and wide geographic distribution provide some buffer against overfishing. The species is currently classified as Least Concern globally. However, ongoing monitoring of catch rates, size structure, and recruitment success is essential to ensure that fishing pressure remains sustainable. The queen mackerel's ecological importance as both predator and prey — linking nutrient-rich baitfish populations to larger game fish, sharks, and dolphins — means that maintaining healthy mackerel populations benefits the entire coastal ecosystem.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Natal Snoek vs Cape Snoek</h4>
+                    <p>Despite sharing the common name "snoek," the Natal snoek (queen mackerel) and Cape snoek are completely different species from different families. Cape snoek (Thyrsites atun) is a long, snake-like fish found in cold Cape waters, while Natal snoek is a true mackerel found in warm subtropical waters. The name "snoek" simply means "pike" in Afrikaans, referring to the elongated shape both species share.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Razor-Wire Teeth</h4>
+                    <p>Queen mackerel possess some of the sharpest teeth of any fish in KZN waters — triangular, laterally compressed blades designed for slicing rather than gripping. These teeth can sever monofilament line instantly and inflict deep lacerations on hands. Experienced anglers use wire traces or heavy fluorocarbon leaders, and handle landed fish with extreme care — gripping them firmly behind the head to avoid the snapping jaws.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Kayak Fishing Favourite</h4>
+                    <p>The rise of kayak fishing in KZN has made queen mackerel more accessible than ever. Kayak anglers can reach feeding schools in the surf zone, position themselves near rocky points, and cover water quickly to locate fish — all while experiencing the thrill of fighting a powerful mackerel from a small, manoeuvrable craft. The explosive strikes and powerful runs take on an entirely new dimension when fighting from a kayak that can be towed across the surface.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Bird Watchers</h4>
+                    <p>Experienced mackerel anglers spend as much time watching seabirds as they do watching their lines. When terns, gulls, and gannets begin working — diving repeatedly in concentrated areas — it's a sure sign that predatory fish are driving baitfish to the surface. Queen mackerel schools often trigger these feeding frenzies, and locating the birds is the fastest way to find the fish during peak feeding periods.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Smoked Snoek Tradition</h4>
+                    <p>Queen mackerel (Natal snoek) are prized for smoking — a culinary tradition with deep roots in KZN's fishing communities. Fresh mackerel are filleted, brined overnight, then hot-smoked over wood chips until the flesh turns golden-brown and develops a rich, smoky flavour. Smoked snoek is eaten fresh, used in pâtés and pasta dishes, or vacuum-sealed for later consumption — a taste of the ocean that brings back memories of successful fishing trips.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Speed Demons</h4>
+                    <p>Queen mackerel are among the fastest fish in KZN's coastal waters, capable of burst speeds approaching 70 km/h. This extraordinary acceleration is powered by their torpedo-shaped body, deeply forked tail, and the ability to fold all fins flush into body grooves during high-speed pursuit — minimising drag and maximising hydrodynamic efficiency. When hooked, this speed translates into screaming runs that can empty a reel in seconds if the drag isn't set correctly.</p>
+                </div>
+            </div>
+
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                   <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

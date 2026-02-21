@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stonefish & Scorpionfish – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(244, 67, 54, 0.5); color: #e57373; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(244, 67, 54, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="safety.html">Beach Safety</a><span>›</span>Stonefish & Scorpionfish</div>
+<section class="species-hero">
+<div class="species-image-block"><img src="stonefish.png" alt="Stonefish"><p class="image-caption">Synanceia & Scorpaena spp. — Stonefish & scorpionfish, KZN reefs</p></div>
+<div class="species-intro">
+<h2>Stonefish & Scorpionfish</h2>
+<span class="scientific-name">Synanceia & Scorpaena spp.</span>
+<span class="conservation-badge">⚠ HIGH HAZARD — Medical Attention Advised</span>
+<p>Stonefish are the world's most venomous fish and are present on KwaZulu-Natal's northern reefs and sandy shallows, camouflaged almost perfectly against rock and rubble substrates. Stepping on a stonefish drives venomous dorsal spines deep into the foot, causing immediate, excruciating pain that can last hours and may cause cardiovascular complications requiring emergency medical treatment. Scorpionfish — related but less venomous members of the same family — are far more commonly encountered by divers and snorkelers on KZN reefs. Both fish are ambush predators that remain motionless while waiting for prey, relying on camouflage so effective they are nearly indistinguishable from their surroundings until accidentally contacted.</p>
+<p>Stonefish and scorpionfish possess 12 to 13 venomous dorsal spines housed in protective sheaths. When pressure is applied to the fish's back — typically by stepping on it or handling it — the integumentary sheath compresses, forcing venom from glands at the base of each spine up through grooves in the spine and into the wound. The venom contains heat-labile proteins that cause intense pain, tissue damage, and in severe envenomations, cardiovascular and neurological effects. Immediate hot water immersion is the most effective first aid treatment, followed by urgent medical care. Stonefish antivenom exists and may be administered in severe cases, though it is rarely available outside major medical centers.</p>
+<div class="quick-stats">
+<div class="stat-box"><span class="stat-label">Venom Spines</span><span class="stat-value">12 – 13 dorsal</span></div>
+<div class="stat-box"><span class="stat-label">Pain Duration</span><span class="stat-value">Hours to days</span></div>
+<div class="stat-box"><span class="stat-label">Common in KZN</span><span class="stat-value">Northern reefs</span></div>
+<div class="stat-box"><span class="stat-label">Lethality</span><span class="stat-value">Potentially fatal</span></div>
+<div class="stat-box"><span class="stat-label">Treatment</span><span class="stat-value">Hot water 45°C</span></div>
+<div class="stat-box"><span class="stat-label">Prevention</span><span class="stat-value">Reef shoes essential</span></div>
+</div>
+</div>
+</section>
+<div class="info-grid">
+<div class="info-section"><h3>What Are Stonefish & Scorpionfish?</h3>
+<p>Stonefish (genus Synanceia) and scorpionfish (genus Scorpaena and related genera) are members of the family Scorpaenidae — venomous ray-finned fish found in tropical and temperate waters worldwide. Stonefish are the most venomous members of the family and are widely recognized as the most venomous fish in the world. Their lethality stems from a combination of potent neurotoxic venom, effective camouflage, and the fact that they inhabit shallow waters where human encounters are frequent. Scorpionfish are less venomous but still capable of causing severe pain and medical complications requiring treatment.</p>
+<p>Both fish are masters of camouflage, resembling rocks, coral rubble, or algae-covered substrates with extraordinary accuracy. Stonefish have lumpy, warty skin covered with algae and sediment that makes them virtually invisible against reef backgrounds. Scorpionfish display vivid but cryptic colouration — reds, browns, yellows, and whites arranged in patterns that break up their outline and blend seamlessly with surrounding coral and rock. Both species remain motionless for extended periods while ambushing prey, adding to the difficulty of detecting them before accidental contact occurs. The 12 to 13 venomous dorsal spines that run along their backs erect when the fish is disturbed, creating a defensive barrier that injects venom into anything that applies pressure from above.</p>
+</div>
+<div class="info-section"><h3>Symptoms & Medical Risks</h3>
+<p>Stonefish and scorpionfish envenomations cause immediate, excruciating pain at the puncture site — often described as the worst pain victims have ever experienced. The pain intensifies rapidly over 20 to 60 minutes and can last for hours or even days without treatment. The affected area becomes swollen, red, and hot to touch. Tissue around the puncture site may turn pale or blue as blood flow is disrupted by venom effects on blood vessels. Blistering and tissue necrosis can develop, particularly with deep spine penetrations or multiple punctures. The pain is so severe that victims often experience nausea, vomiting, sweating, and altered consciousness from the pain alone.</p>
+<p>Systemic effects from stonefish venom include cardiovascular complications such as hypotension (low blood pressure), tachycardia (rapid heart rate), arrhythmias (irregular heartbeat), and in severe cases, cardiovascular collapse and death. Neurological effects include muscle weakness, paralysis, difficulty breathing, seizures, and loss of consciousness. Scorpionfish envenomations produce similar but generally milder systemic symptoms. Deaths from stonefish envenomation have been documented, though they are rare and typically occur in cases where victims receive no medical treatment or have pre-existing cardiovascular conditions. Prompt hot water immersion and medical care dramatically improve outcomes and reduce the risk of permanent complications.</p>
+<ul>
+<li>Immediate excruciating pain at puncture site</li>
+<li>Pain intensifying over 20-60 minutes, lasting hours to days</li>
+<li>Swelling, redness, and tissue discoloration around wound</li>
+<li>Blistering and tissue necrosis at puncture site</li>
+<li>Systemic effects: hypotension, tachycardia, arrhythmias</li>
+<li>Neurological effects: muscle weakness, paralysis, difficulty breathing</li>
+<li>Severe cases: cardiovascular collapse, seizures, death</li>
+</ul>
+</div>
+<div class="info-section"><h3>First Aid & Treatment</h3>
+<p>The most effective first aid for stonefish and scorpionfish envenomations is immediate hot water immersion. Immerse the affected limb in water as hot as the victim can tolerate without causing burns — typically 42 to 45°C (110 to 113°F) — for 30 to 90 minutes or until medical care is available. The heat denatures the heat-labile venom proteins, dramatically reducing pain and preventing further venom spread. Test water temperature carefully before immersion to avoid scalding injuries. If a thermometer is unavailable, have an uninjured person test the water first. Hot water treatment should be initiated within minutes of envenomation for maximum effectiveness.</p>
+<p>After hot water treatment begins, carefully remove any visible spine fragments from the wound using tweezers, taking care not to squeeze venom glands that may have broken off with the spine. Clean the wound gently with soap and fresh water. Do not apply a tourniquet, cut the wound, or attempt to suck out venom — these interventions are ineffective and may worsen injury. All stonefish and scorpionfish envenomations require professional medical evaluation to assess for retained spine fragments, tissue damage, and systemic complications. Stonefish antivenom is available and may be administered in severe cases, though supplies are limited and it is rarely stocked outside major medical centers. Pain management may require intravenous opioid analgesics, and severe envenomations may necessitate intensive care monitoring for cardiovascular complications.</p>
+<ul>
+<li>Immediately immerse affected limb in hot water (42-45°C) for 30-90 minutes</li>
+<li>Test water temperature carefully to avoid scalding burns</li>
+<li>Continue hot water treatment until medical care is available</li>
+<li>Remove visible spine fragments carefully with tweezers</li>
+<li>Clean wound gently with soap and fresh water</li>
+<li>Do NOT apply tourniquet, cut wound, or attempt to suck venom</li>
+<li>Seek urgent medical care — all envenomations require evaluation</li>
+<li>Stonefish antivenom may be administered in severe cases</li>
+</ul>
+</div>
+<div class="info-section"><h3>Prevention & Risk Reduction</h3>
+<p>The single most effective prevention strategy for stonefish and scorpionfish injuries is wearing protective footwear whenever accessing sandy shallows, rocky reefs, or rubble zones. Reef shoes with thick, puncture-resistant soles, wetsuit booties with hard bottoms, or dive boots provide excellent protection against spine penetration. Stonefish and scorpionfish spines can penetrate thin-soled water shoes and flip-flops, so footwear must have substantial sole thickness. Never walk barefoot on sandy or rocky substrates in tropical waters where these fish occur — their camouflage is so effective that stepping on them is virtually inevitable without visual confirmation of every footfall.</p>
+<p>When snorkeling or diving, maintain neutral buoyancy and avoid contact with the bottom. Scorpionfish are frequently encountered perched on coral heads, ledges, and rock outcrops where divers place hands for stability. Always look carefully before placing hands or knees on any substrate, and never grab or lean on coral or rock without visual confirmation that no fish are present. Stonefish and scorpionfish remain motionless even when approached closely, relying on camouflage rather than flight. This means you can be centimeters away from a stonefish without realizing it until contact occurs. Night diving increases risk dramatically as both fish are more active after dark and are nearly impossible to see with artificial light alone. Use a dive light methodically to scan substrates ahead of your path, and avoid areas with heavy sedimentation where stonefish are most likely to hide.</p>
+<ul>
+<li>ALWAYS wear thick-soled reef shoes or dive boots in sandy/rocky areas</li>
+<li>Never walk barefoot on substrates where stonefish may occur</li>
+<li>Maintain neutral buoyancy while diving — avoid bottom contact</li>
+<li>Look carefully before placing hands or knees on any substrate</li>
+<li>Never grab or lean on coral or rock without visual confirmation</li>
+<li>Use dive lights methodically during night dives to scan ahead</li>
+<li>Avoid sandy/rubble areas with heavy sedimentation</li>
+<li>Educate yourself on stonefish/scorpionfish appearance and behaviour</li>
+</ul>
+</div>
+</div>
+<div class="info-section-full"><h3>The World's Most Venomous Fish — Understanding Stonefish Lethality</h3>
+<p>Stonefish hold the distinction of being the most venomous fish on Earth — a title earned through a combination of venom potency, effective delivery system, and frequency of human encounters. The venom contains a protein-based toxin called verrucotoxin that causes severe pain, cardiovascular effects, and tissue necrosis. In laboratory studies, stonefish venom has proven lethal to experimental animals at remarkably low doses, and there are documented cases of human fatalities from stonefish envenomation in Indo-Pacific regions where these fish are endemic. The venom's effects are comparable to those of some terrestrial venomous snakes, earning stonefish a well-deserved reputation as one of the ocean's most dangerous creatures.</p>
+<p>Despite their fearsome reputation, stonefish fatalities are rare. Most deaths occur in remote areas where victims receive no medical treatment, or in cases where multiple spines penetrate simultaneously, delivering large venom doses. Prompt hot water immersion dramatically reduces pain and prevents systemic complications in the majority of cases. Stonefish antivenom — prepared from equine plasma immunized with stonefish venom — is highly effective when administered early, though it is rarely available outside major medical centers and Australian hospitals. The antivenom has been shown to cross-react with scorpionfish and lionfish venoms, suggesting shared biochemical properties among Scorpaenidae venoms that may allow a single antivenom to treat envenomations from multiple species.</p>
+<p>Stonefish are found throughout the Indo-Pacific region, with the highest diversity and abundance in Australian waters, Southeast Asia, and the western Pacific. In South African waters, stonefish occurrence is limited primarily to the northern KZN coast and southern Mozambique where tropical reef systems extend into the region. Scorpionfish are far more widespread along the KZN coastline and are regularly encountered by divers and snorkelers on both shallow and deep reefs. While scorpionfish envenomations are less dangerous than stonefish stings, they still cause severe pain and require medical treatment. The key lesson is simple: respect all members of the Scorpaenidae family, wear appropriate footwear in areas where they occur, and seek immediate medical care if envenomation occurs. The few seconds it takes to put on reef shoes may prevent hours of excruciating pain and days of medical treatment.</p>
+</div>
+<h3 class="section-heading">Critical Facts About Stonefish & Scorpionfish</h3>
+<div class="facts-grid">
+<div class="fact-card"><h4>World's Most Venomous Fish</h4><p>Stonefish are widely recognized as the most venomous fish on Earth. Their venom contains verrucotoxin — a protein-based toxin that causes excruciating pain, cardiovascular effects, and tissue necrosis. Venom potency is comparable to some terrestrial venomous snakes, and documented human fatalities exist. Stonefish envenomations require immediate hot water treatment and urgent medical care.</p></div>
+<div class="fact-card"><h4>Hot Water Denatures Venom</h4><p>Immersing the affected limb in hot water (42-45°C) for 30 to 90 minutes is the most effective first aid for stonefish and scorpionfish envenomations. The heat denatures heat-labile venom proteins, dramatically reducing pain and preventing venom spread. Hot water treatment should begin within minutes of envenomation for maximum effectiveness. This simple intervention can mean the difference between manageable pain and hours of agony.</p></div>
+<div class="fact-card"><h4>Masters of Camouflage</h4><p>Stonefish and scorpionfish are masters of camouflage, resembling rocks, coral rubble, or algae-covered substrates with extraordinary accuracy. Stonefish have lumpy, warty skin covered with algae and sediment, making them virtually invisible against reef backgrounds. Both species remain motionless for extended periods, relying on camouflage rather than flight. This makes accidental contact nearly inevitable without protective footwear and visual vigilance.</p></div>
+<div class="fact-card"><h4>12-13 Venomous Dorsal Spines</h4><p>Stonefish and scorpionfish possess 12 to 13 venomous dorsal spines that erect when the fish is disturbed. When pressure is applied from above, the integumentary sheath compresses, forcing venom from glands at the spine base up through grooves and into the wound. The venom delivery system is highly efficient, ensuring substantial venom injection even from brief contact. Multiple spine penetrations deliver correspondingly larger venom doses.</p></div>
+<div class="fact-card"><h4>Antivenom Available But Rare</h4><p>Stonefish antivenom — prepared from equine plasma immunized with stonefish venom — is highly effective when administered early. The antivenom cross-reacts with scorpionfish and lionfish venoms, allowing it to treat envenomations from multiple Scorpaenidae species. However, antivenom is rarely stocked outside major medical centers and Australian hospitals. Most KZN medical facilities do not maintain stonefish antivenom supplies, making prompt hot water treatment and supportive care the primary interventions.</p></div>
+<div class="fact-card"><h4>Reef Shoes Are Essential</h4><p>Thick-soled reef shoes or dive boots with puncture-resistant soles are essential protection against stonefish and scorpionfish injuries. Never walk barefoot on sandy or rocky substrates in tropical waters where these fish occur. Their camouflage is so effective that stepping on them is virtually inevitable without protective footwear. The minimal investment in proper footwear prevents potentially life-threatening envenomations and hours of excruciating pain.</p></div>
+</div>
+<a href="safety.html" class="back-link">← Back to Beach Safety</a>
+</div></main>
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

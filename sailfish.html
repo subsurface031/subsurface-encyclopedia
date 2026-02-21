@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sailfish – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem; text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(255, 193, 7, 0.5); color: #ffc107; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="fish.html">Fish</a>
+                <span>›</span>
+                Sailfish
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="sailfish.png" alt="Sailfish">
+                    <p class="image-caption">Istiophorus platypterus — Sailfish, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Sailfish</h2>
+                    <span class="scientific-name">Istiophorus platypterus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The sailfish is one of the ocean's most breathtaking and iconic predators — a billfish of extraordinary beauty, speed, and athleticism whose spectacular leaping displays and blistering runs have made it the holy grail of big game fishing along the KwaZulu-Natal coast. Named for the magnificent cobalt-blue dorsal fin that stretches almost the entire length of its back and can stand taller than the fish itself, the sailfish is widely regarded as the fastest fish in the ocean, capable of reaching burst speeds in excess of 110 km/h when hunting prey or evading threats.</p>
+                    <p>In KwaZulu-Natal, sailfish are most abundant in offshore waters during the warmer months between November and April, when the Agulhas Current pushes particularly warm water close to the coast. They are prized quarry for game fishers launching from charter vessels at Durban, Ballito, Richards Bay, and Sodwana Bay — and on a good day, multiple sailfish can be encountered in a single outing. Their aerial acrobatics when hooked — launching themselves metres above the water in a series of spinning, tail-walking leaps — are among the most electrifying spectacles in saltwater sport fishing.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">3.4 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~100 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">13 – 15 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Top Speed</span>
+                            <span class="stat-value">110+ km/h</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KZN Season</span>
+                            <span class="stat-value">Nov – Apr</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Dive Depth</span>
+                            <span class="stat-value">~350 m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The sailfish is among the most visually striking fish in the ocean. The body is elongated, strongly compressed laterally, and built for pure speed — a hydrodynamic masterpiece with a stiff, deeply forked lunate tail, retractable pectoral fins, and a grooved body surface that channels water flow at high velocity. The upperparts are a deep metallic blue to cobalt, fading through silver-blue on the flanks to a white or cream underside. When excited — during feeding, spawning, or when threatened — the body illuminates with vivid electric-blue bars and spots that flash and shift in milliseconds, created by specialized iridescent pigment cells called iridophores.</p>
+                    <p>The defining feature is the enormous first dorsal fin — the "sail" — which is cobalt blue and covered with scattered black spots. At rest and during high-speed swimming, this sail is folded into a groove along the back to reduce drag. During feeding attacks and social displays, it is erected dramatically, sometimes exceeding the fish's own body depth. The bill is long, round in cross-section, and approximately twice the length of the lower jaw — used as a weapon to slash and stun prey rather than to spear it.</p>
+                    <p>Females are consistently larger than males, a common trait among billfish. Adults average 2 to 2.5 metres in length and 30 to 60 kg in weight. The KZN record stands at over 60 kg. The largest individuals globally approach 3.4 metres and 100 kg, though fish exceeding 50 kg are considered exceptional. Sailfish grow extremely rapidly — reaching 1.2 to 1.5 metres in their first year alone.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Sailfish are highly active, surface-oriented pelagic predators that spend most of their time in the upper 10 to 20 metres of the water column, though they make frequent vertical dives to depths of 200 to 350 metres to pursue prey or escape the midday heat. They are predominantly solitary hunters but aggregate in loose groups when prey is concentrated — often coordinating attacks on bait balls in a form of proto-cooperative hunting without the sophisticated coordination seen in dolphins or orcas.</p>
+                    <p>When hunting schooling fish, sailfish use a strategy unique among large pelagic predators. Multiple individuals spread out around a school, raising their sails to herd the fish into a tighter and tighter ball. Then they take turns darting into the school, slashing their bills left and right to stun or injure fish before turning to consume them. Individual sailfish show consistent lateralized striking preferences — some consistently strike left while others strike right — with injured fish accumulating over time, making the school progressively easier to catch.</p>
+                    <p>Sailfish are spectacular jumpers when disturbed or hooked, performing tail-walking runs, high cartwheeling leaps, and greyhounding — a series of long, low skipping leaps across the surface. They can leap to heights equalling their entire body length — over 3 metres above the surface. Their fighting ability when hooked, combined with their aerial displays and raw speed, places them among the most exciting game fish on the planet.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Sailfish are opportunistic apex predators, consuming a wide variety of prey across different depth zones depending on season, location, and prey availability. In KZN offshore waters, sardines, anchovies, mackerel, and other small pelagic schooling fish form the bulk of the diet during summer months. Squid and cuttlefish are important year-round prey items, particularly at night when squid migrate into shallower water. Sailfish also consume flying fish, halfbeaks, and various reef fish when hunting close to the continental shelf edge.</p>
+                    <p>The bill is a versatile hunting weapon used in two distinct ways. Slashing — a horizontal sweeping motion — is used against schooling fish, stunning multiple individuals simultaneously. Tapping — a short, rapid vertical strike — is used against individual prey, driving the bill into the fish's body before it is seized. Sailfish teeth, though tiny, are file-like and numerous, helping to grip and manipulate slippery prey. A single feeding sailfish may injure far more fish than it consumes — injured fish from a feeding event can be detected for considerable distances by other predators, triggering secondary feeding frenzies.</p>
+                    <ul>
+                        <li>Small pelagic fish (sardines, anchovies, mackerel)</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Flying fish and halfbeaks</li>
+                        <li>Crustaceans (occasionally)</li>
+                        <li>Reef-associated fish near shelf edges</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Sailfish spawn in warm surface waters during the warmer months, with peak spawning activity in KZN occurring between November and March when sea surface temperatures exceed 24°C. Spawning is a surface event — females signal readiness by erecting their dorsal fin above the water surface to attract males. One or more males pursue a female in tight formation, and spawning occurs through simultaneous release of eggs and sperm into the water column. A single female can release between 4.5 and 5 million eggs per spawning event.</p>
+                    <p>Fertilised eggs hatch within 36 hours into tiny larvae just 2 to 3 mm long. Sailfish grow with extraordinary speed — the fastest of any billfish — adding up to 3 mm per day in the larval stage and reaching 1.2 to 1.5 metres within their first year. This rapid growth allows them to quickly outgrow most predators. Sexual maturity is reached at 1 to 2 years, corresponding to a size of approximately 1.4 to 1.6 metres. Most sailfish in KZN waters are fully reproductively mature within two years of birth.</p>
+                    <p>Sailfish live for 13 to 15 years under natural conditions, though few fish reached this age historically due to fishing pressure. They are highly migratory, moving between inshore and offshore waters seasonally in response to prey movements and water temperature changes. KZN sailfish are part of the broader Indo-Pacific population, which ranges across the Indian and Pacific Oceans between latitudes 40°N and 40°S.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Sailfishing in KwaZulu-Natal</h3>
+                <p>KwaZulu-Natal has long been one of Africa's premier destinations for sailfish, with the warm Agulhas Current delivering reliable populations of fish to within striking distance of shore between November and April. The deep submarine canyons off Durban and the continental shelf edge off Ballito and Sodwana Bay concentrate baitfish — and consequently sailfish — within reach of day-charter boats. Durban's bluewater fishing fleet, operating from Wilson's Wharf and the Point Yacht Club, has targeted sailfish for decades, contributing to the development of catch-and-release practices that have become standard in KZN game fishing.</p>
+                <p>The shift from kill fishing to catch and release has been one of the most significant developments in KZN game fishing over the past three decades. Sailfish are now almost universally released by responsible anglers, with satellite tagging programs revealing remarkable information about post-release survival and migration routes. Properly handled sailfish have extremely high post-release survival rates — studies suggest over 90% survive catch-and-release encounters — making this form of conservation-conscious fishing compatible with population sustainability.</p>
+                <p>Despite legal protection in some jurisdictions and widespread catch-and-release practices in recreational fisheries, sailfish face significant pressure from commercial longline and driftnet operations targeting tuna and swordfish across the Indian Ocean, where sailfish are caught as bycatch in large numbers. The species is classified as Vulnerable by the IUCN, and continued monitoring of KZN populations is essential to detect population trends and inform management decisions. Climate change — through its effects on prey distribution and ocean temperature — is increasingly altering sailfish distribution and seasonal availability along the KZN coast.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Fastest Fish in the Ocean</h4>
+                    <p>The sailfish holds the record as the fastest fish in the ocean, capable of burst speeds exceeding 110 km/h — faster than a cheetah's top sprint. This extraordinary speed is generated by a powerful lunate tail and streamlined body, with the sail folded flush to reduce drag during high-speed runs. Even sustained cruising speeds of 40 to 60 km/h are beyond the reach of most ocean predators.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Living Colour Display</h4>
+                    <p>Sailfish can change colour in milliseconds — flashing electric blue bars and spots across their silver-blue bodies during feeding frenzies, spawning events, and social displays. This extraordinary colour-change ability, controlled by specialized iridophore cells, is used to communicate excitement, coordinate attacks on bait balls, and signal reproductive readiness to potential mates.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>The Iconic Sail</h4>
+                    <p>The enormous cobalt-blue dorsal fin — sometimes taller than the fish's own body depth — is normally folded flat during swimming to reduce drag. It is raised dramatically during feeding attacks to herd prey, during social displays, and when the fish is excited or threatened. The raised sail has been shown to reduce head oscillation, making the bill less detectable by prey fish schools.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>5 Million Eggs Per Spawn</h4>
+                    <p>A single female sailfish can release 4.5 to 5 million eggs per spawning event. This extraordinary fecundity compensates for the extremely low survival rate of larvae in the open ocean. Larvae hatch within 36 hours and grow at up to 3 mm per day — the fastest growth rate of any billfish — reaching over a metre in length within their first year.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Coordinated Bill Strikes</h4>
+                    <p>Individual sailfish show consistent handedness — a preference for striking left or right with their bills that remains constant throughout their lives. This individual-level specialization is remarkably similar to handedness in humans, and may increase efficiency by reducing competition between fish for the same prey items within a coordinated hunting group.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>KZN Catch and Release</h4>
+                    <p>KwaZulu-Natal's game fishing community has embraced catch-and-release for sailfish, with over 90% of sailfish now released alive after capture. Properly handled sailfish have post-release survival rates exceeding 90%, making responsible sport fishing a sustainable and conservation-compatible activity. Satellite tagging has revealed that KZN sailfish migrate as far as the Mozambique Channel and the central Indian Ocean.</p>
+                </div>
+            </div>
+
+            <a href="fish.html" class="back-link">← Back to Fish</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings</a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swimming Crab (Blue Crab) – Sub-Surface Encyclopedia</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+        .header-title { flex: 1; text-align: center; }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+        h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+        .subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+
+        nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+        .breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+        .species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+        .image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+        .species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+        .scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+        .species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+
+        .conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(76, 175, 80, 0.5); color: #81c784; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        .quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+        .stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+        .stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; }
+        .info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+        .info-section ul li::before { content: '–'; position: absolute; left: 0; color: #90caf9; }
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(100, 149, 237, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+        .info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+        .info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+        .fact-card h4 { color: #90caf9; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        .section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+
+        .back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+        .back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+
+        footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+        .footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+        .social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+
+        @media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="crustaceans.html">Crustaceans</a>
+                <span>›</span>
+                Swimming Crab (Blue Crab)
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="swimming-crab.png" alt="Swimming Crab">
+                    <p class="image-caption">Portunus pelagicus — Blue Swimming Crab, KZN estuaries, bays and sandy habitats</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Swimming Crab (Blue Crab)</h2>
+                    <span class="scientific-name">Portunus pelagicus</span>
+                    <span class="conservation-badge">✓ Least Concern</span>
+                    <p>The blue swimming crab is one of KwaZulu-Natal's most striking and combative crustaceans — an iridescent, paddle-legged predator that combines the agility of an open-water swimmer with the ferocity of an ambush hunter and the explosive temper of an animal that has never lost a confrontation it was willing to start. Portunus pelagicus — the flower crab or blue swimmer — is instantly recognisable by its vivid electric-blue colouration on the claws and legs of adult males, its distinctly paddle-shaped fifth pair of legs that function as oars for surprisingly swift swimming, and the bold, aggressive defensive posture it assumes when threatened: claws raised high and wide, body lowered, every antenna-flick a declaration that this animal is willing to fight anything that comes within reach.</p>
+                    <p>Found throughout KZN's sandy bays, estuaries, lagoons, and nearshore coastal waters, swimming crabs occupy a dynamic, mobile existence that distinguishes them sharply from the sedentary crabs of the rocky shore. Rather than defending a fixed territory from a crevice, swimming crabs patrol open sandy bottoms, seagrass beds, and estuarine channels — hunting actively, migrating with the tides between feeding grounds, and pursuing prey with a combination of burst swimming and rapid walking that few animals in their habitat can evade. Their paddle legs allow genuine mid-water swimming capability — an unusual ability among crabs — making them effective hunters in the water column as well as on the bottom.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Carapace Width</span>
+                            <span class="stat-value">up to 20 cm</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~600 g</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Habitat</span>
+                            <span class="stat-value">Sandy & estuarine</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 50 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~3 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Activity</span>
+                            <span class="stat-value">Day & night</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The blue swimming crab has a broad, transversely oval carapace that is wider than it is long — a body form well suited to forward-facing swimming as well as the characteristic sideways crab walk. The carapace bears nine lateral teeth on each side, with the outermost tooth extended into a long, sharp spine that gives the crab an impressively wide and dangerous profile when viewed head-on. The surface of the carapace is smooth with fine granulations and bears a variable pattern of whitish or pale blue spots against an olive-green to brownish background — providing useful camouflage against sandy and seagrass substrates.</p>
+                    <p>The colouration difference between sexes is pronounced. Adult males are the most visually striking: the claws, walking legs, and paddle legs are suffused with vivid iridescent blue — sometimes approaching an electric cerulean in large, healthy individuals — while the carapace retains its olive-green patterning. Females are generally less vividly coloured, with more muted blue tones and often a greenish-brown overall appearance. Juveniles of both sexes are pale and cryptically patterned, gradually acquiring adult colouration through successive moults.</p>
+                    <p>The defining anatomical feature is the fifth pair of walking legs — modified into broad, flattened paddles with a disc-like dactylus that functions as an oar during swimming. These paddle legs can beat rapidly in an alternating or synchronous rhythm to propel the crab through the water column at speeds of up to 1 metre per second — impressive for a crab — or fold against the body during bottom-walking to avoid snagging on substrate. The claws are long, slender, and armed with sharp teeth along their inner edges, designed for gripping slippery prey like fish and squid rather than crushing hard-shelled molluscs.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Swimming crabs are among the most alert and reactive of KZN's crustaceans — animals that seem perpetually ready for either a meal or a fight. Their wide-set eyes have an excellent field of view, and they respond to visual stimuli — the shadow of an approaching object, movement in the water column above — with remarkable speed and consistency. When a potential threat is detected, the immediate response is the characteristic threat display: the crab squares itself to face the disturbance, raises both claws wide and high, lowers the body slightly, and holds position — a posture that presents the maximum claw span and communicates clearly that retreat is not the first option. This display is directed at predators, rival crabs, and curious humans with equal conviction.</p>
+                    <p>Foraging behaviour is highly active and opportunistic. Swimming crabs patrol sandy bottoms and estuarine channels during both day and night, using chemical cues from their antennules and mechanical vibration detection from sensory hairs on the body to locate prey. When prey is detected, the approach combines careful stalking with sudden explosive acceleration — the crab using both swimming and running to close the distance before the prey can escape. Prey capture is achieved with a rapid forward lunge of both claws simultaneously, the long toothed fingers gripping and immobilising prey items before they can react.</p>
+                    <p>Swimming crabs show pronounced tidal and seasonal movements. In KZN's estuaries, they move up-estuary on flooding tides to exploit productive shallow feeding grounds and retreat to deeper channels on the ebb. Seasonally, large aggregations form in sheltered embayments during summer when water temperatures peak and prey concentrations are highest. During winter, individuals may move offshore into deeper, warmer water. Females undertake migrations to release larvae in high-salinity coastal waters, and post-larval settlement often occurs in lower-salinity estuarine areas that serve as nursery habitats for juveniles.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Swimming crabs are aggressive, wide-ranging predators that feed on a broad spectrum of prey encountered during their active foraging. Their long, slender claws with toothed inner edges are well adapted for capturing and holding slippery, fast-moving prey — small fish are a preferred target and are seized with explosive claw strikes that immobilise before the fish can escape. Squid and cuttlefish are also taken when available, and swimming crabs have been observed pursuing fish in open water — using their swimming ability to chase prey items that would outrun a walking crab with ease.</p>
+                    <p>On sandy bottoms, swimming crabs are efficient mollusc predators, excavating bivalves buried in the sediment and using their claws to prise or chip open the shells. Prawns and shrimps are taken opportunistically, and swimming crabs readily scavenge carrion encountered during their patrols. Smaller crabs — including juvenile swimming crabs — are also consumed, making cannibalism a significant mortality factor in dense populations. The broad dietary spectrum of the swimming crab means that it functions as a significant top predator across multiple habitat types and prey communities in KZN's coastal ecosystems.</p>
+                    <ul>
+                        <li>Small fish — mullet, sardines, anchovies</li>
+                        <li>Prawns, shrimps, and small crustaceans</li>
+                        <li>Squid and cuttlefish</li>
+                        <li>Bivalves and buried molluscs</li>
+                        <li>Carrion and organic matter</li>
+                        <li>Juvenile crabs including conspecifics</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction & Life History</h3>
+                    <p>Blue swimming crabs have a relatively fast-paced life history — growing rapidly, reaching sexual maturity within their first year, reproducing prolifically, and rarely surviving beyond 3 years in the wild. This fast-and-early reproductive strategy makes them resilient to moderate fishing pressure but vulnerable to intensive exploitation that removes large, reproductively active individuals before they can spawn multiple times. Mating follows the same pattern as other portunid crabs — males guard pre-moult females, mating occurs immediately after the female moults, and females store sperm for use in multiple egg batches.</p>
+                    <p>Females in berry — carrying egg masses beneath the abdomen — are a common sight in KZN's coastal waters during spring and summer. A large female may carry hundreds of thousands of bright orange eggs that gradually darken as they develop. Egg masses are incubated for 2 to 4 weeks before larvae are released in high-salinity coastal water, where they spend 3 to 5 weeks developing through zoea and megalopa stages before settling. Post-larval crabs settle preferentially in sheltered, vegetated estuarine habitats — seagrass beds and mangrove fringes — where food is abundant and predation pressure is lower than in open coastal waters.</p>
+                    <p>Juvenile swimming crabs grow extremely rapidly in warm KZN waters, moulting frequently and reaching harvestable size within 6 to 9 months of settlement. The carapace width increases by 20 to 30 percent at each moult, and juveniles may moult every 2 to 3 weeks during peak growth periods. Growth rates slow as individuals approach maximum size, and the moult interval lengthens to weeks or months in large adults. The combination of fast growth, high fecundity, and estuarine nursery habitats makes blue swimming crab populations naturally resilient — provided that the estuaries and coastal habitats they depend on remain healthy and productive.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Swimming Crabs in KZN: Fisheries, Cuisine & Ecology</h3>
+                <p>The blue swimming crab occupies an interesting position in KwaZulu-Natal's coastal economy and culture — commercially significant enough to support targeted fisheries in some areas, yet still sufficiently abundant in healthy estuaries and bays to be encountered regularly by recreational anglers, divers, and coastal walkers. In KZN's larger estuarine systems, particularly around Durban Bay, the St Lucia estuary complex, and the Kosi Bay system, blue swimming crabs are a familiar presence — netted incidentally in prawn trawls, caught on drop nets and crab traps by recreational harvesters, and occasionally taken by hand from shallow water by waders willing to risk the claws.</p>
+                <p>As table fare, blue swimming crabs are excellent — the sweet, delicate white meat found in the claws and body cavity is highly regarded in KZN's coastal communities and restaurants, and freshly caught crabs steamed or cooked in a spicy tomato sauce are a cherished coastal meal. The relatively small size of most KZN individuals — carapace widths of 10 to 15 centimetres being typical in most accessible areas — means that multiple crabs are needed for a satisfying meal, and the effort-to-reward ratio of catching and processing them is balanced by the quality of what ends up on the plate. In some northern KZN communities, particularly around Kosi Bay and Sodwana, blue swimming crabs are harvested using traditional trap methods and sold locally alongside other seafood.</p>
+                <p>Ecologically, blue swimming crabs are important components of multiple habitat communities in KZN's coastal zone. In estuaries, they function as significant predators of juvenile fish, prawns, and molluscs — potentially regulating the abundance of their prey species and preventing any single prey population from becoming overabundant. They are in turn preyed upon by a range of larger animals: dolphins that enter estuaries, large estuarine fish including kob and garrick, sharks patrolling shallow bays, and shore birds including large herons that are adept at catching crabs in the shallows. Their role in linking the productivity of estuarine and coastal habitats — moving between the two as they grow — makes them important vectors for energy transfer between these interconnected ecosystems.</p>
+                <p>The health of blue swimming crab populations in KZN is closely tied to the condition of the estuaries they depend on for nursery habitat. The degradation of seagrass beds and mangrove fringes through coastal development, sedimentation, and pollution removes the sheltered, food-rich nursery environments where juvenile crabs develop — reducing recruitment success and ultimately limiting adult population sizes in coastal waters. Maintaining the ecological integrity of KZN's estuarine systems is therefore essential not only for the direct conservation of swimming crab populations but for the broader coastal fisheries and ecosystems that benefit from their abundance.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>The Blue That Warns</h4>
+                    <p>The vivid iridescent blue colouration of male blue swimming crabs is not camouflage — it is the opposite: a warning signal and a status advertisement. The intensity of blue colouration in males correlates with body condition and dominance status, and rival males assess each other's colour before deciding whether to escalate a confrontation. Females also use male colouration as a quality indicator during mate selection — brighter blue males tend to be larger, healthier individuals whose genetics are worth passing on to the next generation.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Dangerous to Handle</h4>
+                    <p>Blue swimming crabs are among the most aggressive and difficult-to-handle crustaceans in KZN's coastal waters. Unlike rock crabs that wedge into crevices, or mud prawns that simply try to burrow away, a swimming crab actively turns to face any threat and strikes with its claws with speed and accuracy. The long, pointed claw fingers can penetrate skin with ease, and the grip strength of a large individual is capable of drawing blood and causing genuine pain. Experienced crab handlers always approach from behind and grip the lateral carapace spines — the only relatively safe hold.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>True Swimmers</h4>
+                    <p>Unlike most crabs that merely float or are carried passively by currents, blue swimming crabs are genuine active swimmers — capable of sustained mid-water locomotion using their paddle legs. This swimming ability allows them to exploit food resources in the water column, to migrate across open sandy bottoms with far less energy expenditure than walking, and to make rapid vertical excursions between the bottom and the surface. Fishers have observed swimming crabs pursuing schools of small fish at the surface — a hunting behaviour that blurs the line between benthic and pelagic predator.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Soft Shell Delicacy</h4>
+                    <p>In the 24 to 48 hours immediately following a moult, swimming crabs — like all crustaceans — are soft, defenceless, and extraordinarily vulnerable. However, this post-moult "soft shell" phase is also when the meat yield is highest and the flesh has a particularly delicate texture. In parts of Asia where Portunus pelagicus is extensively farmed, soft-shell crabs harvested at the exact moment of moulting are considered a premium delicacy — eaten whole, shell and all, after light frying. This culinary tradition has not yet become established in KZN but represents an interesting potential value-addition opportunity for small-scale aquaculture.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Estuarine Nurseries</h4>
+                    <p>The dependence of juvenile blue swimming crabs on KZN's estuaries as nursery habitats means that the health of these systems directly determines the abundance of adult crabs in adjacent coastal waters. Studies on KZN's estuaries have found that the density of juvenile swimming crabs in seagrass beds is one of the strongest predictors of adult crab abundance in neighbouring bays and reefs the following season — making estuarine habitat quality an essential management consideration for anyone interested in maintaining productive coastal crab populations.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Crab Drop-Netting</h4>
+                    <p>A traditional and highly effective method for catching blue swimming crabs in KZN's estuaries involves a circular drop net baited with fish offal or crushed mussel — lowered flat to the bottom on a rope, left for 10 to 20 minutes, then rapidly pulled to the surface before crabs feeding on the bait can escape over the rim. On productive estuarine flats at night — when crabs are most actively feeding — a single well-placed drop net can yield several crabs per set, making this a practical and accessible harvesting method for both subsistence and recreational crab collectors throughout the KZN coast.</p>
+                </div>
+            </div>
+
+            <a href="crustaceans.html" class="back-link">← Back to Crustaceans</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

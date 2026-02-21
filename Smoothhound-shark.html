@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoothhound Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ef5350;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Smoothhound Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="smoothhound.png" alt="Smoothhound Shark">
+                    <p class="image-caption">Mustelus mustelus — Common Smoothhound Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Smoothhound Shark</h2>
+                    <span class="scientific-name">Mustelus mustelus</span>
+                    <span class="conservation-badge">⚠ Endangered</span>
+                    <p>The common smoothhound shark, also known simply as the smoothhound or "hondhaai" in Afrikaans, is a medium-sized houndshark found throughout the Eastern Atlantic and Southwestern Indian Ocean. Characterised by its slender grey-brown body, smooth skin, and distinctive large second dorsal fin, this bottom-dwelling species is a familiar presence in KwaZulu-Natal's shallow coastal waters, sandy bays, and rocky reefs — where it is frequently caught by recreational shore and ski-boat anglers.</p>
+                    <p>Despite being one of the most commercially important shark species in South African waters, smoothhound populations have declined dramatically in recent decades due to intensive fishing pressure across multiple fisheries. The species has suffered a documented population decline of over 42% since 1991, with catches dropping from 252 tonnes in 2010 to just 124 tonnes by 2016. This precipitous decline has resulted in the species being reclassified as Endangered on the IUCN Red List — a stark reminder of the urgent conservation action needed to prevent further population collapse.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">1.65 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~30 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">~25 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">5 – 100 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-label">10–11 years (F)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">4 – 23 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The smoothhound is a slender-bodied houndshark with a relatively flattened head, elongated snout, and large, oval eyes positioned laterally on the head. Its most distinctive anatomical feature is its unusually large second dorsal fin, which is nearly equal in height to the first dorsal fin — a characteristic that distinguishes it from most other coastal shark species, including the superficially similar tope shark, which has a much smaller second dorsal fin.</p>
+                    <p>Colouration is grey-brown to bronze on the dorsal surface, fading to white or pale grey on the underside. Many specimens exhibit a pattern of distinct black spots scattered irregularly across the upper body and flanks, though the intensity and distribution of these spots varies considerably between individuals. This spotted morph was historically recognised as a separate species, the blackspotted smoothhound, but genetic studies have since confirmed that spotted and non-spotted individuals belong to the same species.</p>
+                    <p>The caudal fin is asymmetrical with a well-developed upper lobe and a distinct ventral notch near the tip. The pectoral fins are moderately large and triangular. Smoothhounds have small, closely packed teeth arranged in multiple rows — forming a crushing pavement ideally suited for processing hard-shelled prey such as crabs and lobsters. The skin is relatively smooth compared to other sharks, giving the species its common name, though it still bears the characteristic dermal denticles that define all elasmobranchs.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Smoothhound sharks are primarily benthic, spending most of their time swimming close to the seafloor where they forage for crustaceans and small fish. They are typically solitary or found in small loose aggregations, though they occasionally form large schools — particularly during seasonal migrations or in response to concentrated food sources. The species' tendency to gather in groups earned it the common name "houndshark," as early observers likened these aggregations to packs of hunting dogs.</p>
+                    <p>Smoothhounds exhibit sexual segregation, with mature females showing a preference for shallower coastal waters while males and juveniles occupy slightly deeper habitats on the continental shelf. This segregation is thought to reduce intraspecific competition and provide females with access to productive nearshore feeding areas during pregnancy. Tagging studies have revealed evidence of coastal migrations, with some individuals travelling considerable distances along the South African coastline — though the species is not as highly migratory as large pelagic sharks like dusky or copper sharks.</p>
+                    <p>The species is entirely harmless to humans and poses no threat even when handled by anglers. Smoothhounds are docile and non-aggressive, relying on camouflage and avoidance rather than confrontation when threatened. They are commonly encountered by recreational anglers fishing from beaches, piers, and ski-boats, and are often released alive — though survival rates after capture can be variable depending on handling practices and water temperature.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Smoothhound sharks are specialised benthic predators with a diet dominated by hard-shelled invertebrates. Their powerful jaws and pavement-like crushing teeth are ideally adapted for processing crustaceans such as crabs, lobsters, and shrimp — which collectively comprise the vast majority of their diet. Unlike sharks with sharp, blade-like teeth designed for cutting flesh, smoothhounds possess broad, flattened teeth with rounded cusps that function as a crushing mill, allowing them to pulverise the exoskeletons of their prey before swallowing.</p>
+                    <p>Diet composition shifts with size and age. Juvenile smoothhounds feed almost exclusively on small crustaceans such as mud crabs, shore crabs, and swimming crabs, as well as shrimp and amphipods. As they grow, larger individuals incorporate a wider variety of prey including cephalopods — particularly octopus, squid, and cuttlefish — and small bony fish such as gobies, porgies, and flatfish. However, even large adults continue to rely heavily on crustaceans, particularly spiny lobsters and slipper lobsters, which are abundant in the rocky reef habitats favoured by the species.</p>
+                    <p>Smoothhounds are primarily nocturnal feeders, becoming most active during the evening and nighttime hours when many of their crustacean prey emerge from crevices and burrows to forage. They hunt primarily by scent and electroreception, using their ampullae of Lorenzini to detect the weak electrical fields generated by buried or hidden prey. Once a prey item is located, the shark uses suction and jaw pressure to extract it from the substrate before crushing and consuming it.</p>
+                    <ul>
+                        <li>Crabs (shore crabs, mud crabs, swimming crabs)</li>
+                        <li>Lobsters (spiny lobsters, slipper lobsters)</li>
+                        <li>Shrimp, prawns, and mantis shrimp</li>
+                        <li>Cephalopods (octopus, squid, cuttlefish)</li>
+                        <li>Small bony fish (gobies, porgies, flatfish)</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Smoothhound sharks are viviparous with a yolk-sac placenta — meaning embryos develop internally, initially sustained by a large yolk sac, which eventually forms a placental connection to the mother during later stages of development. This reproductive mode, intermediate between egg-laying and true placental viviparity, allows the mother to provide some nutritional support to her developing pups beyond the yolk supply alone.</p>
+                    <p>Mating occurs seasonally, with copulation taking place during the late autumn and winter months — typically between May and June in southern African waters. After mating, fertilised eggs develop into embryos within the female's paired uteri. Gestation lasts approximately 10 to 11 months, with parturition occurring the following late autumn — between April and May. Litter sizes are highly variable and correlated with female body size, ranging from as few as 4 pups in small females to as many as 23 pups in large, mature individuals. The average litter size is approximately 10 to 12 pups.</p>
+                    <p>Pups measure between 35 and 42 centimetres at birth and are born fully developed and capable of independent survival. Newborn smoothhounds settle in shallow coastal nursery areas — including sheltered bays, estuaries, and sandy flats — where they remain for several years while feeding on small crustaceans and growing rapidly. These nursery habitats provide protection from larger predators and access to abundant food resources critical for juvenile survival. Males reach sexual maturity at approximately 9 years of age and 95 to 130 centimetres in total length, while females mature slightly later, at 10 to 11 years and 125 to 140 centimetres. Maximum lifespan is estimated at around 25 years, with age validated through vertebral band-pair analysis.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The common smoothhound has a wide distribution across the Eastern Atlantic and Southwestern Indian Ocean, ranging from the British Isles and Mediterranean Sea south along the West African coast to Angola, around the Cape of Good Hope, and north along the Indian Ocean coast as far as northern KwaZulu-Natal. The species is also found in several oceanic island groups including Madeira, the Canary Islands, and Cape Verde. In southern Africa, smoothhounds are distributed continuously from Namibia to the lower KwaZulu-Natal south coast, with the northern limit of their range occurring somewhere between Durban and Richards Bay.</p>
+                <p>Smoothhounds are primarily coastal sharks, inhabiting continental shelf waters at depths ranging from the intertidal zone down to approximately 100 metres, though they are most commonly found in water shallower than 50 metres. They show a strong preference for sandy and mixed sandy-rocky substrates adjacent to reef structures, where their crustacean prey is abundant. In KwaZulu-Natal, smoothhounds are frequently encountered in shallow bays, estuaries, surf zones, and nearshore reefs — particularly during the winter months when water temperatures are cooler and prey availability is high.</p>
+                <p>Juvenile smoothhounds use shallow, sheltered coastal habitats as nursery grounds, including sandy bays, estuarine mouths, and protected lagoons. These nursery areas provide critical refuge from predation and access to abundant small crustaceans during the vulnerable early years of life. Adults range more widely across the continental shelf, utilising both inshore and offshore habitats depending on season, water temperature, and prey distribution.</p>
+                <p>The smoothhound shark is currently listed as Endangered on the IUCN Red List following documented population declines exceeding 42% across South African waters since 1991. The species has been heavily exploited by multiple fisheries, including the demersal shark longline fishery, commercial linefishery, inshore trawl fishery, and recreational shore angling. Despite legal protections classifying smoothhounds as a non-commercial species in South Africa, enforcement remains inadequate, and the species continues to be taken both intentionally and as bycatch. Total catches increased dramatically from just 16 tonnes in 1990 to a peak of 252 tonnes in 2010, before declining to 124 tonnes by 2016 — a decline driven not by reduced fishing effort but by the collapse of available biomass. Projections indicate a greater than 70% probability that smoothhound populations will continue to decline by more than 30% over the next three generation lengths, placing the species firmly in the Endangered category. Urgent conservation measures — including stricter catch limits, expanded marine protected areas, and the protection of critical nursery habitats — are essential to preventing further population collapse and ensuring the long-term survival of this important coastal shark species in KZN waters.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Pack Hunters</h4>
+                    <p>Smoothhound sharks earned their common name from their tendency to aggregate in large groups, which early naturalists likened to packs of hunting dogs. These aggregations can number in the hundreds and are thought to form in response to concentrated prey sources or during seasonal migrations along the coast.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Spotted Mystery</h4>
+                    <p>Many smoothhounds exhibit a distinctive pattern of black spots across their bodies, while others are completely unspotted. For decades, spotted individuals were classified as a separate species — the blackspotted smoothhound — but genetic studies have since confirmed that both morphs belong to the same species, with spotting likely controlled by simple genetic variation.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Crushing Specialists</h4>
+                    <p>Unlike most sharks that use sharp teeth to slice and tear, smoothhounds possess flattened, pavement-like teeth designed exclusively for crushing hard-shelled prey. Their jaws can exert immense pressure to pulverise crab exoskeletons and lobster shells — making them one of the most specialised crustacean predators in the ocean.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Population Collapse</h4>
+                    <p>Smoothhound populations in South African waters have declined by over 42% since 1991, driven by unsustainable fishing pressure across commercial and recreational fisheries. This dramatic decline has resulted in the species being reclassified from Near Threatened to Endangered on the IUCN Red List — underscoring the urgent need for stronger protections.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Valuable Catch</h4>
+                    <p>Smoothhounds are one of the top five most commercially valuable shark species in South African waters, prized for their white, firm flesh that is considered superior to many other shark species. This high market value has driven intensive targeted fishing and contributed significantly to the species' population decline.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Multiple Fathers</h4>
+                    <p>Research has revealed that smoothhound litters frequently exhibit multiple paternity, with up to 67% of litters containing pups fathered by two or more males. This high rate of polyandry increases genetic diversity within litters and may improve the species' ability to adapt to changing environmental conditions.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

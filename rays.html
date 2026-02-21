@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rays – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a {
+            border-right: none;
+        }
+
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ray-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .ray-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .ray-card:hover {
+            border-color: rgba(100, 149, 237, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .ray-image {
+            width: 100%;
+            height: 225px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ray-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .ray-content {
+            padding: 2rem;
+        }
+
+        .ray-card h3 {
+            color: #e3f2fd;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .ray-card p {
+            color: #b0bec5;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: #b0bec5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 0;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .ray-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro {
+                padding: 2rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 149, 237, 0.1);
+                padding: 1rem;
+            }
+
+            nav li:last-child a {
+                border-bottom: none;
+            }
+
+            .intro {
+                padding: 1.5rem;
+            }
+
+            .ray-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>The Graceful Giants of KZN Waters</h2>
+                <p>Rays are among the ocean's most elegant and captivating creatures—flattened, wing-like cartilaginous fish closely related to sharks that have evolved remarkable adaptations for life on and above the seafloor. In KwaZulu-Natal's coastal waters, these graceful swimmers range from massive manta rays gliding through open ocean currents to spotted eagle rays soaring through reef systems, and from gentle stingrays buried in sandy shallows to electric rays capable of generating powerful shocks.</p>
+                
+                <p>KwaZulu-Natal's position along the warm Agulhas Current creates ideal conditions for diverse ray populations. The province's waters support numerous ray species across multiple families—including manta rays, eagle rays, stingrays, electric rays, butterfly rays, and guitarfish. These species occupy virtually every marine habitat from the intertidal zone to continental slopes, playing vital ecological roles as predators of mollusks, crustaceans, and small fish, and serving as important prey for larger sharks and marine mammals.</p>
+                
+                <p>Rays are distinguished from sharks by their dorsoventrally flattened bodies, enlarged pectoral fins that form wing-like structures, and ventral gill slits (located on the underside rather than the sides). Most rays are bottom-dwellers that use their flat bodies to hide in sediment and their specialized mouths to crush hard-shelled prey, though several species—particularly mantas and eagle rays—have evolved into active swimmers that feed in the water column. Many species possess venomous spines on their tails for defense, while electric rays can generate powerful electrical discharges.</p>
+                
+                <p>Despite their abundance and ecological importance, many ray species face significant conservation threats. Overfishing—both targeted and as bycatch—habitat degradation, and slow reproductive rates have led to population declines for numerous species globally. Several rays found in KZN waters are now classified as Vulnerable, Endangered, or Critically Endangered. Understanding these remarkable creatures—their biology, behavior, and conservation needs—is essential for protecting the biodiversity and ecological integrity of KwaZulu-Natal's marine ecosystems.</p>
+            </section>
+
+            <section id="rays" class="ray-grid">
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="manta.png" alt="Manta Ray">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Manta Ray</h3>
+                        <p>The largest rays in the ocean, manta rays are filter-feeding giants that can reach wingspans of up to 7 meters. These graceful creatures glide through KZN's waters, feeding on plankton and small fish. Known for their intelligence and curiosity, mantas often interact with divers and are a highlight of marine encounters along the KZN coast.</p>
+                        <a href="manta-ray.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="spotted-eagle.png" alt="Eagle Ray">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Spotted Eagle Ray</h3>
+                        <p>One of the most beautiful rays in the ocean, spotted eagle rays are distinguished by their distinctive white spots on a dark body and their long, whip-like tail. These powerful swimmers are commonly seen gliding over reefs and sandy bottoms in KZN waters, feeding on mollusks and crustaceans with their specialized crushing plates.</p>
+                        <a href="eagle-ray.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="stingray.png" alt="Stingray">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Stingrays</h3>
+                        <p>Stingrays are common bottom-dwelling rays found in KZN's shallow coastal waters, estuaries, and sandy flats. These well-camouflaged rays partially bury themselves in sand and use their venomous tail spine for defense. Several species inhabit KZN waters, from small estuary stingrays to large short-tail stingrays that can exceed 2 meters in width.</p>
+                        <a href="stingrays.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="electricray.png" alt="Electric Ray">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Electric Rays</h3>
+                        <p>Electric rays possess specialized organs capable of generating powerful electrical discharges—up to 220 volts—used for stunning prey and defense. These thick-bodied, slow-moving rays are found on sandy and muddy bottoms along the KZN coast. Their electrical capabilities make them fascinating subjects of scientific research into bioelectricity.</p>
+                        <a href="electric-rays.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="Butterfly.png" alt="Butterfly Ray">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Butterfly Rays</h3>
+                        <p>Butterfly rays are named for their extremely wide, wing-like pectoral fins that give them a distinctive butterfly-like appearance. These rays have very short tails relative to their disc width and are typically found in shallow coastal waters and estuaries along the KZN coast, where they feed on worms, mollusks, and small crustaceans buried in soft sediments.</p>
+                        <a href="butterfly-rays.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+
+                <article class="ray-card">
+                    <div class="ray-image">
+                        <img src="Guitarfish.png" alt="Guitarfish">
+                    </div>
+                    <div class="ray-content">
+                        <h3>Guitarfish</h3>
+                        <p>Guitarfish are elongated rays with shark-like bodies and flattened heads, creating a distinctive guitar-shaped profile. These intermediate forms between sharks and rays are found in shallow coastal waters, where they feed on bottom-dwelling invertebrates and small fish. Several species occur in KZN, with many now facing severe conservation threats from overfishing.</p>
+                        <a href="guitarfish.html" class="learn-more">Learn More</a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

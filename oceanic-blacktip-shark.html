@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oceanic Blacktip Shark – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover {
+            color: #e3f2fd;
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        main { padding: 4rem 0; }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #78909c;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover { color: #e3f2fd; }
+        .breadcrumb span { margin: 0 0.5rem; }
+
+        .species-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        .species-image-block img {
+            width: 100%;
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            display: block;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: #78909c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .species-intro h2 {
+            font-size: 2.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .scientific-name {
+            color: #90a4ae;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .species-intro p {
+            color: #b0bec5;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        .conservation-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: #ffb74d;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78909c;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #e3f2fd;
+            font-weight: 400;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-section {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+        }
+
+        .info-section h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section p:last-child { margin-bottom: 0; }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section ul li {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            padding: 0.4rem 0 0.4rem 1rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #90caf9;
+        }
+
+        .info-section ul li:last-child { border-bottom: none; }
+
+        .info-section-full {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(100, 149, 237, 0.5);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section-full h3 {
+            color: #e3f2fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .info-section-full p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .info-section-full p:last-child { margin-bottom: 0; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .fact-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .fact-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fact-card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-bottom: 4rem;
+        }
+
+        .back-link:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 900px) {
+            .species-hero { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .species-intro h2 { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 20px; }
+            .info-section, .info-section-full { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .quick-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sub-Surface Encyclopedia</h1>
+            <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <a href="sharks.html">Sharks</a>
+                <span>›</span>
+                Oceanic Blacktip Shark
+            </div>
+
+            <section class="species-hero">
+                <div class="species-image-block">
+                    <img src="oceanic-blacktip.png" alt="Oceanic Blacktip Shark">
+                    <p class="image-caption">Carcharhinus limbatus — Oceanic Blacktip Shark, KZN</p>
+                </div>
+
+                <div class="species-intro">
+                    <h2>Oceanic Blacktip Shark</h2>
+                    <span class="scientific-name">Carcharhinus limbatus</span>
+                    <span class="conservation-badge">⚠ Vulnerable</span>
+                    <p>The oceanic blacktip shark, also known simply as the blacktip shark or common blacktip shark, is a medium-sized, fast-swimming requiem shark found in tropical and warm-temperate waters worldwide. Distinguished by its stout, fusiform body, pointed snout, and distinctive black-tipped fins — particularly on the pectorals, dorsals, and lower caudal lobe — this highly energetic species is one of the most commonly encountered sharks along KwaZulu-Natal's coastline, especially at renowned dive sites like Aliwal Shoal and Protea Banks.</p>
+                    <p>Best known for their spectacular acrobatic feeding displays, oceanic blacktip sharks are frequently observed leaping completely out of the water while spinning vertically through schools of small fish — a behaviour that has made them one of the most visually striking shark species in KZN's waters. Despite their abundance, impressive size, and energetic nature, blacktip sharks are generally timid and non-aggressive toward humans, though they can become excited and confident in the presence of food. Their low reproductive rate and high fishing pressure have resulted in the species being listed as Vulnerable on the IUCN Red List.</p>
+
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Max Length</span>
+                            <span class="stat-value">2.7 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Max Weight</span>
+                            <span class="stat-value">~120 kg</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Lifespan</span>
+                            <span class="stat-value">12–15 years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Depth Range</span>
+                            <span class="stat-value">0 – 100 m</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Maturity Age</span>
+                            <span class="stat-value">6–7 years (F)</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Litter Size</span>
+                            <span class="stat-value">1 – 10 pups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-section">
+                    <h3>Physical Description</h3>
+                    <p>The oceanic blacktip shark is a robust, medium-sized requiem shark with a stout, fusiform body and a moderately long, pointed snout. The head is relatively narrow with small, round eyes positioned laterally. The species lacks an interdorsal ridge, distinguishing it from some other requiem sharks. The first dorsal fin is large, high, and distinctly falcate with a narrow, pointed tip, while the second dorsal fin is significantly smaller but also possesses a characteristic black tip.</p>
+                    <p>Colouration is dark grey to bronze-brown on the dorsal surface, transitioning to white or cream on the underside. A distinctive pale band runs along the flanks, clearly visible against the darker upper body. The defining feature of the species is the presence of conspicuous black tips on most fins — particularly the pectorals, first and second dorsals, pelvic fins, and the lower lobe of the caudal fin. Importantly, the anal fin typically lacks a black tip in oceanic blacktip sharks, which is one of the key features distinguishing them from the closely related spinner shark, which usually develops a black-tipped anal fin.</p>
+                    <p>The pectoral fins are long and moderately wide, providing the shark with excellent manoeuvrability and sustained swimming ability. The caudal fin is asymmetrical with a prominent upper lobe and a well-developed lower lobe. Teeth are narrow, erect, and finely serrated — designed for grasping and holding slippery fish prey rather than cutting through large flesh or bone. The species typically grows to around 1.5 metres in length, though individuals can reach up to 2.7 metres, with females generally larger than males.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Behaviour</h3>
+                    <p>Oceanic blacktip sharks are highly active, fast-swimming sharks that often form large schools segregated by age and sex. They are strongly migratory, undertaking extensive seasonal movements along coastlines in response to water temperature and prey availability. In KwaZulu-Natal, blacktip sharks are present year-round but are most abundant during the cooler winter months, particularly at Protea Banks and Aliwal Shoal where they congregate in large numbers — sometimes numbering in the tens or hundreds during baited dives.</p>
+                    <p>The species is best known for its spectacular feeding behaviour. When pursuing schools of small fish, blacktip sharks charge vertically upward through the school with their mouths open, snapping at prey in all directions. The momentum of these high-speed feeding runs often carries the shark completely out of the water, resulting in dramatic leaps that can reach heights of several metres above the surface. During these leaps, the shark typically spins three or four times around its longitudinal axis before splashing back into the water — a behaviour believed to maximise prey capture efficiency and disorient schooling fish.</p>
+                    <p>Oceanic blacktip sharks are generally timid and wary around divers, maintaining a respectful distance unless food is present. However, they become significantly bolder and more confident in the presence of bait or speared fish, and may exhibit aggressive behaviour during feeding events. They are known to steal catches from fishermen and have earned a reputation among the local fishing community for their persistence and boldness around hooked fish. Despite their size and energetic nature, blacktip sharks are not considered highly dangerous to humans, though they have been implicated in a small number of non-fatal bites — typically occurring in murky water or when food is present.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Diet & Feeding</h3>
+                    <p>Oceanic blacktip sharks are opportunistic piscivores with a diet dominated by small to medium-sized bony fish. They are pursuit predators specialised for chasing down fast-moving schooling fish in open water and nearshore environments. Their streamlined bodies, powerful tail, and sustained swimming abilities make them highly effective at intercepting and capturing agile prey species. Blacktip sharks typically hunt in groups, employing cooperative strategies to herd schools of fish toward the surface where they become easier targets.</p>
+                    <p>The species feeds primarily on sardines, anchovies, herring, menhaden, and other schooling fish species that form dense aggregations in coastal waters. In KwaZulu-Natal, blacktip sharks feed heavily on jacks, mullet, sea catfish, threadfins, porgies, and grunts. They are also opportunistic feeders and will consume squid, cuttlefish, octopus, crabs, mantis shrimp, and occasionally smaller sharks and rays when the opportunity arises. Hunting activity peaks during dawn and dusk, coinciding with the movement patterns of many schooling fish species.</p>
+                    <p>Blacktip sharks are highly excitable and prone to feeding frenzies when large quantities of food become suddenly available — such as when fishing vessels discard bycatch or when large schools of baitfish are concentrated in nearshore areas. During these events, sharks become highly agitated and competitive, snapping indiscriminately at anything in the water. This excitability, combined with their speed and agility, makes them one of the most visually impressive predators during multi-species feeding events along the KZN coast.</p>
+                    <ul>
+                        <li>Sardines, anchovies, herring and menhaden</li>
+                        <li>Jacks, mullet, mackerel and bonito</li>
+                        <li>Sea catfish, porgies, grunts and croakers</li>
+                        <li>Squid, cuttlefish and octopus</li>
+                        <li>Smaller sharks, rays, skates and guitarfish</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Reproduction</h3>
+                    <p>Like all requiem sharks, oceanic blacktip sharks are viviparous with a yolk-sac placenta. Embryos develop internally within the female's paired uteri, initially sustained by a large yolk sac. As development progresses, the depleted yolk sac forms a placental connection to the uterine wall, allowing the mother to provide nutrients to the developing pups during the later stages of gestation. This reproductive mode, intermediate between egg-laying and true placental viviparity, allows for relatively rapid embryonic development compared to purely yolk-dependent species.</p>
+                    <p>Mating occurs seasonally, typically during the late spring and early summer months. After copulation, gestation lasts between 10 and 12 months — nearly a full year — before females give birth to live, fully developed pups. Litter sizes are relatively small and variable, ranging from 1 to 10 pups per litter, with an average of 4 to 7 pups. Larger females generally produce larger litters. Pups measure between 38 and 72 centimetres at birth and are born in shallow coastal nursery areas, where they remain for several years to avoid predation by larger sharks.</p>
+                    <p>Female blacktip sharks reproduce biennially, giving birth only once every two years rather than annually. This extended reproductive cycle, combined with relatively small litter sizes and a late age at maturity, results in a very low overall reproductive output. Males reach sexual maturity at approximately 4 to 5 years of age and 1.35 to 1.8 metres in length, while females mature slightly later, at 6 to 7 years and 1.2 to 1.9 metres. Maximum lifespan is estimated at 12 to 15 years, though most individuals likely do not survive beyond 10 years due to fishing pressure and natural mortality. The species' slow reproductive rate makes populations particularly vulnerable to overfishing, as they are unable to quickly replace individuals lost to fishing mortality.</p>
+                </div>
+            </div>
+
+            <div class="info-section-full">
+                <h3>Habitat & Distribution in KZN</h3>
+                <p>The oceanic blacktip shark has a cosmopolitan distribution, occurring in tropical and warm-temperate waters worldwide. The species is found throughout the Atlantic, Indian, and Pacific Oceans, with populations distributed from the Mediterranean Sea and the Red Sea south along the East African coast, throughout the Indian Ocean to Australia and the central Pacific, and across the Atlantic from the Americas to West Africa. Genetic studies have revealed that populations from the western Atlantic are isolated and genetically distinct from those in the rest of the species' range, suggesting limited gene flow between ocean basins.</p>
+                <p>In KwaZulu-Natal, oceanic blacktip sharks are found along the entire coastline, from the surf zone to offshore waters over the continental shelf. They are most commonly encountered at depths of less than 30 metres, though they have been recorded as deep as 100 metres. The species shows a strong preference for coastal and inshore habitats, including bays, estuaries, river mouths, sandy flats, and coral reef drop-offs. Blacktip sharks are among the most abundant large sharks at KZN's premier dive sites — particularly Protea Banks and Aliwal Shoal — where they can be encountered on virtually every dive, often in large aggregations numbering in the tens or hundreds.</p>
+                <p>Juvenile blacktip sharks use shallow coastal nursery areas — including sheltered bays, estuarine mouths, and mangrove-lined coastlines — as critical refuges during their early years. These nursery habitats provide protection from predation by larger sharks and access to abundant prey resources, allowing juveniles to grow rapidly before dispersing into deeper waters. Adult blacktip sharks range more widely across the continental shelf, though they continue to show a strong preference for nearshore environments where prey is concentrated.</p>
+                <p>The oceanic blacktip shark is listed as Vulnerable on the IUCN Red List, reflecting documented population declines in several regions due to overfishing. The species is heavily exploited by commercial and recreational fisheries worldwide, with its meat considered superior to many other shark species and commanding high prices in fish markets. In the United States, blacktip shark is the second most important commercially landed shark species after the sandbar shark, and in some regions it is the most commonly caught species in both commercial and recreational fisheries. In KwaZulu-Natal, blacktip sharks are frequently caught in beach protection nets and by recreational anglers fishing from beaches, piers, and ski-boats. Many individuals observed at dive sites bear evidence of fishing-related injuries, including embedded hooks and scarring from net entanglement. The species' low reproductive rate and biennial breeding cycle make populations particularly vulnerable to overfishing, and recovery from population declines is expected to be slow without significant reductions in fishing pressure and the protection of critical nursery habitats.</p>
+            </div>
+
+            <h3 class="section-heading">Fascinating Facts</h3>
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <h4>Acrobatic Hunters</h4>
+                    <p>Oceanic blacktip sharks are among the most acrobatic of all shark species, known for their spectacular leaping and spinning behaviour while feeding. During high-speed feeding runs through schools of fish, they can launch themselves completely out of the water, spinning three or four times on their axis before splashing back down — reaching heights of several metres above the surface.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Protea Banks Stars</h4>
+                    <p>Oceanic blacktip sharks are by far the most abundant shark species at Protea Banks, one of South Africa's premier shark diving destinations. Divers can encounter them on virtually every dive, with large aggregations often numbering in the hundreds during baited shark dives. Their constant presence makes them a highlight of the Protea Banks diving experience.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Confused Identity</h4>
+                    <p>Oceanic blacktip sharks are frequently confused with spinner sharks due to their similar appearance and overlapping behaviours — both species leap from the water while feeding. The key difference is the anal fin: oceanic blacktips lack a black tip on the anal fin, while spinner sharks typically have one. The position of the first dorsal fin also differs between the two species.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Feeding Frenzy Prone</h4>
+                    <p>Blacktip sharks are highly excitable and social feeders, making them particularly prone to feeding frenzies when large quantities of food become available. During these events, they become highly competitive and agitated, snapping indiscriminately at anything in the water — including each other, divers' equipment, and even boat propellers.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Virgin Birth</h4>
+                    <p>In 2007, a captive female blacktip shark at the Virginia Aquarium gave birth despite never having mated with a male. Genetic analysis confirmed that the pup was produced through parthenogenesis — a form of asexual reproduction where an unfertilised egg develops into an embryo. This was one of the first confirmed cases of parthenogenesis in sharks.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>Fishermen's Foe</h4>
+                    <p>Oceanic blacktip sharks have earned a notorious reputation among KZN's fishing community for stealing catches from lines and nets. They are persistent and bold around hooked fish, often following fishing boats and attempting to snatch fish before they can be brought aboard. This behaviour has made them unpopular with many recreational and commercial fishermen along the coast.</p>
+                </div>
+            </div>
+
+            <a href="sharks.html" class="back-link">← Back to Sharks</a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:Subsurface031@gmail.com">Subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species & SASSi Listings  </a>
+                    <a href="safety.html">Beach Safety & Hazard Warnings  </a>
+                    <a href="ocean.html">Ocean Awareness & Conservation Tips  </a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>

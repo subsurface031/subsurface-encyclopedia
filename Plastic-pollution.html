@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plastic Pollution – Sub-Surface Encyclopedia</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%); background-attachment: fixed; color: #c9d1d9; min-height: 100vh; line-height: 1.7; }
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%); pointer-events: none; z-index: 1; }
+.container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+header { background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98)); border-bottom: 1px solid rgba(100, 149, 237, 0.2); padding: 3rem 0 2.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; }
+.header-title { flex: 1; text-align: center; }
+.header-logo { width: 90px; height: 90px; object-fit: contain; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+h1 { font-size: 2.8rem; color: #e3f2fd; font-weight: 400; margin-bottom: 0.3rem; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.subtitle { color: #90a4ae; font-size: 1rem; font-style: italic; font-weight: 300; letter-spacing: 1px; }
+nav { background: rgba(15, 24, 32, 0.95); border-bottom: 1px solid rgba(100, 149, 237, 0.15); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+nav a { color: #b0bec5; text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 1.2rem 2rem; display: block; transition: all 0.2s ease; border-right: 1px solid rgba(100, 149, 237, 0.1); font-family: 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; }
+nav li:last-child a { border-right: none; }
+nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+main { padding: 4rem 0; }
+.breadcrumb { margin-bottom: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #78909c; letter-spacing: 1px; }
+.breadcrumb a { color: #90caf9; text-decoration: none; transition: color 0.2s ease; }
+.breadcrumb a:hover { color: #e3f2fd; }
+.breadcrumb span { margin: 0 0.5rem; }
+.species-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+.species-image-block img { width: 100%; border: 1px solid rgba(100, 149, 237, 0.3); display: block; }
+.image-caption { font-size: 0.8rem; color: #78909c; font-style: italic; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; }
+.species-intro h2 { font-size: 2.2rem; color: #e3f2fd; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; margin-bottom: 0.5rem; }
+.scientific-name { color: #90a4ae; font-style: italic; font-size: 1.1rem; margin-bottom: 1.5rem; display: block; }
+.species-intro p { color: #b0bec5; font-size: 1.05rem; line-height: 1.9; text-align: justify; margin-bottom: 1.2rem; }
+.conservation-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(183, 28, 28, 0.6); color: #ef5350; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.quick-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat-box { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.2rem; text-align: center; }
+.stat-label { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #78909c; display: block; margin-bottom: 0.4rem; }
+.stat-value { font-size: 1.2rem; color: #e3f2fd; font-weight: 400; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.info-section { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; }
+.info-section h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section ul { list-style: none; padding: 0; }
+.info-section ul li { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; padding: 0.4rem 0 0.4rem 1rem; border-bottom: 1px solid rgba(100, 149, 237, 0.08); position: relative; }
+.info-section ul li::before { content: '–'; position: absolute; left: 0; color: #4db6ac; }
+.info-section ul li:last-child { border-bottom: none; }
+.info-section-full { background: rgba(15, 24, 32, 0.6); border-left: 4px solid rgba(38, 166, 154, 0.5); padding: 2rem 2.5rem; margin-bottom: 2.5rem; }
+.info-section-full h3 { color: #e3f2fd; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; font-family: 'Courier New', monospace; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.info-section-full p { color: #b0bec5; font-size: 0.98rem; line-height: 1.9; text-align: justify; margin-bottom: 1rem; }
+.info-section-full p:last-child { margin-bottom: 0; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.fact-card { background: rgba(15, 24, 32, 0.8); border: 1px solid rgba(100, 149, 237, 0.2); padding: 1.5rem; transition: border-color 0.2s ease; }
+.fact-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+.fact-card h4 { color: #4db6ac; font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+.fact-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+.section-heading { color: #e3f2fd; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(100, 149, 237, 0.2); }
+.back-link { display: inline-block; padding: 0.7rem 2rem; background: transparent; color: #90caf9; text-decoration: none; border: 1px solid rgba(100, 149, 237, 0.4); border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease; margin-bottom: 4rem; }
+.back-link:hover { background: rgba(100, 149, 237, 0.15); border-color: rgba(100, 149, 237, 0.6); color: #e3f2fd; }
+footer { background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95)); color: #b0bec5; padding: 3rem 0 2rem; border-top: 1px solid rgba(100, 149, 237, 0.2); margin-top: 4rem; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+.footer-section h3 { color: #e3f2fd; margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; font-family: 'Courier New', monospace; text-transform: uppercase; }
+.footer-section p, .footer-section a { color: #90a4ae; line-height: 2; text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.9rem; transition: color 0.2s ease; }
+.footer-section a:hover { color: #b0bec5; }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 0.8rem; align-items: center; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(100, 149, 237, 0.25); border-radius: 4px; padding: 6px; transition: all 0.2s ease; margin-bottom: 0; }
+.social-icons a:hover { border-color: rgba(100, 149, 237, 0.6); background: rgba(100, 149, 237, 0.1); }
+.social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.copyright { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(100, 149, 237, 0.15); color: #78909c; font-size: 0.85rem; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .species-hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { h1 { font-size: 2rem; } nav a { font-size: 0.8rem; padding: 1rem 1.2rem; } .species-intro h2 { font-size: 1.8rem; } .quick-stats { grid-template-columns: 1fr 1fr; } .container { padding: 0 20px; } .info-section, .info-section-full { padding: 1.5rem; } .header-logo { width: 60px; height: 60px; } }
+@media (max-width: 480px) { h1 { font-size: 1.6rem; } nav ul { flex-direction: column; } nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; } nav li:last-child a { border-bottom: none; } .quick-stats { grid-template-columns: 1fr; } .header-logo { display: none; } }
+</style>
+</head>
+<body>
+<header><div class="container"><div class="header-inner"><div class="header-title"><h1>Sub-Surface Encyclopedia</h1><p class="subtitle">Exploring the Waters of KwaZulu-Natal</p></div><img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo"></div></div></header>
+<nav></nav>
+<main><div class="container">
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="ocean.html">Ocean Awareness</a><span>›</span>Plastic Pollution</div>
+
+<section class="species-hero">
+<div class="species-image-block">
+    <img src="plastic.png" alt="Plastic Pollution KZN Coast">
+    <p class="image-caption">Single-use plastic and ghost fishing gear are the most pervasive and visible pollution problem on KZN's coastline — worsening with every rainfall event</p>
+</div>
+<div class="species-intro">
+    <h2>Plastic Pollution</h2>
+    <span class="scientific-name">Single-use plastics, microplastics & ghost gear — a systemic crisis</span>
+    <span class="conservation-badge">⚠ CRITICAL — Escalating Threat</span>
+    <p>Plastic pollution is the most visible environmental crisis on KwaZulu-Natal's coastline, and it is getting worse. Every rainfall event flushes a new wave of single-use plastic — bags, bottles, food packaging, polystyrene, straws, bottle caps — through KZN's urban stormwater systems and into the rivers and estuaries that drain to the sea. The Umgeni, Bluff, uMlazi, and Thukela rivers all carry substantial plastic loads to the coast after heavy rain, depositing debris along beaches and into the nearshore marine environment where it breaks down over decades into progressively smaller fragments. Ghost fishing gear — nets, longlines, crab traps, and monofilament — drifts through the ocean entangling marine animals that have no evolutionary experience with synthetic materials and no ability to free themselves.</p>
+    <p>Microplastics — plastic fragments smaller than 5 mm, produced both by the fragmentation of larger items and as primary microplastics in cosmetics, synthetic clothing, and industrial pellets — have now permeated every compartment of KZN's nearshore marine environment. They have been detected in the sediments of KZN's reef systems, in the gut contents of reef fish harvested for consumption, in filter feeders such as mussels and oysters, and in the tissues of seabirds that feed in KZN's coastal waters. The full ecological and human health consequences of microplastic contamination at this scale are still being researched, but the direction of the evidence is consistently concerning. This is not a problem that will resolve itself — it requires coordinated action at every scale from individual consumer behaviour to national waste management policy, and it requires it urgently.</p>
+    <div class="quick-stats">
+        <div class="stat-box"><span class="stat-label">Threat Status</span><span class="stat-value">Critical — Escalating</span></div>
+        <div class="stat-box"><span class="stat-label">Primary Source</span><span class="stat-value">Urban river discharge</span></div>
+        <div class="stat-box"><span class="stat-label">Breakdown Time</span><span class="stat-value">450+ years (bottles)</span></div>
+        <div class="stat-box"><span class="stat-label">Microplastic Size</span><span class="stat-value">Under 5 mm</span></div>
+        <div class="stat-box"><span class="stat-label">Species Affected</span><span class="stat-value">Turtles, dolphins, seabirds</span></div>
+        <div class="stat-box"><span class="stat-label">Key Action</span><span class="stat-value">Refuse single-use plastic</span></div>
+    </div>
+</div>
+</section>
+
+<div class="info-grid">
+<div class="info-section">
+    <h3>How Plastic Enters KZN's Ocean</h3>
+    <p>The pathway from land-based plastic waste to the ocean in KZN is direct and rapid. The province's coastal urban centres — Durban, Richards Bay, and the towns of the South and North Coast — produce large volumes of plastic waste daily, and the formal waste collection and processing infrastructure is frequently inadequate to capture it all. Plastic that escapes formal collection enters the stormwater system: roadside litter, improperly secured landfill waste, and plastic discarded in open spaces all wash into storm drains during rainfall events, which carry it directly into rivers and eventually to the sea without any filtration or interception.</p>
+    <p>KZN's rivers are the primary conduit. The Umgeni River, which drains through the heart of the Durban metropolitan area before entering the ocean at Blue Lagoon, carries a measurable and visually striking plastic load after significant rainfall — debris fields of mixed plastic waste that extend into the nearshore zone and disperse along the coast on prevailing longshore currents. The situation is replicated at every river mouth along the KZN coast to varying degrees. Seasonal onshore winds and swell patterns then push floating debris onto beaches, concentrating it in the swash zone where it is most accessible to people, children, and wildlife. Plastic that sinks or is driven offshore contributes to the broader Indian Ocean plastic load, where it may circulate for decades before returning to a coastline.</p>
+    <ul>
+        <li>Stormwater systems carry litter directly to rivers without filtration</li>
+        <li>Umgeni and uMlazi rivers: primary conduits through greater Durban</li>
+        <li>Post-rainfall events deposit largest debris loads on beaches</li>
+        <li>Onshore winds concentrate floating plastic in surf zone</li>
+        <li>Sunken plastic contributes to Indian Ocean gyre accumulation</li>
+        <li>Rural coastal dumping adds to load beyond urban centres</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Ghost Gear & Entanglement</h3>
+    <p>Ghost fishing gear — abandoned, lost, or discarded fishing equipment including nets, longlines, crab and rock lobster traps, and monofilament line — is among the most lethal forms of marine plastic pollution. Unlike packaging waste, ghost gear retains its ability to catch and kill marine animals for years or decades after it has been lost or discarded. Nets continue to entangle fish, dolphins, turtles, and sharks; traps continue to catch crustaceans that die and then attract and trap further animals in a cycle called ghost fishing; and monofilament line wraps around the flippers, beaks, and bodies of marine animals causing slow, progressive injury and death.</p>
+    <p>KZN's offshore and inshore fishing sectors — including both commercial and recreational operators — contribute to the ghost gear problem through accidental loss in storms, gear snagged on reefs and abandoned rather than recovered, and deliberate discarding of end-of-life equipment. The KZN shark net programme, while serving a human safety function, also contributes to entanglement mortality of non-target species including loggerhead turtles, Indo-Pacific bottlenose dolphins, and bull sharks that die trapped in the nets. Organisations including WILDOCEANS conduct regular ghost gear removal operations on KZN's accessible reefs and shallow coastal areas, but the problem significantly exceeds current removal capacity. Recreational divers and fishers who encounter ghost gear should report locations to conservation authorities and, where it is safe to do so without risk to themselves, assist with removal.</p>
+    <ul>
+        <li>Ghost nets continue to catch and kill marine life for decades</li>
+        <li>Traps ghost-fish: dead animals attract further catches</li>
+        <li>Monofilament causes progressive entanglement injury to turtles and dolphins</li>
+        <li>KZN shark nets entangle non-target species including loggerhead turtles</li>
+        <li>Report ghost gear locations to Ezemvelo KZN Wildlife: 0800 203 886</li>
+        <li>WILDOCEANS coordinates ghost gear removal dives on KZN reefs</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>Microplastics — The Invisible Problem</h3>
+    <p>Microplastics are plastic particles smaller than 5 millimetres in diameter, and they exist in two forms: secondary microplastics, produced when larger plastic items break down under UV radiation, wave action, and abrasion over time; and primary microplastics, manufactured at small size for use in cosmetics (microbeads in scrubs and toothpaste), industrial abrasives (plastic blasting media), and released from synthetic textile fibres during washing. Both types are now ubiquitous in KZN's marine environment. Beach sand at KZN's most popular beaches contains measurable concentrations of microplastic fragments; KZN's nearshore reef sediments contain primary pellets (nurdles) — small industrial plastic granules that enter the ocean during spills and shipping losses — alongside secondary fragments from fragmented consumer plastic.</p>
+    <p>The ecological impacts of microplastic contamination are still being characterised, but the weight of evidence points to harm at multiple levels of the food web. Filter feeders including mussels, oysters, and small reef fish ingest microplastics along with food particles; zooplankton — the foundation of the marine food chain — ingest microplastics at the nanoscale; and the chemical compounds that leach from plastic polymers (plasticisers, flame retardants, UV stabilisers) are bioactive endocrine disruptors that accumulate in fatty tissues and concentrate up the food chain. Seabirds nesting near KZN's coast have been found with significant plastic loads in their stomach contents. Research into the human health implications of microplastic consumption through seafood harvested from KZN's waters is ongoing, but the precautionary direction is clear: less plastic in the ocean means less in everything that comes out of it.</p>
+    <ul>
+        <li>Secondary microplastics: fragmented consumer plastic under UV and wave action</li>
+        <li>Primary microplastics: nurdles, microbeads, synthetic textile fibres</li>
+        <li>Found in KZN beach sand, reef sediments, and fish gut contents</li>
+        <li>Chemical leachates from plastics are endocrine disruptors — bioaccumulate up food chain</li>
+        <li>Seabirds, turtles, and filter feeders all ingest microplastics</li>
+        <li>Human health implications via seafood consumption under active research</li>
+    </ul>
+</div>
+<div class="info-section">
+    <h3>What You Can Do — Practical Actions</h3>
+    <p>The plastic pollution problem on KZN's coast is systemic, but individual and collective action matters — both directly, through reducing the volume of plastic entering the environment, and indirectly, through signalling to producers and policymakers that consumer demand for plastic reduction is real and consequential. The most effective individual action is refusal: declining single-use plastic packaging, bags, straws, and disposable cutlery at the point of purchase reduces the volume of plastic produced and used in the first place. Carrying a reusable bag, bottle, and coffee cup eliminates the three most common items found on KZN beach clean-ups — bags, bottles, and cup lids.</p>
+    <p>Beach clean-up participation is one of the most direct and visible forms of action available. Organisations including Keep It Clean KZN, the Two Oceans Aquarium Foundation, and WILDOCEANS coordinate regular beach clean-up events along the KZN coast — these events remove significant volumes of plastic from the environment, generate citizen science data on debris types and sources that informs policy advocacy, and build community connection to the coast that sustains long-term behaviour change. Divers can participate in reef clean-ups at Sodwana, Aliwal Shoal, and other KZN dive sites. Fishers can commit to removing all used monofilament and packaging from their fishing areas rather than leaving it on the rocks, beach, or in the water. Reporting illegal dumping near watercourses and rivers to local authorities creates a documentary record that supports enforcement and accountability. Every action at every scale is part of the same collective response to the same problem.</p>
+    <ul>
+        <li>Refuse single-use plastic at point of purchase — bags, bottles, straws, cups</li>
+        <li>Carry reusable bag, bottle, and coffee cup at all times on the coast</li>
+        <li>Pick up beach litter on every visit — not just your own</li>
+        <li>Join organised clean-ups: Keep It Clean KZN, Two Oceans Aquarium Foundation</li>
+        <li>Divers: participate in reef clean-up dives at KZN dive sites</li>
+        <li>Fishers: remove all monofilament and packaging from your fishing area</li>
+        <li>Report illegal dumping near rivers and watercourses to local municipalities</li>
+    </ul>
+</div>
+</div>
+
+<div class="info-section-full">
+    <h3>Plastic Pollution on KZN's Coast — Scale, Sources & the Systemic Problem</h3>
+    <p>To understand plastic pollution on KZN's coast it is necessary to understand the broader waste management context in which it occurs. KwaZulu-Natal is a province with a significant urban population concentrated in the greater Durban metropolitan area and in a ribbon of coastal and peri-urban settlements running the length of the coastline. Formal waste collection services — kerbside collection, transfer stations, formal landfill disposal — are well-developed in established suburban areas but substantially less consistent in informal settlements, peri-urban areas, and rural coastal communities where population growth has outpaced infrastructure investment. In areas where formal collection is unreliable or absent, plastic waste accumulates in the environment and is moved by wind and water into drainage systems and eventually to the sea. This is not primarily a story of individual carelessness — it is a story of infrastructure failure and unequal service delivery that manifests as a pollution problem in the marine environment.</p>
+    <p>The composition of plastic debris on KZN beaches reflects the upstream waste stream. Post-event beach surveys consistently identify food and beverage packaging as the dominant categories — polystyrene takeaway containers, plastic bags, cool drink bottles and bottle caps, plastic straws, and sachets of single-serve food and personal care products. Polystyrene is a particularly persistent problem in KZN: it is extremely lightweight, breaks into small beads that are difficult to collect and resemble food to seabirds and fish, and is not accepted by most recycling infrastructure. The city of Durban and several other KZN municipalities have implemented or proposed bans on certain single-use plastic items, but enforcement and compliance monitoring remain significant challenges, and the regulatory landscape continues to evolve.</p>
+    <p>The international dimension of the plastic problem on KZN's coast should also be acknowledged. KZN sits at the western boundary of the Indian Ocean gyre system, and plastic that enters the Indian Ocean from sources as distant as South Asia, East Africa, and the Middle East can be transported by ocean currents to KZN beaches over months to years. Nurdles — industrial plastic pellets used as the raw material for manufactured plastic products — wash ashore on KZN beaches from shipping losses that may have occurred thousands of kilometres away. This means that even if KZN eliminated all land-based plastic inputs to its coastal waters tomorrow, the ocean would continue to deliver plastic to KZN's beaches from elsewhere for decades. The problem requires international as well as local solutions — but local action remains essential and meaningful within the portion of the problem that is genuinely controllable at the KZN level.</p>
+</div>
+
+<h3 class="section-heading">Key Facts — Plastic Pollution on KZN's Coast</h3>
+<div class="facts-grid">
+<div class="fact-card">
+    <h4>Plastic Never Disappears</h4>
+    <p>Plastic does not biodegrade in any meaningful timeframe — it only fragments into progressively smaller pieces under UV radiation, wave action, and abrasion. A plastic bottle entering KZN's ocean today will remain as plastic particles in the marine environment for 450 years or more. Polystyrene fragments persist for similar timescales. The plastic already in KZN's coastal waters and sediments represents the accumulated legacy of decades of unmanaged plastic waste, and it will remain there long after any individual alive today is gone. The only meaningful response is to stop adding to it.</p>
+</div>
+<div class="fact-card">
+    <h4>Turtles & Plastic — A Lethal Combination</h4>
+    <p>Loggerhead and leatherback turtles nesting on KZN's northern beaches are among the most vulnerable species to plastic pollution in the ocean. Both species are highly susceptible to ingesting plastic bags and film, which they cannot distinguish from the jellyfish and soft-bodied prey they naturally hunt. A turtle with a gut blocked by plastic cannot digest food, loses condition progressively, and dies. Entanglement in ghost gear causes drowning, flipper amputations, and buoyancy disorders that prevent turtles from diving to feed. The same beaches on which conservation efforts have painstakingly rebuilt turtle populations over 50 years receive plastic from KZN's rivers after every significant rainfall.</p>
+</div>
+<div class="fact-card">
+    <h4>Nurdles — The Problem Nobody Sees</h4>
+    <p>Nurdles are small plastic pellets — roughly 3–5 mm in diameter — that serve as the industrial raw material for manufacturing almost all plastic products. They are released into the environment during production, transport, and shipping operations, often invisibly and in enormous quantities: a single shipping container spill can release millions of pellets. On KZN beaches, nurdles are found mixed into the sand at many sites, particularly after storms. They absorb persistent organic pollutants from seawater and are ingested by fish, seabirds, and filter feeders. They are almost impossible to clean up at scale once distributed through beach sand and nearshore sediment.</p>
+</div>
+<div class="fact-card">
+    <h4>Clean-Up Is Not a Solution — But It Matters</h4>
+    <p>Beach clean-ups are an essential and valuable activity, but they do not address the source of the problem — and it is important to understand what they can and cannot do. Regular removal of plastic from beaches prevents debris from re-entering the ocean on subsequent tides and storm events, and generates significant citizen science data on debris sources and composition. But no beach clean-up programme can match the volume of plastic entering the system through urban river discharge after each rainfall event. Systemic change — in waste infrastructure, producer responsibility legislation, and consumer behaviour — is what will eventually bend the curve on the input side.</p>
+</div>
+<div class="fact-card">
+    <h4>The Recycling Reality in KZN</h4>
+    <p>Recycling is frequently presented as the primary solution to plastic pollution, but its role in KZN's specific context is limited. Only a narrow range of plastic types — primarily PET bottles (marked 1) and HDPE containers (marked 2) — have robust recycling markets in South Africa. Polystyrene, multi-layer packaging, plastic bags, and most food packaging types are not economically recyclable in the current KZN infrastructure landscape. Recycling is a better outcome than landfill, but it is not a substitute for reducing the volume of plastic produced and used in the first place. Designing out single-use plastic from the consumer economy is the only approach that addresses the root cause.</p>
+</div>
+<div class="fact-card">
+    <h4>Microplastics in Your Seafood</h4>
+    <p>If you eat seafood caught from KZN's coastal waters — reef fish, prawns, mussels, or squid — you are likely consuming microplastics. Research on seafood harvested from South African coastal waters has detected microplastic particles in the gut contents and muscle tissue of a range of commonly consumed species. The long-term human health consequences of chronic low-level microplastic ingestion through diet are not yet fully characterised, but the evidence is sufficient to treat the issue seriously. Reducing the amount of plastic entering the ocean is the only way to reduce microplastic concentrations in seafood over time — there is no practical way to filter it out once it is in the system.</p>
+</div>
+</div>
+
+<a href="ocean.html" class="back-link">← Back to Ocean Awareness</a>
+</div></main>
+
+<footer><div class="container"><div class="footer-content">
+<div class="footer-section"><h3>Contact Us<p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p><div class="social-icons"><a href="https://www.tiktok.com/@subsurface031" target="_blank"><img src="tiktok.png" alt="TikTok"></a><a href="https://www.youtube.com/@subsurface031" target="_blank"><img src="youtube.png" alt="YouTube"></a><a href="https://www.facebook.com/subsurface031" target="_blank"><img src="fb.png" alt="Facebook"></a><a href="https://www.instagram.com/subsurface031" target="_blank"><img src="Insta.png" alt="Instagram"></a></div></div>
+<div class="footer-section"><h3>Conservation Partners</h3><a href="partners.html">Coming Soon</a></div>
+<div class="footer-section"><h3>Learn More</h3><a href="Sassi.html">Endangered Species & SASSi Listings</a><a href="safety.html">Beach Safety & Hazard Warnings</a><a href="ocean.html">Ocean Awareness & Conservation Tips</a><a href="events.html" style="color: #ffb74d;">Upcoming Events</a><a href="whale-evolution.html">Whale Evolution</a><a href="human-evolution.html">Human Evolution</a></div>
+</div><div class="copyright"><p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

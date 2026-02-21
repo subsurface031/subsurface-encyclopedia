@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Awareness & Conservation Tips – Sub-Surface Encyclopedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 50%, #0f1820 100%);
+            background-attachment: fixed;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(1, 87, 155, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(10, 25, 41, 0.95), rgba(15, 24, 32, 0.98));
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 3rem 0 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #e3f2fd;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .subtitle {
+            color: #90a4ae;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: rgba(15, 24, 32, 0.95);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: #b0bec5;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            display: block;
+            transition: all 0.2s ease;
+            border-right: 1px solid rgba(100, 149, 237, 0.1);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav li:last-child a { border-right: none; }
+        nav a:hover { color: #e3f2fd; background: rgba(100, 149, 237, 0.1); }
+
+        main { padding: 4rem 0; }
+
+        /* Intro block */
+        .intro {
+            margin-bottom: 4rem;
+            padding: 2.5rem 3rem;
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(38, 166, 154, 0.5);
+            border-radius: 2px;
+        }
+
+        .intro h2 {
+            color: #e3f2fd;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #b0bec5;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro p:last-child { margin-bottom: 0; }
+
+        /* Stat banner */
+        .stat-banner {
+            background: rgba(13, 71, 161, 0.1);
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            border-radius: 2px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .stat-banner-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            line-height: 1;
+            margin-top: 0.1rem;
+        }
+
+        .stat-banner h3 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .stat-banner p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-banner p:last-child { margin-bottom: 0; }
+        .stat-banner strong { color: #90caf9; }
+
+        /* Section headings */
+        .section-title {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        /* Threat severity key */
+        .threat-key {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .threat-card {
+            padding: 1.3rem 1.6rem;
+            border-radius: 2px;
+            border: 1px solid;
+        }
+
+        .threat-card.critical   { background: rgba(183, 28, 28, 0.08);   border-color: rgba(183, 28, 28, 0.4); }
+        .threat-card.serious    { background: rgba(244, 67, 54, 0.07);   border-color: rgba(244, 67, 54, 0.35); }
+        .threat-card.ongoing    { background: rgba(255, 152, 0, 0.07);   border-color: rgba(255, 152, 0, 0.35); }
+        .threat-card.recoverable{ background: rgba(38, 166, 154, 0.07);  border-color: rgba(38, 166, 154, 0.3); }
+
+        .threat-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.45rem;
+            vertical-align: middle;
+        }
+
+        .threat-dot.critical    { background: #ef5350; }
+        .threat-dot.serious     { background: #e57373; }
+        .threat-dot.ongoing     { background: #ffb74d; }
+        .threat-dot.recoverable { background: #4db6ac; }
+
+        .threat-card h4 {
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .threat-card.critical    h4 { color: #ef5350; }
+        .threat-card.serious     h4 { color: #e57373; }
+        .threat-card.ongoing     h4 { color: #ffb74d; }
+        .threat-card.recoverable h4 { color: #4db6ac; }
+        .threat-card p { color: #90a4ae; font-size: 0.88rem; line-height: 1.7; }
+
+        /* Topic cards grid */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .topic-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .topic-card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); }
+
+        .topic-card.critical   { border-color: rgba(183, 28, 28, 0.35); }
+        .topic-card.critical:hover { border-color: rgba(183, 28, 28, 0.6); }
+        .topic-card.serious    { border-color: rgba(244, 67, 54, 0.28); }
+        .topic-card.serious:hover  { border-color: rgba(244, 67, 54, 0.55); }
+        .topic-card.ongoing    { border-color: rgba(255, 152, 0, 0.28); }
+        .topic-card.ongoing:hover  { border-color: rgba(255, 152, 0, 0.52); }
+        .topic-card.positive   { border-color: rgba(38, 166, 154, 0.28); }
+        .topic-card.positive:hover { border-color: rgba(38, 166, 154, 0.55); }
+
+        .topic-image {
+            width: 100%;
+            height: 210px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1820 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .topic-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .topic-icon-placeholder {
+            font-size: 5rem;
+            opacity: 0.25;
+            user-select: none;
+        }
+
+        .status-banner {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.22rem 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .status-banner.critical   { background: rgba(183, 28, 28, 0.2);  border: 1px solid rgba(183, 28, 28, 0.5);  color: #ef5350; }
+        .status-banner.serious    { background: rgba(244, 67, 54, 0.18); border: 1px solid rgba(244, 67, 54, 0.48); color: #e57373; }
+        .status-banner.ongoing    { background: rgba(255, 152, 0, 0.14); border: 1px solid rgba(255, 152, 0, 0.42); color: #ffb74d; }
+        .status-banner.positive   { background: rgba(38, 166, 154, 0.14);border: 1px solid rgba(38, 166, 154, 0.42);color: #4db6ac; }
+
+        .topic-content { padding: 2rem; }
+
+        .topic-content h3 {
+            color: #e3f2fd;
+            font-size: 1.35rem;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .topic-subtitle {
+            color: #78909c;
+            font-style: italic;
+            font-size: 0.88rem;
+            display: block;
+            margin: 0.6rem 0 1rem;
+        }
+
+        .topic-content p {
+            color: #b0bec5;
+            line-height: 1.85;
+            font-size: 0.94rem;
+            text-align: justify;
+            margin-bottom: 1.3rem;
+        }
+
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.7rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+            background: rgba(100, 149, 237, 0.07);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            color: #90a4ae;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            color: #90caf9;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(100, 149, 237, 0.4);
+            border-radius: 2px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .learn-more:hover {
+            background: rgba(100, 149, 237, 0.15);
+            border-color: rgba(100, 149, 237, 0.6);
+            color: #e3f2fd;
+        }
+
+        /* Quick reference table */
+        .issue-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4rem;
+            font-size: 0.92rem;
+        }
+
+        .issue-table thead tr {
+            background: rgba(100, 149, 237, 0.09);
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+        }
+
+        .issue-table th {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .issue-table td {
+            padding: 0.9rem 1.2rem;
+            color: #b0bec5;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.08);
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+
+        .issue-table tr:last-child td { border-bottom: none; }
+        .issue-table tr:hover td { background: rgba(100, 149, 237, 0.04); }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .level-badge.critical   { background: rgba(183, 28, 28, 0.18);  color: #ef5350; border: 1px solid rgba(183, 28, 28, 0.38); }
+        .level-badge.serious    { background: rgba(244, 67, 54, 0.14);  color: #e57373; border: 1px solid rgba(244, 67, 54, 0.32); }
+        .level-badge.ongoing    { background: rgba(255, 152, 0, 0.12);  color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.30); }
+        .level-badge.positive   { background: rgba(38, 166, 154, 0.12); color: #4db6ac; border: 1px solid rgba(38, 166, 154, 0.30); }
+
+        /* Action tips block */
+        .action-block {
+            background: rgba(15, 24, 32, 0.6);
+            border-left: 4px solid rgba(38, 166, 154, 0.5);
+            padding: 2.5rem 3rem;
+            margin-bottom: 4rem;
+            border-radius: 2px;
+        }
+
+        .action-block h3 {
+            color: #e3f2fd;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(100, 149, 237, 0.2);
+        }
+
+        .action-block p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .action-block p:last-child { margin-bottom: 0; }
+
+        .action-block a {
+            color: #90caf9;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(144, 202, 249, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .action-block a:hover { border-color: rgba(144, 202, 249, 0.7); }
+
+        /* Tips grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tip-card {
+            background: rgba(15, 24, 32, 0.8);
+            border: 1px solid rgba(100, 149, 237, 0.2);
+            padding: 1.5rem;
+            border-radius: 2px;
+            transition: border-color 0.2s ease;
+        }
+
+        .tip-card:hover { border-color: rgba(100, 149, 237, 0.4); }
+
+        .tip-card h4 {
+            color: #90caf9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-card p { color: #b0bec5; font-size: 0.95rem; line-height: 1.8; }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(15, 24, 32, 0.98), rgba(10, 25, 41, 0.95));
+            color: #b0bec5;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e3f2fd;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #90a4ae;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover { color: #b0bec5; }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+            border-radius: 4px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            margin-bottom: 0;
+        }
+
+        .social-icons a:hover {
+            border-color: rgba(100, 149, 237, 0.6);
+            background: rgba(100, 149, 237, 0.1);
+        }
+
+        .social-icons img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 149, 237, 0.15);
+            color: #78909c;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 2px; }
+            nav a { font-size: 0.8rem; padding: 1rem 1.2rem; }
+            .topic-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .intro, .action-block { padding: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .container { padding: 0 20px; }
+            .header-logo { width: 60px; height: 60px; }
+            .issue-table { font-size: 0.83rem; }
+            .issue-table th, .issue-table td { padding: 0.7rem 0.8rem; }
+            .threat-key { grid-template-columns: 1fr 1fr; }
+            .stat-banner { flex-direction: column; gap: 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { flex-direction: column; }
+            nav a { border-right: none; border-bottom: 1px solid rgba(100, 149, 237, 0.1); padding: 1rem; }
+            nav li:last-child a { border-bottom: none; }
+            .intro { padding: 1.5rem; }
+            .topic-content { padding: 1.5rem; }
+            .header-logo { display: none; }
+            .threat-key { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-title">
+                    <h1>Sub-Surface Encyclopedia</h1>
+                    <p class="subtitle">Exploring the Waters of KwaZulu-Natal</p>
+                </div>
+                <img src="sslogo.png" alt="Sub-Surface Logo" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <nav></nav>
+
+    <main>
+        <div class="container">
+
+            <section class="intro">
+                <h2>Ocean Awareness & Conservation Tips</h2>
+                <p>KwaZulu-Natal's marine environment is one of the most ecologically significant on the African continent. The warm Agulhas Current, the nutrient-rich upwellings of the Mozambique Channel, and the southernmost fringe of the Indo-Pacific coral reef system converge along this coastline to create a biodiversity hotspot of global importance — home to loggerhead and leatherback turtles, humpback whales, whale sharks, manta rays, coelacanths, and hundreds of reef fish species found nowhere else so far south. The iSimangaliso Wetland Park, a UNESCO World Heritage Site, protects the northern portion of this coastline as one of Africa's most intact coastal ecosystems. But this richness is under pressure from multiple directions simultaneously, and the threats are accelerating.</p>
+                <p>This section of the encyclopedia documents the primary conservation challenges facing KZN's coastal and marine environment — from plastic pollution and overfishing to coral bleaching, estuary degradation, and the compounding pressures of climate change on a system that is already stressed. It also provides concrete, practical guidance on what every person who uses, enjoys, or cares about KZN's coast can do differently — as an ocean user, a consumer, a citizen, and a voice in their community. Conservation is not the exclusive domain of scientists and protected area managers. Every interaction with the ocean is an opportunity to either add to the pressure on an already stressed system, or to reduce it. The choice is available to every one of us, every time we visit the coast.</p>
+                <p>Know what you're looking at when you're in or near the water. Understand what's threatened, and why. Make better decisions as a result. That is what ocean awareness means in practice — and it begins here.</p>
+            </section>
+
+            <!-- Context banner -->
+            <div class="stat-banner">
+                <div class="stat-banner-icon">🌊</div>
+                <div>
+                    <h3>KwaZulu-Natal's Marine Environment — Key Context</h3>
+                    <p><strong>iSimangaliso Wetland Park:</strong> UNESCO World Heritage Site — 155 km of protected coastline from St Lucia to Kosi Bay, including southern Africa's largest estuarine system</p>
+                    <p><strong>Sodwana Bay:</strong> The southernmost significant coral reef system in Africa — home to over 1,200 fish species and under increasing pressure from bleaching and diver impact</p>
+                    <p><strong>Turtle nesting:</strong> KZN's northern beaches host the largest loggerhead and leatherback nesting population in the western Indian Ocean — a conservation success story still at risk</p>
+                    <p><strong>Shark nets:</strong> KZN's longline shark nets protect bathers but kill thousands of non-target animals annually, including turtles, dolphins, and rays — the debate around their continued use is ongoing</p>
+                </div>
+            </div>
+
+            <!-- Threat status key -->
+            <h2 class="section-title">Conservation Status Key</h2>
+            <div class="threat-key">
+                <div class="threat-card critical">
+                    <h4><span class="threat-dot critical"></span>Critical — Immediate & Severe</h4>
+                    <p>Threats causing rapid, measurable decline with irreversible consequences if not urgently addressed at scale.</p>
+                </div>
+                <div class="threat-card serious">
+                    <h4><span class="threat-dot serious"></span>Serious — Significant & Worsening</h4>
+                    <p>Major pressures with well-documented negative impacts on species and habitats. Requires coordinated action now.</p>
+                </div>
+                <div class="threat-card ongoing">
+                    <h4><span class="threat-dot ongoing"></span>Ongoing — Persistent Pressure</h4>
+                    <p>Long-established problems with mixed management outcomes. Progress is possible with sustained effort and policy change.</p>
+                </div>
+                <div class="threat-card recoverable">
+                    <h4><span class="threat-dot recoverable"></span>Positive — Conservation Success</h4>
+                    <p>Areas where intervention has produced measurable recovery — proof that coordinated conservation action works.</p>
+                </div>
+            </div>
+
+            <!-- Primary threats -->
+            <h2 class="section-title">Primary Threats to KZN's Marine Environment</h2>
+            <div class="topic-grid">
+
+                <article class="topic-card critical">
+                    <div class="topic-image">
+                        <img src="plastic.png" alt="Plastic Pollution KZN Coast">
+                        <span class="status-banner critical">Critical — Escalating</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Plastic Pollution</h3>
+                        <span class="topic-subtitle">Single-use plastics, microplastics & ghost gear</span>
+                        <p>Plastic pollution is the most visible and pervasive environmental problem on KZN's coastline. Storm surge and river discharge flush enormous volumes of single-use plastic — bags, bottles, food packaging, polystyrene — into the ocean through every major urban watercourse after rainfall events. Ghost fishing gear — abandoned nets, lines, and traps — entangles turtles, dolphins, and sharks. Microplastics now permeate KZN's nearshore sediments and have been detected in the tissues of reef fish, filter feeders, and seabirds. The problem is systemic, worsening, and connected directly to land-based waste management failures.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Microplastics</span>
+                            <span class="tag">Ghost gear</span>
+                            <span class="tag">River-borne pollution</span>
+                            <span class="tag">Entanglement risk</span>
+                        </div>
+                        <a href="plastic-pollution.html" class="learn-more">Full Information & What You Can Do</a>
+                    </div>
+                </article>
+
+                <article class="topic-card critical">
+                    <div class="topic-image">
+                        <img src="coral.png" alt="Coral Bleaching KZN">
+                        <span class="status-banner critical">Critical — Climate-Driven</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Coral Bleaching & Reef Degradation</h3>
+                        <span class="topic-subtitle">Sodwana Bay & northern KZN reef systems</span>
+                        <p>KZN's coral reef systems at Sodwana Bay and northward are at the extreme southern edge of viable coral reef habitat globally — which means they are already living at the thermal limits of their tolerance. Rising sea surface temperatures driven by climate change are pushing reef-building corals past the threshold at which they expel their symbiotic algae, causing bleaching events that leave reefs pale, stressed, and vulnerable to subsequent mortality. Bleaching events that were once decade-scale occurrences are now happening every few years, with insufficient recovery time between events. The window for meaningful intervention is narrowing rapidly.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Sea surface temperature rise</span>
+                            <span class="tag">Sodwana Bay</span>
+                            <span class="tag">Ocean acidification</span>
+                            <span class="tag">Thermal bleaching events</span>
+                        </div>
+                        <a href="coral-bleaching.html" class="learn-more">Full Information & KZN Reef Status</a>
+                    </div>
+                </article>
+
+                <article class="topic-card serious">
+                    <div class="topic-image">
+                        <img src="overfishing.png" alt="Overfishing KZN">
+                        <span class="status-banner serious">Serious — Ongoing Decline</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Overfishing & Illegal Harvesting</h3>
+                        <span class="topic-subtitle">Reef fish depletion, abalone poaching & bycatch</span>
+                        <p>KZN's inshore and reef fish populations have been substantially reduced from historical abundances by decades of commercial and recreational overharvesting. Species like musselcracker, scotsman, and many grouper species that were once common catches are now rarely encountered at accessible reef areas. Abalone poaching — driven by organised criminal networks supplying Asian markets — has effectively stripped the southern KZN coast of its once-abundant perlemoen population. Bycatch from both commercial trawl operations and the KZN shark net programme kills thousands of non-target animals annually, including endangered and protected species.</p>
+                        <div class="topic-tags">
+                            <span class="tag">SASSi listings</span>
+                            <span class="tag">Reef fish depletion</span>
+                            <span class="tag">Abalone poaching</span>
+                            <span class="tag">Bycatch & shark nets</span>
+                        </div>
+                        <a href="overfishing.html" class="learn-more">Full Information & Responsible Fishing</a>
+                    </div>
+                </article>
+
+                <article class="topic-card serious">
+                    <div class="topic-image">
+                        <img src="estuary.png" alt="Estuary Degradation KZN">
+                        <span class="status-banner serious">Serious — Widespread</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Estuary & Wetland Degradation</h3>
+                        <span class="topic-subtitle">KZN's critical coastal nursery habitats</span>
+                        <p>Estuaries are among the most productive and ecologically important coastal environments on Earth — critical nursery habitats for the juvenile stages of fish and invertebrate species that spend their adult lives on offshore reefs. KZN has over 80 estuarine systems, and the majority are degraded to some degree by sedimentation from upstream erosion, nutrient pollution from agriculture and urban runoff, altered hydrology from upstream dams, and direct encroachment from development. The loss of estuarine connectivity and water quality does not just harm the estuary itself — it depletes the offshore reef and coastal fish populations that depend on estuarine nursery habitat during their juvenile stages.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Nursery habitat loss</span>
+                            <span class="tag">Sedimentation</span>
+                            <span class="tag">Nutrient pollution</span>
+                            <span class="tag">80+ KZN estuaries at risk</span>
+                        </div>
+                        <a href="estuaries.html" class="learn-more">Full Information & KZN Estuary Health</a>
+                    </div>
+                </article>
+
+                <article class="topic-card ongoing">
+                    <div class="topic-image">
+                        <img src="pollution.png" alt="Water Pollution KZN">
+                        <span class="status-banner ongoing">Ongoing — Infrastructure Failure</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Sewage, Runoff & Coastal Pollution</h3>
+                        <span class="topic-subtitle">Urban wastewater, agricultural chemicals & stormwater</span>
+                        <p>KZN's coastal urban centres — particularly the greater Durban metropolitan area — discharge significant volumes of partially treated or untreated wastewater into coastal waters during and after heavy rainfall events, when overwhelmed stormwater and sewage infrastructure overflows directly into rivers and the ocean. Agricultural runoff from sugarcane plantations and other farming operations on KZN's coastal hinterland introduces nitrates, phosphates, and herbicides into river systems that eventually reach the sea. Nutrient enrichment drives algal blooms that reduce water clarity, suppress coral growth, and create hypoxic zones that kill bottom-dwelling organisms.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Sewage overflow events</span>
+                            <span class="tag">Agricultural runoff</span>
+                            <span class="tag">Nutrient enrichment</span>
+                            <span class="tag">Algal blooms</span>
+                        </div>
+                        <a href="coastal-pollution.html" class="learn-more">Full Information & Monitoring Resources</a>
+                    </div>
+                </article>
+
+                <article class="topic-card positive">
+                    <div class="topic-image">
+                        <img src="turtlecon.png" alt="Turtle Conservation KZN">
+                        <span class="status-banner positive">Positive — Recovery Underway</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Turtle Conservation — A KZN Success Story</h3>
+                        <span class="topic-subtitle">Loggerhead & leatherback nesting recovery on Maputaland's beaches</span>
+                        <p>The loggerhead and leatherback turtle nesting populations on KZN's northern Maputaland beaches represent one of Africa's most significant marine conservation achievements. Five decades of protection and monitoring by Ezemvelo KZN Wildlife — beginning with the pioneering work of Dr George Hughes and the Natal Parks Board in the 1960s — have allowed both species to recover from the brink of local extinction to a point where thousands of loggerhead nests and hundreds of leatherback nests are recorded annually. This recovery was not inevitable and is not irreversible — continued poaching pressure, climate-driven nest temperature changes affecting hatchling sex ratios, and ocean plastic entanglement remain serious ongoing threats.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Loggerhead turtle</span>
+                            <span class="tag">Leatherback turtle</span>
+                            <span class="tag">Maputaland coast</span>
+                            <span class="tag">50+ years of monitoring</span>
+                        </div>
+                        <a href="turtle-conservation.html" class="learn-more">Full Information & How to Participate</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Secondary topics -->
+            <h2 class="section-title">Further Conservation Topics</h2>
+            <div class="topic-grid">
+
+                <article class="topic-card serious">
+                    <div class="topic-image">
+                        <img src="shark-nets.png" alt="Shark Nets KZN">
+                        <span class="status-banner serious">Serious — Ethical Debate</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>KZN Shark Nets — The Bycatch Problem</h3>
+                        <span class="topic-subtitle">Protecting swimmers vs protecting marine biodiversity</span>
+                        <p>KwaZulu-Natal's shark net programme has operated along the coastline since 1952, reducing shark attack incidents on protected beaches significantly. However, the nets do not form a barrier — they are set offshore and work by entangling and drowning sharks in the area. They also entangle and kill dolphins, turtles, rays, and other non-target species in substantial numbers. The ethical and conservation tension between swimmer safety and marine biodiversity protection is one of the most contested issues in KZN's coastal management, and the programme's future in the context of alternative, more selective technologies is actively debated.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Bycatch mortality</span>
+                            <span class="tag">Dolphin entanglement</span>
+                            <span class="tag">Turtle bycatch</span>
+                            <span class="tag">Alternative technologies</span>
+                        </div>
+                        <a href="shark-nets.html" class="learn-more">Full Information & the Debate</a>
+                    </div>
+                </article>
+
+                <article class="topic-card ongoing">
+                    <div class="topic-image">
+                        <img src="diver.png" alt="Responsible Diving KZN">
+                        <span class="status-banner ongoing">Ongoing — Diver Responsibility</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Responsible Diving & Snorkelling</h3>
+                        <span class="topic-subtitle">Protecting KZN's reefs through diver behaviour</span>
+                        <p>Sodwana Bay is one of South Africa's most popular dive destinations, receiving tens of thousands of dive entries per year. Diver contact with reef — through poor buoyancy control, accidental fin strikes, and direct touching of coral and organisms — is a measurable source of physical reef damage at high-use sites. Responsible diving involves achieving and maintaining neutral buoyancy at all times, keeping fins horizontal and clear of the reef, never touching, standing on, or collecting from the reef, and briefing dive groups on environmental expectations before entry. Good buoyancy is not just a skill — on a coral reef, it is an ethical obligation.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Buoyancy control</span>
+                            <span class="tag">No-touch protocols</span>
+                            <span class="tag">Sodwana Bay</span>
+                            <span class="tag">Diver impact reduction</span>
+                        </div>
+                        <a href="responsible-diving.html" class="learn-more">Full Information & Dive Code</a>
+                    </div>
+                </article>
+
+                <article class="topic-card ongoing">
+                    <div class="topic-image">
+                        <img src="climate.png" alt="Climate Change Ocean KZN">
+                        <span class="status-banner ongoing">Ongoing — Systemic Threat</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Climate Change & the KZN Ocean</h3>
+                        <span class="topic-subtitle">Sea level rise, warming, acidification & storm intensity</span>
+                        <p>Climate change is the overarching, systemic pressure that amplifies every other threat facing KZN's coastal environment. Sea surface temperature rise is driving coral bleaching. Ocean acidification is reducing calcification rates in corals, molluscs, and other shell-forming organisms. Sea level rise is accelerating erosion on KZN's sandy beaches, threatening both turtle nesting habitat and coastal infrastructure. Increased storm intensity is reshaping dune and beach systems faster than natural recovery mechanisms can compensate. And warming ocean temperatures are shifting the distributional ranges of species northward, reorganising food webs in ways that are still being understood.</p>
+                        <div class="topic-tags">
+                            <span class="tag">Sea surface temperature</span>
+                            <span class="tag">Ocean acidification</span>
+                            <span class="tag">Sea level rise</span>
+                            <span class="tag">Species range shifts</span>
+                        </div>
+                        <a href="climate-ocean.html" class="learn-more">Full Information & KZN Projections</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- At-a-glance table -->
+            <h2 class="section-title">KZN Marine Conservation — At a Glance</h2>
+            <table class="issue-table">
+                <thead>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Status</th>
+                        <th>Primary Driver</th>
+                        <th>What You Can Do</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Plastic Pollution</td>
+                        <td><span class="level-badge critical">Critical</span></td>
+                        <td>Single-use plastic, urban waste, river discharge</td>
+                        <td>Refuse single-use plastic; remove litter from beaches; support deposit return schemes</td>
+                    </tr>
+                    <tr>
+                        <td>Coral Bleaching</td>
+                        <td><span class="level-badge critical">Critical</span></td>
+                        <td>Rising sea surface temperature, climate change</td>
+                        <td>Reduce personal carbon footprint; support reef monitoring and restoration projects</td>
+                    </tr>
+                    <tr>
+                        <td>Overfishing</td>
+                        <td><span class="level-badge serious">Serious</span></td>
+                        <td>Commercial & recreational over-harvest, poaching</td>
+                        <td>Use SASSi green lists; adhere to bag limits and size limits; report illegal fishing</td>
+                    </tr>
+                    <tr>
+                        <td>Estuary Degradation</td>
+                        <td><span class="level-badge serious">Serious</span></td>
+                        <td>Sedimentation, nutrient runoff, development</td>
+                        <td>Respect estuary access rules; avoid disturbing bank vegetation; report pollution</td>
+                    </tr>
+                    <tr>
+                        <td>Sewage & Coastal Pollution</td>
+                        <td><span class="level-badge ongoing">Ongoing</span></td>
+                        <td>Infrastructure failure, agricultural runoff</td>
+                        <td>Report sewage spills; avoid swimming after rain; support municipal accountability</td>
+                    </tr>
+                    <tr>
+                        <td>Shark Net Bycatch</td>
+                        <td><span class="level-badge serious">Serious</span></td>
+                        <td>KZN shark net programme non-target mortality</td>
+                        <td>Stay informed; support research into selective alternatives; engage with public processes</td>
+                    </tr>
+                    <tr>
+                        <td>Diver Reef Impact</td>
+                        <td><span class="level-badge ongoing">Ongoing</span></td>
+                        <td>Poor buoyancy, contact, collection</td>
+                        <td>Perfect buoyancy; hands-off diving; choose operators with environmental briefings</td>
+                    </tr>
+                    <tr>
+                        <td>Climate Change (ocean)</td>
+                        <td><span class="level-badge ongoing">Ongoing</span></td>
+                        <td>Greenhouse gas emissions, global warming</td>
+                        <td>Reduce emissions; support climate-aware policy; engage with community education</td>
+                    </tr>
+                    <tr>
+                        <td>Turtle Nesting Recovery</td>
+                        <td><span class="level-badge positive">Improving</span></td>
+                        <td>50+ years of monitoring and protection</td>
+                        <td>Book through Ezemvelo-authorised tours only; never approach nesting turtles independently</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Practical actions grid -->
+            <h2 class="section-title">10 Things You Can Do Right Now</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Use the SASSi Green List</h4>
+                    <p>The Southern African Sustainable Seafood Initiative (SASSi) publishes a regularly updated list of fish species rated green (sustainable choice), orange (think twice), and red (do not buy). Before ordering fish at a restaurant or buying from a supermarket, check the list. Consumer demand drives the market — choosing sustainable seafood is one of the most direct levers available to individuals on the overfishing problem.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Remove Litter from Every Beach Visit</h4>
+                    <p>Carry a bag when you visit the beach and collect any plastic litter you encounter, not just your own. A single person picking up litter consistently removes thousands of pieces from the marine environment over a lifetime of beach visits. Organised beach clean-ups through groups like the Two Oceans Aquarium Foundation and Keep it Clean KZN offer a way to multiply that impact significantly.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Never Release Balloons Outdoors</h4>
+                    <p>Released balloons inevitably return to earth as litter, frequently entering waterways and the ocean where they are eaten by turtles and seabirds that mistake them for jellyfish. A deflated balloon is indistinguishable from a jellyfish by a sea turtle. Balloon releases — however well-intentioned the occasion — are a direct source of marine litter with documented lethal consequences for protected species.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Observe No-Touch Protocols on Reefs</h4>
+                    <p>Whether snorkelling, diving, or exploring tidal pools, make a deliberate commitment to touching nothing. Not coral, not rocks, not shells, not marine animals. Physical contact from thousands of visitors per year causes real, cumulative damage to reef organisms that grow millimetres per year. The environmental briefing your dive operator gives you before the dive is not a formality — act on it.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Report Pollution & Poaching</h4>
+                    <p>Ezemvelo KZN Wildlife operates an environmental crime hotline for reporting illegal fishing, poaching, and pollution incidents: <strong>0800 203 886</strong> (toll-free). Marine pollution incidents in eThekwini can be reported to the municipality's environmental emergency line. Reporting is not always sufficient on its own, but documented incident records support enforcement, policy change, and legal proceedings against chronic offenders.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Choose Responsible Tour Operators</h4>
+                    <p>When booking whale watching, shark diving, turtle tours, or reef excursions in KZN, choose operators who demonstrate genuine environmental commitment — Environmental Impact Assessment compliance, trained guides who brief participants on interaction protocols, participation in citizen science data collection, and membership of industry bodies with environmental standards. Operators who allow or encourage wildlife harassment for photographic opportunities should be avoided and reported.</p>
+                </div>
+            </div>
+
+            <!-- Resources block -->
+            <div class="action-block">
+                <h3>KZN Marine Conservation — Key Organisations & Resources</h3>
+                <p><strong>Ezemvelo KZN Wildlife</strong> is the provincial conservation authority responsible for KZN's protected areas, including the iSimangaliso Wetland Park marine zone and the loggerhead and leatherback turtle monitoring programme on the Maputaland coast. Their website provides information on reserve access, responsible turtle tour booking, and how to report environmental crimes. Environmental crime hotline: <strong>0800 203 886</strong> (toll-free).</p>
+                <p><strong>SANParks</strong> (South African National Parks) manages the marine component of the Hluhluwe-iMfolozi Park and coordinates with Ezemvelo on iSimangaliso management. For diving and snorkelling within iSimangaliso's marine protected area, permits and entry conditions are managed through SANParks and iSimangaliso Wetland Park Authority.</p>
+                <p><strong>SASSi (Southern African Sustainable Seafood Initiative)</strong> is the essential reference tool for making sustainable seafood choices as a consumer. Their free app and website at <a href="https://www.wwfsassi.co.za" target="_blank">wwfsassi.co.za</a> provide species ratings updated as new stock assessments become available. Green-list species are genuinely sustainably harvested; red-list species should not be purchased, ordered, or accepted as gifts.</p>
+                <p><strong>The Two Oceans Aquarium Foundation</strong> and <strong>WILDOCEANS</strong> (a programme of the WILDTRUST) both operate significant marine conservation, education, and citizen science programmes relevant to KZN's coastal environment — including turtle strandings response networks, beach clean-up coordination, and ocean literacy education programmes in coastal communities. Both accept donations and volunteers, and both produce accessible, well-researched conservation content relevant to KZN's ocean environment.</p>
+                <p>Finally: talk about this. The most undervalued conservation tool available to any individual is simply speaking to other people — about what they saw on their last dive, what was in the fish they ate last night, what they picked up from the beach that day. Ocean literacy spreads through conversation, and a community that understands and values its coastal environment is a community that generates the political will and social pressure for the systemic changes that individual action alone cannot achieve.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: <a href="mailto:subsurface031@gmail.com">subsurface031@gmail.com</a></p>
+                    <p>Phone: +27 66 346 8954</p>
+                    <p>Social Media: @Subsurface031</p>
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@subsurface031" target="_blank" title="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+                        <a href="https://www.youtube.com/@subsurface031" target="_blank" title="YouTube"><img src="youtube.png" alt="YouTube"></a>
+                        <a href="https://www.facebook.com/subsurface031" target="_blank" title="Facebook"><img src="fb.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/subsurface031" target="_blank" title="Instagram"><img src="Insta.png" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Conservation Partners</h3>
+                    <a href="partners.html" target="_blank">Coming Soon</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Learn More</h3>
+                    <a href="Sassi.html">Endangered Species &amp; SASSi Listings</a>
+                    <a href="safety.html">Beach Safety &amp; Hazard Warnings</a>
+                    <a href="ocean.html">Ocean Awareness &amp; Conservation Tips</a>
+                    <a href="events.html" style="color: #ffb74d;">Upcoming Events</a>
+                    <a href="whale-evolution.html">Whale Evolution</a>
+                    <a href="human-evolution.html">Human Evolution</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 KZN Sub-Surface Encyclopedia. All rights reserved. | Protecting aquatic life, preserving our waters.</p>
+            </div>
+        </div>
+    </footer>
+<script src="nav.js"></script>
+</body>
+</html>
