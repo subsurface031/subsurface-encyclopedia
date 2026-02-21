@@ -359,47 +359,64 @@ Status codes: LC NT VU EN CR DD. SASSi: Green Orange Red Unrated. If cannot iden
             ? `Identify this aquatic species. Context: "${contextNote.value.trim()}"`
             : 'Identify this aquatic species from the image.';
 
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${API_KEY}`,
-                    'HTTP-Referer': 'https://subsurface031.github.io',
-                    'X-Title': 'Sub-Surface Encyclopedia'
-                },
-                body: JSON.stringify({
-                    model: 'meta-llama/llama-3.2-11b-vision-instruct:free',
-                    max_tokens: 1200,
-                    messages: [
-                        { role: 'system', content: SYSTEM_PROMPT },
-                        { role: 'user', content: [
-                            { type: 'image_url', image_url: { url: `data:${currentMimeType};base64,${currentBase64}` } },
-                            { type: 'text', text: userText }
-                        ]}
-                    ]
-                })
-            });
+        // Try models in order — fall back if one fails
+        const models = [
+            'meta-llama/llama-3.2-11b-vision-instruct:free',
+            'qwen/qwen2-vl-7b-instruct:free'
+        ];
 
-            if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                throw new Error(err.error?.message || `API error ${response.status}`);
+        let lastError = null;
+
+        for (const model of models) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'HTTP-Referer': 'https://subsurface031.github.io',
+                        'X-Title': 'Sub-Surface Encyclopedia'
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        max_tokens: 1200,
+                        messages: [
+                            { role: 'system', content: SYSTEM_PROMPT },
+                            { role: 'user', content: [
+                                { type: 'image_url', image_url: { url: `data:${currentMimeType};base64,${currentBase64}` } },
+                                { type: 'text', text: userText }
+                            ]}
+                        ]
+                    })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    lastError = new Error(err.error?.message || `API error ${response.status}`);
+                    continue; // try next model
+                }
+
+                const data = await response.json();
+                const rawText = data.choices[0].message.content.trim();
+                const cleaned = rawText.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
+                const result = JSON.parse(cleaned);
+
+                result.cannotIdentify
+                    ? showError(result.cannotIdentifyReason || 'Could not identify species.')
+                    : renderResult(result);
+
+                return; // success — stop trying models
+
+            } catch (err) {
+                lastError = err;
+                continue; // try next model
             }
-
-            const data = await response.json();
-            const rawText = data.choices[0].message.content.trim();
-            const cleaned = rawText.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
-            const result = JSON.parse(cleaned);
-
-            result.cannotIdentify ? showError(result.cannotIdentifyReason || 'Could not identify species.') : renderResult(result);
-
-        } catch (err) {
-            console.error(err);
-            showError(err.message || 'An unexpected error occurred.');
-        } finally {
-            identifyBtn.disabled = false;
-            identifyBtn.classList.remove('loading');
         }
+
+        // All models failed
+        console.error(lastError);
+        showError(lastError?.message || 'All identification attempts failed. Please try again.');
+
     }
 
     function renderResult(r) {
